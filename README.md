@@ -5,5 +5,6 @@
 - add pocketbase ✅
 - add auth page ✅
 - add nprogress ✅
+- add /public ✅
 - add react-hot-toast
 - add side darwer
