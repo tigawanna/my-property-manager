@@ -3,16 +3,13 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./styles.css"
 import { PocketBaseClient } from '@/lib/pb/client';
-import { PropertyUserResponse } from '@/lib/pb/database';
 import { QueryClient } from '@tanstack/react-query';
-import { RecordAuthResponse } from 'pocketbase';
+import { PocketbaseViewerType } from '@/lib/tanstack/query/use-viewer';
 
 export const Route = createRootRouteWithContext<{
   pb: PocketBaseClient;
   queryClient: QueryClient;
-  viewer?:
-    | RecordAuthResponse<PropertyUserResponse>
-    | { record: null; token: null };
+  viewer?: PocketbaseViewerType;
 }>()({
   component: RootComponent,
 });

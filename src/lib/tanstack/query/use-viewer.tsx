@@ -17,7 +17,7 @@ export const viewerqueryOptions = queryOptions({
       .from("property_user")
       .authRefresh()
       .then((res) => res)
-      .catch((err) => {
+      .catch(() => {
         pb.authStore.clear();
         return { record: null,token:null };
       })
@@ -36,7 +36,9 @@ export function useViewer() {
 }
 
 
-
+export type PocketbaseViewerType =
+  | RecordAuthResponse<PropertyUserResponse>
+  | { record: null; token: null };
 
 type AuthBeforeloadContext = BeforeLoadContextOptions<
   RootRoute<
@@ -44,7 +46,7 @@ type AuthBeforeloadContext = BeforeLoadContextOptions<
     {
       pb: PocketBaseClient;
       queryClient: QueryClient;
-      viewer?: RecordAuthResponse<PropertyUserResponse>;
+      viewer?: PocketbaseViewerType;
     },
     AnyContext,
     AnyContext,
