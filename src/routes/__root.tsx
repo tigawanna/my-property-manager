@@ -1,4 +1,4 @@
-import { Link, Outlet, createRootRoute, createRootRouteWithContext } from '@tanstack/react-router'
+import { Link, Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "./styles.css"
@@ -10,7 +10,9 @@ import { RecordAuthResponse } from 'pocketbase';
 export const Route = createRootRouteWithContext<{
   pb: PocketBaseClient;
   queryClient: QueryClient;
-  viewer?: RecordAuthResponse<PropertyUserResponse>
+  viewer?:
+    | RecordAuthResponse<PropertyUserResponse>
+    | { record: null; token: null };
 }>()({
   component: RootComponent,
 });
@@ -28,11 +30,11 @@ function RootComponent() {
           Home
         </Link>{" "}
         <Link
-          to="/about"
+          to="/dashboard"
           activeProps={{
             className: "font-bold",
           }}>
-          About
+          Dashboard
         </Link>
       </div>
       <Outlet />

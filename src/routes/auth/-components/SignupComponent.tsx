@@ -1,17 +1,16 @@
 import { PropertyUserCreate } from "@/lib/pb/database";
 import { formOptions, useForm } from "@tanstack/react-form";
-import { FormLabel } from "@/components/park/ui/form-label";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { pb } from "@/lib/pb/client";
-import { toaster } from "@/components/navigation/ParkuiToast";
 import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
-import { Checkbox } from "@/components/park/ui/checkbox";
 import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
 import { useNavigate } from "@tanstack/react-router";
+import { FormLabel } from "@/components/shadcn/ui/form";
+import { Checkbox } from "@radix-ui/react-checkbox";
 
 interface SignupComponentProps {}
 
@@ -32,33 +31,33 @@ const formOpts = formOptions<PropertyUserCreate>({
 export function SignupComponent({}: SignupComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
   const qc = useQueryClient();
-  const navigate = useNavigate({ from: "/auth/signup" });
+  // const navigate = useNavigate({ from: "/auth/signup" });
   const mutation = useMutation({
     mutationFn: (data: PropertyUserCreate) => {
       return pb.from("property_user").create(data);
     },
     onSuccess(data) {
-      toaster.create({
-        title: "signed up",
-        description: `Welcome ${data.username}`,
-        type: "success",
-        duration: 2000,
-      });
+      // toaster.create({
+      //   title: "signed up",
+      //   description: `Welcome ${data.username}`,
+      //   type: "success",
+      //   duration: 2000,
+      // });
       qc.invalidateQueries(viewerqueryOptions);
 
-      navigate({ to: "/profile" });
-      if (typeof window !== "undefined") {
-        location.reload();
-      }
+      // navigate({ to: "/profile" });
+      // if (typeof window !== "undefined") {
+      //   location.reload();
+      // }
     },
     onError(error) {
       console.log(error.name);
-      toaster.create({
-        title: "Something went wrong",
-        description: `${error.message}`,
-        type: "error",
-        duration: 20000,
-      });
+      // toaster.create({
+      //   title: "Something went wrong",
+      //   description: `${error.message}`,
+      //   type: "error",
+      //   duration: 20000,
+      // });
     },
   });
   const form = useForm({
