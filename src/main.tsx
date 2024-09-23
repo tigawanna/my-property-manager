@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom/client'
 import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router'
-import { GlobalRouterLoading } from './components/navigation/GlobalRouterLoading';
+
 import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeTree } from './routeTree.gen'
 import { useViewer } from './lib/tanstack/query/use-viewer';
 import { pb } from './lib/pb/client';
 import React from 'react';
+import { GlobalRouterLoading } from './components/GlobalRouterLoading';
 
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({
