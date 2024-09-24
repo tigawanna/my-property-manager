@@ -6,7 +6,7 @@ import { PocketBaseClient } from '@/lib/pb/client';
 import { QueryClient } from '@tanstack/react-query';
 import { PocketbaseViewerType } from '@/lib/tanstack/query/use-viewer';
 import { MainNavbar } from '@/components/navigation/MainNavbar';
-
+import { Toaster } from "react-hot-toast";
 export const Route = createRootRouteWithContext<{
   pb: PocketBaseClient;
   queryClient: QueryClient;
@@ -17,11 +17,12 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <div className="w-full min-h-screen ">
-      <MainNavbar/>
+    <div className="min-h-screen w-full">
+      <MainNavbar />
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       <TanStackRouterDevtools position="bottom-left" />
+      <Toaster />
     </div>
   );
 }
