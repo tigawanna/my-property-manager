@@ -5,7 +5,7 @@ import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react
 import { routeTree } from './routeTree.gen'
 import { useViewer } from './lib/tanstack/query/use-viewer';
 import { pb } from './lib/pb/client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GlobalRouterLoading } from './components/GlobalRouterLoading';
 
 export const queryClient = new QueryClient({
@@ -51,6 +51,9 @@ declare module '@tanstack/react-router' {
 }
 
 function App() {
+  useEffect(() => {
+  document.documentElement.dataset.style="vertical"
+},[])
   const { userQuery } = useViewer();
 
   return (

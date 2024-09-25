@@ -11,7 +11,7 @@ export function RootComponent() {
     })
 
   return (
-    <div className="min-h-screen w-full" data-theme={searchparams.theme??"light"}>
+    <div className="content min-h-screen w-full" data-theme={searchparams.theme??"light"}>
       <MainNavbar />
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
