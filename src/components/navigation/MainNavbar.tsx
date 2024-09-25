@@ -1,7 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
-import { Home } from "lucide-react";
 import Nprogress from "./nprogress/Nprogress";
 import { NavbarRoutes } from "./NavbarRoutes";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MainNavbarProps {
 
@@ -13,10 +13,11 @@ export function MainNavbar({}:MainNavbarProps){
 return (
   <nav className="sticky top-0 flex h-14 w-full bg-base-200  flex-col items-center justify-between">
     <div className="flex h-full w-full items-center justify-between px-1">
- 
       <NavbarRoutes/>
+      <ThemeToggle/>
     </div>
     <Nprogress isAnimating={isLoading} />
+
   </nav>
 );
 }

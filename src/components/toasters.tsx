@@ -34,5 +34,5 @@ return toast.custom((t) => {
         </button>
       </div>
     </div>
-  );},{...props})
+  );},{...props,position:"bottom-left"})
 };
