@@ -15,7 +15,7 @@ export function ThemeToggle({}: ThemeToggleProps) {
     }
   }
   return (
-    <div className="w-full flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2">
       <select
       className="select select-bordered select-sm max-w-xs"
         onChange={(e) =>

@@ -2,6 +2,7 @@ import { useRouterState } from "@tanstack/react-router";
 import Nprogress from "./nprogress/Nprogress";
 import { NavbarRoutes } from "./NavbarRoutes";
 import { ThemeToggle } from "./ThemeToggle";
+import { CurrentUser } from "./CurrentUser";
 
 interface MainNavbarProps {
 
@@ -15,9 +16,9 @@ return (
     <div className="flex h-full w-full items-center justify-between px-1">
       <NavbarRoutes/>
       <ThemeToggle/>
+    <CurrentUser/>
     </div>
     <Nprogress isAnimating={isLoading} />
-
-  </nav>
+    </nav>
 );
 }

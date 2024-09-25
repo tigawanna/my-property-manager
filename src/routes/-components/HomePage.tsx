@@ -1,8 +1,8 @@
-import { makeHotToast, successToast } from "@/components/toasters";
-import { useState } from "react";
+import { makeHotToast } from "@/components/toasters";
+
 
 export function HomePage(){
-const [toastcount, setToastcount] = useState(1)
+
 return (
   <div className="flex h-full w-full flex-col items-center justify-center">
     <h3 className="text-2xl font-bold">Welcome Home!</h3>
