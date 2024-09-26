@@ -8,7 +8,7 @@ export function ThemeToggle({}: ThemeToggleProps) {
   function transitionColors() {
     if (typeof window !== "undefined") {
       document.startViewTransition(() => {
-        const newTheme = theme  === "light" ? "dark" : "light";
+        const newTheme = theme === "light" ? "dark" : "light";
         document.documentElement.dataset.theme = newTheme;
         updateTheme(newTheme);
       });
@@ -17,7 +17,7 @@ export function ThemeToggle({}: ThemeToggleProps) {
   return (
     <div className="flex items-center justify-center gap-2">
       <select
-      className="select select-bordered select-sm max-w-xs"
+        className="select select-bordered select-sm max-w-xs"
         onChange={(e) =>
           (document.documentElement.dataset.style = e.target.value)
         }

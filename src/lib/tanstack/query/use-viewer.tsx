@@ -7,7 +7,12 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import { AnyContext, BeforeLoadContextOptions, redirect, RootRoute } from "@tanstack/react-router";
+import {
+  AnyContext,
+  BeforeLoadContextOptions,
+  redirect,
+  RootRoute,
+} from "@tanstack/react-router";
 import { RecordAuthResponse } from "pocketbase";
 
 export const viewerqueryOptions = queryOptions({
@@ -19,9 +24,8 @@ export const viewerqueryOptions = queryOptions({
       .then((res) => res)
       .catch(() => {
         pb.authStore.clear();
-        return { record: null,token:null };
-      })
-      ,
+        return { record: null, token: null };
+      }),
   staleTime: 1000 * 60 * 60,
 });
 export function useViewer() {
@@ -34,7 +38,6 @@ export function useViewer() {
   });
   return { userQuery: useSuspenseQuery(viewerqueryOptions), logoutMutation };
 }
-
 
 export type PocketbaseViewerType =
   | RecordAuthResponse<PropertyUserResponse>
@@ -99,4 +102,3 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
   }
   // console.log(" ++++++++ fall through case user exists ++++++ ");
 }
-

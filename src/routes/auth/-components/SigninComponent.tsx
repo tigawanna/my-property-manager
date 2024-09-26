@@ -26,7 +26,7 @@ const formOpts = formOptions<PropertyUserLogn>({
 });
 export function SigninComponent({}: SigninComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
-  console.log("show password  === ",showPassword)
+  console.log("show password  === ", showPassword);
   const qc = useQueryClient();
   const { returnTo } = Route.useSearch();
   const navigate = useNavigate({ from: "/auth" });
@@ -74,7 +74,7 @@ export function SigninComponent({}: SigninComponentProps) {
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="bg-base-300 flex h-full w-[90%] flex-col items-center justify-center gap-3 rounded-lh p-[2%] md:w-[60%] lg:w-[50%]"
+        className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-3 bg-base-300 p-[2%] md:w-[60%] lg:w-[50%]"
       >
         <h1 className="text-4xl">Sign in</h1>
         <form.Field
@@ -121,11 +121,14 @@ export function SigninComponent({}: SigninComponentProps) {
 
         <div className="w-full">
           <div className="flex w-full items-center justify-center gap-3">
-            <label htmlFor="showPassword" className="text-sm">Show password</label>
-            <input type="checkbox"
+            <label htmlFor="showPassword" className="text-sm">
+              Show password
+            </label>
+            <input
+              type="checkbox"
               id="showPassword"
               name="showPassword"
-              className="checkbox checkbox-primary"
+              className="checkbox-primary checkbox"
               checked={showPassword}
               onChange={() => setShowPassword(!showPassword)}
             />

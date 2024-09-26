@@ -1,7 +1,10 @@
 import { exec } from "child_process";
 export async function runCommand(command: string): Promise<string> {
   try {
-    const { stdout, stderr } = await new Promise<{ stdout: string; stderr: string | null }>((resolve, reject) => {
+    const { stdout, stderr } = await new Promise<{
+      stdout: string;
+      stderr: string | null;
+    }>((resolve, reject) => {
       exec(command, (error, stdout, stderr) => {
         if (error) {
           reject(error);

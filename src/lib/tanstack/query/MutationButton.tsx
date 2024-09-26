@@ -2,7 +2,8 @@ import type { UseMutationResult } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-interface MutationButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface MutationButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: React.ReactNode;
   mutation: UseMutationResult<any, any, any, any>;
   className?: string;
@@ -19,13 +20,16 @@ export function MutationButton({
   return (
     <button
       className={twMerge(
-        "btn btn-sm btn-wide  flex gap-2 justify-center items-center",
-        className
+        "btn btn-sm btn-wide flex items-center justify-center gap-2",
+        className,
       )}
       disabled={mutation.isPending}
-      {...props}>
+      {...props}
+    >
       {label || <div> Submit</div>}
-      {mutation.isPending && <Loader className={twMerge("animate-spin", loaderClassname)} />}
+      {mutation.isPending && (
+        <Loader className={twMerge("animate-spin", loaderClassname)} />
+      )}
     </button>
   );
 }

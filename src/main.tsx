@@ -1,13 +1,17 @@
-import ReactDOM from 'react-dom/client'
-import {  RouterProvider, createRouter } from '@tanstack/react-router'
-import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { routeTree } from './routeTree.gen'
-import { useViewer } from './lib/tanstack/query/use-viewer';
-import { pb } from './lib/pb/client';
-import React, { useEffect } from 'react';
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { routeTree } from "./routeTree.gen";
+import { useViewer } from "./lib/tanstack/query/use-viewer";
+import { pb } from "./lib/pb/client";
+import React, { useEffect } from "react";
 import { RouterPendingComponent } from "./lib/tanstack/router/RouterPendingComponent";
-import { RouterErrorComponent } from './lib/tanstack/router/routerErrorComponent';
-import { RouterNotFoundComponent } from './lib/tanstack/router/RouterNotFoundComponent';
+import { RouterErrorComponent } from "./lib/tanstack/router/routerErrorComponent";
+import { RouterNotFoundComponent } from "./lib/tanstack/router/RouterNotFoundComponent";
 
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({
@@ -36,8 +40,8 @@ const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPendingComponent: () => <RouterPendingComponent />,
-  defaultNotFoundComponent:()=><RouterNotFoundComponent/>,
-  defaultErrorComponent: ({ error }) => (<RouterErrorComponent error={error} />),
+  defaultNotFoundComponent: () => <RouterNotFoundComponent />,
+  defaultErrorComponent: ({ error }) => <RouterErrorComponent error={error} />,
   context: {
     pb: undefined!, // We'll inject this when we render
     queryClient,
@@ -46,16 +50,16 @@ const router = createRouter({
 });
 
 // Register things for typesafety
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
-    router: typeof router
+    router: typeof router;
   }
 }
 
 function App() {
   useEffect(() => {
-  document.documentElement.dataset.style="vertical"
-},[])
+    document.documentElement.dataset.style = "vertical";
+  }, []);
   const { userQuery } = useViewer();
 
   return (
@@ -73,15 +77,15 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById('app')!
+const rootElement = document.getElementById("app")!;
 
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-    </React.StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </React.StrictMode>,
   );
 }

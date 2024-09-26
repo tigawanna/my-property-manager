@@ -9,6 +9,8 @@
     "pb-types": "tsx src/lib/pb/scripts/gen-pb-types.ts property",
     "build": "tsc && vite build",
     "serve": "vite preview",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "format": "prettier --write --ignore-unknown src",
     "start": "vite"
   },
   "devDependencies": {

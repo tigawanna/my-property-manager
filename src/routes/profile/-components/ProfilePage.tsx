@@ -3,7 +3,6 @@ import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { CheckIcon } from "lucide-react";
 
-
 interface ProfilePageProps {}
 
 export function ProfilePage({}: ProfilePageProps) {
@@ -25,22 +24,21 @@ export function ProfilePage({}: ProfilePageProps) {
       }),
   });
 
- 
   const profileRole = profileQuery.data?.expand?.[viewer?.role || "user"];
   return (
-    <div className="w-full h-full flex min-h-[80vh] flex-col items-center justify-center p-1">
-      <div className="flex gap-2  p-3 bg-bg-muted rounded-md">
-        <div className="w-full flex gap-2 flex-col p-3 bg-bg-muted rounded-md">
+    <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center p-1">
+      <div className="bg-bg-muted flex gap-2 rounded-md p-3">
+        <div className="bg-bg-muted flex w-full flex-col gap-2 rounded-md p-3">
           <h1 className="text-5xl">{viewer?.username}</h1>
           <p className="">{viewer?.email}</p>
-          <div className="flex gap-2 items-center rounded-lg ">
+          <div className="flex items-center gap-2 rounded-lg">
             <div className="">{viewer?.role}</div>
             {profileRole && profileRole.id && (
-              <CheckIcon className="text-success-content fill-success-content" />
+              <CheckIcon className="fill-success-content text-success-content" />
             )}
           </div>
         </div>
-        <div className="w-full flex gap-2 flex-col p-3 bg-bg-muted  rounded-md">
+        <div className="bg-bg-muted flex w-full flex-col gap-2 rounded-md p-3">
           <h1 className="text-5xl">Profile</h1>
           <p className="">{viewer?.role}</p>
           <p className="">{viewer?.email}</p>
@@ -50,5 +48,3 @@ export function ProfilePage({}: ProfilePageProps) {
     </div>
   );
 }
-
-

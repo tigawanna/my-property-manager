@@ -28,7 +28,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 interface CurrentUserProps {}
 
 export function CurrentUser({}: CurrentUserProps) {
-  const location = useLocation()
+  const location = useLocation();
   const { userQuery, logoutMutation } = useViewer();
   const viewer = userQuery?.data?.record;
 
@@ -43,12 +43,14 @@ export function CurrentUser({}: CurrentUserProps) {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <Link 
-              className="flex items-center gap-2"
-              search={{ returnTo: location.pathname }} to="/auth">
+              <Link
+                className="flex items-center gap-2"
+                search={{ returnTo: location.pathname }}
+                to="/auth"
+              >
                 <User className="mr-2 size-4" />
                 <span>Login</span>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>

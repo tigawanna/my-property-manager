@@ -10,124 +10,130 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as ProfileIndexImport } from './routes/profile/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
-import { Route as AuthIndexImport } from './routes/auth/index'
-import { Route as AuthSignupImport } from './routes/auth/signup'
+import { Route as rootRoute } from "./routes/__root";
+import { Route as IndexImport } from "./routes/index";
+import { Route as ProfileIndexImport } from "./routes/profile/index";
+import { Route as DashboardIndexImport } from "./routes/dashboard/index";
+import { Route as AuthIndexImport } from "./routes/auth/index";
+import { Route as AuthSignupImport } from "./routes/auth/signup";
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
-  path: '/',
+  path: "/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const ProfileIndexRoute = ProfileIndexImport.update({
-  path: '/profile/',
+  path: "/profile/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const DashboardIndexRoute = DashboardIndexImport.update({
-  path: '/dashboard/',
+  path: "/dashboard/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AuthIndexRoute = AuthIndexImport.update({
-  path: '/auth/',
+  path: "/auth/",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 const AuthSignupRoute = AuthSignupImport.update({
-  path: '/auth/signup',
+  path: "/auth/signup",
   getParentRoute: () => rootRoute,
-} as any)
+} as any);
 
 // Populate the FileRoutesByPath interface
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/signup': {
-      id: '/auth/signup'
-      path: '/auth/signup'
-      fullPath: '/auth/signup'
-      preLoaderRoute: typeof AuthSignupImport
-      parentRoute: typeof rootRoute
-    }
-    '/auth/': {
-      id: '/auth/'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/profile/': {
-      id: '/profile/'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileIndexImport
-      parentRoute: typeof rootRoute
-    }
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/auth/signup": {
+      id: "/auth/signup";
+      path: "/auth/signup";
+      fullPath: "/auth/signup";
+      preLoaderRoute: typeof AuthSignupImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/auth/": {
+      id: "/auth/";
+      path: "/auth";
+      fullPath: "/auth";
+      preLoaderRoute: typeof AuthIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/dashboard/": {
+      id: "/dashboard/";
+      path: "/dashboard";
+      fullPath: "/dashboard";
+      preLoaderRoute: typeof DashboardIndexImport;
+      parentRoute: typeof rootRoute;
+    };
+    "/profile/": {
+      id: "/profile/";
+      path: "/profile";
+      fullPath: "/profile";
+      preLoaderRoute: typeof ProfileIndexImport;
+      parentRoute: typeof rootRoute;
+    };
   }
 }
 
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/auth': typeof AuthIndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/profile': typeof ProfileIndexRoute
+  "/": typeof IndexRoute;
+  "/auth/signup": typeof AuthSignupRoute;
+  "/auth": typeof AuthIndexRoute;
+  "/dashboard": typeof DashboardIndexRoute;
+  "/profile": typeof ProfileIndexRoute;
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/auth': typeof AuthIndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/profile': typeof ProfileIndexRoute
+  "/": typeof IndexRoute;
+  "/auth/signup": typeof AuthSignupRoute;
+  "/auth": typeof AuthIndexRoute;
+  "/dashboard": typeof DashboardIndexRoute;
+  "/profile": typeof ProfileIndexRoute;
 }
 
 export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/auth/': typeof AuthIndexRoute
-  '/dashboard/': typeof DashboardIndexRoute
-  '/profile/': typeof ProfileIndexRoute
+  __root__: typeof rootRoute;
+  "/": typeof IndexRoute;
+  "/auth/signup": typeof AuthSignupRoute;
+  "/auth/": typeof AuthIndexRoute;
+  "/dashboard/": typeof DashboardIndexRoute;
+  "/profile/": typeof ProfileIndexRoute;
 }
 
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/signup' | '/auth' | '/dashboard' | '/profile'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/signup' | '/auth' | '/dashboard' | '/profile'
-  id: '__root__' | '/' | '/auth/signup' | '/auth/' | '/dashboard/' | '/profile/'
-  fileRoutesById: FileRoutesById
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths: "/" | "/auth/signup" | "/auth" | "/dashboard" | "/profile";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/auth/signup" | "/auth" | "/dashboard" | "/profile";
+  id:
+    | "__root__"
+    | "/"
+    | "/auth/signup"
+    | "/auth/"
+    | "/dashboard/"
+    | "/profile/";
+  fileRoutesById: FileRoutesById;
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthSignupRoute: typeof AuthSignupRoute
-  AuthIndexRoute: typeof AuthIndexRoute
-  DashboardIndexRoute: typeof DashboardIndexRoute
-  ProfileIndexRoute: typeof ProfileIndexRoute
+  IndexRoute: typeof IndexRoute;
+  AuthSignupRoute: typeof AuthSignupRoute;
+  AuthIndexRoute: typeof AuthIndexRoute;
+  DashboardIndexRoute: typeof DashboardIndexRoute;
+  ProfileIndexRoute: typeof ProfileIndexRoute;
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -136,11 +142,11 @@ const rootRouteChildren: RootRouteChildren = {
   AuthIndexRoute: AuthIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
-}
+};
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
 /* prettier-ignore-end */
 

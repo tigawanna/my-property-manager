@@ -10,7 +10,6 @@ import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
 
-
 interface SignupComponentProps {}
 
 const formOpts = formOptions<PropertyUserCreate>({

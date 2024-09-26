@@ -22,4 +22,4 @@ export const routes = [
       },
     ],
   },
-] as const
+] as const;

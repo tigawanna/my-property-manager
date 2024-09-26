@@ -9,19 +9,18 @@ export function isString(text?: string | null) {
   return true;
 }
 export function addZeroToSingleNumber(num: number) {
-  const numString = num.toString().padStart(2, "0")
-  if(numString === "NaN") {
-    return
+  const numString = num.toString().padStart(2, "0");
+  if (numString === "NaN") {
+    return;
   }
-  return numString
- 
+  return numString;
 }
 
-export function ensureNumber(val:string|number){
-  if(typeof val === "string"){
-    return parseInt(val)
+export function ensureNumber(val: string | number) {
+  if (typeof val === "string") {
+    return parseInt(val);
   }
-  return val
+  return val;
 }
 
 export function wordToNumber(word: string): number {
@@ -30,5 +29,5 @@ export function wordToNumber(word: string): number {
     sum += word.charCodeAt(i);
   }
 
-  return sum % 991 + 10; // 991 is a prime number close to 1000
+  return (sum % 991) + 10; // 991 is a prime number close to 1000
 }

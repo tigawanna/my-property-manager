@@ -20,10 +20,10 @@
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-    /* background: canvas;
+  /* background: canvas;
     color: canvasText; */
 }
-  /* body::before {
+/* body::before {
     --size: 45px;
     --line: color-mix(in lch, canvasText, transparent 40%);
     content: '';
@@ -129,6 +129,3 @@ h6 {
     animation-duration: 15s;
   }
 }
-
-
-

@@ -1,5 +1,5 @@
-import { Config } from 'tailwindcss'
-import plugin from 'tailwindcss/plugin'
+import { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 const defaultCofig: Partial<Config> = {
   content: [],
   theme: {
@@ -76,11 +76,6 @@ const defaultCofig: Partial<Config> = {
     },
   },
 };
-export default plugin(
-    function ({config}) { 
-        config()
-    },
-    defaultCofig
-
-
-)
+export default plugin(function ({ config }) {
+  config();
+}, defaultCofig);

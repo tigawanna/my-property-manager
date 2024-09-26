@@ -1,10 +1,9 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import { SignupComponent } from './-components/SignupComponent';
-import { z } from 'zod';
-
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { SignupComponent } from "./-components/SignupComponent";
+import { z } from "zod";
 
 const searchparams = z.object({
-  returnTo: z.string()
+  returnTo: z.string(),
 });
 export const Route = createFileRoute("/auth/signup")({
   component: SignupPage,
@@ -15,17 +14,15 @@ export const Route = createFileRoute("/auth/signup")({
     if (viewer?.record) {
       throw redirect({ to: returnTo });
     }
-  }
+  },
 });
 
-interface SignupProps {
+interface SignupProps {}
 
-}
-
-export function SignupPage({}:SignupProps){
-return (
- <div className='w-full h-full min-h-screen flex flex-col items-center justify-center'>
-    <SignupComponent/>
- </div>
-);
+export function SignupPage({}: SignupProps) {
+  return (
+    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
+      <SignupComponent />
+    </div>
+  );
 }

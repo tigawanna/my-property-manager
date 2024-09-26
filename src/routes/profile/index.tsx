@@ -1,4 +1,4 @@
-import { authGuard} from "@/lib/tanstack/query/use-viewer";
+import { authGuard } from "@/lib/tanstack/query/use-viewer";
 import { createFileRoute } from "@tanstack/react-router";
 import { ProfilePage } from "./-components/ProfilePage";
 import { z } from "zod";
@@ -13,4 +13,3 @@ export const Route = createFileRoute("/profile/")({
     await authGuard({ ctx });
   },
 });
-

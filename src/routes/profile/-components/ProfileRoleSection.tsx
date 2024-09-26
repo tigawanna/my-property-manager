@@ -1,7 +1,6 @@
 import { pb } from "@/lib/pb/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-
 interface ProfileRoleSectionProps {
   userId: string;
 }
@@ -15,5 +14,9 @@ export function ProfileRoleSection({ userId }: ProfileRoleSectionProps) {
       });
     },
   });
-  return <div className="w-full h-full flex flex-col items-center justify-center">role section </div>;
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      role section{" "}
+    </div>
+  );
 }
