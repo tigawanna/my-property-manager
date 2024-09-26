@@ -13,7 +13,7 @@ export function MainNavbar({}:MainNavbarProps){
 
 return (
   <nav className="sticky top-0 flex h-14 w-full bg-base-200  flex-col items-center justify-between">
-    <div className="flex h-full w-full items-center justify-between px-1">
+    <div className="flex h-full w-full items-center gap-2  justify-between px-2 pr-5">
       <NavbarRoutes/>
       <ThemeToggle/>
     <CurrentUser/>

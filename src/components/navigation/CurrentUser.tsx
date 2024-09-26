@@ -8,106 +8,113 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
   DropdownMenuShortcut,
-  DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-
 } from "@/components/shadcn/ui/dropdown-menu";
-import { User, CreditCard, Settings, Keyboard, Users, UserPlus, Mail, MessageSquare, PlusCircle, Plus, Github, LifeBuoy, Cloud, LogOut } from "lucide-react";
+import {
+  User,
+  CreditCard,
+  Settings,
+  Keyboard,
+  Mail,
+  UserCircle,
+} from "lucide-react";
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+} from "@/components/shadcn/ui/avatar";
+import { MutationButton } from "@/lib/tanstack/query/MutationButton";
+import { Link, useLocation } from "@tanstack/react-router";
 
-interface CurrentUserProps {
+interface CurrentUserProps {}
 
-}
+export function CurrentUser({}: CurrentUserProps) {
+  const location = useLocation()
+  const { userQuery, logoutMutation } = useViewer();
+  const viewer = userQuery?.data?.record;
 
-export function CurrentUser({}:CurrentUserProps){
-const { userQuery, logoutMutation } = useViewer();
+  if (!viewer) {
+    return (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <UserCircle className="size-6" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-72 border-none p-3">
+          <DropdownMenuLabel>Login</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem>
+              <Link 
+              className="flex items-center gap-2"
+              search={{ returnTo: location.pathname }} to="/auth">
+                <User className="mr-2 size-4" />
+                <span>Login</span>
+              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
 
-return (
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <button >Open</button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent className="w-56">
-      <DropdownMenuLabel>My Account</DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
-          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <CreditCard className="mr-2 h-4 w-4" />
-          <span>Billing</span>
-          <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Settings className="mr-2 h-4 w-4" />
-          <span>Settings</span>
-          <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Keyboard className="mr-2 h-4 w-4" />
-          <span>Keyboard shortcuts</span>
-          <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
-        <DropdownMenuItem>
-          <Users className="mr-2 h-4 w-4" />
-          <span>Team</span>
-        </DropdownMenuItem>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>
-            <UserPlus className="mr-2 h-4 w-4" />
-            <span>Invite users</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem>
-                <Mail className="mr-2 h-4 w-4" />
-                <span>Email</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <MessageSquare className="mr-2 h-4 w-4" />
-                <span>Message</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <PlusCircle className="mr-2 h-4 w-4" />
-                <span>More...</span>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuItem>
-          <Plus className="mr-2 h-4 w-4" />
-          <span>New Team</span>
-          <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <Github className="mr-2 h-4 w-4" />
-        <span>GitHub</span>
-      </DropdownMenuItem>
-      <DropdownMenuItem>
-        <LifeBuoy className="mr-2 h-4 w-4" />
-        <span>Support</span>
-      </DropdownMenuItem>
-      <DropdownMenuItem disabled>
-        <Cloud className="mr-2 h-4 w-4" />
-        <span>API</span>
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <LogOut className="mr-2 h-4 w-4" />
-        <span>Log out</span>
-        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Avatar>
+          <AvatarImage src={viewer.avatarUrl} alt={viewer.username} />
+          <AvatarFallback>{viewer.username.slice(0, 2)}</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-72 border-none p-3">
+        {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+        <DropdownMenuSeparator />
+        <div className="flex h-full w-full gap-3">
+          <Avatar>
+            <AvatarImage src={viewer.avatarUrl} alt={viewer.username} />
+            <AvatarFallback>{viewer.username.slice(0, 2)}</AvatarFallback>
+          </Avatar>
+          <div className="flex h-full w-full flex-col p-1">
+            <div className="i flex h-full w-full items-center gap-1">
+              <Mail className="size-3" />
+              <span className="text-xs">{viewer.email}</span>
+            </div>
+            <span className="text-xs">{viewer.username}</span>
+          </div>
+        </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <User className="mr-2 h-4 w-4" />
+            <span>Profile</span>
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+
+          <DropdownMenuItem>
+            <CreditCard className="mr-2 h-4 w-4" />
+            <span>Billing</span>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Settings</span>
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Keyboard className="mr-2 h-4 w-4" />
+            <span>Keyboard shortcuts</span>
+            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <div className="flex h-full w-full items-center justify-center gap-3">
+          <MutationButton
+            className="btn-error"
+            onClick={() => logoutMutation.mutate()}
+            label="Logout"
+            mutation={logoutMutation}
+          />
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }
