@@ -1,6 +1,6 @@
-interface GlobalRouterLoadingProps {}
+interface RouterPendingComponentProps {}
 
-export function GlobalRouterLoading({}: GlobalRouterLoadingProps) {
+export function RouterPendingComponent({}: RouterPendingComponentProps) {
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center gap-2">
       <div className="w-full h-[40vh] bg-base-300 skeleton rounded-lg" />
