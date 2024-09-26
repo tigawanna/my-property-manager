@@ -1,22 +1,22 @@
-import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
+import { useState } from "react";
 
 export function useTheme() {
-  const location = useLocation();
-  const rootSerachParams = useSearch({
-    from: "__root__",
-  });
-  const theme = rootSerachParams.theme;
-  const navigate = useNavigate({  });
-  function updateTheme(newTheme: typeof theme) {
-    navigate({
-        to:location.pathname,
-        search:{
-            theme:newTheme
-        }
-    });
+  const [theme,seTheme] = useState(() => {
+  if (typeof window === "undefined") return "light";
+  return (
+    localStorage.getItem("theme") as ("light"|"dark") ||
+    window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"
+  );
+  })
+function updateTheme(newTheme: typeof theme) {
+    if (typeof window !== "undefined") {
+      document.documentElement.dataset.theme = newTheme;
+      localStorage.setItem("theme", newTheme);
+      seTheme(newTheme)
+    }
   }
   return {
     theme,
-    updateTheme
-  }
+    updateTheme,
+  };
 }

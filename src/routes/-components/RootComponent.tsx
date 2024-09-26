@@ -6,12 +6,9 @@ import { Toaster } from "react-hot-toast";
 
 
 export function RootComponent() {
-    const searchparams = useSearch({
-        from:"__root__"
-    })
 
   return (
-    <div className="content min-h-screen w-full" data-theme={searchparams.theme??"light"}>
+    <div className="content min-h-screen w-full" >
       <MainNavbar />
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
