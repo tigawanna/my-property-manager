@@ -20,7 +20,8 @@ export async function getCustomTypes() {
   //   const custom_type_start = custom_db_types_lines.findIndex((line) =>line.includes("custom_db_types"));
   for (const [index, line] of custom_db_types_lines.entries()) {
     if (line.includes("=== start of custom type ===")) {
-      const custom_block_hint = custom_db_types_lines[index + 1]
+      // @ts-expect-error
+      const custom_block_hint = custom_db_types_lines?.[index + 1]
         .trim()
         .split(".");
 
@@ -35,22 +36,26 @@ export async function getCustomTypes() {
         custom_block_end,
       );
       extracted_custom_db_types += `${custom_type_in_block.join("\n")}\n`;
-      const target_interface_prefix = custom_block_hint[0]
+      // @ts-expect-error
+      const target_interface_prefix = custom_block_hint?.[0]
         .replace("//", "")
         .trim();
       extracted_custom_db_types_array.push({
         target_interface: `${target_interface_prefix}Create`,
         field: `${custom_block_hint[2]}`,
+        // @ts-expect-error
         new_custom_type: custom_block_hint[1],
       });
       extracted_custom_db_types_array.push({
         target_interface: `${target_interface_prefix}Update`,
         field: `${custom_block_hint[2]}`,
+        // @ts-expect-error
         new_custom_type: custom_block_hint[1],
       });
       extracted_custom_db_types_array.push({
         target_interface: `${target_interface_prefix}Response`,
         field: `${custom_block_hint[2]}`,
+        // @ts-expect-error
         new_custom_type: custom_block_hint[1],
       });
     }
@@ -134,7 +139,7 @@ export async function filterByCollection() {
         }
       }
       if (line.startsWith("// ===== ")) {
-        const current_block_name = line.split("=====")[1].trim();
+        const current_block_name = line?.split("=====")[1]?.trim();
         // currentBlck is not null after the first // ===== encount eredor a new block
         if (currentBlock) {
           // current block is not the same as the current block name
@@ -156,6 +161,7 @@ export async function filterByCollection() {
           // mark where the currennt block index starts at
           current_block_indexes[0] = index;
           //   set the current block name
+          // @ts-expect-error
           currentBlock = current_block_name;
         }
       }

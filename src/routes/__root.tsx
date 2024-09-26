@@ -8,7 +8,6 @@ import "./styles.css"
 import { PocketBaseClient } from '@/lib/pb/client';
 import { QueryClient } from '@tanstack/react-query';
 import { PocketbaseViewerType } from '@/lib/tanstack/query/use-viewer';
-import { z } from 'zod';
 import { RootComponent } from './-components/RootComponent';
 
 export const Route = createRootRouteWithContext<{
