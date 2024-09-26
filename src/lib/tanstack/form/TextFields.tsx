@@ -3,7 +3,7 @@ import { Input } from "@/components/shadcn/ui/input";
 import { Textarea } from "@/components/shadcn/ui/textarea";
 import { FormFieldProps, FieldInfo } from "./components";
 import { twMerge } from "tailwind-merge";
-import { FormLabel } from "@/components/shadcn/ui/form";
+
 
 export interface TextFormFieldProps<T> extends FormFieldProps<T> {
   inputOptions?: React.InputHTMLAttributes<HTMLInputElement>;
@@ -23,9 +23,9 @@ export function TextFormField<T>({
 
   return (
     <div className="w-full">
-      <FormLabel htmlFor={fieldKey} className="capitalize">
+      <label htmlFor={fieldKey} className="capitalize text-sm">
         {fieldlabel || fieldKey}
-      </FormLabel>
+      </label>
       <Input
         id={fieldKey}
         name={fieldKey}
@@ -55,9 +55,9 @@ export function TextAreaFormField<T>({
   );
   return (
     <div className="w-full">
-      <FormLabel htmlFor={fieldKey} className="capitalize">
+      <label htmlFor={fieldKey} className="capitalize text-sm">
         {fieldlabel || fieldKey}
-      </FormLabel>
+      </label>
       <Textarea
         id={fieldKey}
         name={fieldKey}

@@ -8,9 +8,8 @@ import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
-import { useNavigate } from "@tanstack/react-router";
-import { FormLabel } from "@/components/shadcn/ui/form";
-import { Checkbox } from "@radix-ui/react-checkbox";
+import { makeHotToast } from "@/components/toasters";
+
 
 interface SignupComponentProps {}
 
@@ -37,12 +36,12 @@ export function SignupComponent({}: SignupComponentProps) {
       return pb.from("property_user").create(data);
     },
     onSuccess(data) {
-      // toaster.create({
-      //   title: "signed up",
-      //   description: `Welcome ${data.username}`,
-      //   type: "success",
-      //   duration: 2000,
-      // });
+      makeHotToast({
+        title: "signed up",
+        description: `Welcome ${data.username}`,
+        duration: 2000,
+        variant: "success",
+      });
       qc.invalidateQueries(viewerqueryOptions);
 
       // navigate({ to: "/profile" });
@@ -52,12 +51,12 @@ export function SignupComponent({}: SignupComponentProps) {
     },
     onError(error) {
       console.log(error.name);
-      // toaster.create({
-      //   title: "Something went wrong",
-      //   description: `${error.message}`,
-      //   type: "error",
-      //   duration: 20000,
-      // });
+      makeHotToast({
+        title: "Something went wrong",
+        description: `${error.message}`,
+        duration: 20000,
+        variant: "error",
+      });
     },
   });
   const form = useForm({
@@ -68,14 +67,15 @@ export function SignupComponent({}: SignupComponentProps) {
   });
 
   return (
-    <div className="w-full  h-full flex flex-col items-center justify-center   ">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="w-[90%] md:w-[60%] lg:w-[50%] h-full flex flex-col items-center justify-center p-[2%] bg-bg-muted rounded-md gap-3 ">
+        className="bg-bg-muted flex h-full w-[90%] flex-col items-center justify-center gap-3 rounded-md p-[2%] md:w-[60%] lg:w-[50%]"
+      >
         <h1 className="text-4xl">Sign up</h1>
         <form.Field
           name="username"
@@ -108,6 +108,7 @@ export function SignupComponent({}: SignupComponentProps) {
                 field={field}
                 fieldKey="email"
                 inputOptions={{
+                  autoComplete: "email",
                   onBlur: field.handleBlur,
                   onChange: (e) => field.handleChange(e.target.value),
                 }}
@@ -157,20 +158,22 @@ export function SignupComponent({}: SignupComponentProps) {
           }}
         />
         <div className="w-full">
-          <div className="w-full flex gap-3">
-            <div className=""></div>
-            <FormLabel htmlFor="showPassword">Show password</FormLabel>
-            <Checkbox
+          <div className="flex w-full items-center justify-center gap-3">
+            <label htmlFor="showPassword" className="text-sm">
+              Show password
+            </label>
+            <input
+              type="checkbox"
               id="showPassword"
               name="showPassword"
-              className="border-2 border-accent-default"
+              className="checkbox-primary checkbox"
               checked={showPassword}
               onChange={() => setShowPassword(!showPassword)}
             />
           </div>
         </div>
 
-        <MutationButton mutation={mutation} />
+        <MutationButton className="btn-primary" mutation={mutation} />
       </form>
     </div>
   );

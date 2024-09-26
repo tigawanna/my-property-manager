@@ -9,8 +9,7 @@ import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
-import { FormLabel } from "@/components/shadcn/ui/form";
-import { Checkbox } from "@/components/shadcn/ui/checkbox";
+import { makeHotToast } from "@/components/toasters";
 
 interface SigninComponentProps {}
 
@@ -27,20 +26,23 @@ const formOpts = formOptions<PropertyUserLogn>({
 });
 export function SigninComponent({}: SigninComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
+  console.log("show password  === ",showPassword)
   const qc = useQueryClient();
   const { returnTo } = Route.useSearch();
   const navigate = useNavigate({ from: "/auth" });
   const mutation = useMutation({
     mutationFn: (data: PropertyUserLogn) => {
-      return pb.from("property_user").authWithPassword(data.emailOrUsername, data.password);
+      return pb
+        .from("property_user")
+        .authWithPassword(data.emailOrUsername, data.password);
     },
     onSuccess(data) {
-      // toaster.create({
-      //   title: "signed in",
-      //   description: `Welcome ${data.record.username}`,
-      //   type: "success",
-      //   duration: 2000,
-      // });
+      makeHotToast({
+        title: "signed in",
+        description: `Welcome ${data.record.username}`,
+        variant: "success",
+        duration: 2000,
+      });
       qc.invalidateQueries(viewerqueryOptions);
       // @ts-expect-error
       navigate({ to: returnTo || "/" });
@@ -50,12 +52,12 @@ export function SigninComponent({}: SigninComponentProps) {
     },
     onError(error) {
       console.log(error.name);
-      // toaster.create({
-      //   title: "Something went wrong",
-      //   description: `${error.message}`,
-      //   type: "error",
-      //   duration: 20000,
-      // });
+      makeHotToast({
+        title: "Something went wrong",
+        description: `${error.message}`,
+        variant: "error",
+        duration: 20000,
+      });
     },
   });
   const form = useForm({
@@ -65,14 +67,15 @@ export function SigninComponent({}: SigninComponentProps) {
     },
   });
   return (
-    <div className="w-full  h-full flex flex-col items-center justify-center   ">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="w-[90%] md:w-[60%] lg:w-[50%] h-full flex flex-col items-center justify-center p-[2%] bg-bg-muted rounded-md gap-3 ">
+        className="bg-base-300 flex h-full w-[90%] flex-col items-center justify-center gap-3 rounded-lh p-[2%] md:w-[60%] lg:w-[50%]"
+      >
         <h1 className="text-4xl">Sign in</h1>
         <form.Field
           name="emailOrUsername"
@@ -117,20 +120,19 @@ export function SigninComponent({}: SigninComponentProps) {
         />
 
         <div className="w-full">
-          <div className="w-full flex gap-3">
-            <div className=""></div>
-            <FormLabel htmlFor="showPassword">Show password</FormLabel>
-            <Checkbox
+          <div className="flex w-full items-center justify-center gap-3">
+            <label htmlFor="showPassword" className="text-sm">Show password</label>
+            <input type="checkbox"
               id="showPassword"
               name="showPassword"
-              className="border-2 border-accent-default"
+              className="checkbox checkbox-primary"
               checked={showPassword}
               onChange={() => setShowPassword(!showPassword)}
             />
           </div>
         </div>
 
-        <MutationButton mutation={mutation} />
+        <MutationButton className="btn-primary" mutation={mutation} />
       </form>
     </div>
   );
