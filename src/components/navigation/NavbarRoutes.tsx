@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { routes } from "./routes";
-import { Home } from "lucide-react";
+import { Home, Lock } from "lucide-react";
 
 interface NavbarRoutesProps {
 
@@ -12,18 +12,20 @@ return (
     <Link to="/" className="btn btn-link btn-sm">
       <Home />
     </Link>
-  <div className="w-full flex h-full items-center justify-center gap-2">
-    {routes.map((route) => (
-      <Link
-        key={route.name}
-        to={route.href}
-        className="btn btn-link btn-sm flex items-center justify-center bg-base-300"
-      >
-        {route.name}
+    <div className="flex h-full w-full items-center justify-center gap-2">
+      {routes.map((route) => (
+        <Link
+          key={route.name}
+          to={route.href}
+          className="btn btn-link btn-sm flex items-center justify-center bg-base-300"
+        >
+          {route.name}
+        </Link>
+      ))}
+      <Link to="/auth" search={{ returnTo: "/" }} className="btn btn-link btn-sm">
+        <Lock />
       </Link>
-    ))}
-
-  </div>
+    </div>
   </div>
 );
 }

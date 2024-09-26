@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router'
+import { Link, RouterProvider, createRouter } from '@tanstack/react-router'
 
 import { MutationCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeTree } from './routeTree.gen'
@@ -35,7 +35,32 @@ const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultPendingComponent: () => <GlobalRouterLoading/>,
-  defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
+  defaultNotFoundComponent() {
+    return (
+      <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
+        <div className="bg-bg-emphasized flex flex-col items-center justify-center rounded-lg p-[5%]">
+          <h1 className="text-9xl font-bold">404</h1>
+          <p className="text-2xl">Page Not Found</p>
+          <Link to="/" className="btn btn-link btn-sm">Back to Home</Link>
+        </div>
+      </div>
+    );
+  },
+  // defaultPendingComponent: () => (
+  //   <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
+  //     <div className="rounded-full border-b-2 border-primary">
+  //       <Loader className="animate-spin" />
+  //     </div>
+  //   </div>
+  // ),
+  defaultErrorComponent: ({ error }: { error: Error }) => (
+    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
+      <div className="rounded-xl border-error border p-5 text-error-content bg-error/20">
+        <p className="">{error.name}</p>
+        <p className="text-sm">{error.message}</p>
+      </div>
+    </div>
+  ),
   context: {
     pb: undefined!, // We'll inject this when we render
     queryClient,
