@@ -1,13 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { DashboardPage } from "./-components/DashboardPage";
 
 export const Route = createFileRoute("/dashboard/")({
   component: DashboardPage,
 });
 
-export function DashboardPage() {
-  return (
-    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-    </div>
-  );
-}
