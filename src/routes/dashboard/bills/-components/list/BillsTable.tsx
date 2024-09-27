@@ -15,15 +15,15 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
   const data = query.data.result;
 
   return (
-    <div className={twMerge("w-full h-screen overflow-auto",tableClassname)}>
-        <p> 
-           Bills {period.curr_year}/{period.curr_month}
-        </p>
-      <table className="" >
-        <thead className="sticky top-0 bg-bg-muted">
+    <div className={twMerge("h-screen w-full overflow-auto", tableClassname)}>
+      <table className="table screen:table-zebra">
+        <caption className="sticky top-0 bg-base-300 p-2">
+          Readings {period.curr_year}/{period.curr_month}
+        </caption>
+        <thead className="sticky top-7 bg-base-300">
           <tr>
             {/* shop details */}
-            {!printing&&<th>Order</th>}
+            {!printing && <th>Order</th>}
             <th>Shop No</th>
             <th>Shop Name</th>
             {/* previous */}
@@ -35,7 +35,7 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
             <th>Curr Elec</th>
             <th>Diff</th>
             {/* update */}
-            {!printing&&<th>Actions</th>}
+            {!printing && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -43,9 +43,9 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
             return (
               <tr key={item.shop_id}>
                 {/* shop details */}
-                {!printing&&<td>{item.list_order}</td>}
+                {!printing && <td>{item.list_order}</td>}
                 <td>{item.shop_number}</td>
-                <td>{item.shop_name}</td>
+                <td className="print:text-xs print:max-w-[100px] break-all">{item.shop_name}</td>
 
                 {/* water */}
                 <td>{item.previous_water}</td>
@@ -56,10 +56,11 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
                 <td>{item.current_elec}</td>
                 <td>{parseInt(item.elec_diff).toFixed(2)}</td>
                 {/* update */}
-                {!printing&&<td className="flex justify-center items-center">
-             
-                  <MutateBill bill={item} />
-                </td>}
+                {!printing && (
+                  <td className="flex items-center justify-center">
+                    <MutateBill bill={item} />
+                  </td>
+                )}
               </tr>
             );
           })}
@@ -75,11 +76,10 @@ interface BillsTableSuspenseFallbac {
 export function BillsTableSuspenseFallback({ period }: BillsTableSuspenseFallbac) {
     const data = Array.from({ length: 12 });
   return (
-    <div className="w-full h-screen overflow-auto">
-
-      <table className="w-full overflow-auto">
-        <caption>
-          Bills {period.curr_year}/{period.curr_month}
+    <div className="h-screen w-full overflow-auto">
+      <table className="table table-zebra">
+        <caption className="sticky top-0 bg-base-300 p-2">
+          Readings {period.curr_year}/{period.curr_month}
         </caption>
         <thead>
           <tr>
@@ -104,18 +104,18 @@ export function BillsTableSuspenseFallback({ period }: BillsTableSuspenseFallbac
             return (
               <tr key={idx}>
                 {/* shop details */}
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
 
                 {/* prev */}
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
                 {/* current */}
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
-                <td className="bg-base-300 animate-pulse p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
+                <td className="animate-pulse bg-base-300 p-1" />
                 {/* update */}
                 <td>
                   <Edit className="size-4" />

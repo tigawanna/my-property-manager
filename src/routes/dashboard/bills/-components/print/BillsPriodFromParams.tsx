@@ -9,7 +9,7 @@ interface BillsPriodFromParamsProps {
 export function BillsPriodFromParams({period}: BillsPriodFromParamsProps) {
 return (
     <Suspense fallback={<BillsTableSuspenseFallback period={period} />}>
-      <MonthlyBillsTable period={period} tableClassname="h-full p-[2%]" printing/>
+      <MonthlyBillsTable period={period} tableClassname="h-full  p-[2%]" printing/>
     </Suspense>
   );
 }

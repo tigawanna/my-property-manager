@@ -34,7 +34,7 @@ const period = {
       />
 
       <PrintThis
-        title={`Bills for ${getMonthName(period.curr_month)} ${period.curr_year}`}
+        title={`readings for ${getMonthName(period.curr_month)} ${period.curr_year}`}
         ref={componentRef}
         period={period}
       />

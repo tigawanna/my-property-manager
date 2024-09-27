@@ -21,8 +21,7 @@ export class PrintThis extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      <div className="p-2 flex flex-col w-full h-full">
-        <div className="capitaliza text-[15px]  m-1">{this.state.title}</div>
+      <div className="p-2 flex flex-col w-full h-full ">
         <BillsPriodFromParams period={this.props.period}/>
       </div>
     );
