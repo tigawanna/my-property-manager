@@ -28,8 +28,8 @@ export function DashboardPage({}: DashboardPageProps) {
             key={link.name}
             to={link.path}
             className="p-[5%] flex gap-2 justify-center items-center 
-          text-4xl h-full w-[40%] bg-bg-subtle rounded-lg
-          hover:bg-bg-emphasized hover:text-accent-text">
+          text-4xl h-full w-[40%] bg-base-200 rounded-xl
+          hover:bg-base-300 hover:text-accent-text">
             {link.icon}
             {link.name}
           </Link>
