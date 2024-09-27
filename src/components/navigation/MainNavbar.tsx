@@ -10,7 +10,7 @@ export function MainNavbar({}: MainNavbarProps) {
   const isLoading = useRouterState({ select: (s) => s.status === "pending" });
 
   return (
-    <nav className="sticky top-0 flex h-14 w-full flex-col items-center justify-between bg-base-200">
+    <nav className="sticky z-30 top-0 flex h-14 w-full flex-col items-center justify-between bg-base-200">
       <div className="flex h-full w-full items-center justify-between gap-2 px-2 pr-5">
         <NavbarRoutes />
         <ThemeToggle />
