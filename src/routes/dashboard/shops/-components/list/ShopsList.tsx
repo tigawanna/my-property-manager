@@ -1,23 +1,28 @@
 import { pb } from "@/lib/pb/client";
 import { wordToNumber } from "@/utils/string";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { like } from "typed-pocketbase";
+import { and, like } from "typed-pocketbase";
 import {
   Avatar,
   AvatarImage,
   AvatarFallback,
 } from "@/components/shadcn/ui/avatar";
+import { HouseFloorsKeys } from "./use-shook-hooks";
 
 interface ShopsListProps {
   keyword?: string;
+  floor: HouseFloorsKeys;
 }
 
-export function ShopsList({ keyword = "" }: ShopsListProps) {
+export function ShopsList({ keyword = "",floor }: ShopsListProps) {
+  console.log(" === floor  === ",floor)
   const query = useSuspenseQuery({
-    queryKey: ["property_tenants_list", keyword],
+    queryKey: ["property_shops", keyword,floor],
     queryFn: () => {
       return pb.from("property_shops").getList(1, 24, {
-        filter: like("shop_number", keyword),
+        // filter:`shop_number~"${floor}"`,
+        // filter:like("shop_number",floor),
+        filter: and(like("shop_number", keyword),like("shop_number",floor)),
         select: {
           expand: {
             tenant: true,
