@@ -2,22 +2,18 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { oneShopQueryOptions } from "../query-options/shops_query_options";
 import { ShopCard } from "../list/ShopCard";
 
-
 interface OneShopDetailsProps {
-    shop_id:string
+  shop: string;
 }
 
-export function OneShopDetails({shop_id}:OneShopDetailsProps){
- const query = useSuspenseQuery(oneShopQueryOptions({shop_id})); 
- const data = query.data  
- const tenant = data?.expand?.tenant
-return (
-  <div className="flex h-full w-full bg-base-300 flex-col items-center justify-center">
- 
+export function OneShopDetails({ shop }: OneShopDetailsProps) {
+  const query = useSuspenseQuery(oneShopQueryOptions({ shop }));
+  const data = query.data;
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center bg-base-300">
       <div className="flex h-full w-full items-center gap-2 p-2">
-<ShopCard item={data} variant="wide"/>
+        <ShopCard item={data} variant="wide" />
       </div>
-
-  </div>
-);
+    </div>
+  );
 }

@@ -35,7 +35,7 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-base-200",
           wide: "w-full ",
           disabled:
             " hover:via-secondary/30 hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-primary",
@@ -58,7 +58,7 @@ if(item.is_vacant){
       key={item.id}
       className={cn(shopCardVariants({ variant }), cardClassname)}
     >
-      <div className="flex h-full w-full flex-col justify-between gap-2 hover:scale-95 hover:duration-300 hover:ease-in-out">
+      <div className="flex h-full w-full flex-col justify-between gap-2 ">
         <div className="flex w-full items-start justify-between gap-2">
           <div className="flex items-center gap-2">
             {item.is_vacant && (
