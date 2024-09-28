@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
-import { oneShopBillsQueryOptions} from "../../query-options/shops_query_options";
+import { oneShopBillsQueryOptions} from "../../query-options/shops-query-options";
 import { useParams, useSearch } from "@tanstack/react-router";
 import { GenericTable } from "@/components/wrappers/GenericTable";
 import { pb } from "@/lib/pb/client";

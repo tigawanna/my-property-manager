@@ -20,6 +20,7 @@ import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
 import { Route as DashboardBillsIndexImport } from './routes/dashboard/bills/index'
 import { Route as DashboardBillsPrintImport } from './routes/dashboard/bills/print'
+import { Route as DashboardTenantsTenantIndexImport } from './routes/dashboard/tenants/$tenant/index'
 import { Route as DashboardShopsShopIndexImport } from './routes/dashboard/shops/$shop/index'
 
 // Create/Update Routes
@@ -68,6 +69,12 @@ const DashboardBillsPrintRoute = DashboardBillsPrintImport.update({
   path: '/dashboard/bills/print',
   getParentRoute: () => rootRoute,
 } as any)
+
+const DashboardTenantsTenantIndexRoute =
+  DashboardTenantsTenantIndexImport.update({
+    path: '/dashboard/tenants/$tenant/',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 const DashboardShopsShopIndexRoute = DashboardShopsShopIndexImport.update({
   path: '/dashboard/shops/$shop/',
@@ -148,6 +155,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardShopsShopIndexImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/tenants/$tenant/': {
+      id: '/dashboard/tenants/$tenant/'
+      path: '/dashboard/tenants/$tenant'
+      fullPath: '/dashboard/tenants/$tenant'
+      preLoaderRoute: typeof DashboardTenantsTenantIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -164,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
+  '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -177,6 +192,7 @@ export interface FileRoutesByTo {
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
+  '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
 }
 
 export interface FileRoutesById {
@@ -191,6 +207,7 @@ export interface FileRoutesById {
   '/dashboard/shops/': typeof DashboardShopsIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
+  '/dashboard/tenants/$tenant/': typeof DashboardTenantsTenantIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -206,6 +223,7 @@ export interface FileRouteTypes {
     | '/dashboard/shops'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
+    | '/dashboard/tenants/$tenant'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -218,6 +236,7 @@ export interface FileRouteTypes {
     | '/dashboard/shops'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
+    | '/dashboard/tenants/$tenant'
   id:
     | '__root__'
     | '/'
@@ -230,6 +249,7 @@ export interface FileRouteTypes {
     | '/dashboard/shops/'
     | '/dashboard/tenants/'
     | '/dashboard/shops/$shop/'
+    | '/dashboard/tenants/$tenant/'
   fileRoutesById: FileRoutesById
 }
 
@@ -244,6 +264,7 @@ export interface RootRouteChildren {
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
   DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
+  DashboardTenantsTenantIndexRoute: typeof DashboardTenantsTenantIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -257,6 +278,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
   DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
+  DashboardTenantsTenantIndexRoute: DashboardTenantsTenantIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -280,7 +302,8 @@ export const routeTree = rootRoute
         "/dashboard/bills/",
         "/dashboard/shops/",
         "/dashboard/tenants/",
-        "/dashboard/shops/$shop/"
+        "/dashboard/shops/$shop/",
+        "/dashboard/tenants/$tenant/"
       ]
     },
     "/": {
@@ -312,6 +335,9 @@ export const routeTree = rootRoute
     },
     "/dashboard/shops/$shop/": {
       "filePath": "dashboard/shops/$shop/index.tsx"
+    },
+    "/dashboard/tenants/$tenant/": {
+      "filePath": "dashboard/tenants/$tenant/index.tsx"
     }
   }
 }

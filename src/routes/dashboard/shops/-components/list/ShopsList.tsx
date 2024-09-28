@@ -5,7 +5,7 @@ import { and, like } from "typed-pocketbase";
 
 import { HouseFloorsKeys } from "./use-shook-hooks";
 import { ShopCard } from "./ShopCard";
-import { listShopsQueryOptions } from "../query-options/shops_query_options";
+import { listShopsQueryOptions } from "../query-options/shops-query-options";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
 
 interface ShopsListProps {

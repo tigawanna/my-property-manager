@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { oneShopQueryOptions } from "../query-options/shops_query_options";
+import { oneShopQueryOptions } from "../query-options/shops-query-options";
 import { ShopCard } from "../list/ShopCard";
 
 interface OneShopDetailsProps {
