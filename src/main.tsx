@@ -12,6 +12,7 @@ import React, { useEffect } from "react";
 import { RouterPendingComponent } from "./lib/tanstack/router/RouterPendingComponent";
 import { RouterErrorComponent } from "./lib/tanstack/router/routerErrorComponent";
 import { RouterNotFoundComponent } from "./lib/tanstack/router/RouterNotFoundComponent";
+import { themeChange } from 'theme-change'
 
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({
@@ -59,6 +60,7 @@ declare module "@tanstack/react-router" {
 function App() {
   useEffect(() => {
     document.documentElement.dataset.style = "vertical";
+    themeChange(false);
   }, []);
   const { userQuery } = useViewer();
 
