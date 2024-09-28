@@ -58,14 +58,7 @@ type AuthBeforeloadContext = BeforeLoadContextOptions<
     unknown,
     unknown
   >,
-  (search: Record<string, unknown>) =>Partial<{
-    returnTo: string;
-    cy?: number | undefined;
-    cm?: number | undefined;
-    py?: number | undefined;
-    pm?: number | undefined;
-    bill?: number | undefined;
-  }>,
+  any,
   Record<never, string>,
   AnyContext,
   AnyContext
