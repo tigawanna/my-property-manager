@@ -147,3 +147,26 @@ h6 {
     page-break-after: always;
   }
 }
+
+/* .grid-bg {
+    --size: 45px;
+    --line: color-mix(in lch, theme('colors.primary'), transparent 90%);
+    content: '';
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    background: linear-gradient(
+          90deg,
+          var(--line) 1px,
+          transparent 1px var(--size)
+        )
+        50% 50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+        var(--size) var(--size);
+    mask: linear-gradient(-20deg, transparent 50%, theme('colors.primary'));
+    top: 0;
+    transform-style: flat;
+    pointer-events: none;
+    z-index: 1;
+  } */

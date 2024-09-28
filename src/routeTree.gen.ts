@@ -20,6 +20,7 @@ import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
 import { Route as DashboardBillsIndexImport } from './routes/dashboard/bills/index'
 import { Route as DashboardBillsPrintImport } from './routes/dashboard/bills/print'
+import { Route as DashboardShopsShopIndexImport } from './routes/dashboard/shops/$shop/index'
 
 // Create/Update Routes
 
@@ -65,6 +66,11 @@ const DashboardBillsIndexRoute = DashboardBillsIndexImport.update({
 
 const DashboardBillsPrintRoute = DashboardBillsPrintImport.update({
   path: '/dashboard/bills/print',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardShopsShopIndexRoute = DashboardShopsShopIndexImport.update({
+  path: '/dashboard/shops/$shop/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -135,6 +141,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTenantsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/shops/$shop/': {
+      id: '/dashboard/shops/$shop/'
+      path: '/dashboard/shops/$shop'
+      fullPath: '/dashboard/shops/$shop'
+      preLoaderRoute: typeof DashboardShopsShopIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -150,6 +163,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/bills': typeof DashboardBillsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
+  '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -162,6 +176,7 @@ export interface FileRoutesByTo {
   '/dashboard/bills': typeof DashboardBillsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
+  '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
 }
 
 export interface FileRoutesById {
@@ -175,6 +190,7 @@ export interface FileRoutesById {
   '/dashboard/bills/': typeof DashboardBillsIndexRoute
   '/dashboard/shops/': typeof DashboardShopsIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
+  '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -189,6 +205,7 @@ export interface FileRouteTypes {
     | '/dashboard/bills'
     | '/dashboard/shops'
     | '/dashboard/tenants'
+    | '/dashboard/shops/$shop'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -200,6 +217,7 @@ export interface FileRouteTypes {
     | '/dashboard/bills'
     | '/dashboard/shops'
     | '/dashboard/tenants'
+    | '/dashboard/shops/$shop'
   id:
     | '__root__'
     | '/'
@@ -211,6 +229,7 @@ export interface FileRouteTypes {
     | '/dashboard/bills/'
     | '/dashboard/shops/'
     | '/dashboard/tenants/'
+    | '/dashboard/shops/$shop/'
   fileRoutesById: FileRoutesById
 }
 
@@ -224,6 +243,7 @@ export interface RootRouteChildren {
   DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
+  DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -236,6 +256,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardBillsIndexRoute: DashboardBillsIndexRoute,
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
+  DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -258,7 +279,8 @@ export const routeTree = rootRoute
         "/dashboard/bills/print",
         "/dashboard/bills/",
         "/dashboard/shops/",
-        "/dashboard/tenants/"
+        "/dashboard/tenants/",
+        "/dashboard/shops/$shop/"
       ]
     },
     "/": {
@@ -287,6 +309,9 @@ export const routeTree = rootRoute
     },
     "/dashboard/tenants/": {
       "filePath": "dashboard/tenants/index.tsx"
+    },
+    "/dashboard/shops/$shop/": {
+      "filePath": "dashboard/shops/$shop/index.tsx"
     }
   }
 }

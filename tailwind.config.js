@@ -8,6 +8,7 @@ export default {
         print: { raw: "print" },
         screen: { raw: "screen" },
       },
+      
     },
   },
   plugins: [
