@@ -9,6 +9,7 @@ import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
+import { useNavigate } from "@tanstack/react-router";
 
 interface SignupComponentProps {}
 
@@ -29,7 +30,7 @@ const formOpts = formOptions<PropertyUserCreate>({
 export function SignupComponent({}: SignupComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
   const qc = useQueryClient();
-  // const navigate = useNavigate({ from: "/auth/signup" });
+  const navigate = useNavigate({ from: "/auth/signup" });
   const mutation = useMutation({
     mutationFn: (data: PropertyUserCreate) => {
       return pb.from("property_user").create(data);
@@ -42,8 +43,8 @@ export function SignupComponent({}: SignupComponentProps) {
         variant: "success",
       });
       qc.invalidateQueries(viewerqueryOptions);
-
-      // navigate({ to: "/profile" });
+      // qc.setQueryData(["viewer"], () => data);
+      navigate({ to: "/auth",search: {returnTo: "/profile"}});
       // if (typeof window !== "undefined") {
       //   location.reload();
       // }

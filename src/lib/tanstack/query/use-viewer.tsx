@@ -21,8 +21,12 @@ export const viewerqueryOptions = queryOptions({
     pb
       .from("property_user")
       .authRefresh()
-      .then((res) => res)
-      .catch(() => {
+      .then((res) => {
+        console.log("use viewer res", res);
+        return res
+      })
+      .catch((err) => {
+        console.log("use viewer error ", err);
         pb.authStore.clear();
         return { record: null, token: null };
       }),

@@ -26,7 +26,6 @@ const formOpts = formOptions<PropertyUserLogn>({
 });
 export function SigninComponent({}: SigninComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
-  console.log("show password  === ", showPassword);
   const qc = useQueryClient();
   const { returnTo } = Route.useSearch();
   const navigate = useNavigate({ from: "/auth" });
@@ -43,12 +42,14 @@ export function SigninComponent({}: SigninComponentProps) {
         variant: "success",
         duration: 2000,
       });
-      qc.invalidateQueries(viewerqueryOptions);
+      
+      // qc.invalidateQueries(viewerqueryOptions); 
+      qc.setQueryData(["viewer"], () => data);
       // @ts-expect-error
       navigate({ to: returnTo || "/" });
-      // if (typeof window !== "undefined") {
-      //   location.reload();
-      // }
+      if (typeof window !== "undefined") {
+        location.reload();
+      }
     },
     onError(error) {
       console.log(error.name);
