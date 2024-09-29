@@ -20,7 +20,6 @@ export function listTenantsQueryOptions({ keyword }: IListTenantsQueryOptions) {
       return pb.from("property_tenants_list").getList(1, 24, {
         filter: or(
           like("name", keyword),
-          like("property_shops(tenant).shop_number", keyword),
         ),
         select: {
           expand: {
@@ -76,7 +75,7 @@ export function oneTenantBillsQueryOptions({
       return pb.from("property_bills").getList(1, 24, {
         filter: and(
           eq("year", year),
-          eq("shop.property_bills(shop).shop.tenant.name", tenant),
+          // eq("shop.property_bills(shop).shop.tenant.name", tenant),
         ),
         sort: ["-year", "-month"],
         select: {

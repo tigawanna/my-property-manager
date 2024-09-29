@@ -25,11 +25,13 @@ interface TenantsCardProps {
   variant?: "default" | "wide";
   cardClassname?: string;
   item: PropertyTenantsListResponse & ShopExpand;
+  oneTenantMode?: boolean;
 }
 
 export function TenantsCard({
   variant="default",
   cardClassname,
+  oneTenantMode,
   item,
 }: TenantsCardProps) {
   const tenantCardVariants = cva(
@@ -70,13 +72,10 @@ const shops = item.expand?.["property_shops(tenant)"];
             </Avatar>
           </div>
         </div>
+        <div className="text-4xl break-words">{item?.name}</div>
 
         <div className="flex h-full w-full flex-col justify-end p-2">
-          <div className="flex w-full items-center gap-2">
-            <div className="">{item?.name}</div>
-          </div>
-
-          <div className="flex w-full items-center gap-2">
+{!oneTenantMode&&<div className="flex w-full items-center gap-2">
             {shops && shops.length > 0 && (
               <div className="flex items-center justify-start gap-2">
                 {shops?.map((shop) => (
@@ -85,14 +84,14 @@ const shops = item.expand?.["property_shops(tenant)"];
                     key={shop.id}
                   >
                     {/* <User className="w-3 h-3" /> */}
-                    <h4 className="rounded border border-accent bg-accent px-1 text-xs">
+                    <h4 className="badge badge-primary badge-outline px-1 text-xs">
                       {shop.shop_number}
                     </h4>
                   </div>
                 ))}
               </div>
             )}
-          </div>
+          </div>}
         </div>
       </div>
     </Link>
