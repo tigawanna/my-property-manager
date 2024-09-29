@@ -35,7 +35,7 @@ export function HomePage() {
 
       <div className="z-10 flex h-full min-h-screen w-full flex-col items-center justify-evenly gap-5 bg-base-300/70">
         <div className="*:justfy-center grid grid-cols-1 justify-center gap-2 p-[5%] *:flex *:items-center *:rounded-xl *:bg-base-300/40 *:p-5 md:grid-cols-2 lg:grid-cols-2">
-          <h1 className="text-7xl font-bold text-primary">welcome</h1>
+          <h1 className="text-7xl font-bold text-primary">welcome {viewer?.username}</h1>
 
           <RealTimeClock />
           <div className="text-4xl hover:bg-primary-content/30">
