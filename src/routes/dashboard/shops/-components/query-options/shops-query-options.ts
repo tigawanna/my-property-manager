@@ -89,6 +89,6 @@ export function oneShopBillsQueryOptions({shop,year}:IOneShopBillsQueryOptions){
         })
       }
       },
-      // staleTime:1000*60*60
+      staleTime:1000*60*60
     });
 }
