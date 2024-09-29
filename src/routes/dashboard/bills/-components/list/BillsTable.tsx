@@ -7,10 +7,14 @@ import { MutateBill } from "../form/MutateBill";
 interface MonthlyBillsTableProps {
   period: BillsPeriod;
   printing?: boolean;
-  tableClassname?:string;
+  tableClassname?: string;
 }
 
-export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBillsTableProps) {
+export function MonthlyBillsTable({
+  period,
+  printing,
+  tableClassname,
+}: MonthlyBillsTableProps) {
   const query = useBillsQuery(period);
   const data = query.data.result;
   console.log("bills query", query);
@@ -46,7 +50,9 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
                 {/* shop details */}
                 {!printing && <td>{item.list_order}</td>}
                 <td>{item.shop_number}</td>
-                <td className="print:text-xs print:max-w-[100px] break-all">{item.shop_name}</td>
+                <td className="break-all print:max-w-[100px] print:text-xs">
+                  {item.shop_name}
+                </td>
 
                 {/* water */}
                 <td>{item.previous_water}</td>
@@ -74,8 +80,10 @@ export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBil
 interface BillsTableSuspenseFallbac {
   period: BillsPeriod;
 }
-export function BillsTableSuspenseFallback({ period }: BillsTableSuspenseFallbac) {
-    const data = Array.from({ length: 12 });
+export function BillsTableSuspenseFallback({
+  period,
+}: BillsTableSuspenseFallbac) {
+  const data = Array.from({ length: 12 });
   return (
     <div className="h-screen w-full overflow-auto">
       <table className="table table-zebra">

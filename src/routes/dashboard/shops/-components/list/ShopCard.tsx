@@ -46,9 +46,9 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
       },
     },
   );
-if(item.is_vacant){
-  variant="disabled"
-}
+  if (item.is_vacant) {
+    variant = "disabled";
+  }
   return (
     <Link
       to={`/dashboard/shops/$shop`}
@@ -58,7 +58,7 @@ if(item.is_vacant){
       key={item.id}
       className={cn(shopCardVariants({ variant }), cardClassname)}
     >
-      <div className="flex h-full w-full flex-col justify-between gap-2 ">
+      <div className="flex h-full w-full flex-col justify-between gap-2">
         <div className="flex w-full items-start justify-between gap-2">
           <div className="flex items-center gap-2">
             {item.is_vacant && (
@@ -73,7 +73,7 @@ if(item.is_vacant){
             {item.utils === "both" && (
               <div className="flex items-center gap-1">
                 <Zap className="fill-warning stroke-warning" />
-                <Droplet className="stroke-info fill-info"/>
+                <Droplet className="fill-info stroke-info" />
               </div>
             )}
           </div>

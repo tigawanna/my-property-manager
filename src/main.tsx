@@ -12,7 +12,7 @@ import React, { useEffect } from "react";
 import { RouterPendingComponent } from "./lib/tanstack/router/RouterPendingComponent";
 import { RouterErrorComponent } from "./lib/tanstack/router/routerErrorComponent";
 import { RouterNotFoundComponent } from "./lib/tanstack/router/RouterNotFoundComponent";
-import { themeChange } from 'theme-change'
+import { themeChange } from "theme-change";
 
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({

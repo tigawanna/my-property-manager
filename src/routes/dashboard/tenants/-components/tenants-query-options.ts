@@ -18,9 +18,7 @@ export function listTenantsQueryOptions({ keyword }: IListTenantsQueryOptions) {
     queryKey: ["property_tenants_list", keyword],
     queryFn: () => {
       return pb.from("property_tenants_list").getList(1, 24, {
-        filter: or(
-          like("name", keyword),
-        ),
+        filter: or(like("name", keyword)),
         select: {
           expand: {
             "property_shops(tenant)": true,

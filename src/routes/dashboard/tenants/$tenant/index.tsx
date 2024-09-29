@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { OneTenantPage } from '../-components/one-tenant/OneTenantPage';
-import { authGuard } from '@/lib/tanstack/query/use-viewer';
+import { createFileRoute } from "@tanstack/react-router";
+import { OneTenantPage } from "../-components/one-tenant/OneTenantPage";
+import { authGuard } from "@/lib/tanstack/query/use-viewer";
 
 export const Route = createFileRoute("/dashboard/tenants/$tenant/")({
   component: OneTenantPage,

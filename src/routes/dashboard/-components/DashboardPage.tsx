@@ -1,3 +1,5 @@
+import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { Link } from "@tanstack/react-router";
 import { Droplet, Store, Users, Wallet, Zap } from "lucide-react";
 
@@ -17,24 +19,31 @@ const links = [
   { name: "shops", path: "/dashboard/shops", icon: <Store /> },
   { name: "tenants", path: "/dashboard/tenants", icon: <Users /> },
   { name: "rent", path: "/dashboard/rent", icon: <Wallet /> },
-] as const
+] as const;
 export function DashboardPage({}: DashboardPageProps) {
+  const { userQuery } = useViewer();
+  const viewer = userQuery?.data?.record;
   return (
-    <div className="w-full h-full min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full h-full flex justify-center items-center"></div>
-      <ul className="w-full h-full flex flex-wrap justify-center items-center gap-2 p-[5%]">
-        {links.map((link) => (
-          <Link
-            key={link.name}
-            to={link.path}
-            className="p-[5%] flex gap-2 justify-center items-center 
-          text-4xl h-full w-[40%] bg-base-200 rounded-xl
-          hover:bg-base-300 hover:text-accent-text">
-            {link.icon}
-            {link.name}
-          </Link>
-        ))}
-
+    <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
+      <ul className="grid h-full w-full grid-cols-1 justify-center gap-2 p-[5%] md:grid-cols-2 lg:grid-cols-2">
+        {links.map((link) => {
+          if (
+            !(viewer?.staff && viewer?.staff.length > 0) &&
+            link.name === "bills"
+          ) {
+            return;
+          }
+          return (
+            <Link
+              key={link.name}
+              to={link.path}
+              className="hover:text-accent-text flex h-full items-center justify-center gap-2 rounded-xl bg-base-200 p-[5%] text-4xl hover:bg-base-300"
+            >
+              {link.icon}
+              {link.name}
+            </Link>
+          );
+        })}
       </ul>
     </div>
   );

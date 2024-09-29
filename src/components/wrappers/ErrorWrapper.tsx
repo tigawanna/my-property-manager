@@ -1,7 +1,5 @@
 import { concatErrors } from "@/utils/concaterrors";
 
-
-
 interface ErrorOutputProps {
   err: any;
 }
@@ -13,5 +11,3 @@ export function ErrorWrapper({ err }: ErrorOutputProps) {
     </div>
   );
 }
-
-

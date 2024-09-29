@@ -9,7 +9,10 @@ interface BillsPeriodPickerProps {
   setPeriod: React.Dispatch<React.SetStateAction<BillsPeriod>>;
 }
 
-export function BillsPeriodPicker({ period, setPeriod }: BillsPeriodPickerProps) {
+export function BillsPeriodPicker({
+  period,
+  setPeriod,
+}: BillsPeriodPickerProps) {
   const [_, startTransition] = useTransition();
   const currentYear = new Date().getFullYear();
   return (
@@ -32,7 +35,7 @@ export function BillsPeriodPicker({ period, setPeriod }: BillsPeriodPickerProps)
             }
           />
         </div>
-        <div className="flex items-center justify-center text-primary gap-3">
+        <div className="flex items-center justify-center gap-3 text-primary">
           <h1 className="md:text-3xl">bills</h1>
           <BillsCaroussel period={period} />
           <Link
@@ -78,8 +81,8 @@ interface PlusMinusMonthProps {
 
 export function PlusMinusMonth({ value, setValue }: PlusMinusMonthProps) {
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <div className="w-full flex gap-1 items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="flex w-full items-center justify-center gap-1">
         <button disabled={value === 12} className="btn btn-ghost">
           <Plus
             onClick={() => {
@@ -115,10 +118,15 @@ interface PlusMinusYearProps {
   maxYear?: number;
 }
 
-export function PlusMinusYear({ value, setValue, maxYear, minYear }: PlusMinusYearProps) {
+export function PlusMinusYear({
+  value,
+  setValue,
+  maxYear,
+  minYear,
+}: PlusMinusYearProps) {
   return (
-    <div className="w-full flex flex-col gap-1 items-center justify-center">
-      <div className="w-full flex gap-1 items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-1">
+      <div className="flex w-full items-center justify-center gap-1">
         <button disabled={value === maxYear} className="btn btn-ghost">
           <Plus
             onClick={() => {

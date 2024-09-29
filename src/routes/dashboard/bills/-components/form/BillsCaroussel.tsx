@@ -69,14 +69,14 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn-ghost flex btn btn-sm gap-2 px-2">
+        <button className="btn btn-ghost btn-sm flex gap-2 px-2">
           <Plus />
           carrousel form
         </button>
       </DialogTrigger>
 
       <DialogContent
-        className="bg-base-300 min-h-[70vh] min-w-[60%] p-5"
+        className="min-h-[70vh] min-w-[60%] bg-base-300 p-5"
         onKeyDown={(e) => {
           if (e.ctrlKey && e.key === "ArrowRight") {
             nextBill();

@@ -44,7 +44,7 @@ export function SignupComponent({}: SignupComponentProps) {
       });
       qc.invalidateQueries(viewerqueryOptions);
       // qc.setQueryData(["viewer"], () => data);
-      navigate({ to: "/auth",search: {returnTo: "/profile"}});
+      navigate({ to: "/auth", search: { returnTo: "/profile" } });
       // if (typeof window !== "undefined") {
       //   location.reload();
       // }

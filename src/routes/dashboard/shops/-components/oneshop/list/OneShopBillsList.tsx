@@ -1,26 +1,23 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
-import { oneShopBillsQueryOptions} from "../../query-options/shops-query-options";
+import { oneShopBillsQueryOptions } from "../../query-options/shops-query-options";
 import { useParams, useSearch } from "@tanstack/react-router";
 import { GenericTable } from "@/components/wrappers/GenericTable";
 import { pb } from "@/lib/pb/client";
 
-interface ShopsListProps {
-
-  }
+interface ShopsListProps {}
 
 export function ShopsBillsList({}: ShopsListProps) {
   const { shop } = useParams({
     from: "/dashboard/shops/$shop/",
   });
-  const {cy} = useSearch({ from: "/dashboard/shops/$shop/" });
-  const selectedYear = cy??new Date().getFullYear();
+  const { cy } = useSearch({ from: "/dashboard/shops/$shop/" });
+  const selectedYear = cy ?? new Date().getFullYear();
   const query = useSuspenseQuery(
     oneShopBillsQueryOptions({ shop, year: selectedYear }),
   );
   const data = query.data;
   const error = query.error;
-
 
   if (error) {
     return (
@@ -46,7 +43,7 @@ export function ShopsBillsList({}: ShopsListProps) {
       <div className="w-full p-2">
         <GenericTable
           rows={data.items}
-          updateItem={(item)=>pb.from("property_bills").update(item.id, item)}
+          updateItem={(item) => pb.from("property_bills").update(item.id, item)}
           columns={[
             { label: "month", type: "number", accessor: "month" },
             { label: "year", type: "number", accessor: "year" },

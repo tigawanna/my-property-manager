@@ -6,19 +6,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/shadcn/ui/select";
-import { houseFloors, HouseFloorsKeys, useShopsFlooor } from "./use-shook-hooks";
+import {
+  houseFloors,
+  HouseFloorsKeys,
+  useShopsFlooor,
+} from "./use-shook-hooks";
 interface SelectHouseFloorProps {}
 
 export function SelectHouseFloor({}: SelectHouseFloorProps) {
   const floors = Object.entries(houseFloors) as Array<
     [HouseFloorsKeys, string]
   >;
-  const {floor,setHouseFloor} = useShopsFlooor()
+  const { floor, setHouseFloor } = useShopsFlooor();
   return (
     <Select
       value={floor}
       onValueChange={(value: HouseFloorsKeys) => {
-        setHouseFloor(value)}}
+        setHouseFloor(value);
+      }}
     >
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a floor" />
@@ -30,7 +35,7 @@ export function SelectHouseFloor({}: SelectHouseFloorProps) {
               {value}
             </SelectItem>
           ))}
-{/* 
+          {/* 
           <SelectItem value="apple">Apple</SelectItem>
           <SelectItem value="banana">Banana</SelectItem>
           <SelectItem value="blueberry">Blueberry</SelectItem>

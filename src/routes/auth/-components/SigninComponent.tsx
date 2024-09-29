@@ -42,8 +42,8 @@ export function SigninComponent({}: SigninComponentProps) {
         variant: "success",
         duration: 2000,
       });
-      
-      // qc.invalidateQueries(viewerqueryOptions); 
+
+      // qc.invalidateQueries(viewerqueryOptions);
       qc.setQueryData(["viewer"], () => data);
       // @ts-expect-error
       navigate({ to: returnTo || "/" });

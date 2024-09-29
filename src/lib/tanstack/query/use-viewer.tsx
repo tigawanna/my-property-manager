@@ -23,7 +23,7 @@ export const viewerqueryOptions = queryOptions({
       .authRefresh()
       .then((res) => {
         // console.log("use viewer res", res);
-        return res
+        return res;
       })
       .catch((err) => {
         // console.log("use viewer error ", err);

@@ -57,10 +57,10 @@ export type BillUpdateFields = Pick<
 export async function getBills(pb: PocketBaseClient, filter?: string) {
   try {
     const records = await pb.collection("property_bills").getFullList({
-      select:{
-        expand:{
-          shop: true
-        }
+      select: {
+        expand: {
+          shop: true,
+        },
       },
       filter,
     });
@@ -89,9 +89,12 @@ export async function getOneMonthlyBill(
   params: { prev_bill: string; curr_bill: string },
 ) {
   try {
-    const records = await pb.send<{ result: MonthlyBills }>("/custom_property_one_bill", {
-      params,
-    });
+    const records = await pb.send<{ result: MonthlyBills }>(
+      "/custom_property_one_bill",
+      {
+        params,
+      },
+    );
     return records;
   } catch (error) {
     console.log("========= ERROR GETTING ONE MONTHLY BILL ========== ", error);
@@ -104,9 +107,12 @@ export async function getMonthlyBills(
   period: BillsPeriod,
 ) {
   try {
-    const records = pb.send<{ result: MonthlyBills[] }>("/custom_property_bills", {
-      params: period,
-    });
+    const records = pb.send<{ result: MonthlyBills[] }>(
+      "/custom_property_bills",
+      {
+        params: period,
+      },
+    );
     return records;
   } catch (error) {
     console.log("========= ERROR GETTING MONTHLY BILLS ========== ", error);
@@ -118,11 +124,11 @@ export async function addBill(pb: PocketBaseClient, bill: BillMutationFields) {
   // console.log("creating bill ", bill)
   try {
     const record = await pb.from("property_bills").create(bill, {
-      select:{
-        expand:{
-          shop: true
-        }
-      }
+      select: {
+        expand: {
+          shop: true,
+        },
+      },
     });
     return record;
   } catch (error) {

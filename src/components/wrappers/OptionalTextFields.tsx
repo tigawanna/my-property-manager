@@ -3,8 +3,11 @@ interface OptionalTextFieldsProps {
   children: React.ReactNode;
 }
 
-export function OptionalTextFields({ value, children }: OptionalTextFieldsProps) {
+export function OptionalTextFields({
+  value,
+  children,
+}: OptionalTextFieldsProps) {
   if (!value) return null;
   if (value.length === 0) return null;
-  return children
+  return children;
 }

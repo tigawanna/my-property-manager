@@ -4,7 +4,7 @@ interface BillsPageProps {}
 
 export function BillsPage({}: BillsPageProps) {
   return (
-    <div className="w-full h-screen ooverflow-x-  flex flex-col items-center ">
+    <div className="ooverflow-x- flex h-screen w-full flex-col items-center">
       <BillsContainer />
     </div>
   );

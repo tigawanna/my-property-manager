@@ -1,11 +1,10 @@
 import { getPrevMonthandYear } from "@/utils/date-helpers";
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { MonthlyBills, BillsPeriod } from "./bills";
 import { useSearch } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 
-
-export type BillStatus ="prev_curr"|"prev_no_curr"|"no_prev_no_curr"
+export type BillStatus = "prev_curr" | "prev_no_curr" | "no_prev_no_curr";
 export function isBillingNewMonth(bill: MonthlyBills): BillStatus {
   if (bill.prev_bill_id === "blank" && bill.curr_bill_id === "blank") {
     return "no_prev_no_curr";
@@ -24,7 +23,6 @@ export function isBillingNewMonth(bill: MonthlyBills): BillStatus {
 
   return "prev_curr";
 }
-
 
 export interface BillsInput {
   curr_elec: string;
@@ -50,12 +48,11 @@ export function genInitValues(bill: MonthlyBills, is_new_bill: BillStatus) {
   };
 }
 
-
 export function currentMonthAndYear() {
   return {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
-  }
+  };
 }
 
 export function caclulatePeriod(month: number, year: number): BillsPeriod {
@@ -68,7 +65,10 @@ export function caclulatePeriod(month: number, year: number): BillsPeriod {
 }
 
 export function getDefaultPeriod() {
-  return caclulatePeriod(currentMonthAndYear().month, currentMonthAndYear().year);
+  return caclulatePeriod(
+    currentMonthAndYear().month,
+    currentMonthAndYear().year,
+  );
 }
 
 export function useBillsPeriod() {
@@ -83,7 +83,9 @@ export function useBillsPeriod() {
   const curr_month = search_params_curr_month
     ? search_params_curr_month
     : new Date().getMonth() + 1;
-  const curr_year = search_params_curr_year ? search_params_curr_year : new Date().getFullYear();
+  const curr_year = search_params_curr_year
+    ? search_params_curr_year
+    : new Date().getFullYear();
   const prev_month = search_params_prev_month
     ? search_params_prev_month
     : getPrevMonthandYear(curr_month).month;

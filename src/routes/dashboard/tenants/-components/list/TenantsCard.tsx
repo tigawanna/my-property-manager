@@ -8,11 +8,10 @@ import {
 import { cva } from "class-variance-authority";
 import { Zap, Droplet } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import { PropertyShopsResponse, PropertyTenantsListResponse } from "@/lib/pb/database";
-
-
-
-
+import {
+  PropertyShopsResponse,
+  PropertyTenantsListResponse,
+} from "@/lib/pb/database";
 
 type ShopExpand = {
   expand?:
@@ -29,7 +28,7 @@ interface TenantsCardProps {
 }
 
 export function TenantsCard({
-  variant="default",
+  variant = "default",
   cardClassname,
   oneTenantMode,
   item,
@@ -49,7 +48,7 @@ export function TenantsCard({
       },
     },
   );
-const shops = item.expand?.["property_shops(tenant)"];
+  const shops = item.expand?.["property_shops(tenant)"];
   return (
     <Link
       to={`/dashboard/tenants/$tenant`}
@@ -72,26 +71,28 @@ const shops = item.expand?.["property_shops(tenant)"];
             </Avatar>
           </div>
         </div>
-        <div className="text-4xl break-words">{item?.name}</div>
+        <div className="break-words text-4xl">{item?.name}</div>
 
         <div className="flex h-full w-full flex-col justify-end p-2">
-{!oneTenantMode&&<div className="flex w-full items-center gap-2">
-            {shops && shops.length > 0 && (
-              <div className="flex items-center justify-start gap-2">
-                {shops?.map((shop) => (
-                  <div
-                    className="flex items-center justify-start gap-2"
-                    key={shop.id}
-                  >
-                    {/* <User className="w-3 h-3" /> */}
-                    <h4 className="badge badge-primary badge-outline px-1 text-xs">
-                      {shop.shop_number}
-                    </h4>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>}
+          {!oneTenantMode && (
+            <div className="flex w-full items-center gap-2">
+              {shops && shops.length > 0 && (
+                <div className="flex items-center justify-start gap-2">
+                  {shops?.map((shop) => (
+                    <div
+                      className="flex items-center justify-start gap-2"
+                      key={shop.id}
+                    >
+                      {/* <User className="w-3 h-3" /> */}
+                      <h4 className="badge badge-primary badge-outline px-1 text-xs">
+                        {shop.shop_number}
+                      </h4>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </Link>

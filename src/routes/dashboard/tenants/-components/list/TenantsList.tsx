@@ -1,8 +1,7 @@
-
 import { pb } from "@/lib/pb/client";
 import { wordToNumber } from "@/utils/string";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { like} from "typed-pocketbase";
+import { like } from "typed-pocketbase";
 import {
   Avatar,
   AvatarImage,
@@ -16,15 +15,13 @@ interface TenantsListProps {
 }
 
 export function TenantsList({ keyword = "" }: TenantsListProps) {
-  const query = useSuspenseQuery(listTenantsQueryOptions({keyword}));
+  const query = useSuspenseQuery(listTenantsQueryOptions({ keyword }));
   const data = query.data;
   return (
-    <ul className="w-full h-full flex flex-col items-center justify-center">
-      <div className="w-[90%] flex flex-wrap gap-2 justify-center">
+    <ul className="flex h-full w-full flex-col items-center justify-center">
+      <div className="flex w-[90%] flex-wrap justify-center gap-2">
         {data.items.map((item) => {
-          return (
-            <TenantsCard key={item.id} item={item}/>
-          );
+          return <TenantsCard key={item.id} item={item} />;
         })}
       </div>
     </ul>

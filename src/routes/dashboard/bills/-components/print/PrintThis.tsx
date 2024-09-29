@@ -5,7 +5,7 @@ import { BillsPeriod } from "../api/bills";
 type MyProps = {
   title: string;
   ref: React.MutableRefObject<null>;
-  period:BillsPeriod
+  period: BillsPeriod;
 };
 type MyState = {
   title: string;
@@ -21,8 +21,8 @@ export class PrintThis extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      <div className="p-2 flex flex-col w-full h-full ">
-        <BillsPriodFromParams period={this.props.period}/>
+      <div className="flex h-full w-full flex-col p-2">
+        <BillsPriodFromParams period={this.props.period} />
       </div>
     );
   }

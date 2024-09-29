@@ -15,25 +15,28 @@ interface IListShopsQueryOptions {
  * @param {string} options.floor - The floor to filter shops by.
  * @return {Promise<QueryOptions>} - A promise that resolves to the query options for listing shops.
  */
-export function listShopsQueryOptions({floor,keyword}:IListShopsQueryOptions){
-    return queryOptions({
-      queryKey: ["property_shops", keyword, floor],
-      queryFn: () => {
-        return pb.from("property_shops").getList(1, 24, {
-          filter: and(like("shop_number", keyword), like("shop_number", floor)),
-          select: {
-            expand: {
-              tenant: true,
-            },
+export function listShopsQueryOptions({
+  floor,
+  keyword,
+}: IListShopsQueryOptions) {
+  return queryOptions({
+    queryKey: ["property_shops", keyword, floor],
+    queryFn: () => {
+      return pb.from("property_shops").getList(1, 24, {
+        filter: and(like("shop_number", keyword), like("shop_number", floor)),
+        select: {
+          expand: {
+            tenant: true,
           },
-        });
-      },
-      staleTime: 1000 * 60 * 60,
-    });
+        },
+      });
+    },
+    staleTime: 1000 * 60 * 60,
+  });
 }
 
-interface IOneShopQueryOptions{
-    shop:string
+interface IOneShopQueryOptions {
+  shop: string;
 }
 
 /**
@@ -42,53 +45,56 @@ interface IOneShopQueryOptions{
  * @param {IOneShopQueryOptions} shop - An object containing the ID of the shop to retrieve.
  * @return {Promise<QueryOptions>} - A promise that resolves to the query options for retrieving the shop.
  */
-export function oneShopQueryOptions({shop}:IOneShopQueryOptions){
-    return queryOptions({
-      queryKey: ["property_shops","one_shop",shop],
-      queryFn:()=>{
-        return pb.from("property_shops").getOne(shop, {
-          select: {
-            expand: {
-              tenant: true
-            },
+export function oneShopQueryOptions({ shop }: IOneShopQueryOptions) {
+  return queryOptions({
+    queryKey: ["property_shops", "one_shop", shop],
+    queryFn: () => {
+      return pb.from("property_shops").getOne(shop, {
+        select: {
+          expand: {
+            tenant: true,
           },
-        });
-      },
-      staleTime:1000*60*60
-    });
+        },
+      });
+    },
+    staleTime: 1000 * 60 * 60,
+  });
 }
 
-interface IOneShopBillsQueryOptions{
-    shop:string;
-    year:number
+interface IOneShopBillsQueryOptions {
+  shop: string;
+  year: number;
 }
 
-export function oneShopBillsQueryOptions({shop,year}:IOneShopBillsQueryOptions){
-    return queryOptions({
-      queryKey: ["property_shops","one_shop",shop,"shop_bills",year],
-      queryFn:()=>{
-        return pb.from("property_bills").getList(1, 24, {
-          filter: and(eq("shop.id", shop),eq("year",year)),
-          sort:["-year","-month"],
-          select: {
-            expand: {
-              "shop": true
-            },
+export function oneShopBillsQueryOptions({
+  shop,
+  year,
+}: IOneShopBillsQueryOptions) {
+  return queryOptions({
+    queryKey: ["property_shops", "one_shop", shop, "shop_bills", year],
+    queryFn: () => {
+      return pb.from("property_bills").getList(1, 24, {
+        filter: and(eq("shop.id", shop), eq("year", year)),
+        sort: ["-year", "-month"],
+        select: {
+          expand: {
+            shop: true,
           },
-        });
-      },
-      select(data) {
-        return {
-          ...data,
-          items:data.items.map((item,idx) => {
-          const prev_elec = data?.items?.[idx+1]?.elec_readings??0
-          const prev_water = data?.items?.[idx+1]?.water_readings??0
-          const elec_diff = (item.elec_readings - prev_elec).toFixed(2)
-          const water_diff = (item.water_readings - prev_water).toFixed(2)
-          return {...item,elec_diff,water_diff}
-        })
-      }
-      },
-      staleTime:1000*60*60
-    });
+        },
+      });
+    },
+    select(data) {
+      return {
+        ...data,
+        items: data.items.map((item, idx) => {
+          const prev_elec = data?.items?.[idx + 1]?.elec_readings ?? 0;
+          const prev_water = data?.items?.[idx + 1]?.water_readings ?? 0;
+          const elec_diff = (item.elec_readings - prev_elec).toFixed(2);
+          const water_diff = (item.water_readings - prev_water).toFixed(2);
+          return { ...item, elec_diff, water_diff };
+        }),
+      };
+    },
+    staleTime: 1000 * 60 * 60,
+  });
 }
