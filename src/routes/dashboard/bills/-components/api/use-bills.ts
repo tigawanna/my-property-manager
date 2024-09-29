@@ -1,10 +1,6 @@
-
-
 import { pb } from "@/lib/pb/client";
 import { BillsPeriod, getMonthlyBills, getOneMonthlyBill } from "./bills";
 import { useSuspenseQuery } from "@tanstack/react-query";
-
-
 
 
 export function useBillsQuery(period: BillsPeriod) {

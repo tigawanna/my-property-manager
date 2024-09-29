@@ -13,6 +13,7 @@ interface MonthlyBillsTableProps {
 export function MonthlyBillsTable({ period,printing,tableClassname }: MonthlyBillsTableProps) {
   const query = useBillsQuery(period);
   const data = query.data.result;
+  console.log("bills query", query);
 
   return (
     <div className={twMerge("h-screen w-full overflow-auto", tableClassname)}>

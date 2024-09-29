@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { BillsPage } from './-components/BillsPage'
 import { getDefaultPeriod } from './-components/api/use-bills-period'
+import { RouterErrorComponent } from '@/lib/tanstack/router/routerErrorComponent'
 
 const { curr_month, curr_year, prev_month, prev_year } = getDefaultPeriod()
 
@@ -13,10 +14,11 @@ const searchparams = z.object({
   pm: z.number().default(prev_month).optional(),
   bill: z.number().default(0).optional(),
 })
-export const Route = createFileRoute('/dashboard/bills/')({
+export const Route = createFileRoute("/dashboard/bills/")({
   component: BillsPage,
+  errorComponent: ({ error }) => <RouterErrorComponent error={error} />,
   validateSearch: (search) => searchparams.parse(search),
   async beforeLoad(ctx) {
-    await authGuard({ ctx })
+    await authGuard({ ctx });
   },
-})
+});

@@ -89,7 +89,6 @@ export async function getOneMonthlyBill(
   params: { prev_bill: string; curr_bill: string },
 ) {
   try {
-    console.log("params ==== ", params);
     const records = await pb.send<{ result: MonthlyBills }>("/custom_property_one_bill", {
       params,
     });
@@ -105,8 +104,7 @@ export async function getMonthlyBills(
   period: BillsPeriod,
 ) {
   try {
-    console.log("params ==== ", period);
-    const records = await pb.send<{ result: MonthlyBills[] }>("/custom_property_bills", {
+    const records = pb.send<{ result: MonthlyBills[] }>("/custom_property_bills", {
       params: period,
     });
     return records;
