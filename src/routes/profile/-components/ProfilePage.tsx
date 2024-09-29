@@ -27,8 +27,8 @@ export function ProfilePage({}: ProfilePageProps) {
   const profileRole = profileQuery.data?.expand?.[viewer?.role || "user"];
   return (
     <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center p-1">
-      <div className="bg-bg-muted flex gap-2 rounded-md p-3">
-        <div className="bg-bg-muted flex w-full flex-col gap-2 rounded-md p-3">
+      <div className="bg-base-200 flex gap-2 rounded-md p-3">
+        <div className="bg-base-200 flex w-full flex-col gap-2 rounded-md p-3">
           <h1 className="text-5xl">{viewer?.username}</h1>
           <p className="">{viewer?.email}</p>
           <div className="flex items-center gap-2 rounded-lg">
@@ -38,7 +38,7 @@ export function ProfilePage({}: ProfilePageProps) {
             )}
           </div>
         </div>
-        <div className="bg-bg-muted flex w-full flex-col gap-2 rounded-md p-3">
+        <div className="bg-base-200 flex w-full flex-col gap-2 rounded-md p-3">
           <h1 className="text-5xl">Profile</h1>
           <p className="">{viewer?.role}</p>
           <p className="">{viewer?.email}</p>

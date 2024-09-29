@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { routes } from "./routes";
-import { Home, Lock } from "lucide-react";
+import { Home } from "lucide-react";
 
 interface NavbarRoutesProps {}
 
@@ -20,13 +20,7 @@ export function NavbarRoutes({}: NavbarRoutesProps) {
             {route.name}
           </Link>
         ))}
-        <Link
-          to="/auth"
-          search={{ returnTo: "/" }}
-          className="btn btn-link btn-sm"
-        >
-          <Lock />
-        </Link>
+
       </div>
     </div>
   );

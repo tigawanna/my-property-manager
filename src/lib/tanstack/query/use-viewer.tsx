@@ -78,7 +78,14 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
   const user = ctx.context?.viewer;
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user);
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user?.record);
-
+  if(ctx.location.pathname==="/dashboard/bills" && (!user?.record?.staff||user?.record?.staff=="")){
+    throw redirect({
+      to: "..",
+      search: {
+        returnTo: ctx.location.pathname,
+      },
+    })
+  }
   if (!user?.record) {
     // console.log(" ++++++++ no user redirectiong to auth ++++++ ");
     throw redirect({
