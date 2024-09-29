@@ -22,7 +22,9 @@ interface PBListCollectionProps<T extends Record<string, any>> {
   setSelectedRows: (selectedRows: T[]) => void;
 }
 
-export function PBListCollection<T extends Record<string, any> = Record<string, any>>({
+export function PBListCollection<
+  T extends Record<string, any> = Record<string, any>,
+>({
   selectedRows,
   setSelectedRows,
   maxSelected = 1,
@@ -37,44 +39,41 @@ export function PBListCollection<T extends Record<string, any> = Record<string, 
   // console.log({selectedRows})
   //   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
-
   const query = useSuspenseQuery({
     queryKey: [collectionName, String(page), debouncedValue],
     queryFn: () => {
       return pb?.from(collectionName).getList(+page, 12, {
-          filter: and(
-            // @ts-expect-error
-            like(filterBy, debouncedValue),
-            // eq("verified", "yes")
-          ),
-        })
-      
-    }
+        filter: and(
+          // @ts-expect-error
+          like(filterBy, debouncedValue),
+          // eq("verified", "yes")
+        ),
+      });
+    },
   });
 
   const data = query?.data?.items ?? [];
   function selectItem(one_item: T) {
-    if(maxSelected > 1){
+    if (maxSelected > 1) {
       const is_in_array = selectedRows.find((item) => item.id === one_item.id);
       if (is_in_array) {
         setSelectedRows(selectedRows.filter((item) => item.id !== one_item.id));
       } else {
         setSelectedRows([...selectedRows, one_item]);
       }
-      
-    }else{
+    } else {
       setSelectedRows([one_item]);
     }
   }
 
   return (
-    <div className="w-full h-full overflow-auto">
-      <ul className="w-full h-full flex flex-col  gap-2 p-2">
+    <div className="h-full w-full overflow-auto">
+      <ul className="flex h-full w-full flex-col gap-2 p-2">
         {data?.map((i) => {
           const checked = selectedRows.find((item) => item.id === i.id);
           return (
             <div
-              className="w-full border rounded-lg p-2 flex items-center  gap-2"
+              className="flex w-full items-center gap-2 rounded-lg border p-2"
               key={i.id}
             >
               <Checkbox
@@ -92,9 +91,7 @@ export function PBListCollection<T extends Record<string, any> = Record<string, 
           );
         })}
         <div className="w-full">
-          <ListPagination
-            total_pages={query?.data?.totalPages ?? 1}
-          />
+          <ListPagination total_pages={query?.data?.totalPages ?? 1} />
         </div>
       </ul>
     </div>

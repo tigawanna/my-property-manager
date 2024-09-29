@@ -15,10 +15,8 @@ export function RealTimeClock({}: RealTimeClockProps) {
   const seconds = time.getSeconds();
 
   return (
-
-      <div className="text-6xl font-bold">
-        {`${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
-      </div>
-
+    <div className="text-6xl font-bold">
+      {`${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`}
+    </div>
   );
 }

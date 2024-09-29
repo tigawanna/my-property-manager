@@ -21,8 +21,7 @@ interface ShopNumberInputProps {
   >;
 }
 
-export function ShopNumberInput({input,setInput }: ShopNumberInputProps) {
-
+export function ShopNumberInput({ input, setInput }: ShopNumberInputProps) {
   const shopsQuery = useSuspenseQuery({
     queryKey: ["property_shops", input.floor],
     queryFn: () => {
@@ -30,26 +29,27 @@ export function ShopNumberInput({input,setInput }: ShopNumberInputProps) {
         sort: "+order",
         filter: like("shop_number", input.floor),
       });
-
-    }
-  })
+    },
+  });
   useEffect(() => {
-    const shopNumbers = shopsQuery?.data?.items.map((s)=>s.shop_number)
+    const shopNumbers = shopsQuery?.data?.items.map((s) => s.shop_number);
     if (shopNumbers) {
-      console.log(shopNumbers)
+      console.log(shopNumbers);
       setInput((prev) => ({
         ...prev,
         shop_number: `${input.floor}-${shopNumbers.length + 1}`,
       }));
     }
-  }, [input.floor])
+  }, [input.floor]);
   const [_, startTransition] = useTransition();
   const floors_list = Object.entries(floors);
   return (
-    <div className="w-full flex flex-col items-center justify-center">
-      <div className="w-full flex flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center">
         <Select
-          onValueChange={(v: PropertyFloorPrefixes) => startTransition(() => setInput((prev) => ({ ...prev, floor: v })))}
+          onValueChange={(v: PropertyFloorPrefixes) =>
+            startTransition(() => setInput((prev) => ({ ...prev, floor: v })))
+          }
         >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Select a floor" />

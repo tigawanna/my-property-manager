@@ -5,9 +5,7 @@ interface ListingsPaginationProps {
   total_pages: number;
 }
 
-export function ListPagination({
-  total_pages,
-}: ListingsPaginationProps) {
+export function ListPagination({ total_pages }: ListingsPaginationProps) {
   const location = useLocation();
   const { globalPage } = useSearch({
     from: "__root__",

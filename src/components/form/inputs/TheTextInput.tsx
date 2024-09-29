@@ -23,7 +23,6 @@ export function TheTextInput<T>({
   editing = true,
   ...props
 }: TheTextInputProps<T>) {
-
   const [error_message, setError] = useState(
     props.error_message && props.error_message.length > 0
       ? props.error_message
@@ -59,18 +58,18 @@ export function TheTextInput<T>({
     <div
       key={field_key as string}
       className={twMerge(
-        "flex w-full flex-col justify-center gap-2 ",
+        "flex w-full flex-col justify-center gap-2",
         props.container_classname,
       )}
     >
       <Label
         htmlFor={field_key as string}
-        className={twMerge("font-serif font-semibold ", props.label_classname)}
+        className={twMerge("font-serif font-semibold", props.label_classname)}
       >
         {field_name as string}
       </Label>
       {editing ? (
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <Input
             {...props}
             value={value}

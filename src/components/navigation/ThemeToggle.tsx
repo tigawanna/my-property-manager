@@ -22,21 +22,23 @@ export function ThemeToggle({}: ThemeToggleProps) {
   }
   return (
     <div className="flex items-center justify-center gap-2">
-    <div className="hidden md:flex">
-{import.meta.env.DEV&& <select
-        className="select select-bordered select-sm max-w-xs"
-        onChange={(e) =>
-          (document.documentElement.dataset.style = e.target.value)
-        }
-      >
-        <option value="default">Default</option>
-        <option value="vertical">Vertical</option>
-        <option value="wipe">Wipe</option>
-        <option value="angled">Angled</option>
-        <option value="flip">Flip</option>
-        <option value="slides">Slides</option>
-      </select>}
-    </div>
+      <div className="hidden md:flex">
+        {import.meta.env.DEV && (
+          <select
+            className="select select-bordered select-sm max-w-xs"
+            onChange={(e) =>
+              (document.documentElement.dataset.style = e.target.value)
+            }
+          >
+            <option value="default">Default</option>
+            <option value="vertical">Vertical</option>
+            <option value="wipe">Wipe</option>
+            <option value="angled">Angled</option>
+            <option value="flip">Flip</option>
+            <option value="slides">Slides</option>
+          </select>
+        )}
+      </div>
       <button onClick={() => transitionColors()} className="btn">
         {theme === "light" ? <Moon /> : <Sun />}
       </button>

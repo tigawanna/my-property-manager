@@ -14,6 +14,7 @@ export const Route = createFileRoute("/dashboard/bills/print")({
   validateSearch: (search) => searchparams.parse(search),
   errorComponent: ({ error }) => <RouterErrorComponent error={error} />,
   async beforeLoad(ctx) {
+    // @ts-expect-error
     await authGuard({ ctx });
   },
 });

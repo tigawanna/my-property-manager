@@ -20,7 +20,6 @@ export function NavbarRoutes({}: NavbarRoutesProps) {
             {route.name}
           </Link>
         ))}
-
       </div>
     </div>
   );

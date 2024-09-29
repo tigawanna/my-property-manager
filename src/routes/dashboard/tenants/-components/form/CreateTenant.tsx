@@ -20,7 +20,6 @@ import { PbTheTextInput } from "@/lib/pb/components/PBTheTextInput";
 import { makeHotToast } from "@/components/toasters";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 
-
 type PropertyTenantsExpand = Pick<PropertyUserResponse, "id" | "username">;
 interface CreateTenantProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -28,18 +27,17 @@ interface CreateTenantProps {
 
 export function CreateTenant({ setOpen }: CreateTenantProps) {
   const collectionName: CollectionName = "property_tenants_list";
-  const [relation, setRelation] = useState<
-    PropertyTenantsExpand[] | undefined
-  >([]);
+  const [relation, setRelation] = useState<PropertyTenantsExpand[] | undefined>(
+    [],
+  );
 
-  const { input, handleChange, setInput } = useFormHook<
-    PropertyTenantsListCreate 
-  >({
-    initialValues: {
-    account: "",
-    name: "",
-    },
-  });
+  const { input, handleChange, setInput } =
+    useFormHook<PropertyTenantsListCreate>({
+      initialValues: {
+        account: "",
+        name: "",
+      },
+    });
 
   const mutation = useMutation({
     mutationFn: (data: PropertyTenantsListCreate) => {
@@ -114,7 +112,7 @@ export function CreateTenant({ setOpen }: CreateTenantProps) {
 interface CreateTenantModalProps {
   trigger?: React.ReactNode;
 }
-export function CreateTenantModal({trigger}: CreateTenantModalProps) {
+export function CreateTenantModal({ trigger }: CreateTenantModalProps) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -122,12 +120,12 @@ export function CreateTenantModal({trigger}: CreateTenantModalProps) {
         asChild
         className="flex size-full items-center justify-center"
       >
-        {trigger??<Plus className="size-9" />}
+        {trigger ?? <Plus className="size-9" />}
       </DialogTrigger>
       <DialogContent className="min-h-[30%]overflow-auto w-fit min-w-[80%] sm:max-w-[80%] md:min-w-[60%] lg:min-w-[40%]">
         <DialogHeader>
           <DialogTitle>Create Tenant</DialogTitle>
-          <DialogDescription >Add new Tenant </DialogDescription>
+          <DialogDescription>Add new Tenant </DialogDescription>
         </DialogHeader>
 
         <div className="h-full w-full">

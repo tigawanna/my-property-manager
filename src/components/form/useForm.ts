@@ -7,17 +7,19 @@ export interface IUseFormError {
   name: string;
   message: string;
 }
-export  type IUseFormErrors<T extends Record<string, any>> = {
+export type IUseFormErrors<T extends Record<string, any>> = {
   [K in keyof T]: {
     name: string;
     message: string;
   };
-}
+};
 
-export function useFormHook<T extends Record<string, any>>({ initialValues }: IUseFormHook<T>) {
+export function useFormHook<T extends Record<string, any>>({
+  initialValues,
+}: IUseFormHook<T>) {
   const [input, setInput] = useState(initialValues);
   const [error, setError] = useState<IUseFormError>({ message: "", name: "" });
-  const [errors, setErrors] = useState<IUseFormErrors<T>|undefined>();
+  const [errors, setErrors] = useState<IUseFormErrors<T> | undefined>();
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -33,5 +35,14 @@ export function useFormHook<T extends Record<string, any>>({ initialValues }: IU
     return checker(input);
   }
 
-  return { input, setInput, handleChange, error, setError,errors,setErrors,validateInputs };
+  return {
+    input,
+    setInput,
+    handleChange,
+    error,
+    setError,
+    errors,
+    setErrors,
+    validateInputs,
+  };
 }

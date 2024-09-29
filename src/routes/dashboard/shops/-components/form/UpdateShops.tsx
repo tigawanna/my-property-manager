@@ -35,18 +35,20 @@ import { PBCheckbox } from "./PBCheckbox";
 
 type PropertyTenantsExpand = Pick<PropertyTenantsListResponse, "id" | "name">;
 interface UpdateShopProps {
-  shop: PropertyShopsUpdate & { id: string }; 
+  shop: PropertyShopsUpdate & { id: string };
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function UpdateShop({ shop,setOpen }: UpdateShopProps) {
+export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
   const collectionName: CollectionName = "property_shops";
-  const [tenant, setTenants] = useState<
-    PropertyTenantsExpand[] | undefined
-  >([]);
-const shopFloor =
-  (shop?.shop_number?.split("-")[0] as PropertyFloorPrefixes) ?? "G"; 
-  const { input, handleChange, setInput } = useFormHook<PropertyShopsCreate &{floor:PropertyFloorPrefixes}>({
+  const [tenant, setTenants] = useState<PropertyTenantsExpand[] | undefined>(
+    [],
+  );
+  const shopFloor =
+    (shop?.shop_number?.split("-")[0] as PropertyFloorPrefixes) ?? "G";
+  const { input, handleChange, setInput } = useFormHook<
+    PropertyShopsCreate & { floor: PropertyFloorPrefixes }
+  >({
     initialValues: {
       shop_number: shop?.shop_number ?? "",
       is_vacant: shop.is_vacant,
@@ -58,7 +60,7 @@ const shopFloor =
   });
   const mutation = useMutation({
     mutationFn: (data: PropertyShopsUpdate) => {
-      return pb.from(collectionName).update(shop.id,data);
+      return pb.from(collectionName).update(shop.id, data);
     },
     meta: { invalidates: [collectionName] },
     onSuccess: (data) => {
@@ -128,7 +130,7 @@ const shopFloor =
         />
         <div className="flex w-full flex-col items-center justify-center">
           <Select
-          value={input?.utils as PropertyFloorPrefixes}
+            value={input?.utils as PropertyFloorPrefixes}
             onValueChange={(v: PropertyFloorPrefixes) =>
               startTransition(() =>
                 setInput((prev) => ({
@@ -164,7 +166,7 @@ interface UpdateShopModalProps {
   shop: PropertyShopsUpdate & { id: string };
   trigger?: React.ReactNode;
 }
-export function UpdateShopModal({shop,trigger}: UpdateShopModalProps) {
+export function UpdateShopModal({ shop, trigger }: UpdateShopModalProps) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -172,12 +174,12 @@ export function UpdateShopModal({shop,trigger}: UpdateShopModalProps) {
         asChild
         className="flex size-full items-center justify-center"
       >
-    {trigger?? <Edit className="size-5" />}
+        {trigger ?? <Edit className="size-5" />}
       </DialogTrigger>
       <DialogContent className="min-h-[30%]overflow-auto w-fit min-w-[80%] sm:max-w-[80%] md:min-w-[60%] lg:min-w-[40%]">
         <DialogHeader>
           <DialogTitle>Update Shop</DialogTitle>
-          <DialogDescription>Update Shop  </DialogDescription>
+          <DialogDescription>Update Shop </DialogDescription>
         </DialogHeader>
 
         <div className="h-full w-full">

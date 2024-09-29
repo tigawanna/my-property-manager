@@ -14,9 +14,8 @@ import { z } from "zod";
 
 const searchparams = z.object({
   globalPage: z.number().optional(),
-  globalSearch: z.string().optional()
+  globalSearch: z.string().optional(),
 });
-
 
 export const Route = createRootRouteWithContext<{
   pb: PocketBaseClient;

@@ -6,15 +6,16 @@ interface UseGlobalPocketbaseSearchQueryProps {
   default_value?: string;
 }
 export function useGlobalPocketbaseSearchQuery(
-  opts: UseGlobalPocketbaseSearchQueryProps = {
-  },
+  opts: UseGlobalPocketbaseSearchQueryProps = {},
 ) {
-   const location = useLocation() 
+  const location = useLocation();
   const { globalSearch } = useSearch({ from: "__root__" });
   const navigate = useNavigate({ from: location.pathname });
   const [_, startTransition] = useTransition();
 
-  const [keyword, setKeyword] = useState(  globalSearch ?? opts.default_value ?? "");
+  const [keyword, setKeyword] = useState(
+    globalSearch ?? opts.default_value ?? "",
+  );
   const { debouncedValue, isDebouncing } = useDebouncedValue(keyword, 2000);
   useEffect(() => {
     if (globalSearch !== debouncedValue) {
@@ -22,7 +23,7 @@ export function useGlobalPocketbaseSearchQuery(
         navigate({
           search: {
             // @ts-expect-error
-            globalSearch:debouncedValue,
+            globalSearch: debouncedValue,
           },
         });
       });

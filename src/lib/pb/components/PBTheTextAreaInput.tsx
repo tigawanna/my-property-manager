@@ -1,6 +1,6 @@
 import { TheTextAreaInput } from "@/components/form/inputs/TheTextArea";
-import type{ IUseFormError } from "@/components/form/useForm";
-import type{ ClientResponseError } from "pocketbase";
+import type { IUseFormError } from "@/components/form/useForm";
+import type { ClientResponseError } from "pocketbase";
 
 interface PbTheTextAreaInputProps<T>
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -35,14 +35,12 @@ export function PbTheTextAreaInput<T>({
   const pb_field_error = error_data?.[field_key] as FieldError | undefined;
 
   return (
-
-      <TheTextAreaInput
-        {...props}
-        field_key={field_key}
-        field_name={field_name}
-        editing={editing}
-        error_message={validatin_field_error ?? pb_field_error?.message}
-      />
-
+    <TheTextAreaInput
+      {...props}
+      field_key={field_key}
+      field_name={field_name}
+      editing={editing}
+      error_message={validatin_field_error ?? pb_field_error?.message}
+    />
   );
 }

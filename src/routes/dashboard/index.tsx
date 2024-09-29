@@ -7,6 +7,7 @@ import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCards
 export const Route = createFileRoute("/dashboard/")({
   errorComponent: ({ error }) => <RouterErrorComponent error={error} />,
   async beforeLoad(ctx) {
+    // @ts-expect-error
     await authGuard({ ctx });
   },
   pendingComponent: () => {

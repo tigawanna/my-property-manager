@@ -40,9 +40,7 @@ interface CreateShopProps {
 
 export function CreateShop({ setOpen }: CreateShopProps) {
   const collectionName: CollectionName = "property_shops";
-  const [tenant, setTenant] = useState<
-    PropertyTenantsExpand[] | undefined
-  >([]);
+  const [tenant, setTenant] = useState<PropertyTenantsExpand[] | undefined>([]);
 
   const { input, handleChange, setInput } = useFormHook<
     PropertyShopsCreate & { floor: PropertyFloorPrefixes }
@@ -107,7 +105,12 @@ export function CreateShop({ setOpen }: CreateShopProps) {
         <div className="flex w-full flex-col items-center justify-center">
           <Select
             onValueChange={(v: PropertyFloorPrefixes) =>
-              startTransition(() => setInput((prev) => ({ ...prev, utils: v as typeof input["utils"] })))
+              startTransition(() =>
+                setInput((prev) => ({
+                  ...prev,
+                  utils: v as (typeof input)["utils"],
+                })),
+              )
             }
           >
             <SelectTrigger className="w-[180px]">
@@ -116,19 +119,10 @@ export function CreateShop({ setOpen }: CreateShopProps) {
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Utils</SelectLabel>
-                  <SelectItem value={"both"}>
-                    both
-                  </SelectItem>
-                  <SelectItem value={"none"}>
-                    none
-                  </SelectItem>
-                  <SelectItem value={"elec"}>
-                    elec
-                  </SelectItem>
-                  <SelectItem value={"water"}>
-                    water
-                  </SelectItem>
-
+                <SelectItem value={"both"}>both</SelectItem>
+                <SelectItem value={"none"}>none</SelectItem>
+                <SelectItem value={"elec"}>elec</SelectItem>
+                <SelectItem value={"water"}>water</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -167,7 +161,7 @@ export function CreateShop({ setOpen }: CreateShopProps) {
 interface CreateShopModalProps {
   trigger?: React.ReactNode;
 }
-export function CreateShopModal({trigger}: CreateShopModalProps) {
+export function CreateShopModal({ trigger }: CreateShopModalProps) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -175,12 +169,12 @@ export function CreateShopModal({trigger}: CreateShopModalProps) {
         asChild
         className="flex size-full items-center justify-center"
       >
-        {trigger??<Plus className="size-9" />}
+        {trigger ?? <Plus className="size-9" />}
       </DialogTrigger>
       <DialogContent className="min-h-[30%]overflow-auto w-fit min-w-[80%] sm:max-w-[80%] md:min-w-[60%] lg:min-w-[40%]">
         <DialogHeader>
           <DialogTitle>Create Shop</DialogTitle>
-          <DialogDescription >Add new shop </DialogDescription>
+          <DialogDescription>Add new shop </DialogDescription>
         </DialogHeader>
 
         <div className="h-full w-full">

@@ -23,25 +23,26 @@ import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 
 type PropertyTenantsExpand = Pick<PropertyUserResponse, "id" | "username">;
 interface UpdateTenantProps {
-  item: PropertyTenantsListUpdate & { id: string }; 
+  item: PropertyTenantsListUpdate & { id: string };
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export function UpdateTenant({ item,setOpen }: UpdateTenantProps) {
+export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
   const collectionName: CollectionName = "property_tenants_list";
-  const [relation, setRelation] = useState<
-    PropertyTenantsExpand[] | undefined
-  >([]);
+  const [relation, setRelation] = useState<PropertyTenantsExpand[] | undefined>(
+    [],
+  );
 
-  const { input, handleChange, setInput } = useFormHook<PropertyTenantsListCreate>({
-    initialValues: {
-      name: item.name??"",
-      account: item.account??"",
-    },
-  });
+  const { input, handleChange, setInput } =
+    useFormHook<PropertyTenantsListCreate>({
+      initialValues: {
+        name: item.name ?? "",
+        account: item.account ?? "",
+      },
+    });
   const mutation = useMutation({
     mutationFn: (data: PropertyTenantsListUpdate) => {
-      return pb.from(collectionName).update(item.id,data);
+      return pb.from(collectionName).update(item.id, data);
     },
     meta: { invalidates: [collectionName] },
     onSuccess: (data) => {
@@ -115,7 +116,7 @@ interface UpdateTenantModalProps {
   item: PropertyTenantsListUpdate & { id: string };
   trigger?: React.ReactNode;
 }
-export function UpdateTenantModal({item,trigger}: UpdateTenantModalProps) {
+export function UpdateTenantModal({ item, trigger }: UpdateTenantModalProps) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -123,12 +124,12 @@ export function UpdateTenantModal({item,trigger}: UpdateTenantModalProps) {
         asChild
         className="flex size-full items-center justify-center"
       >
-    {trigger?? <Edit className="size-5" />}
+        {trigger ?? <Edit className="size-5" />}
       </DialogTrigger>
       <DialogContent className="min-h-[30%]overflow-auto w-fit min-w-[80%] sm:max-w-[80%] md:min-w-[60%] lg:min-w-[40%]">
         <DialogHeader>
           <DialogTitle>Update tenant</DialogTitle>
-          <DialogDescription>Update tenant  </DialogDescription>
+          <DialogDescription>Update tenant </DialogDescription>
         </DialogHeader>
 
         <div className="h-full w-full">
