@@ -3,6 +3,7 @@ import { TenantsCard } from "../list/TenantsCard";
 import { oneTenantQueryOptions } from "../tenants-query-options";
 import { useParams } from "@tanstack/react-router";
 import { ShopCard } from "@/routes/dashboard/shops/-components/list/ShopCard";
+import { UpdateTenantModal } from "../form/UpdateTenant";
 
 interface OneTenantPageProps {}
 
@@ -20,6 +21,7 @@ export function OneTenantPage({}: OneTenantPageProps) {
           variant="wide"
           cardClassname="w-full min-h-[40%]"
         />
+        <UpdateTenantModal item={data} />
       </div>
 
       <div className="flex w-full items-center gap-2">

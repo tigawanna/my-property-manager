@@ -9,6 +9,8 @@ import {
 } from "@/components/shadcn/ui/avatar";
 import { listTenantsQueryOptions } from "../tenants-query-options";
 import { TenantsCard } from "./TenantsCard";
+import { Plus } from "lucide-react";
+import { CreateTenantModal } from "../form/CreateTenant";
 
 interface TenantsListProps {
   keyword?: string;
@@ -23,6 +25,15 @@ export function TenantsList({ keyword = "" }: TenantsListProps) {
         {data.items.map((item) => {
           return <TenantsCard key={item.id} item={item} />;
         })}
+        <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">
+          <CreateTenantModal
+            trigger={
+              <div className="">
+                <Plus className="size-9" />
+              </div>
+            }
+          />
+        </div>
       </div>
     </ul>
   );
