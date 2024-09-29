@@ -7,11 +7,17 @@ export function ThemeToggle({}: ThemeToggleProps) {
   const { theme, updateTheme } = useTheme();
   function transitionColors() {
     if (typeof window !== "undefined") {
-      document.startViewTransition(() => {
+      try {
+        document.startViewTransition(() => {
+          const newTheme = theme === "light" ? "dark" : "light";
+          document.documentElement.dataset.theme = newTheme;
+          updateTheme(newTheme);
+        });
+      } catch (error) {
         const newTheme = theme === "light" ? "dark" : "light";
         document.documentElement.dataset.theme = newTheme;
         updateTheme(newTheme);
-      });
+      }
     }
   }
   return (
