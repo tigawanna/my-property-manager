@@ -7,6 +7,8 @@ import { HouseFloorsKeys } from "./use-shook-hooks";
 import { ShopCard } from "./ShopCard";
 import { listShopsQueryOptions } from "../query-options/shops-query-options";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
+import { CreateShop, CreateShopModal } from "../form/CreateShops";
+import { Plus } from "lucide-react";
 
 interface ShopsListProps {
   keyword?: string;
@@ -40,6 +42,15 @@ export function ShopsList({ keyword = "", floor }: ShopsListProps) {
           const tenant = item.expand?.tenant;
           return <ShopCard key={item.id} item={item} />;
         })}
+        <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">
+          <CreateShopModal
+            trigger={
+              <div className="">
+                <Plus className="size-9" />
+              </div>
+            }
+          />
+        </div>
       </div>
     </ul>
   );
