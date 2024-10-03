@@ -6,6 +6,7 @@ import { useShopssSearchQuery } from "./use-shook-hooks";
 import { SelectHouseFloor } from "./SelectHouseFloor";
 import { useSearch } from "@tanstack/react-router";
 
+
 interface ShopsContainerProps {}
 
 export function ShopsContainer({}: ShopsContainerProps) {

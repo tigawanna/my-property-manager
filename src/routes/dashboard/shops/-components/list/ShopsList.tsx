@@ -1,13 +1,9 @@
-import { pb } from "@/lib/pb/client";
-import { wordToNumber } from "@/utils/string";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { and, like } from "typed-pocketbase";
-
 import { HouseFloorsKeys } from "./use-shook-hooks";
 import { ShopCard } from "./ShopCard";
 import { listShopsQueryOptions } from "../query-options/shops-query-options";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
-import { CreateShop, CreateShopModal } from "../form/CreateShops";
+import { CreateShopModal } from "../form/CreateShops";
 import { Plus } from "lucide-react";
 
 interface ShopsListProps {
