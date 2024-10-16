@@ -20,12 +20,13 @@ export function SelectHouseFloor({}: SelectHouseFloorProps) {
   const { floor, setHouseFloor } = useShopsFlooor();
   return (
     <Select
+      
       value={floor}
       onValueChange={(value: HouseFloorsKeys) => {
         setHouseFloor(value);
       }}
     >
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-fit md:w-[180px]">
         <SelectValue placeholder="Select a floor" />
       </SelectTrigger>
       <SelectContent>
