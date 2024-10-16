@@ -3,6 +3,7 @@ import { RealTimeClock } from "./RealTimeClock";
 import { Link } from "@tanstack/react-router";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { ArrowRightIcon } from "lucide-react";
+import { FlipClock } from "@/components/flip-clock/DigitalFlipClock";
 
 export function HomePage() {
   const { userQuery } = useViewer();
@@ -38,7 +39,8 @@ export function HomePage() {
             welcome {viewer?.username}
           </h1>
 
-          <RealTimeClock />
+          <FlipClock/>
+          {/* <RealTimeClock /> */}
           <div className="text-4xl hover:bg-primary-content/30">
             {viewer ? (
               <Link
