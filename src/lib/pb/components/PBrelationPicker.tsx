@@ -50,9 +50,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2">
       <div className="flex w-full flex-col justify-between gap-3 px-3 pr-5 md:flex-row">
-        <div className="w-full">
-          <h1 className="bg-base-200 text-2xl">{fieldLabel}</h1>
-        </div>
+
 
         <SearchBox
           inputProps={{
@@ -125,13 +123,13 @@ export function PBPickRelationsModal<T extends Record<string, any>>({
       <DialogTrigger asChild>
         {dialogTrigger || (
           <span className="btn btn-outline flex cursor-pointer gap-1 p-2">
-            <GitFork className="" /> Pick relations
+            <GitFork className="" />
           </span>
         )}
       </DialogTrigger>
       <DialogContent className="h-[80%] w-full overflow-auto sm:max-w-[80%]">
-        <DialogTitle>{fieldLabel} relation</DialogTitle>
-        <DialogDescription>Pick a relation for {fieldLabel}</DialogDescription>
+        <DialogTitle>{fieldLabel}</DialogTitle>
+        <DialogDescription>Pick a {fieldLabel}</DialogDescription>
         <div className="h-[95%] w-full overflow-y-scroll">
           <PBrelationPicker
             collectionName={collectionName}
@@ -180,7 +178,7 @@ export function PBPickRelationField<T extends Record<string, any>>({
         fieldLabel={fieldLabel}
         dialogTrigger={dialogTrigger}
       />
-      <div className="mb-4 flex flex-wrap items-center gap-2">
+{maxSelected>1 &&      <div className="mb-4 flex flex-wrap items-center gap-2">
         {selectedRows?.map((item) => (
           <div
             key={item.id}
@@ -199,7 +197,7 @@ export function PBPickRelationField<T extends Record<string, any>>({
             />
           </div>
         ))}
-      </div>
+      </div>}
     </div>
   );
 }
