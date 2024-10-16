@@ -129,6 +129,20 @@ h6 {
     animation-duration: 15s;
   }
 } */
+@layer base {
+  :root {
+    --chart-1:var(--wa);
+    --chart-2:var(--in);
+    --chart-3:var(--a);
+    /* --chart-4:theme("colors.success");
+    --chart-5:theme("colors.info"); */
+      /* --chart-1: 49.12% 0.3096 275.75; */
+    /* --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%; */
+}
+}
 
 @media print {
   html,
