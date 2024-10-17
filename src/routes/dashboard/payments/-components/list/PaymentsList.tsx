@@ -3,6 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { listPropertyQueryOptions } from "../query-options/payments-query-options";
 import { GenericTable } from "@/components/wrappers/GenericTable";
 import { pb } from "@/lib/pb/client";
+import { GenericPocketbaseGenericTable } from "@/components/wrappers/PocketbaseGenericTable";
 
 interface PaymentsListProps {
   keyword: string;
@@ -39,15 +40,16 @@ export function PaymentsList({
   }
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <GenericTable
+      <GenericPocketbaseGenericTable
         rows={data.items}
-        updateItem={(item) => pb.from("property_shop_payments").update(item.id, item)}
+        updateItem={(item) =>
+          pb.from("property_shop_payments").update(item.id, item)
+        }
         columns={[
           { label: "month", type: "number", accessor: "month" },
           { label: "year", type: "number", accessor: "year" },
           { label: "amount", type: "number", accessor: "amount" },
-            //  @ts-expect-error
-          { label: "shop", type: "number", accessor: "shop.shopnumber" }
+          { label: "shop", type: "number", accessor: "shop" },
         ]}
       />
     </div>
