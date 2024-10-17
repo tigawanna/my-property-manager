@@ -1,4 +1,4 @@
-import { createRootRouteWithContext } from "@tanstack/react-router";
+import { createRootRouteWithContext, createRouteMask } from "@tanstack/react-router";
 import "@/view-transition/angled-transition.css";
 import "@/view-transition/wipe-transition.css";
 import "@/view-transition/slides-transition.css";
@@ -17,6 +17,11 @@ const searchparams = z.object({
   globalSearch: z.string().optional(),
 });
 
+// const list = createRouteMask({
+
+// })
+
+
 export const Route = createRootRouteWithContext<{
   pb: PocketBaseClient;
   queryClient: QueryClient;
@@ -24,4 +29,5 @@ export const Route = createRootRouteWithContext<{
 }>()({
   component: RootComponent,
   validateSearch: (search) => searchparams.parse(search),
+
 });

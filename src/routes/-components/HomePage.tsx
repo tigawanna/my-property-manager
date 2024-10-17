@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { ArrowRightIcon } from "lucide-react";
 import { FlipClock } from "@/components/flip-clock/DigitalFlipClock";
+import { ProfileLinkCard } from "./HomeComponents";
 
 export function HomePage() {
   const { userQuery } = useViewer();
@@ -39,19 +40,11 @@ export function HomePage() {
             welcome {viewer?.username}
           </h1>
 
-          <FlipClock/>
+          <FlipClock />
           {/* <RealTimeClock /> */}
-          <div className="text-4xl hover:bg-primary-content/30">
-            {viewer ? (
-              <Link
-                to="/profile"
-                className="group flex items-center justify-center gap-2"
-              >
-                Profile
-                <ArrowRightIcon className="size-10 group-hover:animate-ping group-hover:text-secondary" />
-              </Link>
-            ) : null}
-          </div>
+            {viewer && <ProfileLinkCard viewer={viewer} />}
+          {/* <div className="text-4xl hover:bg-primary-content/30">
+          </div> */}
           <div className="text-4xl hover:bg-primary-content/30">
             {viewer ? (
               <Link
