@@ -36,18 +36,10 @@ export const queryClient = new QueryClient({
   },
 });
 
-const listRouteToPhotoMask = createRouteMask({
-  routeTree,
-  from: "/list/$item/item-modal",
-  to: "/list/$item",
-  params: true,
-  unmaskOnReload: true,
-});
 
 // Set up a Router instance
 const router = createRouter({
   routeTree,
-  routeMasks: [listRouteToPhotoMask],
   defaultPreload: "intent",
   defaultPendingComponent: () => <RouterPendingComponent />,
   defaultNotFoundComponent: () => <RouterNotFoundComponent />,
