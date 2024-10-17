@@ -91,7 +91,7 @@ export function PBListCollection<
           );
         })}
         <div className="w-full">
-          <ListPagination total_pages={query?.data?.totalPages ?? 1} />
+          {query?.data?.totalPages>1&&<ListPagination total_pages={query?.data?.totalPages ?? 1} />}
         </div>
       </ul>
     </div>

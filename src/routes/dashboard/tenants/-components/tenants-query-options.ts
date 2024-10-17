@@ -47,6 +47,7 @@ export function oneTenantQueryOptions({ tenant }: IOneTenantQueryOptions) {
       return pb.from("property_tenants_list").getOne(tenant, {
         select: {
           expand: {
+            "account": true,
             "property_shops(tenant)": true,
           },
         },

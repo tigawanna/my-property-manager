@@ -40,18 +40,11 @@ export function PBrelationPicker<T extends Record<string, any>>({
 }: PBrelationPickerProps<T>) {
   const { isDebouncing, debouncedValue, setKeyword, keyword } =
     useGlobalPocketbaseSearchQuery({ default_value: "" });
-
-  // const { searchParam } = useCustomSearchParams({
-  //   key: searchParamKey,
-  //   defaultValue: "1",
-  // });
   useGlobalPocketbaseSearchQuery({ default_value: "" });
   // console.log({ selectedRows });
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2">
       <div className="flex w-full flex-col justify-between gap-3 px-3 pr-5 md:flex-row">
-
-
         <SearchBox
           inputProps={{
             placeholder: "type to search",
@@ -127,9 +120,9 @@ export function PBPickRelationsModal<T extends Record<string, any>>({
           </span>
         )}
       </DialogTrigger>
-      <DialogContent className="h-[80%] w-full overflow-auto sm:max-w-[80%]">
-        <DialogTitle>{fieldLabel}</DialogTitle>
-        <DialogDescription>Pick a {fieldLabel}</DialogDescription>
+      <DialogContent className="w-full gap-1 overflow-auto sm:max-w-[80%]">
+        <DialogTitle className="">{fieldLabel}</DialogTitle>
+        <DialogDescription className=" ">Pick a {fieldLabel}</DialogDescription>
         <div className="h-[95%] w-full overflow-y-scroll">
           <PBrelationPicker
             collectionName={collectionName}
@@ -142,10 +135,12 @@ export function PBPickRelationsModal<T extends Record<string, any>>({
             selectedRows={selectedRows}
           />
         </div>
-        <DialogClose className="btn btn-sm btn-wide flex gap-3">
-          Done
-          <Check className="h-5 w-5" />
-        </DialogClose>
+        <div className="flex w-full items-center justify-center">
+          <DialogClose className="btn btn-sm btn-wide flex gap-3">
+            Done
+            <Check className="h-5 w-5" />
+          </DialogClose>
+        </div>
 
         {/* <DialogFooter className="sm:justify-start">
       </DialogFooter> */}
@@ -178,26 +173,30 @@ export function PBPickRelationField<T extends Record<string, any>>({
         fieldLabel={fieldLabel}
         dialogTrigger={dialogTrigger}
       />
-{maxSelected>1 &&      <div className="mb-4 flex flex-wrap items-center gap-2">
-        {selectedRows?.map((item) => (
-          <div
-            key={item.id}
-            className="flex items-center justify-center rounded-lg border-2 border-secondary px-2"
-          >
-            <div className="flex h-full w-full items-center justify-center">
-              {" "}
-              {item[filterBy as any]}
-            </div>
+      {maxSelected > 1 && (
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          {selectedRows?.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-center rounded-lg border-2 border-secondary px-2"
+            >
+              <div className="flex h-full w-full items-center justify-center">
+                {" "}
+                {item[filterBy as any]}
+              </div>
 
-            <X
-              className="size-5 hover:text-error"
-              onClick={() => {
-                setSelectedRows(selectedRows?.filter((i) => i.id !== item.id));
-              }}
-            />
-          </div>
-        ))}
-      </div>}
+              <X
+                className="size-5 hover:text-error"
+                onClick={() => {
+                  setSelectedRows(
+                    selectedRows?.filter((i) => i.id !== item.id),
+                  );
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

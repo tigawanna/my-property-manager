@@ -10,6 +10,7 @@ import {
 } from "@/components/shadcn/ui/dialog";
 import { Edit } from "lucide-react";
 import {
+  PropertyShopsResponse,
   PropertyTenantsListCreate,
   PropertyTenantsListUpdate,
   PropertyUserResponse,
@@ -23,7 +24,13 @@ import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 
 type PropertyTenantsExpand = Pick<PropertyUserResponse, "id" | "username">;
 interface UpdateTenantProps {
-  item: PropertyTenantsListUpdate & { id: string };
+  item: PropertyTenantsListUpdate & {
+    id: string;
+    expand?: {
+      "property_shops(tenant)"?: PropertyShopsResponse[] | undefined;
+      account?: PropertyUserResponse | undefined;
+    };
+  };
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -65,7 +72,7 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
     },
   });
   const pb_error = mutation?.error;
-
+  const currentTenant = item.expand?.account;
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     console.log("input", input);
@@ -84,7 +91,10 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
 
         <PBPickRelationField<PropertyTenantsExpand>
           dialogTrigger={
-            <span className="btn btn-outline btn-sm">Pick tenant account</span>
+            <span className="btn btn-outline btn-sm">
+              {relation?.[0]?.username ? currentTenant?.username :<div>link an account</div>}
+              <Edit className="size-3" />
+            </span>
           }
           selectedRows={relation}
           maxSelected={1}
@@ -100,7 +110,7 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
               name: "account",
             },
           }}
-          fieldLabel="Tenant"
+          fieldLabel="Account"
           searchParamKey="ths"
           filterBy="username"
         />
@@ -113,7 +123,13 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
 }
 
 interface UpdateTenantModalProps {
-  item: PropertyTenantsListUpdate & { id: string };
+  item: PropertyTenantsListUpdate & {
+    id: string;
+    expand?: {
+      "property_shops(tenant)"?: PropertyShopsResponse[] | undefined;
+      account?: PropertyUserResponse | undefined;
+    };
+  };
   trigger?: React.ReactNode;
 }
 export function UpdateTenantModal({ item, trigger }: UpdateTenantModalProps) {
@@ -122,7 +138,7 @@ export function UpdateTenantModal({ item, trigger }: UpdateTenantModalProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         asChild
-        className="flex size-full items-center justify-center"
+        className="flex items-center justify-center"
       >
         {trigger ?? <Edit className="size-5" />}
       </DialogTrigger>
