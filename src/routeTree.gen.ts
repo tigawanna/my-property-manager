@@ -18,6 +18,7 @@ import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
+import { Route as DashboardPaymentsIndexImport } from './routes/dashboard/payments/index'
 import { Route as DashboardBillsIndexImport } from './routes/dashboard/bills/index'
 import { Route as DashboardBillsPrintImport } from './routes/dashboard/bills/print'
 import { Route as DashboardTenantsTenantIndexImport } from './routes/dashboard/tenants/$tenant/index'
@@ -57,6 +58,11 @@ const DashboardTenantsIndexRoute = DashboardTenantsIndexImport.update({
 
 const DashboardShopsIndexRoute = DashboardShopsIndexImport.update({
   path: '/dashboard/shops/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardPaymentsIndexRoute = DashboardPaymentsIndexImport.update({
+  path: '/dashboard/payments/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -134,6 +140,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardBillsIndexImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/payments/': {
+      id: '/dashboard/payments/'
+      path: '/dashboard/payments'
+      fullPath: '/dashboard/payments'
+      preLoaderRoute: typeof DashboardPaymentsIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/dashboard/shops/': {
       id: '/dashboard/shops/'
       path: '/dashboard/shops'
@@ -175,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills': typeof DashboardBillsIndexRoute
+  '/dashboard/payments': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
@@ -189,6 +203,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills': typeof DashboardBillsIndexRoute
+  '/dashboard/payments': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
@@ -204,6 +219,7 @@ export interface FileRoutesById {
   '/profile/': typeof ProfileIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills/': typeof DashboardBillsIndexRoute
+  '/dashboard/payments/': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops/': typeof DashboardShopsIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
@@ -220,6 +236,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/dashboard/bills/print'
     | '/dashboard/bills'
+    | '/dashboard/payments'
     | '/dashboard/shops'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
@@ -233,6 +250,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/dashboard/bills/print'
     | '/dashboard/bills'
+    | '/dashboard/payments'
     | '/dashboard/shops'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
@@ -246,6 +264,7 @@ export interface FileRouteTypes {
     | '/profile/'
     | '/dashboard/bills/print'
     | '/dashboard/bills/'
+    | '/dashboard/payments/'
     | '/dashboard/shops/'
     | '/dashboard/tenants/'
     | '/dashboard/shops/$shop/'
@@ -261,6 +280,7 @@ export interface RootRouteChildren {
   ProfileIndexRoute: typeof ProfileIndexRoute
   DashboardBillsPrintRoute: typeof DashboardBillsPrintRoute
   DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
+  DashboardPaymentsIndexRoute: typeof DashboardPaymentsIndexRoute
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
   DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
@@ -275,6 +295,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileIndexRoute: ProfileIndexRoute,
   DashboardBillsPrintRoute: DashboardBillsPrintRoute,
   DashboardBillsIndexRoute: DashboardBillsIndexRoute,
+  DashboardPaymentsIndexRoute: DashboardPaymentsIndexRoute,
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
   DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
@@ -300,6 +321,7 @@ export const routeTree = rootRoute
         "/profile/",
         "/dashboard/bills/print",
         "/dashboard/bills/",
+        "/dashboard/payments/",
         "/dashboard/shops/",
         "/dashboard/tenants/",
         "/dashboard/shops/$shop/",
@@ -326,6 +348,9 @@ export const routeTree = rootRoute
     },
     "/dashboard/bills/": {
       "filePath": "dashboard/bills/index.tsx"
+    },
+    "/dashboard/payments/": {
+      "filePath": "dashboard/payments/index.tsx"
     },
     "/dashboard/shops/": {
       "filePath": "dashboard/shops/index.tsx"

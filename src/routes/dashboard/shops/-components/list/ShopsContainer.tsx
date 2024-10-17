@@ -23,7 +23,7 @@ export function ShopsContainer({}: ShopsContainerProps) {
           <SelectHouseFloor />
           <SearchBox
             inputProps={{
-              placeholder: "Search by name",
+              placeholder: "Search by shop number",
             }}
             debouncedValue={debouncedValue}
             isDebouncing={isDebouncing}
