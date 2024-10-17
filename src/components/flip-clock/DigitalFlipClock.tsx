@@ -66,46 +66,69 @@ function FlipUnitContainer({ digit, shuffle, unit }:{digit:number;shuffle:boolea
 };
 
 
+class MyClock {
+  time: Date;
+  ampm:"AM"|"PM"
+  hours: number;
+  minutes: number;
+  seconds: number;
+
+  constructor() {
+    this.time = new Date();
+     const currentHour = this.time.getHours();
+    this.hours = currentHour > 12 ? currentHour - 12 : currentHour;
+    this.minutes = this.time.getMinutes();
+    this.seconds = this.time.getSeconds();
+    this.ampm = currentHour > 12 ? "PM" : "AM";
+    this.updateTime();
+  }
+
+  updateTime() {
+    this.time = new Date();
+    const currentHour = this.time.getHours();
+    this.ampm = currentHour > 12 ? "PM" : "AM";
+    this.hours = currentHour > 12 ? currentHour - 12 : currentHour;
+    this.minutes = this.time.getMinutes();
+    this.seconds = this.time.getSeconds();
+  }
+}
+
 
 
 // class component
 export function FlipClock(){
-  const time = new Date();
-  const [hours, setHours] = React.useState(time.getHours());
+  const clock = new MyClock();
+  const [hours, setHours] = React.useState(clock.hours);
   const [hoursShuffle, setHoursShuffle] = React.useState(true);
-  const [minutes, setMinutes] = React.useState(time.getMinutes());
+  const [minutes, setMinutes] = React.useState(clock.minutes);
   const [minutesShuffle, setMinutesShuffle] = React.useState(true);
-  const [seconds, setSeconds] = React.useState(time.getSeconds());
+  const [seconds, setSeconds] = React.useState(clock.seconds);
   const [secondsShuffle, setSecondsShuffle] = React.useState(true);
+  const[ampm,setAMPM]=React.useState(clock.ampm)
+  const [ampmShuffle, setAMPMShuffle] = React.useState(true);
 
   React.useEffect(() => {
-    const timerID = setInterval(() => updateTime(), 50);
+    const timerID = setInterval(() => {
+      clock.updateTime();
+      if(clock.ampm!==ampm){
+      setHours(clock.hours);
+      setHoursShuffle(true);
+    }
+      if(clock.ampm!==ampm){
+      setMinutes(clock.minutes);
+      setMinutesShuffle(true);
+    }
+      if(clock.seconds!==seconds){
+      setSeconds(clock.seconds);
+      setSecondsShuffle(true);
+      }
+      if(clock.ampm!==ampm){
+      setAMPM(clock.ampm);
+      setAMPMShuffle(true);
+    }
+    }, 50);
     return () => clearInterval(timerID);
   }, []);
-
-  const updateTime = () => {
-    // get new date
-    const time = new Date();
-    // set time units
-    const newHours = time.getHours();
-    const newMinutes = time.getMinutes();
-    const newSeconds = time.getSeconds();
-    // on hour chanage, update hours and shuffle state
-    if (newHours !== hours) {
-      setHoursShuffle(!hoursShuffle);
-      setHours(newHours);
-    }
-    // on minute chanage, update minutes and shuffle state
-    if (newMinutes !== minutes) {
-      setMinutesShuffle(!minutesShuffle);
-      setMinutes(newMinutes);
-    }
-    // on second chanage, update seconds and shuffle state
-    if (newSeconds !== seconds) {
-      setSecondsShuffle(!secondsShuffle);
-      setSeconds(newSeconds);
-    }
-  };
 //   console.log({hours, minutes, seconds});
   return (
     <div className={"flipClock"}>
@@ -126,6 +149,13 @@ export function FlipClock(){
         unit={"seconds"}
         digit={seconds}
         shuffle={secondsShuffle}
+      />
+      <FlipUnitContainer
+        key={ampm}
+        unit={"ampm"}
+        // @ts-expect-error
+        digit={ampm}
+        shuffle={ampmShuffle}
       />
     </div>
   );
