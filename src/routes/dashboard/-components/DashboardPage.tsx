@@ -6,19 +6,19 @@ import { Droplet, Store, Users, Wallet, Zap } from "lucide-react";
 interface DashboardPageProps {}
 
 const links = [
+  { name: "shops", path: "/dashboard/shops", icon: <Store /> },
   {
-    name: "bills",
+    name: "utilities",
     path: "/dashboard/bills",
     icon: (
       <div className="flex">
-        <Droplet />
-        <Zap />
+        <Droplet className="fill-info text-info"/>
+        <Zap className="fill-warning text-warning"/>
       </div>
     ),
   },
-  { name: "shops", path: "/dashboard/shops", icon: <Store /> },
   { name: "tenants", path: "/dashboard/tenants", icon: <Users /> },
-  { name: "rent", path: "/dashboard/rent", icon: <Wallet /> },
+  { name: "payments", path: "/dashboard/payments", icon: <Wallet /> },
 ] as const;
 export function DashboardPage({}: DashboardPageProps) {
   const { userQuery } = useViewer();
@@ -29,7 +29,7 @@ export function DashboardPage({}: DashboardPageProps) {
         {links.map((link) => {
           if (
             !(viewer?.staff && viewer?.staff.length > 0) &&
-            link.name === "bills"
+            (link.name === "utilities"||link.name === "payments")
           ) {
             return;
           }

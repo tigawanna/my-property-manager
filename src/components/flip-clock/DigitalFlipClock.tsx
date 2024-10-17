@@ -10,7 +10,7 @@ function AnimatedCard({
 }){
   return (
     <div className={`flipCard ${animation}`}>
-      <span>{digit}</span>
+      <span>{`${digit}`}</span>
     </div>
   );
 };
@@ -19,7 +19,7 @@ function AnimatedCard({
 function StaticCard({ position, digit }: { position: "upperCard"|"lowerCard"; digit: number }){
   return (
     <div className={position}>
-      <span>{digit}</span>
+      <span>{`${digit}`}</span>
     </div>
   );
 };
@@ -133,19 +133,19 @@ export function FlipClock(){
   return (
     <div className={"flipClock"}>
       <FlipUnitContainer
-        key={hours}
+        key={`hour-${hours}`}
         unit={"hours"}
         digit={hours}
         shuffle={hoursShuffle}
       />
       <FlipUnitContainer
-        key={minutes}
+        key={`$minutes-${minutes}`}
         unit={"minutes"}
         digit={minutes}
         shuffle={minutesShuffle}
       />
       <FlipUnitContainer
-        key={seconds}
+        key={`$seconds-${seconds}`}
         unit={"seconds"}
         digit={seconds}
         shuffle={secondsShuffle}
