@@ -14,9 +14,12 @@ interface DashboardNavigationMenuProps {}
 
 export function DashboardNavigationMenu({}: DashboardNavigationMenuProps) {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="w-full">
       <NavigationMenuList>
         {routes.map((route) => {
+          if(route.name==="Home"){
+            return
+          }
           if (!route.children) {
             return (
               <NavigationMenuItem key={route.name}>
