@@ -30,15 +30,19 @@ export function DashboardNavigationMenu({}: DashboardNavigationMenuProps) {
             );
           }
           return (
-            <NavigationMenuItem key={route.name}>
-              <NavigationMenuTrigger className="hover:bg-primary">{route.name}</NavigationMenuTrigger>
+            <NavigationMenuItem
+              key={route.name}
+            >
+              <NavigationMenuTrigger className="hover:bg-primary">
+                {route.name}
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid grid-cols-2 gap-2  md:w-[400px] bg-base-100 lg:grid-cols-[.75fr_1fr]">
+                <ul className="grid gap-2 bg-primary/20 p-1 rounded-md sm:w-[250px] md:w-[400px] sm:grid-cols-2 lg:grid-cols-[.75fr_1fr]">
                   {route.children.map((child) => (
                     <NavigationMenuLink
                       asChild
                       key={child.name}
-                      className="flex h-full w-full select-none hover:via-primary/30 flex-col justify-end rounded-md  bg-gradient-to-b from-base-300 to-base-100 p-2 no-underline outline-none focus:shadow-md"
+                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-base-300 to-base-100 p-2 no-underline outline-none hover:via-primary/30 focus:shadow-md"
                     >
                       <Link to={child.href} className="">
                         <div className="flex w-full justify-evenly gap-2 p-2">

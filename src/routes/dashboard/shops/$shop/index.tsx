@@ -12,7 +12,7 @@ export const Route = createFileRoute("/dashboard/shops/$shop/")({
   loader(ctx) {
     const { shop } = ctx.params;
     const {cy} = ctx.location.search as Record<string, string>;
-    const selectedYear = Number(cy)?? new Date().getFullYear();
+    const selectedYear = isNaN(Number(cy))? new Date().getFullYear():Number(cy)
     ctx.context.queryClient.ensureQueryData(
       oneShopBillsQueryOptions({ shop, year: selectedYear }),
     );
