@@ -1,6 +1,6 @@
 
 
-type Prettify<T> = T extends infer o
+export type Prettify<T> = T extends infer o
   ? {
       [K in keyof o]: o[K];
     }
@@ -78,3 +78,30 @@ export type ResolveSelectWithExpand<
         }
       : {})
 >;
+
+
+type ExpandType = {
+  shop: {
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    id: string;
+    is_vacant: boolean;
+    monthly_rent: number;
+    order: number;
+    shop_number: string;
+    tenant: string;
+    updated: string;
+    utils: string;
+  };
+  staff: {
+    account: string;
+    collectionId: string;
+    collectionName: string;
+    created: string;
+    id: string;
+    name: string;
+    updated: string;
+  };
+};
+

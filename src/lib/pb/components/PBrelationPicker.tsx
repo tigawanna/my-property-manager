@@ -40,10 +40,10 @@ export function PBrelationPicker<T extends Record<string, any>>({
 }: PBrelationPickerProps<T>) {
   const { isDebouncing, debouncedValue, setKeyword, keyword } =
     useGlobalPocketbaseSearchQuery({ default_value: "" });
-  useGlobalPocketbaseSearchQuery({ default_value: "" });
+  // useGlobalPocketbaseSearchQuery({ default_value: "" });
   // console.log({ selectedRows });
   return (
-    <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2">
+    <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2 ">
       <div className="flex w-full flex-col justify-between gap-3 px-3 pr-5 md:flex-row">
         <SearchBox
           inputProps={{
@@ -120,7 +120,7 @@ export function PBPickRelationsModal<T extends Record<string, any>>({
           </span>
         )}
       </DialogTrigger>
-      <DialogContent className="w-full gap-1 overflow-auto sm:max-w-[80%]">
+      <DialogContent className="z-50 w-full h-[90vh] gap-1 overflow-auto sm:max-w-[80%]">
         <DialogTitle className="">{fieldLabel}</DialogTitle>
         <DialogDescription className=" ">Pick a {fieldLabel}</DialogDescription>
         <div className="h-[95%] w-full overflow-y-scroll">
@@ -161,7 +161,7 @@ export function PBPickRelationField<T extends Record<string, any>>({
   dialogTrigger,
 }: PBrelationPickerProps<T>) {
   return (
-    <div className="flex h-full w-full flex-wrap gap-2">
+    <div className="flex  w-full flex-wrap gap-2 ">
       <PBPickRelationsModal
         collectionName={collectionName}
         columns={columns}

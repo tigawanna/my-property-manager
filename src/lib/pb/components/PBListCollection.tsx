@@ -35,7 +35,15 @@ export function PBListCollection<
   columns,
   searchParamKey,
 }: PBListCollectionProps<T>) {
-  const page = debouncedValue.length > 0 ? 1 : searchParam;
+  // console.log({
+  //   searchParam,
+  //   searchParamKey,
+  //   debouncedValue,
+  // })
+  if (isNaN(+searchParam)){
+    searchParam="1"
+  } 
+    const page = debouncedValue.length > 0 ? 1 : searchParam;
   // console.log({selectedRows})
   //   const [selectedRows, setSelectedRows] = useState<string[]>([]);
 
@@ -53,6 +61,7 @@ export function PBListCollection<
   });
 
   const data = query?.data?.items ?? [];
+  console.log({data})
   function selectItem(one_item: T) {
     if (maxSelected > 1) {
       const is_in_array = selectedRows.find((item) => item.id === one_item.id);

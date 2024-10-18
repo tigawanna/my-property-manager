@@ -11,6 +11,7 @@ interface GenericTableProps<T extends Record<string, any>> {
   columns: GenericTableColumn<T>[];
   rows: T[];
   updateItem?: (item: T) => Promise<any>;
+  
 }
 
 export function GenericTable<T extends Record<string, any>>({
