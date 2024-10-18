@@ -1,47 +1,53 @@
 import { useMutation } from "@tanstack/react-query";
 import { Edit, Loader } from "lucide-react";
 import { useRef, useState } from "react";
-type NestedKeyOf<T> = (
-  T extends object
-    ? {
-        [K in keyof T]-?: K extends string
-          ? T[K] extends object
-            ? `${K}.${NestedKeyOf<T[K]>}`
-            : K
-          : never;
-      }[keyof T]
-    : never
-) extends infer D
-  ? Extract<D, string>
-  : never;
+// type NestedKeyOf<T> = (
+//   T extends object
+//     ? {
+//         [K in keyof T]-?: K extends string
+//           ? T[K] extends object
+//             ? `${K}.${NestedKeyOf<T[K]>}`
+//             : K
+//           : never;
+//       }[keyof T]
+//     : never
+// ) extends infer D
+//   ? Extract<D, string>
+//   : never;
 
-type OptionalizeObject<T> =
-  | {
-      [K in keyof T]: T[K] extends object ? OptionalizeObject<T[K]> : T[K];
-    }
-  | undefined;
+// type OptionalizeObject<T> =
+//   | {
+//       [K in keyof T]: T[K] extends object ? OptionalizeObject<T[K]> : T[K];
+//     }
+//   | undefined;
 
-type GenericPocketbaseGenericTableColumn<T extends Record<string, any>> = {
-  label: string;
-  type: "text" | "number" | "date";
-  accessor: NestedKeyOf<OptionalizeObject<T>>;
-};
 // type GenericPocketbaseGenericTableColumn<T extends Record<string, any>> = {
 //   label: string;
 //   type: "text" | "number" | "date";
-//   accessor: string extends keyof T ? string : Extract<keyof T, string>;
+//   accessor: NestedKeyOf<OptionalizeObject<T>>;
 // };
-interface GenericPocketbaseGenericTableProps<T extends Record<string, any>> {
+
+type Expanded<T extends Record<string, any>> =  T["expand"]
+type GenericPocketbaseGenericTableColumn<T extends Record<string, any>> = {
+  label: string;
+  type: "text" | "number" | "date";
+  accessor: string extends keyof T
+    ? string
+    : Extract<keyof T, string> | "expand";
+
+};
+interface GenericPocketbaseGenericTableProps<T extends Record<string, any>,E extends Expanded<T>> {
   columns: GenericPocketbaseGenericTableColumn<T>[];
+  expand:keyof T["expand"]
   rows: T[];
   updateItem?: (item: T) => Promise<any>;
 }
 
-export function GenericPocketbaseGenericTable<T extends Record<string, any>>({
+export function GenericPocketbaseGenericTable<T extends Record<string, any>,E extends Expanded<T>>({
   columns,
   rows,
   updateItem,
-}: GenericPocketbaseGenericTableProps<T>) {
+}: GenericPocketbaseGenericTableProps<T,E>) {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   // @ts-expect-error
   const [input, setInput] = useState<T>({});
