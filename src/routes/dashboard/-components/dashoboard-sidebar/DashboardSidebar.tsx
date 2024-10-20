@@ -10,14 +10,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+
 import { Separator } from "@/components/ui/separator";
 import { Outlet,Link } from "@tanstack/react-router";
 import { DashboardSidebarHeader } from "./DashboardSidebarHeader";
@@ -25,6 +18,7 @@ import { DashboardSidebarLinks } from "./DashboardSidebarLinks";
 import { DashboardSidebaruser } from "./DashboardSidebaruser";
 import { ThemeToggle } from "@/components/navigation/ThemeToggle";
 import {Castle} from "lucide-react"
+import { TSRBreadCrumbs } from "@/lib/tanstack/router/TSRBreadCrumbs";
 interface DashboardSidebarProps {
   sidebar_props: React.ComponentProps<typeof Sidebar>;
 }
@@ -34,9 +28,7 @@ export function DashboardSidebar({ sidebar_props }: DashboardSidebarProps) {
     <SidebarProvider>
       <Sidebar className="" collapsible="icon" {...sidebar_props}>
         <SidebarHeader>
-          <Link to="/" className=" w-full p-5 text-primary hover:bg-primary/20 flex justify-center items-center border-b border-primary">
-            <Castle className="size-10" />
-          </Link>
+
           <DashboardSidebarHeader />
         </SidebarHeader>
         <SidebarContent>
@@ -53,7 +45,8 @@ export function DashboardSidebar({ sidebar_props }: DashboardSidebarProps) {
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
+            <TSRBreadCrumbs/>
+            {/* <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
@@ -65,7 +58,7 @@ export function DashboardSidebar({ sidebar_props }: DashboardSidebarProps) {
                   <BreadcrumbPage>Data Fetching</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
-            </Breadcrumb>
+            </Breadcrumb> */}
           </div>
         </header>
         {/* main content */}

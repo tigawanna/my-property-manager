@@ -1,4 +1,4 @@
-import { LayoutDashboard } from "lucide-react";
+import { Castle, LayoutDashboard } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Link } from "@tanstack/react-router";
 interface DashboardSidebarHeaderProps {}
@@ -6,12 +6,22 @@ interface DashboardSidebarHeaderProps {}
 export function DashboardSidebarHeader({}: DashboardSidebarHeaderProps) {
   const { state } = useSidebar();
     return (
-    <Link
-      to="/dashboard"
-      className="flex cursor-pointer items-center gap-2 p-1 text-primary underline-offset-2 hover:underline"
-    >
-      <LayoutDashboard />
-      {state === "expanded" && <h1 className="text-xl font-bold">Dashboard</h1>}
-    </Link>
-  );
+      <div className=" flex flex-col gap-3">
+        <Link
+          to="/"
+          className="flex py-4 w-full items-center justify-center border-b border-primary text-primary hover:bg-primary/20"
+        >
+          <Castle className="size-14" />
+        </Link>
+        <Link
+          to="/dashboard"
+          className="flex cursor-pointer items-center gap-2 p-1 text-primary underline-offset-2 hover:underline"
+        >
+          <LayoutDashboard />
+          {state === "expanded" && (
+            <h1 className="text-xl font-bold">Dashboard</h1>
+          )}
+        </Link>
+      </div>
+    );
 }
