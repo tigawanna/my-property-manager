@@ -6,21 +6,7 @@ import { Droplet, Store, Users, Wallet, Zap } from "lucide-react";
 
 interface DashboardPageProps {}
 dashboard_routes
-// const links = [
-//   { name: "shops", path: "/dashboard/shops", icon: <Store /> },
-//   {
-//     name: "utilities",
-//     path: "/dashboard/bills",
-//     icon: (
-//       <div className="flex">
-//         <Droplet className="fill-info text-info"/>
-//         <Zap className="fill-warning text-warning"/>
-//       </div>
-//     ),
-//   },
-//   { name: "tenants", path: "/dashboard/tenants", icon: <Users /> },
-//   { name: "payments", path: "/dashboard/payments", icon: <Wallet /> },
-// ] as const;
+
 export function DashboardPage({}: DashboardPageProps) {
   const { userQuery } = useViewer();
   const viewer = userQuery?.data?.record;
