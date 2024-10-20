@@ -1,10 +1,9 @@
-import { makeHotToast } from "@/components/toasters";
-import { RealTimeClock } from "./RealTimeClock";
 import { Link } from "@tanstack/react-router";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { ArrowRightIcon } from "lucide-react";
 import { FlipClock } from "@/components/flip-clock/DigitalFlipClock";
 import { ProfileLinkCard } from "./HomeComponents";
+import { ThemeToggle } from "@/components/navigation/ThemeToggle";
 
 export function HomePage() {
   const { userQuery } = useViewer();
@@ -35,6 +34,9 @@ export function HomePage() {
       </picture>
 
       <div className="z-10 flex h-full min-h-screen w-full flex-col items-center justify-evenly gap-5 bg-base-300/70">
+        <div className="fixed right-6 top-5">
+          <ThemeToggle />
+        </div>
         <div className="*:justfy-center grid grid-cols-1 justify-center gap-2 p-[5%] *:flex *:items-center *:rounded-xl *:bg-base-300/40 *:p-5 md:grid-cols-2 lg:grid-cols-2">
           <h1 className="text-7xl font-bold text-primary">
             welcome {viewer?.username}
@@ -42,7 +44,7 @@ export function HomePage() {
 
           <FlipClock />
           {/* <RealTimeClock /> */}
-            {viewer && <ProfileLinkCard viewer={viewer} />}
+          {viewer && <ProfileLinkCard viewer={viewer} />}
           {/* <div className="text-4xl hover:bg-primary-content/30">
           </div> */}
           <div className="text-4xl hover:bg-primary-content/30">
