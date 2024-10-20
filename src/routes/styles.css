@@ -134,14 +134,28 @@ h6 {
     --chart-1:var(--wa);
     --chart-2:var(--in);
     --chart-3:var(--a);
-    /* --chart-4:theme("colors.success");
-    --chart-5:theme("colors.info"); */
-      /* --chart-1: 49.12% 0.3096 275.75; */
-    /* --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%; */
+    --sidebar-background:var(--b1);
+    --sidebar-foreground:var(--bc);
+    --sidebar-primary:var(--p);
+    --sidebar-primary-foreground:var(--pc);
+    --sidebar-accent:var(--a);
+    --sidebar-accent-foreground:var(--ac);
+    --sidebar-border:var(--bc);
+    --sidebar-ring: var(--n);
 }
+  .dark {
+    --chart-1:var(--wa);
+    --chart-2:var(--in);
+    --chart-3:var(--a);
+    --sidebar-background:var(--b1);
+    --sidebar-foreground:var(--bc);
+    --sidebar-primary:var(--p);
+    --sidebar-primary-foreground:var(--pc);
+    --sidebar-accent:var(--a);
+    --sidebar-accent-foreground:var(--ac);
+    --sidebar-border:var(--bc);
+    --sidebar-ring: var(--n);
+  }
 }
 
 
@@ -327,3 +341,12 @@ h6 {
 }
 
   /* end of digital clock styles */
+
+  @layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

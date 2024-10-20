@@ -15,6 +15,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
+import { Route as DashboardNiceImport } from './routes/dashboard/nice'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
@@ -43,6 +44,11 @@ const DashboardIndexRoute = DashboardIndexImport.update({
 
 const AuthIndexRoute = AuthIndexImport.update({
   path: '/auth/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardNiceRoute = DashboardNiceImport.update({
+  path: '/dashboard/nice',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -103,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/auth/signup'
       fullPath: '/auth/signup'
       preLoaderRoute: typeof AuthSignupImport
+      parentRoute: typeof rootRoute
+    }
+    '/dashboard/nice': {
+      id: '/dashboard/nice'
+      path: '/dashboard/nice'
+      fullPath: '/dashboard/nice'
+      preLoaderRoute: typeof DashboardNiceImport
       parentRoute: typeof rootRoute
     }
     '/auth/': {
@@ -183,6 +196,7 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
@@ -198,6 +212,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
@@ -214,6 +229,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile/': typeof ProfileIndexRoute
@@ -231,6 +247,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth/signup'
+    | '/dashboard/nice'
     | '/auth'
     | '/dashboard'
     | '/profile'
@@ -245,6 +262,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth/signup'
+    | '/dashboard/nice'
     | '/auth'
     | '/dashboard'
     | '/profile'
@@ -259,6 +277,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/auth/signup'
+    | '/dashboard/nice'
     | '/auth/'
     | '/dashboard/'
     | '/profile/'
@@ -275,6 +294,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthSignupRoute: typeof AuthSignupRoute
+  DashboardNiceRoute: typeof DashboardNiceRoute
   AuthIndexRoute: typeof AuthIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
@@ -290,6 +310,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthSignupRoute: AuthSignupRoute,
+  DashboardNiceRoute: DashboardNiceRoute,
   AuthIndexRoute: AuthIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
@@ -316,6 +337,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/auth/signup",
+        "/dashboard/nice",
         "/auth/",
         "/dashboard/",
         "/profile/",
@@ -333,6 +355,9 @@ export const routeTree = rootRoute
     },
     "/auth/signup": {
       "filePath": "auth/signup.tsx"
+    },
+    "/dashboard/nice": {
+      "filePath": "dashboard/nice.tsx"
     },
     "/auth/": {
       "filePath": "auth/index.tsx"

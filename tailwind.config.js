@@ -1,15 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 import shadcnTailwindPlugin from "./src/components/shadcn/lib/shadcn-tailwind-config";
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: ["class"],
+    content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {
-      screens: {
-        print: { raw: "print" },
-        screen: { raw: "screen" },
-      },
-      
-    },
+  	extend: {
+  		screens: {
+  			print: {
+  				raw: 'print'
+  			},
+  			screen: {
+  				raw: 'screen'
+  			}
+  		},
+  		colors: {
+  			sidebar: {
+  				DEFAULT: 'oklch(var(--sidebar-background))',
+  				foreground: 'oklch(var(--sidebar-foreground))',
+  				primary: 'oklch(var(--sidebar-primary))',
+  				'primary-foreground': 'oklch(var(--sidebar-primary-foreground))',
+  				accent: 'oklch(var(--sidebar-accent))',
+  				'accent-foreground': 'oklch(var(--sidebar-accent-foreground))',
+  				border: 'oklch(var(--sidebar-border))',
+  				ring: 'oklch(var(--sidebar-ring))'
+  			}
+  		}
+  	}
   },
   plugins: [
     require("daisyui"),
