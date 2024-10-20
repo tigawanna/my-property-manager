@@ -5,6 +5,8 @@ import { pb } from "@/lib/pb/client";
 import { GenericPocketbaseGenericTable } from "@/lib/pb/components/PocketbaseGenericTable";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
+import { CreatePaymentForm } from "../form/CreatePaymentForm";
+import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
 
 interface PaymentsListProps {
   keyword: string;
@@ -51,6 +53,8 @@ return (
       }
       makeToast={makeHotToast}
       createItem={(item) => pb.from("property_shop_payments").create(item)}
+      createForm={(row, afterSave) => <CreatePaymentForm  row={row} afterSave={afterSave} />}
+      updateForm={(row, afterSave) => <UpdatePaymentForm  row={row} afterSave={afterSave} />}
       defaultRowValue={{
         month: new Date().getMonth() + 1,
         year: new Date().getFullYear(),

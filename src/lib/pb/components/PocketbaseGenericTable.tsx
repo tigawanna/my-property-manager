@@ -62,7 +62,6 @@ export function GenericPocketbaseGenericTable<T extends Record<string, any>>({
   createForm,
   mappedColumns,
   defaultRowValue,
-  makeToast,
 }: GenericPocketbaseGenericTableProps<T>) {
   const columns = mappedColumns();
 
@@ -152,8 +151,10 @@ export function PocketbaseGenericFormModal<T extends Record<string, any>>({
   if (updateForm && row) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="z-30 w-full gap-1 overflow-auto sm:max-w-[80%]">
+        <DialogTrigger asChild>
+          <Edit className="size-5" />
+        </DialogTrigger>
+        <DialogContent className="z-50 w-full gap-1 overflow-auto sm:max-w-[80%]">
           <DialogTitle className="">Update</DialogTitle>
           <DialogDescription className="sr-only">
             Form to update the row
@@ -168,8 +169,13 @@ export function PocketbaseGenericFormModal<T extends Record<string, any>>({
   if (createForm) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="z-30 w-full gap-1 overflow-auto sm:max-w-[80%]">
+        <DialogTrigger asChild>
+          <div className="btn btn-outline btn-sm">
+            add new
+            <Plus className="" />
+          </div>
+        </DialogTrigger>
+        <DialogContent className="z-50 w-full gap-1 overflow-auto sm:max-w-[80%]">
           <DialogTitle className="">Create</DialogTitle>
           <DialogDescription className="sr-only">
             Form to create a new row

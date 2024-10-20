@@ -1,57 +1,50 @@
-import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 import { FormFieldProps } from "./components";
-import * as Select from "@/components/park/ui/select";
-export interface SelectFieldsProps<T, K extends keyof T> extends FormFieldProps<T> {
-  inputOptions?: React.InputHTMLAttributes<HTMLTextAreaElement>;
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/shadcn/ui/select";
+export interface SelectFieldsProps<T extends Record<string,any>, K extends keyof T> extends FormFieldProps<T> {
   items: {
     label: string;
-    value: T[K] extends string ? T[K] : string;
+    value: T[K];
   }[];
 }
 
-export function SelectFields<T, K extends keyof T>({
+export function SelectFields<T extends Record<string,any>, K extends keyof T>({
   items,
   field,
   fieldKey,
   fieldlabel,
-  inputOptions,
 }: SelectFieldsProps<T, K>) {
 
   return (
-    <Select.Root
+    <Select
       name={fieldKey}
-      value={[field.state.value as string]}
-      positioning={{ sameWidth: true }}
-      items={items}
-      onValueChange={({ value }) => {
+      onValueChange={(value) => {
         if (field) {
-          field.handleChange(value[0] as any);
+          field.handleChange(value as any);
         }
-      }}>
-      <Select.Label>{fieldlabel}</Select.Label>
-      {/* @ts-expect-error */}
-      <Select.HiddenSelect {...inputOptions} />
-      <Select.Control>
-        <Select.Trigger>
-          <Select.ValueText placeholder={`Select ${fieldlabel}`} />
-          <ChevronsUpDownIcon />
-        </Select.Trigger>
-      </Select.Control>
-      <Select.Positioner>
-        <Select.Content>
-          <Select.ItemGroup>
-            <Select.ItemGroupLabel>{fieldlabel}</Select.ItemGroupLabel>
-            {items.map((item) => (
-              <Select.Item key={item.value} item={item}>
-                <Select.ItemText>{item.label}</Select.ItemText>
-                <Select.ItemIndicator>
-                  <CheckIcon />
-                </Select.ItemIndicator>
-              </Select.Item>
-            ))}
-          </Select.ItemGroup>
-        </Select.Content>
-      </Select.Positioner>
-    </Select.Root>
+      }}
+      value={field.state.value as string}
+    >
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder={`Select ${fieldlabel}`} />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>{fieldlabel}</SelectLabel>
+          {items.map((item) => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }
