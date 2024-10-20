@@ -21,7 +21,7 @@ export function ThemeToggle({}: ThemeToggleProps) {
     }
   }
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-between gap-2 w-full">
       <div className="hidden md:flex">
         {import.meta.env.DEV && (
           <select

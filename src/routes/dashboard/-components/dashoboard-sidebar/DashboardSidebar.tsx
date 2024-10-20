@@ -19,11 +19,12 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-
-import { Outlet } from "@tanstack/react-router";
+import { Outlet,Link } from "@tanstack/react-router";
 import { DashboardSidebarHeader } from "./DashboardSidebarHeader";
 import { DashboardSidebarLinks } from "./DashboardSidebarLinks";
-
+import { DashboardSidebaruser } from "./DashboardSidebaruser";
+import { ThemeToggle } from "@/components/navigation/ThemeToggle";
+import {Castle} from "lucide-react"
 interface DashboardSidebarProps {
   sidebar_props: React.ComponentProps<typeof Sidebar>;
 }
@@ -31,18 +32,24 @@ interface DashboardSidebarProps {
 export function DashboardSidebar({ sidebar_props }: DashboardSidebarProps) {
   return (
     <SidebarProvider>
-      <Sidebar className="pt-16" collapsible="icon" {...sidebar_props}>
-        <SidebarHeader><DashboardSidebarHeader/></SidebarHeader>
+      <Sidebar className="" collapsible="icon" {...sidebar_props}>
+        <SidebarHeader>
+          <Link to="/" className=" w-full p-5 text-primary hover:bg-primary/20 flex justify-center items-center border-b border-primary">
+            <Castle className="size-10" />
+          </Link>
+          <DashboardSidebarHeader />
+        </SidebarHeader>
         <SidebarContent>
-          <DashboardSidebarLinks/>
-          {/* <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} /> */}
+          <DashboardSidebarLinks />
         </SidebarContent>
-        <SidebarFooter>{/* <NavUser user={data.user} /> */}</SidebarFooter>
+        <SidebarFooter>
+          <ThemeToggle />
+          <DashboardSidebaruser />
+        </SidebarFooter>
         <SidebarRail />
       </Sidebar>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
+        <header className="flex h-16 sticky top-0 bg-base-100 z-30 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />

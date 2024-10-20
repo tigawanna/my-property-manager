@@ -2,7 +2,7 @@ import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCards
 import { dashboard_routes } from "@/components/navigation/routes";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { Link } from "@tanstack/react-router";
-import { Droplet, Store, Users, Wallet, Zap } from "lucide-react";
+
 
 interface DashboardPageProps {}
 dashboard_routes

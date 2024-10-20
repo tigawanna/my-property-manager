@@ -5,26 +5,50 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { Link } from "@tanstack/react-router";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Link, useLocation } from "@tanstack/react-router";
+
 
 interface DashboardSidebarLinksProps {}
 
 export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
+  const { state } = useSidebar();
+  const { pathname } = useLocation();
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-      <SidebarGroupLabel>Projects</SidebarGroupLabel>
-      <SidebarMenu className="gap-3">
+    <SidebarGroup className="h-full bg-base-100">
+      <SidebarGroupLabel>House keeping</SidebarGroupLabel>
+      <SidebarMenu className="gap-5">
         {dashboard_routes.map((item) => {
           return (
             <SidebarMenuItem key={item.name}>
               <SidebarMenuButton asChild>
-                <div className="flex w-full bg-base-200 gap-3 border-b glass p-1">
-                  <button className="size-6">{item.icon}</button>
-                  <Link to={item.href} className="text-lg">
-                    {item.name}
-                  </Link>
-                </div>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger
+                      asChild
+                      className={
+                        (pathname === item.href)
+                          ? `flex w-full gap-3 rounded-sm bg-base-300 p-1 text-accent`
+                          : `flex w-full gap-3 rounded-sm p-1 hover:bg-base-300`
+                      }
+                    >
+                      <Link to={item.href}>
+                        <button className="size-6">{item.icon}</button>
+                        {state === "expanded" && (
+                          <span className="text-lg"> {item.name}</span>
+                        )}
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>{item.name}</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </SidebarMenuButton>
             </SidebarMenuItem>
           );
