@@ -115,7 +115,7 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
           <label className="label">
             <span className="label-text">Staff</span>
           </label>
-          <form.Field name="staff">
+          <form.Field name="shop">
             {(field) => {
               return (
                 <>
@@ -159,13 +159,13 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
         </div>
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Type</span>
+            <span className="label-text">Shop</span>
           </label>
-          <form.Field name="type">
+          <form.Field name="shop">
             {(field) => {
               return (
                 <>
-                  <label htmlFor={field.name}>Type</label>
+                  <label htmlFor={field.name}>Shop</label>
                   <PBPickRelationField<PropertyShopsResponse>
                     dialogTrigger={
                       <span className="btn btn-outline btn-sm">
