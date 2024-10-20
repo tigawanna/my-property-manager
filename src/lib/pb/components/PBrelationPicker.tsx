@@ -174,11 +174,11 @@ export function PBPickRelationField<T extends Record<string, any>>({
         dialogTrigger={dialogTrigger}
       />
       {maxSelected > 1 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2">
+        <div className="mb-4 flex flex-wrap items-center gap-2 bg-base-300">
           {selectedRows?.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-center rounded-lg border-2 border-secondary px-2"
+              className="flex items-center justify-center bg-base-100 rounded-lg b px-2"
             >
               <div className="flex h-full w-full items-center justify-center">
                 {" "}

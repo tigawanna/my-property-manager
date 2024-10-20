@@ -33,21 +33,12 @@ export function PBListCollection<
   searchParam,
   filterBy,
   columns,
-  searchParamKey,
 }: PBListCollectionProps<T>) {
-  // console.log({
-  //   searchParam,
-  //   searchParamKey,
-  //   debouncedValue,
-  // })
   if (isNaN(+searchParam)){
     searchParam="1"
   } 
     const page = debouncedValue.length > 0 ? 1 : searchParam;
-  // console.log({selectedRows})
-  //   const [selectedRows, setSelectedRows] = useState<string[]>([]);
-
-  const query = useSuspenseQuery({
+const query = useSuspenseQuery({
     queryKey: [collectionName, String(page), debouncedValue],
     queryFn: () => {
       return pb?.from(collectionName).getList(+page, 12, {
@@ -61,7 +52,6 @@ export function PBListCollection<
   });
 
   const data = query?.data?.items ?? [];
-  console.log({data})
   function selectItem(one_item: T) {
     if (maxSelected > 1) {
       const is_in_array = selectedRows.find((item) => item.id === one_item.id);
@@ -77,12 +67,12 @@ export function PBListCollection<
 
   return (
     <div className="h-full w-full overflow-auto">
-      <ul className="flex h-full w-full flex-col gap-2 p-2">
+      <ul className="flex h-full w-full flex-col gap-2 p-2 ">
         {data?.map((i) => {
           const checked = selectedRows.find((item) => item.id === i.id);
           return (
             <div
-              className="flex w-full items-center gap-2 rounded-lg border p-2"
+              className="flex w-full items-center gap-2 rounded-lg bg-base-200 p-2"
               key={i.id}
             >
               <Checkbox

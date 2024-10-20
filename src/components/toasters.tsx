@@ -1,7 +1,7 @@
 import { CheckCircle2, CircleAlert, CircleX } from "lucide-react";
 import toast, { ToastOptions } from "react-hot-toast";
 
-interface ToasterProps extends ToastOptions {
+export interface MakeToasterProps extends ToastOptions {
   title: string;
   description: string;
   duration?: number;
@@ -13,7 +13,7 @@ export function makeHotToast({
   description,
   variant = "info",
   ...props
-}: ToasterProps) {
+}: MakeToasterProps) {
   const toastVariantStyle = (toastAvriant: typeof variant) => {
     switch (toastAvriant) {
       case "success":
