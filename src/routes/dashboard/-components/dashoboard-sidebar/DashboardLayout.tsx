@@ -18,11 +18,11 @@ import { DashboardSidebarLinks } from "./DashboardSidebarLinks";
 import { DashboardSidebaruser } from "./DashboardSidebaruser";
 import { TSRBreadCrumbs } from "@/lib/tanstack/router/TSRBreadCrumbs";
 import { DashboardTheme } from "./DashboardTheme";
-interface DashboardSidebarProps {
+interface DashboardLayoutProps {
   sidebar_props: React.ComponentProps<typeof Sidebar>;
 }
 
-export function DashboardSidebar({ sidebar_props }: DashboardSidebarProps) {
+export function DashboardLayout({ sidebar_props }: DashboardLayoutProps) {
   return (
     <SidebarProvider>
       <Sidebar className="" collapsible="icon" {...sidebar_props}>
