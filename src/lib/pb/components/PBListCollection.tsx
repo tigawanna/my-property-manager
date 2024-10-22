@@ -66,7 +66,7 @@ const query = useSuspenseQuery({
   }
 
   return (
-    <div className="h-full w-full overflow-auto">
+    <div className="h-full w-full overflow-auto ">
       <ul className="flex h-full w-full flex-col gap-2 p-2 pb-5">
         {data?.map((i) => {
           const checked = selectedRows.find((item) => item.id === i.id);
@@ -90,7 +90,9 @@ const query = useSuspenseQuery({
           );
         })}
         <div className="w-full">
-          {query?.data?.totalPages>1&&<ListPagination total_pages={query?.data?.totalPages ?? 1} />}
+          {query?.data?.totalPages > 1 && (
+            <ListPagination total_pages={query?.data?.totalPages ?? 1} />
+          )}
         </div>
       </ul>
     </div>
