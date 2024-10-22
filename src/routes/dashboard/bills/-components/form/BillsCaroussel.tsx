@@ -69,7 +69,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="btn btn-ghost btn-sm flex gap-2 px-2">
+        <button className="btn btn-outline btn-sm flex gap-2 px-2">
           <Plus />
           carrousel form
         </button>
@@ -90,11 +90,11 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
           <div className="h-full w-full">
             <DialogTitle>
               {" "}
-              <div className="flex flex-col">
-                <div className="font-bold text-accent">{bill.shop_number}</div>
+              <div className="flex flex-col gap-2">
+                <div className="font-bold "> {bill.shop_number}</div>
                 {bill.shop_name}
                 <div className="flex gap-0.5">
-                  <div className="flex text-accent">{currentBill}</div>/
+                  <div className="flex ">{currentBill}</div>/
                   <div className="flex">{bills.length}</div>
                 </div>
               </div>

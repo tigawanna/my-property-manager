@@ -6,7 +6,7 @@ interface ReturnedUseQueryErorProps {
 
 export function PBReturnedUseQueryError({ error }: ReturnedUseQueryErorProps) {
   return (
-    <div className="flex h-full items-center justify-center rounded-lg border bg-error-content p-[2%] text-sm">
+    <div className="flex h-fit items-center justify-center rounded-lg border bg-error-content p-[2%] text-sm">
       {error && (
         <div className="rounded-lg p-2 text-error">{error.message}</div>
       )}

@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 
 interface ShopsListProps {
   keyword?: string;
-  floor: HouseFloorsKeys;
+  floor: HouseFloorsKeys|"";
 }
 
 export function ShopsList({ keyword = "", floor }: ShopsListProps) {

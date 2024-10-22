@@ -16,9 +16,9 @@ export function BillsPeriodPicker({
   const [_, startTransition] = useTransition();
   const currentYear = new Date().getFullYear();
   return (
-    <div className="flex w-full flex-col items-center justify-center p-1">
-      <div className="flex h-full w-full flex-col items-center justify-center md:flex-row md:gap-4">
-        <div className="flex items-center justify-center gap-1 rounded-2xl border-[1px] border-primary bg-base-300 text-primary">
+    <div className="flex w-full flex-col items-center justify-center ">
+      <div className="flex h-full w-full flex-col items-center justify-center md:flex-row md:gap-6 gap-3">
+        <div className="flex items-center justify-center gap-1 rounded-2xl border-[1px]  bg-base-300 ">
           <PlusMinusYear
             value={period.curr_year}
             setValue={(value) =>
@@ -35,7 +35,7 @@ export function BillsPeriodPicker({
             }
           />
         </div>
-        <div className="flex items-center justify-center gap-3 text-primary">
+        <div className="flex items-center justify-center gap-3 ">
           <h1 className="md:text-3xl">bills</h1>
           <BillsCaroussel period={period} />
           <Link
@@ -51,7 +51,7 @@ export function BillsPeriodPicker({
           </Link>
         </div>
 
-        <div className="flex items-center justify-center gap-1 rounded-2xl border-[1px] border-primary bg-base-300 text-primary">
+        <div className="flex items-center justify-center gap-1 rounded-2xl border-[1px]  bg-base-300 ">
           <PlusMinusYear
             value={period.prev_year}
             setValue={(value) =>

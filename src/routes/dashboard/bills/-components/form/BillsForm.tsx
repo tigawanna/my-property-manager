@@ -289,7 +289,7 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         {is_new_bill === "prev_no_curr" || is_new_bill === "no_prev_no_curr" ? (
           <button
             disabled={new_bill_mutation.isPending}
-            className="btn btn-primary btn-wide"
+            className="btn btn-outline btn-wide"
           >
             Create{" "}
             {new_bill_mutation.isPending && (
@@ -299,7 +299,7 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         ) : (
           <button
             disabled={update_bill_mutation.isPending}
-            className="btn btn-secondary btn-wide"
+            className="btn btn-outline btn-wide"
           >
             Update{" "}
             {update_bill_mutation.isPending && (
