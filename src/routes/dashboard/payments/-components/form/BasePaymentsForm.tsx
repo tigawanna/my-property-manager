@@ -64,9 +64,33 @@ export function BasePaymentsForm({
                   field={field}
                   fieldKey="amount"
                   fieldlabel="Amount"
+                
                   inputOptions={{
+                    onChange: (e) => {
+                      field.handleChange(parseFloat(e.target.value));
+                    },
                     type: "number",
                     step: "0.01", // step of 0.01 to allow for cents in the amount
+                  }}
+                />
+              );
+            }}
+          </form.Field>
+        </div>
+        {/* reciept_number */}
+        <div className="form-control w-full md:w-[40%]">
+          <form.Field name="reciept_number">
+            {(field) => {
+              return (
+                <TextFormField<PropertyShopPaymentsUpdate>
+                  field={field}
+                  fieldKey="reciept_number"
+                  fieldlabel="Reciept number"
+                
+                  inputOptions={{
+                    onChange: (e) => {
+                      field.handleChange(e.target.value);
+                    }
                   }}
                 />
               );
@@ -83,6 +107,7 @@ export function BasePaymentsForm({
                 <SelectFields<PropertyShopPaymentsUpdate, "type">
                   field={field}
                   fieldKey="type"
+
                   items={[
                     { value: "rent", label: "Rent" },
                     { value: "elec", label: "Elec" },

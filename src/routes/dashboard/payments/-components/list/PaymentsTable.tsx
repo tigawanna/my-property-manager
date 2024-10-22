@@ -6,19 +6,7 @@ import {
 import { getNestedProperty } from "@/utils/object";
 import { PossibleNestedUnions } from "@/utils/types/nested_objects_union";
 import { ListResult } from "pocketbase";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/shadcn/ui/drawer";
-import { Button } from "@/components/shadcn/ui/button";
-import { Edit } from "lucide-react";
-import { UpdatePaymentFormDrawer } from "../form/UpdatePaymentForm";
+import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
 
 interface PaymentsTableProps {
   data: ListResult<
@@ -55,7 +43,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     {accessor:"staff.name",label:"Staff"},
   ];
   return (
-    <div className="overflow-x-auto ">
+    <div className="overflow-x-auto">
       <table className="table table-zebra table-lg w-full">
         <thead>
           <tr>
@@ -80,7 +68,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
                 return <td key={column.accessor}>{row?.[column?.accessor]}</td>;
               })}
               <td>
-                <UpdatePaymentFormDrawer row={row} />
+                <UpdatePaymentForm row={row} />
               </td>
             </tr>
           ))}
@@ -91,33 +79,3 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
 }
 
 
-interface PaymentsTableUpdateDrawerProps {
-
-}
-
-export function PaymentsTableUpdateDrawer({}:PaymentsTableUpdateDrawerProps){
-return (
-  <Drawer>
-    <DrawerTrigger asChild>
-        <Edit className="size-5" />
-    </DrawerTrigger>
-    <DrawerContent>
-      <div className="mx-auto w-full max-w-sm">
-        <DrawerHeader>
-          <DrawerTitle>Move Goal</DrawerTitle>
-          <DrawerDescription>Set your daily activity goal.</DrawerDescription>
-        </DrawerHeader>
-        <div className="flex w-full flex-col gap-2">
-          <h1 className="font-bol text-4xl">NIce DrawerDescription 1</h1>
-        </div>
-        <DrawerFooter>
-          <Button>Submit</Button>
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </div>
-    </DrawerContent>
-  </Drawer>
-);
-}
