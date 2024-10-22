@@ -13,7 +13,7 @@ export function DashboardPage({}: DashboardPageProps) {
   const viewer = userQuery?.data?.record;
   return (
     <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
-      <CreatePaymentForm/>
+      <h1 className="text-3xl font-bold">Dashboard</h1>
       <ul className="grid h-full w-full grid-cols-1 justify-center gap-2 p-[5%] md:grid-cols-2 lg:grid-cols-2">
         {dashboard_routes.map((link) => {
           if (

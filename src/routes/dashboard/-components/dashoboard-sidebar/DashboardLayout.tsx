@@ -24,8 +24,8 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ sidebar_props }: DashboardLayoutProps) {
   return (
-    <SidebarProvider>
-      <Sidebar className="" collapsible="icon" {...sidebar_props}>
+    <SidebarProvider defaultOpen={false}>
+      <Sidebar className=""  collapsible="icon" {...sidebar_props}>
         <SidebarHeader>
           <DashboardSidebarHeader />
         </SidebarHeader>
