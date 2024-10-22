@@ -36,13 +36,20 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
       setOpen={setOpen}
       title="Create Payment"
       description="Create a new payment"
-      trigger={<Plus className="size-9" />}
+      trigger={
+      <button className="btn btn-sm btn-outline flex justify-center items-center gap-2">
+        <Plus className="" />
+        Add new
+      </button>
+    }
     >
+      <div className="flex w-fit h-[90%]  max-h-[80vh] flex-col  gap-2 overflow-auto">
       <BasePaymentsForm
         mutation={mutation}
         row={defaultRow}
 
       />
+      </div>
     </DiaDrawer>
   );
 }

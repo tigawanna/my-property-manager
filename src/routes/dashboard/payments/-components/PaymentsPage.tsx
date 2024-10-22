@@ -17,13 +17,16 @@ export function PaymentsPage({}: PaymentsPageProps) {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
+      <div className="flex h-full w-full flex-col items-center gap-5 justify-center">
+        <div className="sticky top-[10%] z-20 flex w-full flex-wrap justify-between gap-3 px-3 pr-5">
+          <div className="flex gap-5  w-full md:w-fit items-center justify-between">
+            <h1 className="text-2xl font-bold">Payments</h1>
+            <div className="">
+              <CreatePaymentForm />
+            </div>
+          </div>
 
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="sticky top-[10%] z-20 flex w-full flex-wrap justify-between gap-3  px-3 pr-5">
-          <h1 className=" text-2xl font-bold ">
-            Payments
-          </h1>
-          <div className="flex min-w-[50%] gap-2">
+          <div className="flex w-full  flex-1 min-w-[30%] gap-2 md:w-fit">
             <SearchBox
               inputProps={{
                 placeholder: "Search by name",
@@ -35,10 +38,14 @@ export function PaymentsPage({}: PaymentsPageProps) {
             />
           </div>
         </div>
-        <div className="m-3 flex h-full w-full items-center justify-center p-5">
-
+        <div className="flex h-full w-full items-center justify-center">
           <Suspense fallback={<CardsListSuspenseFallback />}>
-                <PaymentsList month={month} year={year} keyword={debouncedValue} page={page}/>
+            <PaymentsList
+              month={month}
+              year={year}
+              keyword={debouncedValue}
+              page={page}
+            />
           </Suspense>
         </div>
       </div>

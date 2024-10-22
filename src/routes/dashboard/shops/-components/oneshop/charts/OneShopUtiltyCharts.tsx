@@ -20,7 +20,7 @@ import {
   oneShopBillsQueryOptions,
   oneShopQueryOptions,
 } from "../../query-options/shops-query-options";
-import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
+import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 import { getMonthFromNumber } from "@/utils/hooks/date";
 interface OneShopUtiltyChartsProps {}
 

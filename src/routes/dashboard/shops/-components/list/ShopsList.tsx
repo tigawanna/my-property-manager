@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { HouseFloorsKeys } from "./use-shook-hooks";
 import { ShopCard } from "./ShopCard";
 import { listShopsQueryOptions } from "../query-options/shops-query-options";
-import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
+import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 import { CreateShopModal } from "../form/CreateShops";
 import { Plus } from "lucide-react";
 

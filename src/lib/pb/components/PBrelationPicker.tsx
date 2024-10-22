@@ -99,57 +99,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
   );
 }
 
-export function PBPickRelationsModal<T extends Record<string, any>>({
-  collectionName,
-  columns,
-  searchParamKey,
-  maxSelected,
-  filterBy,
-  selectedRows,
-  setSelectedRows,
-  fieldLabel,
-  dialogTrigger,
-}: PBrelationPickerProps<T>) {
-  const [open, setOpen] = useState(false);
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        {dialogTrigger || (
-          <span className="btn btn-outline flex cursor-pointer gap-1 p-2">
-            <GitFork className="" />
-          </span>
-        )}
-      </DialogTrigger>
-      <DialogContent className="z-50 max-h-[90vh] inset-x-[46%] w-[80%] md:w-full gap-1 overflow-auto sm:max-w-[80%] lg:max-w-[60%]">
-        <DialogTitle className="">{fieldLabel}</DialogTitle>
-        <DialogDescription className=" ">Pick a {fieldLabel}</DialogDescription>
-        <div className="flex h-[90%] w-full flex-col gap-2">
-          <div className="h-full">
-            <PBrelationPicker
-              collectionName={collectionName}
-              columns={columns}
-              maxSelected={maxSelected}
-              searchParamKey={searchParamKey}
-              filterBy={filterBy}
-              fieldLabel={fieldLabel}
-              setSelectedRows={setSelectedRows}
-              selectedRows={selectedRows}
-            />
-          </div>
-          <div className="flex items-center justify-center">
-            <DialogClose className="btn btn-sm btn-wide flex gap-3 bg-primary/20">
-              <Check className="" />
-              done
-            </DialogClose>
-          </div>
-        </div>
 
-        {/* <DialogFooter className="sm:justify-start">
-      </DialogFooter> */}
-      </DialogContent>
-    </Dialog>
-  );
-}
 
 export function PBPickRelationField<T extends Record<string, any>>({
   collectionName,
@@ -199,6 +149,114 @@ export function PBPickRelationField<T extends Record<string, any>>({
           ))}
         </div>
       )}
+    </div>
+  );
+}
+
+
+export function PBPickRelationsModal<T extends Record<string, any>>({
+  collectionName,
+  columns,
+  searchParamKey,
+  maxSelected,
+  filterBy,
+  selectedRows,
+  setSelectedRows,
+  fieldLabel,
+  dialogTrigger,
+}: PBrelationPickerProps<T>) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        {dialogTrigger || (
+          <span className="btn btn-outline flex cursor-pointer gap-1 p-2">
+            <GitFork className="" />
+          </span>
+        )}
+      </DialogTrigger>
+      <DialogContent className=" z-50 max-h-[90vh] w-[95%] gap-1 overflow-auto sm:max-w-[80%] md:w-full lg:max-w-[60%]">
+        <DialogTitle className="">{fieldLabel}</DialogTitle>
+        <DialogDescription className=" ">Pick a {fieldLabel}</DialogDescription>
+        <div className="flex h-[90%] w-full flex-col gap-2">
+          <div className="h-full">
+            <PBrelationPicker
+              collectionName={collectionName}
+              columns={columns}
+              maxSelected={maxSelected}
+              searchParamKey={searchParamKey}
+              filterBy={filterBy}
+              fieldLabel={fieldLabel}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <DialogClose className="btn btn-sm btn-wide flex gap-3 bg-primary/20">
+              <Check className="" />
+              done
+            </DialogClose>
+          </div>
+        </div>
+
+        {/* <DialogFooter className="sm:justify-start">
+      </DialogFooter> */}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+export function PBPickRelationsDaisyUIDrawer<T extends Record<string, any>>({
+  collectionName,
+  columns,
+  searchParamKey,
+  maxSelected,
+  filterBy,
+  selectedRows,
+  setSelectedRows,
+  fieldLabel,
+  dialogTrigger,
+}: PBrelationPickerProps<T>) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="drawer">
+      <input
+        id="relations-picker-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
+      <div className="drawer-content">
+        {/* Page content here */}
+        <label htmlFor="relations-picker-drawer" className="">
+          {dialogTrigger || (
+            <span className="btn btn-outline flex cursor-pointer gap-1 p-2">
+              <GitFork className="" />
+            </span>
+          )}
+        </label>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="relations-picker-drawer z-50"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu h-screen overflow-auto z-40 sticky top-0 w-80 md:w-[60%] bg-base-100 p-4 text-base-content">
+          {/* Sidebar content here */}
+          <div className="h-full">
+            <PBrelationPicker
+              collectionName={collectionName}
+              columns={columns}
+              maxSelected={maxSelected}
+              searchParamKey={searchParamKey}
+              filterBy={filterBy}
+              fieldLabel={fieldLabel}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
+          </div>
+        </ul>
+      </div>
     </div>
   );
 }

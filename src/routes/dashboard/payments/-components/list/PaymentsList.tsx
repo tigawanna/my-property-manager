@@ -1,4 +1,4 @@
-import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryEror";
+import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { listPropertyQueryOptions } from "../query-options/payments-query-options";
 import { pb } from "@/lib/pb/client";
@@ -8,6 +8,16 @@ import { makeHotToast } from "@/components/toasters";
 import { CreatePaymentForm } from "../form/CreatePaymentForm";
 import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
 import { PaymentsTable } from "./PaymentsTable";
+import { PBPickRelationField, PBPickRelationsDaisyUIDrawer } from "@/lib/pb/components/PBrelationPicker";
+import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/database";
+import { Edit } from "lucide-react";
+import { useState } from "react";
+
+type PaymentExpansion = {
+  shop: PropertyShopsResponse[];
+  staff: PropertyStaffListResponse[];
+};
+
 
 interface PaymentsListProps {
   keyword: string;
@@ -24,6 +34,11 @@ export function PaymentsList({
 }: PaymentsListProps) {
   const { userQuery } = useViewer();
   const viewer = userQuery.data.record;
+    const [expansions, setExpansions] = useState<PaymentExpansion>({
+      shop: [],
+      // @ts-expect-error
+      staff: [viewer],
+    });
   const query = useSuspenseQuery(
     listPropertyQueryOptions({ keyword, month, year, page }),
   );
@@ -46,51 +61,9 @@ export function PaymentsList({
   }
 
   return (
-    <div className="flex h-full w-full  flex-col items-center justify-center">
-      {/* <GenericPocketbaseGenericTable
-      rows={data.items}
-      updateItem={(item) =>
-        pb.from("property_shop_payments").update(item.id, item)
-      }
-      makeToast={makeHotToast}
-      createItem={(item) => pb.from("property_shop_payments").create(item)}
-      createForm={(row, afterSave) => <CreatePaymentForm  row={row} afterSave={afterSave} />}
-      updateForm={(row, afterSave) => <UpdatePaymentForm  row={row} afterSave={afterSave} />}
-      defaultRowValue={{
-        month: new Date().getMonth() + 1,
-        year: new Date().getFullYear(),
-        amount: 5000,
-        staff:viewer?.id,
-        type: "rent",
-      }}
-      mappedColumns={() => [
-        { label: "month", type: "number", accessor: "month" },
-        { label: "year", type: "number", accessor: "year" },
-        { label: "amount", type: "number", accessor: "amount" },
-        { label: "recipt", type: "text", accessor: "reciept_number" },
-        { label: "type", type: "text", accessor: "type" },
-        {
-          label: "shop",
-          type: "number",
-          accessor: "shop.shop_number",
-          expand: {
-            collection: "property_shops",
-          },
-        },
-        {
-          label: "by",
-          type: "number",
-          accessor: "staff.name",
-          expand: {
-            collection: "property_staff_list",
-          },
-        },
-      ]}
-    /> */}
-      <CreatePaymentForm/>
-      <div className="">
-      <PaymentsTable data={data}/>
-
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      <div className="max-w-[99vw] overflow-auto">
+        <PaymentsTable data={data} />
       </div>
     </div>
   );

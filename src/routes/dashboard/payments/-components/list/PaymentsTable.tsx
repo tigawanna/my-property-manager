@@ -55,7 +55,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     {accessor:"staff.name",label:"Staff"},
   ];
   return (
-    <div className="overflow-x-auto w-[99vw]">
+    <div className="overflow-x-auto ">
       <table className="table table-zebra table-lg w-full">
         <thead>
           <tr>
