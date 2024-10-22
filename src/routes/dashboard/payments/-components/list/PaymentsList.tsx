@@ -87,7 +87,8 @@ export function PaymentsList({
         },
       ]}
     /> */}
-<PaymentsTable data={data}/>
+      <PaymentsTable data={data}/>
+      <CreatePaymentForm/>
     </div>
   );
 }

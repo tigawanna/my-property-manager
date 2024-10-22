@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+} from "@/components/shadcn/ui/breadcrumb";
 interface TSRBreadCrumbsProps {}
 
 export function TSRBreadCrumbs({}: TSRBreadCrumbsProps) {

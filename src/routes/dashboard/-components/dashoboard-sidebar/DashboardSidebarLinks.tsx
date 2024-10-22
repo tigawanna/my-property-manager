@@ -6,13 +6,13 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   useSidebar,
-} from "@/components/ui/sidebar";
+} from "@/components/shadcn/ui/sidebar";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/shadcn/ui/tooltip";
 import { Link, useLocation } from "@tanstack/react-router";
 
 
@@ -22,9 +22,9 @@ export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
   const { state } = useSidebar();
   const { pathname } = useLocation();
   return (
-    <SidebarGroup className="h-full bg-base-100">
+    <SidebarGroup className="h-full bg-base-100 ">
       <SidebarGroupLabel>House keeping</SidebarGroupLabel>
-      <SidebarMenu className="gap-5">
+      <SidebarMenu className="gap-5 ">
         {dashboard_routes.map((item) => {
           return (
             <SidebarMenuItem key={item.name}>
@@ -35,7 +35,7 @@ export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
                       asChild
                       className={
                         (pathname === item.href)
-                          ? `flex w-full gap-3 rounded-lg bg-base-300 p-1  border border-secondary text-secondary`
+                          ? `flex w-full gap-3 rounded-lg bg-primary/30 p-1  border  glass`
                           : `flex w-full gap-3 rounded-sm p-1 hover:bg-base-300`
                       }
                     >
