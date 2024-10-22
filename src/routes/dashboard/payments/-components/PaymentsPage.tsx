@@ -4,6 +4,7 @@ import { SearchBox } from "@/components/search/SearchBox";
 import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
 import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
+import { TestDrawer } from "./test/TestDrawer";
 
 interface PaymentsPageProps {}
 
@@ -34,6 +35,7 @@ export function PaymentsPage({}: PaymentsPageProps) {
           </div>
         </div>
         <div className="m-3 flex h-full w-full items-center justify-center p-5">
+
           <Suspense fallback={<CardsListSuspenseFallback />}>
                 <PaymentsList month={month} year={year} keyword={debouncedValue} page={page}/>
           </Suspense>

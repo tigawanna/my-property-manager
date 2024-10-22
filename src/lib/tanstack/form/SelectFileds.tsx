@@ -36,7 +36,7 @@ export function SelectFields<T extends Record<string,any>, K extends keyof T>({
         <SelectValue placeholder={`Select ${fieldlabel}`} />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
+        <SelectGroup className="gap-1">
           <SelectLabel>{fieldlabel}</SelectLabel>
           {items.map((item) => (
             <SelectItem key={item.value} value={item.value}>

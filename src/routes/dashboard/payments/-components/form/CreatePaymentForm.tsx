@@ -59,9 +59,10 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="flex h-full w-full flex-col items-center justify-center"
+      className="flex h-full w-fit flex-col items-center justify-center"
     >
-      <div className="flex h-full w-full flex-wrap items-center justify-center gap-3 overflow-scroll">
+      <div className="flex h-full w-full flex-wrap items-center gap-5 overflow-scroll justify-center">
+        {/* amount */}
         <div className="form-control w-full md:w-[40%]">
           <form.Field name="amount">
             {(field) => {
@@ -79,8 +80,32 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
             }}
           </form.Field>
         </div>
+        {/* type */}
+        <div className="form-control w-fit min-w-[30%] md:w-[40%]">
+
+            <span className="label-text">Type</span>
+
+          <form.Field name="type">
+            {(field) => {
+              return (
+                <SelectFields<PropertyShopPaymentsCreate, "type">
+                  field={field}
+                  fieldKey="type"
+                  items={[
+                    { value: "rent", label: "Rent" },
+                    { value: "elec", label: "Elec" },
+                    { value: "water", label: "water" },
+                    { value: "fines", label: "fines" },
+                    { value: "deposit", label: "Deposit" },
+                  ]}
+                  fieldlabel=""
+                />
+              );
+            }}
+          </form.Field>
+        </div>
         {/* shop */}
-        <div className="form-control w-full md:w-[40%]">
+        <div className="form-control w-fit min-w-[30%] md:w-[40%]">
           <form.Field name="shop">
             {(field) => {
               return (
@@ -89,7 +114,8 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
                   <PBPickRelationField<PropertyShopsResponse>
                     dialogTrigger={
                       <span className="btn btn-outline btn-sm">
-                        {expansions["shop"][0]?.shop_number ?? field.state.value}{" "}
+                        {expansions["shop"][0]?.shop_number ??
+                          field.state.value}{" "}
                         <Edit />
                       </span>
                     }
@@ -121,7 +147,7 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
           </form.Field>
         </div>
         {/* staff */}
-        <div className="form-control w-full md:w-[40%]">
+        <div className="form-control w-fit min-w-[30%] md:w-[40%]">
           <form.Field name="staff">
             {(field) => {
               return (
@@ -130,7 +156,7 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
                   <PBPickRelationField<PropertyStaffListResponse>
                     dialogTrigger={
                       <span className="btn btn-outline btn-sm">
-                        {expansions["staff"][0]?.name??field.state.value}{" "}
+                        {expansions["staff"][0]?.name ?? field.state.value}{" "}
                         <Edit />
                       </span>
                     }
@@ -157,30 +183,6 @@ export function CreatePaymentForm({ row, afterSave }: CreatePaymentFormProps) {
                   />
                   <FieldInfo field={field} />
                 </>
-              );
-            }}
-          </form.Field>
-        </div>
-        {/* type */}
-        <div className="form-control w-full md:w-[40%]">
-          <label className="label">
-            <span className="label-text">Type</span>
-          </label>
-          <form.Field name="type">
-            {(field) => {
-              return (
-                <SelectFields<PropertyShopPaymentsCreate, "type">
-                  field={field}
-                  fieldKey="type"
-                  items={[
-                    { value: "rent", label: "Rent" },
-                    { value: "elec", label: "Elec" },
-                    { value: "water", label: "water" },
-                    { value: "fines", label: "fines" },
-                    { value: "deposit", label: "Deposit" },
-                  ]}
-                  fieldlabel=""
-                />
               );
             }}
           </form.Field>

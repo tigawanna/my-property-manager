@@ -11,8 +11,19 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/shadcn/ui/drawer";
 import { GitFork, Info } from "lucide-react";
 import { MakeToasterProps } from "@/components/toasters";
+import {Button} from "@/components/shadcn/ui/button"
 
 import { ClientResponseError } from "pocketbase";
 type GenericPocketbaseGenericTableColumn<
@@ -150,20 +161,43 @@ export function PocketbaseGenericFormModal<T extends Record<string, any>>({
   const [open, setOpen] = useState(false);
   if (updateForm && row) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
+      // <Dialog open={open} onOpenChange={setOpen}>
+      //   <DialogTrigger asChild>
+      //     <Edit className="size-5" />
+      //   </DialogTrigger>
+      //   <DialogContent className="z-50 w-full gap-1 overflow-auto sm:max-w-[80%]">
+      //     <DialogTitle className="">Update</DialogTitle>
+      //     <DialogDescription className="sr-only">
+      //       Form to update the row
+      //     </DialogDescription>
+      //     {updateForm(row, () => setOpen(false))}
+      //     {/* <DialogFooter className="sm:justify-start">
+      //   </DialogFooter> */}
+      //   </DialogContent>
+      // </Dialog>
+      <Drawer>
+        <DrawerTrigger asChild>
           <Edit className="size-5" />
-        </DialogTrigger>
-        <DialogContent className="z-50 w-full gap-1 overflow-auto sm:max-w-[80%]">
-          <DialogTitle className="">Update</DialogTitle>
-          <DialogDescription className="sr-only">
-            Form to update the row
-          </DialogDescription>
-          {updateForm(row, () => setOpen(false))}
-          {/* <DialogFooter className="sm:justify-start">
-        </DialogFooter> */}
-        </DialogContent>
-      </Dialog>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="mx-auto w-full max-w-sm">
+            <DrawerHeader>
+              <DrawerTitle>Move Goal</DrawerTitle>
+              <DrawerDescription>
+                Set your daily activity goal.
+              </DrawerDescription>
+            </DrawerHeader>
+            <div className="flex w-full flex-col gap-2">
+              {updateForm(row, () => setOpen(false))}
+            </div>
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
+        </DrawerContent>
+      </Drawer>
     );
   }
   if (createForm) {
@@ -180,7 +214,10 @@ export function PocketbaseGenericFormModal<T extends Record<string, any>>({
           <DialogDescription className="sr-only">
             Form to create a new row
           </DialogDescription>
+          <div className="h-full w-full ">
           {createForm({ ...defaultRowValue } as T, () => setOpen(false))}
+
+          </div>
 
           {/* <DialogFooter className="sm:justify-start">
         </DialogFooter> */}

@@ -7,6 +7,7 @@ import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
 import { CreatePaymentForm } from "../form/CreatePaymentForm";
 import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
+import { PaymentsTable } from "./PaymentsTable";
 
 interface PaymentsListProps {
   keyword: string;
@@ -21,8 +22,8 @@ export function PaymentsList({
   year,
   page,
 }: PaymentsListProps) {
-  const {userQuery} = useViewer()
-  const viewer  = userQuery.data.record
+  const { userQuery } = useViewer();
+  const viewer = userQuery.data.record;
   const query = useSuspenseQuery(
     listPropertyQueryOptions({ keyword, month, year, page }),
   );
@@ -44,9 +45,9 @@ export function PaymentsList({
     );
   }
 
-return (
-  <div className="flex h-full w-full flex-col items-center justify-center">
-    <GenericPocketbaseGenericTable
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      {/* <GenericPocketbaseGenericTable
       rows={data.items}
       updateItem={(item) =>
         pb.from("property_shop_payments").update(item.id, item)
@@ -85,7 +86,8 @@ return (
           },
         },
       ]}
-    />
-  </div>
-);
+    /> */}
+<PaymentsTable data={data}/>
+    </div>
+  );
 }
