@@ -5,6 +5,7 @@ import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCards
 import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
 import { TestDrawer } from "./test/TestDrawer";
+import { CreatePaymentForm } from "./form/CreatePaymentForm";
 
 interface PaymentsPageProps {}
 
@@ -13,15 +14,15 @@ export function PaymentsPage({}: PaymentsPageProps) {
     usePaymentsSearchQuery();
   const { month = new Date().getMonth() + 1, year = new Date().getFullYear(),page=1 } =
     useSearch({ from: "/dashboard/payments/" });
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
+
       <div className="flex h-full w-full flex-col items-center justify-center">
-        <div className="sticky top-[10%] z-20 flex w-full flex-wrap justify-between gap-3 bg-base-200 px-3 pr-5">
-          <h1 className="bg-base-200/30 text-2xl font-bold ">
+        <div className="sticky top-[10%] z-20 flex w-full flex-wrap justify-between gap-3  px-3 pr-5">
+          <h1 className=" text-2xl font-bold ">
             Payments
           </h1>
-          {/* <div className="flex w-fit gap-2">
-        </div> */}
           <div className="flex min-w-[50%] gap-2">
             <SearchBox
               inputProps={{

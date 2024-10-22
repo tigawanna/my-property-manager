@@ -55,8 +55,8 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     {accessor:"staff.name",label:"Staff"},
   ];
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <table className="table table-zebra table-lg sticky top-0 w-full">
+    <div className="overflow-x-auto w-[99vw]">
+      <table className="table table-zebra table-lg w-full">
         <thead>
           <tr>
             {columns.map((column) => (
@@ -80,7 +80,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
                 return <td key={column.accessor}>{row?.[column?.accessor]}</td>;
               })}
               <td>
-                <UpdatePaymentFormDrawer row={row}/>
+                <UpdatePaymentFormDrawer row={row} />
               </td>
             </tr>
           ))}

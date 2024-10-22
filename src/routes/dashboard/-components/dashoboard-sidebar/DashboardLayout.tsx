@@ -17,7 +17,7 @@ import { DashboardSidebarLinks } from "./DashboardSidebarLinks";
 import { DashboardSidebaruser } from "./DashboardSidebaruser";
 import { TSRBreadCrumbs } from "@/lib/tanstack/router/TSRBreadCrumbs";
 import { DashboardTheme } from "./DashboardTheme";
-import { DialogTitle,DialogDescription } from "@/components/shadcn/ui/dialog";
+
 interface DashboardLayoutProps {
   sidebar_props: React.ComponentProps<typeof Sidebar>;
 }

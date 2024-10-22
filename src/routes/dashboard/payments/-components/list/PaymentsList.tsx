@@ -46,7 +46,7 @@ export function PaymentsList({
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full  flex-col items-center justify-center">
       {/* <GenericPocketbaseGenericTable
       rows={data.items}
       updateItem={(item) =>
@@ -87,8 +87,11 @@ export function PaymentsList({
         },
       ]}
     /> */}
-      <PaymentsTable data={data}/>
       <CreatePaymentForm/>
+      <div className="">
+      <PaymentsTable data={data}/>
+
+      </div>
     </div>
   );
 }

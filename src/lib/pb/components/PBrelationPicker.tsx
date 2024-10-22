@@ -43,7 +43,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
   // useGlobalPocketbaseSearchQuery({ default_value: "" });
   // console.log({ selectedRows });
   return (
-    <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2 ">
+    <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2">
       <div className="flex w-full flex-col justify-between gap-3 px-3 pr-5 md:flex-row">
         <SearchBox
           inputProps={{
@@ -56,7 +56,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
         />
       </div>
       <div className="h-[95%] w-full">
-        <ul className="flex max-h-[25%] w-full flex-wrap gap-2 overflow-clip p-2">
+        <ul className="flex max-h-[25%] w-full flex-wrap gap-2  p-2">
           <li>{selectedRows?.length} selected</li>
           {selectedRows?.slice?.(0, 5)?.map((item) => (
             <li
@@ -71,7 +71,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
 
         <Suspense
           fallback={
-            <div className="flex h-full w-full flex-col gap-2">
+            <div className="flex h-full w-full flex-col gap-2 pb-4">
               {Array.from({ length: 12 }).map((_, i) => (
                 <div
                   // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -120,26 +120,28 @@ export function PBPickRelationsModal<T extends Record<string, any>>({
           </span>
         )}
       </DialogTrigger>
-      <DialogContent className="z-50 w-full h-[90vh] gap-1 overflow-auto sm:max-w-[80%]">
+      <DialogContent className="z-50 max-h-[90vh] w-full  gap-1 overflow-auto sm:max-w-[80%]">
         <DialogTitle className="">{fieldLabel}</DialogTitle>
         <DialogDescription className=" ">Pick a {fieldLabel}</DialogDescription>
-        <div className="h-[95%] w-full overflow-y-scroll">
-          <PBrelationPicker
-            collectionName={collectionName}
-            columns={columns}
-            maxSelected={maxSelected}
-            searchParamKey={searchParamKey}
-            filterBy={filterBy}
-            fieldLabel={fieldLabel}
-            setSelectedRows={setSelectedRows}
-            selectedRows={selectedRows}
-          />
-        </div>
-        <div className="flex w-full items-center justify-center">
-          <DialogClose className="btn btn-sm btn-wide flex gap-3">
-            Done
-            <Check className="h-5 w-5" />
-          </DialogClose>
+        <div className="flex h-[90%] w-[90%] flex-col gap-2 ">
+          <div className="h-full">
+            <PBrelationPicker
+              collectionName={collectionName}
+              columns={columns}
+              maxSelected={maxSelected}
+              searchParamKey={searchParamKey}
+              filterBy={filterBy}
+              fieldLabel={fieldLabel}
+              setSelectedRows={setSelectedRows}
+              selectedRows={selectedRows}
+            />
+          </div>
+          <div className="flex items-center justify-center">
+            <DialogClose className="btn btn-wide btn-sm flex gap-3 bg-primary/20">
+              <Check className="" />
+              done
+            </DialogClose>
+          </div>
         </div>
 
         {/* <DialogFooter className="sm:justify-start">

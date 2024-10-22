@@ -45,7 +45,7 @@ export function DiaDrawer({
         <DialogTrigger asChild>
           {trigger ?? <Button variant="outline">Open </Button>}
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="max:w-[60vw] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
@@ -60,8 +60,8 @@ export function DiaDrawer({
       <DrawerTrigger asChild>
         {trigger ?? <Button variant="outline">Open </Button>}
       </DrawerTrigger>
-      <DrawerContent className="flex min-h-fit flex-col items-center justify-center">
-        <div className="flex h-full w-full max-w-[90%] flex-col items-center justify-center md:max-w-[60%]">
+      <DrawerContent className="max-w-[100vw]  h-fit  p-2">
+        <div className="flex h-full w-full flex-col  items-center justify-center md:max-w-[60%]">
           <DrawerHeader>
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>

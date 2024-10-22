@@ -67,7 +67,7 @@ const query = useSuspenseQuery({
 
   return (
     <div className="h-full w-full overflow-auto">
-      <ul className="flex h-full w-full flex-col gap-2 p-2 ">
+      <ul className="flex h-full w-full flex-col gap-2 p-2 pb-5">
         {data?.map((i) => {
           const checked = selectedRows.find((item) => item.id === i.id);
           return (
