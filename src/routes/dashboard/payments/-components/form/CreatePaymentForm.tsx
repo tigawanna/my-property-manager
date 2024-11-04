@@ -1,12 +1,7 @@
 import { pb } from "@/lib/pb/client";
-import {
-  PropertyShopPaymentsCreate,
-  PropertyShopsResponse,
-  PropertyStaffListResponse,
-} from "@/lib/pb/database";
+import { PropertyShopPaymentsCreate } from "@/lib/pb/database";
 import { useMutation } from "@tanstack/react-query";
 import { BasePaymentsForm } from "./BasePaymentsForm";
-import { useScrollRestoration } from "@tanstack/react-router";
 import { useState } from "react";
 import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
 import { Plus } from "lucide-react";
@@ -19,8 +14,8 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
   const { userQuery } = useViewer();
   const viewer = userQuery?.data?.record!;
   const mutation = useMutation({
-    mutationFn: async (value: PropertyShopPaymentsCreate) => {
-      pb.from("property_shop_payments").create(value);
+    mutationFn: (value: PropertyShopPaymentsCreate) => {
+      return pb.from("property_shop_payments").create(value);
     },
     meta: {
       invalidates: ["property_shops_payments"],
@@ -47,7 +42,7 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
         </button>
       }
     >
-      <div className="flex h-[90%] max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
+      <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
         <BasePaymentsForm mutation={mutation} row={defaultRow} />
       </div>
     </DiaDrawer>

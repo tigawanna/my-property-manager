@@ -4,7 +4,7 @@ export function FieldInfo({ field }: { field: FieldApi<any, any, any, any> }) {
   return (
     <>
       {field.state.meta.errors ? (
-        <em className="text-xs text-error-content">
+        <em className="text-xs text-error">
           {field.state.meta.errors}
         </em>
       ) : null}

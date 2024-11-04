@@ -13,15 +13,20 @@ import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useForm } from "@tanstack/react-form";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Edit } from "lucide-react";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import {ClientResponseError} from "pocketbase"
 type PaymentExpansion = {
   shop: PropertyShopsResponse[];
   staff: PropertyStaffListResponse[];
 };
 
 interface BasePaymentsFormProps {
-  mutation: UseMutationResult<void, Error, PropertyShopPaymentsCreate|PropertyShopPaymentsUpdate, unknown>;
+  mutation: UseMutationResult<
+    any,
+    Error,
+    PropertyShopPaymentsCreate | PropertyShopPaymentsUpdate,
+    unknown
+  >;
   row: PropertyShopPaymentsUpdate;
   afterSave?: () => void;
 }
@@ -31,8 +36,8 @@ export function BasePaymentsForm({
   row,
   afterSave,
 }: BasePaymentsFormProps) {
-      const { userQuery } = useViewer();
-      const viewer = userQuery?.data?.record!;
+  const { userQuery } = useViewer();
+  const viewer = userQuery?.data?.record!;
   const [expansions, setExpansions] = useState<PaymentExpansion>({
     shop: [],
     // @ts-expect-error
@@ -40,11 +45,25 @@ export function BasePaymentsForm({
   });
   const form = useForm<Partial<PropertyShopPaymentsUpdate>>({
     defaultValues: row,
-    onSubmit: async ({ value }) => {
+     onSubmit: async ({ value }) => {
       mutation.mutate(value);
       afterSave?.();
     },
   });
+
+const error = mutation?.error as ClientResponseError;
+const pbError = error?.data?.data as Record<string, {message: string,code:string}>
+
+useEffect(() => {
+    pbError&&Object?.entries(pbError)?.forEach(([key, value]) => {
+      form.setFieldMeta(key as any,(prev)=>{
+        return {...prev, errorMap:{
+          onChange:value?.message
+        }}
+      });
+    });
+}, [pbError]);
+
   return (
     <form
       onSubmit={(e) => {
@@ -52,9 +71,9 @@ export function BasePaymentsForm({
         e.stopPropagation();
         form.handleSubmit();
       }}
-      className="flex h-full w-full flex-col items-center justify-center gap-5 p-3"
+      className="p- flex h-full w-full flex-col items-center justify-center gap-5"
     >
-      <div className="flex h-full w-full flex-wrap items-center justify-center gap-5 p-5">
+      <div className="flex h-full w-full flex-wrap items-center justify-center gap-5">
         {/* amount */}
         <div className="form-control w-full md:w-[40%]">
           <form.Field name="amount">
@@ -64,7 +83,6 @@ export function BasePaymentsForm({
                   field={field}
                   fieldKey="amount"
                   fieldlabel="Amount"
-                
                   inputOptions={{
                     onChange: (e) => {
                       field.handleChange(parseFloat(e.target.value));
@@ -86,11 +104,10 @@ export function BasePaymentsForm({
                   field={field}
                   fieldKey="reciept_number"
                   fieldlabel="Reciept number"
-                
                   inputOptions={{
                     onChange: (e) => {
                       field.handleChange(e.target.value);
-                    }
+                    },
                   }}
                 />
               );
@@ -107,7 +124,6 @@ export function BasePaymentsForm({
                 <SelectFields<PropertyShopPaymentsUpdate, "type">
                   field={field}
                   fieldKey="type"
-
                   items={[
                     { value: "rent", label: "Rent" },
                     { value: "elec", label: "Elec" },
@@ -209,3 +225,5 @@ export function BasePaymentsForm({
     </form>
   );
 }
+
+

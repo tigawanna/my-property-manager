@@ -12,6 +12,7 @@ import { PBPickRelationField, PBPickRelationsDaisyUIDrawer } from "@/lib/pb/comp
 import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/database";
 import { Edit } from "lucide-react";
 import { useState } from "react";
+import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 
 type PaymentExpansion = {
   shop: PropertyShopsResponse[];
@@ -55,7 +56,7 @@ export function PaymentsList({
   if (!data || data.items.length === 0) {
     return (
       <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
-        <PBReturnedUseQueryError error={new Error("No shops found")} />
+        <ItemNotFound label="payments"/>
       </div>
     );
   }

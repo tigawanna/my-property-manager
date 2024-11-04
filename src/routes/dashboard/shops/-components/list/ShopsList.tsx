@@ -5,6 +5,7 @@ import { listShopsQueryOptions } from "../query-options/shops-query-options";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 import { CreateShopModal } from "../form/CreateShops";
 import { Plus } from "lucide-react";
+import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 
 interface ShopsListProps {
   keyword?: string;
@@ -26,7 +27,7 @@ export function ShopsList({ keyword = "", floor }: ShopsListProps) {
   if (!data || data.items.length === 0) {
     return (
       <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
-        <PBReturnedUseQueryError error={new Error("No shops found")} />
+        <ItemNotFound label="shops" />
       </div>
     );
   }

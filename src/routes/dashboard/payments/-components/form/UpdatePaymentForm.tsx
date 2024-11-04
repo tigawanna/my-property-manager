@@ -23,7 +23,7 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
 
   const mutation = useMutation({
     mutationFn: async (value: PropertyShopPaymentsUpdate) => {
-      pb.from("property_shop_payments").update(
+     return pb.from("property_shop_payments").update(
         // @ts-expect-error
         row?.id,
         value,
@@ -46,7 +46,7 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
         description="Create a new payment"
         trigger={<Edit className="size-5" />}
       >
-        <div className="flex h-[90%] max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
+        <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
           <BasePaymentsForm
             mutation={mutation}
             row={row}
