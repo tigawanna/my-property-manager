@@ -18,7 +18,7 @@ export function ShopsBillsList({}: ShopsListProps) {
   );
   const data = query.data;
   const error = query.error;
-
+  console.log("==== data === ", data);
   if (error) {
     return (
       <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center">

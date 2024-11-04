@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { PrinterIcon } from "lucide-react";
 import { getMonthName } from "@/utils/date-helpers";
@@ -24,6 +24,9 @@ export default function PrintBillsContainerBills({}: PrintBillsContainerProps) {
     prev_year: py ?? prev_year,
     prev_month: pm ?? prev_month,
   };
+  useEffect(() => {
+    document.title = `readings for ${getMonthName(period.curr_month)} ${period.curr_year}`;
+  }, []);
 
   return (
     <div className="w-full p-5">
@@ -33,6 +36,7 @@ export default function PrintBillsContainerBills({}: PrintBillsContainerProps) {
             <PrinterIcon />
           </button>
         )}
+        documentTitle={`readings_for6_${getMonthName(period.curr_month)} ${period.curr_year}`}
         content={() => componentRef.current}
       />
 
