@@ -98,3 +98,32 @@ export function oneShopBillsQueryOptions({
     staleTime: 1000 * 60 * 60,
   });
 }
+
+interface IOneShopPaymentsQueryOptions {
+  shop: string;
+  year: number;
+}
+
+export function oneShopPaymentsQueryOptions({
+  shop,
+  year,
+}: IOneShopPaymentsQueryOptions) {
+  return queryOptions({
+    queryKey: ["property_shops", "one_shop", shop, "shop_payments", year],
+    queryFn: () => {
+      return pb.from("property_shop_payments").getList(1, 24, {
+        filter: and(eq("shop.id", shop), eq("year", year)),
+        sort: ["-year", "-month"],
+        select: {
+          expand: {
+            shop: true,
+          },
+        },
+      });
+    },
+
+    staleTime: 1000 * 60 * 60,
+  });
+}
+
+
