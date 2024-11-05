@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
 import { CreatePaymentForm } from "./form/CreatePaymentForm";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
-import { PaymentsPagination } from "./list/PaymentsPagination";
+import { PaymentsPagination, PaymentsYearPagination } from "./list/PaymentsPagination";
 import { GeneriicTableSkeleton } from "@/components/wrappers/GeneriicTableSkeleton";
 
 interface PaymentsPageProps {}
@@ -35,7 +35,8 @@ export function PaymentsPage({}: PaymentsPageProps) {
             />
           }
         />
-        <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-3 pb-3">
+          <PaymentsYearPagination year={year} month={month}/>
         <Suspense fallback={<GeneriicTableSkeleton />}>
             <PaymentsList
               month={month}
@@ -44,7 +45,7 @@ export function PaymentsPage({}: PaymentsPageProps) {
               page={page}
             />
           </Suspense>
-          <PaymentsPagination />
+          <PaymentsPagination month={month} year={year}/>
         </div>
       </div>
     </div>

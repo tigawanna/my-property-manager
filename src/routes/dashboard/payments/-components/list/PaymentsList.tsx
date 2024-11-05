@@ -35,11 +35,11 @@ export function PaymentsList({
 }: PaymentsListProps) {
   const { userQuery } = useViewer();
   const viewer = userQuery.data.record;
-    const [expansions, setExpansions] = useState<PaymentExpansion>({
-      shop: [],
-      // @ts-expect-error
-      staff: [viewer],
-    });
+    // const [expansions, setExpansions] = useState<PaymentExpansion>({
+    //   shop: [],
+    //   // @ts-expect-error
+    //   staff: [viewer],
+    // });
   const query = useSuspenseQuery(
     listPropertyQueryOptions({ keyword, month, year, page }),
   );

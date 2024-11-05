@@ -2,6 +2,7 @@ import {
   PropertyStaffListResponse,
   PropertyShopsResponse,
   PropertyShopPaymentsResponse,
+  PropertyTenantsListResponse,
 } from "@/lib/pb/database";
 import { getNestedProperty } from "@/utils/object";
 import { PossibleNestedUnions } from "@/utils/types/nested_objects_union";
@@ -14,7 +15,12 @@ interface PaymentsTableProps {
       expand?:
         | {
             staff?: PropertyStaffListResponse | undefined;
-            shop?: PropertyShopsResponse | undefined;
+            shop?: PropertyShopsResponse&{
+                expand?: {
+                tenant?: PropertyTenantsListResponse | undefined;
+            } | undefined;
+            } | undefined;
+
           }
         | undefined;
     }
@@ -40,7 +46,6 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     { label: "Year", accessor: "year" },
     { accessor: "type", label: "Type" },
     { accessor: "shop.shop_number", label: "Shop" },
-    { accessor: "shop.tenant", label: "name" },
     { accessor: "staff.name", label: "Staff" },
   ];
   return (
@@ -48,6 +53,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
       <table className="table table-zebra table-lg w-full">
         <thead>
           <tr>
+            <th>name</th>
             {columns.map((column) => (
               <th key={column.accessor}>{column.label}</th>
             ))}
@@ -57,6 +63,7 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
         <tbody>
           {data.items.map((row) => (
             <tr key={row.id}>
+              <td>{row?.expand?.shop?.expand?.tenant?.name}</td>
               {columns.map((column) => {
                 if (column.accessor.includes(".")) {
                   const value = getNestedProperty(
