@@ -38,7 +38,7 @@ async function addRentoToallShops() {
   }
 }
 
-async function addrandomPaykments() {
+async function addrandomPayments() {
     const pb = await cliAdminPB();
     pb.autoCancellation(false);
     const shops = await pb.from("property_shops").getFullList({
@@ -76,12 +76,32 @@ async function addrandomPaykments() {
         // });
     }
 }
+async function updateAllShops() {
+    const pb = await cliAdminPB();
+    pb.autoCancellation(false);
+    const shops = await pb.from("property_shops").getFullList({
+    });
+    for (const shop of shops) {
+        for (let month = 0; month < 10; month++) {
+      await pb.from("property_shops").update(shop.id,{
+          "goodwill": shop.goodwill,
+        });
+    }
+        // await pb.from("property_shop_payments").create({
+        // shop: shop.id,
+        // amount: randomDeposit,
+        // type: "rent",
+        // year: new Date().getFullYear(),
 
-// addrandomPaykments()
-//   .then(() => {
-//     console.log("All shops have been updated with random rent and deposit");
-//   })
-//   .catch((e) => {
-//     console.log("Error updating shops", e.message);
-//     console.log("Error updating shops", e.data);
-//   });
+        // });
+    }
+}
+
+updateAllShops()
+  .then(() => {
+    console.log("All shops have been updated with random rent and deposit");
+  })
+  .catch((e) => {
+    console.log("Error updating shops", e.message);
+    console.log("Error updating shops", e.data);
+  });
