@@ -7,6 +7,7 @@ import { PaymentsList } from "./list/PaymentsList";
 import { CreatePaymentForm } from "./form/CreatePaymentForm";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
 import { PaymentsPagination } from "./list/PaymentsPagination";
+import { GeneriicTableSkeleton } from "@/components/wrappers/GeneriicTableSkeleton";
 
 interface PaymentsPageProps {}
 
@@ -18,23 +19,24 @@ export function PaymentsPage({}: PaymentsPageProps) {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="flex h-full w-full flex-col items-center gap-5 justify-center">
+      <div className="flex h-full w-full flex-col items-center justify-center gap-5">
         <ListPageHeader
-        title="Payments"
-        formTrigger={<CreatePaymentForm />}
-        searchBox={<SearchBox 
-          inputProps={{
-            placeholder: "Search by name",
-          }}
-          debouncedValue={debouncedValue}
-          isDebouncing={isDebouncing}
-          setKeyword={setKeyword}
-          keyword={keyword}
-          />}
-        
+          title="Payments"
+          formTrigger={<CreatePaymentForm />}
+          searchBox={
+            <SearchBox
+              inputProps={{
+                placeholder: "Search by name",
+              }}
+              debouncedValue={debouncedValue}
+              isDebouncing={isDebouncing}
+              setKeyword={setKeyword}
+              keyword={keyword}
+            />
+          }
         />
-        <div className="flex flex-col h-full gap-3 w-full items-center justify-center">
-          <Suspense fallback={<CardsListSuspenseFallback />}>
+        <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+        <Suspense fallback={<GeneriicTableSkeleton />}>
             <PaymentsList
               month={month}
               year={year}
