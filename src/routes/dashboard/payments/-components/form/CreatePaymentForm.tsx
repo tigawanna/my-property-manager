@@ -43,6 +43,7 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
       }
     >
       <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
+        {/* @ts-expect-error */}
         <BasePaymentsForm mutation={mutation} row={defaultRow} />
       </div>
     </DiaDrawer>

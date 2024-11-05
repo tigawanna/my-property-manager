@@ -14,7 +14,7 @@ import { useForm } from "@tanstack/react-form";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Edit } from "lucide-react";
 import { useEffect, useState } from "react";
-import {ClientResponseError} from "pocketbase"
+import { ClientResponseError } from "pocketbase";
 type PaymentExpansion = {
   shop: PropertyShopsResponse[];
   staff: PropertyStaffListResponse[];
@@ -45,24 +45,31 @@ export function BasePaymentsForm({
   });
   const form = useForm<Partial<PropertyShopPaymentsUpdate>>({
     defaultValues: row,
-     onSubmit: async ({ value }) => {
+    onSubmit: async ({ value }) => {
       mutation.mutate(value);
       afterSave?.();
     },
   });
 
-const error = mutation?.error as ClientResponseError;
-const pbError = error?.data?.data as Record<string, {message: string,code:string}>
+  const error = mutation?.error as ClientResponseError;
+  const pbError = error?.data?.data as Record<
+    string,
+    { message: string; code: string }
+  >;
 
-useEffect(() => {
-    pbError&&Object?.entries(pbError)?.forEach(([key, value]) => {
-      form.setFieldMeta(key as any,(prev)=>{
-        return {...prev, errorMap:{
-          onChange:value?.message
-        }}
+  useEffect(() => {
+    pbError &&
+      Object?.entries(pbError)?.forEach(([key, value]) => {
+        form.setFieldMeta(key as any, (prev) => {
+          return {
+            ...prev,
+            errorMap: {
+              onChange: value?.message,
+            },
+          };
+        });
       });
-    });
-}, [pbError]);
+  }, [pbError]);
 
   return (
     <form
@@ -221,9 +228,8 @@ useEffect(() => {
           </form.Field>
         </div>
       </div>
+
       <MutationButton mutation={mutation} />
     </form>
   );
 }
-
-
