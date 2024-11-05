@@ -143,6 +143,9 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 	utils: '' | 'elec' | 'water' | 'both' | 'none';
 	order: number;
 	is_vacant: boolean;
+	monthly_rent: number;
+	deposit: number;
+	goodwill: number;
 }
 
 export interface PropertyShopsCreate extends BaseCollectionCreate {
@@ -151,6 +154,9 @@ export interface PropertyShopsCreate extends BaseCollectionCreate {
 	utils?: '' | 'elec' | 'water' | 'both' | 'none';
 	order?: number;
 	is_vacant?: boolean;
+	monthly_rent?: number;
+	deposit?: number;
+	goodwill?: number;
 }
 
 export interface PropertyShopsUpdate extends BaseCollectionUpdate {
@@ -161,6 +167,15 @@ export interface PropertyShopsUpdate extends BaseCollectionUpdate {
 	'order+'?: number;
 	'order-'?: number;
 	is_vacant?: boolean;
+	monthly_rent?: number;
+	'monthly_rent+'?: number;
+	'monthly_rent-'?: number;
+	deposit?: number;
+	'deposit+'?: number;
+	'deposit-'?: number;
+	goodwill?: number;
+	'goodwill+'?: number;
+	'goodwill-'?: number;
 }
 
 export interface PropertyShopsCollection {
@@ -174,6 +189,7 @@ export interface PropertyShopsCollection {
 		tenant: PropertyTenantsListCollection;
 		'property_bills(shop)': PropertyBillsCollection[];
 		'property_shop_payments(shop)': PropertyShopPaymentsCollection[];
+		'property_shop_history(shop)': PropertyShopHistoryCollection[];
 	};
 }
 
@@ -259,6 +275,7 @@ export interface PropertyTenantsListCollection {
 		'property_shops(tenant)': PropertyShopsCollection[];
 		account: PropertyUserCollection;
 		'property_user(tenant)': PropertyUserCollection[];
+		'property_shop_history(tenant)': PropertyShopHistoryCollection[];
 	};
 }
 
@@ -396,18 +413,18 @@ export interface PropertyShopPaymentsResponse extends BaseCollectionResponse {
 	amount: number;
 	shop: string;
 	staff: string;
-	type: '' | 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
+	type: 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
 	reciept_number: string;
 }
 
 export interface PropertyShopPaymentsCreate extends BaseCollectionCreate {
-	year?: number;
-	month?: number;
-	amount?: number;
-	shop?: string;
-	staff?: string;
-	type?: '' | 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
-	reciept_number?: string;
+	year: number;
+	month: number;
+	amount: number;
+	shop: string;
+	staff: string;
+	type: 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
+	reciept_number: string;
 }
 
 export interface PropertyShopPaymentsUpdate extends BaseCollectionUpdate {
@@ -422,7 +439,7 @@ export interface PropertyShopPaymentsUpdate extends BaseCollectionUpdate {
 	'amount-'?: number;
 	shop?: string;
 	staff?: string;
-	type?: '' | 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
+	type?: 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
 	reciept_number?: string;
 }
 
@@ -441,6 +458,56 @@ export interface PropertyShopPaymentsCollection {
 
 // ==== end of property_shop_payments block =====
 
+// ==== start of property_shop_history block =====
+
+
+export interface PropertyShopHistoryResponse extends BaseCollectionResponse {
+	collectionName: 'property_shop_history';
+	shop: string;
+	tenant: string;
+	rent: number;
+	deposit: number;
+	from: string;
+	to: string;
+}
+
+export interface PropertyShopHistoryCreate extends BaseCollectionCreate {
+	shop?: string;
+	tenant?: string;
+	rent?: number;
+	deposit?: number;
+	from?: string | Date;
+	to?: string | Date;
+}
+
+export interface PropertyShopHistoryUpdate extends BaseCollectionUpdate {
+	shop?: string;
+	tenant?: string;
+	rent?: number;
+	'rent+'?: number;
+	'rent-'?: number;
+	deposit?: number;
+	'deposit+'?: number;
+	'deposit-'?: number;
+	from?: string | Date;
+	to?: string | Date;
+}
+
+export interface PropertyShopHistoryCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_shop_history';
+	response: PropertyShopHistoryResponse;
+	create: PropertyShopHistoryCreate;
+	update: PropertyShopHistoryUpdate;
+	relations: {
+		shop: PropertyShopsCollection;
+		tenant: PropertyTenantsListCollection;
+	};
+}
+
+// ==== end of property_shop_history block =====
+
 export type Schema = {
 	property_shops: PropertyShopsCollection;
 	property_bills: PropertyBillsCollection;
@@ -449,4 +516,5 @@ export type Schema = {
 	property_staff_list: PropertyStaffListCollection;
 	property_users_list: PropertyUsersListCollection;
 	property_shop_payments: PropertyShopPaymentsCollection;
+	property_shop_history: PropertyShopHistoryCollection;
 };

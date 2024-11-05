@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
 import { CreatePaymentForm } from "./form/CreatePaymentForm";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
+import { PaymentsPagination } from "./list/PaymentsPagination";
 
 interface PaymentsPageProps {}
 
@@ -32,7 +33,7 @@ export function PaymentsPage({}: PaymentsPageProps) {
           />}
         
         />
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex flex-col h-full gap-3 w-full items-center justify-center">
           <Suspense fallback={<CardsListSuspenseFallback />}>
             <PaymentsList
               month={month}
@@ -41,6 +42,7 @@ export function PaymentsPage({}: PaymentsPageProps) {
               page={page}
             />
           </Suspense>
+          <PaymentsPagination />
         </div>
       </div>
     </div>

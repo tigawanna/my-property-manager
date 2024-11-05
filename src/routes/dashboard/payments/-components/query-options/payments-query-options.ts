@@ -20,13 +20,17 @@ export function listPropertyQueryOptions({
     queryFn: () => {
       return pb.from("property_shop_payments").getList(page, 24, {
         filter: and(
-          like("shop.shop_number", keyword),
+          like("shop.tenant.name", keyword),
           like("month", month),
           like("year", year),
         ),
         select: {
           expand: {
-            shop: true,
+            shop:{
+              expand:{
+                "tenant":true
+              }
+            },
             staff: true,
           },
         },

@@ -19,20 +19,15 @@ import {
 import {
   ChartConfig,
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
 } from "@/components/shadcn/ui/chart";
 import { useParams, useSearch } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   oneShopMonthlyPaymentsQueryOptions,
-  oneShopPaymentsQueryOptions,
   oneShopQueryOptions,
 } from "../../query-options/shops-query-options";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
-import { getMonthFromNumber } from "@/utils/hooks/date";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
-import { ExampleRadialChart } from "./ExampleChart";
 interface OneShopPaymentsChartsProps {}
 
 export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
@@ -65,13 +60,6 @@ export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
     );
   }
 
-  
-  // const oneShopAnnualChartsData = data.items.reduce((acc, item) => {
-  //   const month = getMonthFromNumber(item.month);
-  //   acc[month] = acc[month] ? acc[month] + item.amount : item.amount;
-  //   return acc;
-  // }, {} as Record<string, number>);
-
   const oneShopMonthlyChartsData = data.items.reduce(
     (acc, item) => {
       acc["rent"] = acc["rent"]
@@ -90,7 +78,6 @@ export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
     },
   );
 
-
   const chartConfig = {
     rent: {
       label: "rent",
@@ -104,39 +91,8 @@ export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
         <CardDescription>January - December {selectedYear}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ExampleRadialChart />
-        {/* <ChartContainer config={chartConfig} className="h-72 w-full">
-          <BarChart
-            accessibilityLayer
-            data={oneShopChartsData}
-            margin={{
-              top: 20,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="rent"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value?.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-              <Bar dataKey="mobth" fill="var(--color-elec)" radius={8}>
-                <LabelList
-                  position="top"
-                  offset={12}
-                  className="fill-foreground"
-                  fontSize={12}
-                />
-              </Bar>
-
-          </BarChart>
-        </ChartContainer> */}
         <ChartContainer
+          data-theme="dark"
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
         >
@@ -146,7 +102,6 @@ export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
             endAngle={250}
             innerRadius={80}
             outerRadius={110}
-
           >
             <PolarGrid
               gridType="circle"
@@ -155,11 +110,7 @@ export function OneShopPaymentsCharts({}: OneShopPaymentsChartsProps) {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar
-              dataKey="total"
-
-              cornerRadius={10}
-            />
+            <RadialBar dataKey="total" cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {

@@ -27,20 +27,21 @@ type PaymentstableColumn<T extends Record<string, any>> = {
 };
 
 export function PaymentsTable({ data }: PaymentsTableProps) {
-  const columns: PaymentstableColumn<typeof data["items"][number]>[] = [
-      {
-        accessor: "reciept_number",
-        label: "Reciept Number",
-      },
+  const columns: PaymentstableColumn<(typeof data)["items"][number]>[] = [
+    {
+      accessor: "reciept_number",
+      label: "Reciept Number",
+    },
     {
       label: "Amout",
       accessor: "amount",
     },
     { label: "Month", accessor: "month" },
     { label: "Year", accessor: "year" },
-    {accessor:"type",label:"Type"},
-    {accessor:"shop.shop_number",label:"Shop"},
-    {accessor:"staff.name",label:"Staff"},
+    { accessor: "type", label: "Type" },
+    { accessor: "shop.shop_number", label: "Shop" },
+    { accessor: "shop.tenant", label: "name" },
+    { accessor: "staff.name", label: "Staff" },
   ];
   return (
     <div className="overflow-x-auto">
@@ -77,5 +78,3 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     </div>
   );
 }
-
-

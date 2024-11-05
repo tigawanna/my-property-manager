@@ -14,11 +14,6 @@ export function OneShopPage({}: OneShopPageProps) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <OneShopDetails shop={shop} />
-      {/* <div className="flex w-full flex-col items-center justify-center">
-        <OneShopUtiltyCharts />
-        <OneShopsBillsContainer shop={shop} />
-      </div> */}
-
       <Tabs defaultValue="payments" className="h-full w-full">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="payments">Payments</TabsTrigger>
