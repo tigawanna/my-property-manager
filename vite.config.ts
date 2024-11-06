@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [TanStackRouterVite({
-         routeToken: "layout" // <-- Add this line
+    routeToken: "layout" // <-- Add this line
   }), react(), tsconfigPaths()],
   server: {
     port: 3000,

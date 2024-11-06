@@ -87,8 +87,8 @@
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
     "theme-change": "^2.5.0",
-    "typed-pocketbase": "^0.1.1",
     "vaul": "^0.9.4",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "typed-pocketbase": "^0.1.1"
   }
 }
