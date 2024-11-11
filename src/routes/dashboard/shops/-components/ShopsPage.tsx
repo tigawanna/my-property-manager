@@ -5,8 +5,8 @@ import { useSearch } from "@tanstack/react-router";
 import { Suspense } from "react";
 import { SelectHouseFloor } from "./list/SelectHouseFloor";
 import { useShopssSearchQuery } from "./list/use-shook-hooks";
-import { ShopsList } from "./list/ShopsList";
 import { Plus } from "lucide-react";
+import { ShopsList } from "./list/ShopsList";
 import { CreateShopModal } from "./form/CreateShops";
 
 interface ShopsPageProps {}

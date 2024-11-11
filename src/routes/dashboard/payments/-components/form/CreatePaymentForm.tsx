@@ -12,8 +12,8 @@ interface CreatePaymentFormProps {}
 
 export function CreatePaymentForm({}: CreatePaymentFormProps) {
   const [open, setOpen] = useState(false);
-  const { userQuery } = useViewer();
-  const viewer = userQuery?.data?.record!;
+  // const { userQuery } = useViewer();
+  // const viewer = userQuery?.data?.record!;
   const mutation = useMutation({
     mutationFn: (value: PropertyShopPaymentsCreate) => {
       return pb.from("property_shop_payments").create(value);

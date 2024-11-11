@@ -3,7 +3,7 @@ import toast, { ToastOptions } from "react-hot-toast";
 
 export interface MakeToasterProps extends ToastOptions {
   title: string;
-  description: string;
+  description?: string;
   duration?: number;
   variant: "success" | "error" | "warning" | "info";
 }

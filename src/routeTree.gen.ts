@@ -13,12 +13,12 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardLayoutImport } from './routes/dashboard/layout'
 import { Route as IndexImport } from './routes/index'
-import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
+import { Route as DashboardStaffIndexImport } from './routes/dashboard/staff/index'
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
 import { Route as DashboardPaymentsIndexImport } from './routes/dashboard/payments/index'
 import { Route as DashboardBillsIndexImport } from './routes/dashboard/bills/index'
@@ -35,11 +35,6 @@ const DashboardLayoutRoute = DashboardLayoutImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const StaffIndexRoute = StaffIndexImport.update({
-  path: '/staff/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -65,6 +60,11 @@ const AuthSignupRoute = AuthSignupImport.update({
 
 const DashboardTenantsIndexRoute = DashboardTenantsIndexImport.update({
   path: '/tenants/',
+  getParentRoute: () => DashboardLayoutRoute,
+} as any)
+
+const DashboardStaffIndexRoute = DashboardStaffIndexImport.update({
+  path: '/staff/',
   getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
@@ -145,13 +145,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileIndexImport
       parentRoute: typeof rootRoute
     }
-    '/staff/': {
-      id: '/staff/'
-      path: '/staff'
-      fullPath: '/staff'
-      preLoaderRoute: typeof StaffIndexImport
-      parentRoute: typeof rootRoute
-    }
     '/dashboard/bills/print': {
       id: '/dashboard/bills/print'
       path: '/bills/print'
@@ -178,6 +171,13 @@ declare module '@tanstack/react-router' {
       path: '/shops'
       fullPath: '/dashboard/shops'
       preLoaderRoute: typeof DashboardShopsIndexImport
+      parentRoute: typeof DashboardLayoutImport
+    }
+    '/dashboard/staff/': {
+      id: '/dashboard/staff/'
+      path: '/staff'
+      fullPath: '/dashboard/staff'
+      preLoaderRoute: typeof DashboardStaffIndexImport
       parentRoute: typeof DashboardLayoutImport
     }
     '/dashboard/tenants/': {
@@ -212,6 +212,7 @@ interface DashboardLayoutRouteChildren {
   DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
   DashboardPaymentsIndexRoute: typeof DashboardPaymentsIndexRoute
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
+  DashboardStaffIndexRoute: typeof DashboardStaffIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
   DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
   DashboardTenantsTenantIndexRoute: typeof DashboardTenantsTenantIndexRoute
@@ -223,6 +224,7 @@ const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
   DashboardBillsIndexRoute: DashboardBillsIndexRoute,
   DashboardPaymentsIndexRoute: DashboardPaymentsIndexRoute,
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
+  DashboardStaffIndexRoute: DashboardStaffIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
   DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
   DashboardTenantsTenantIndexRoute: DashboardTenantsTenantIndexRoute,
@@ -239,11 +241,11 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/staff': typeof StaffIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills': typeof DashboardBillsIndexRoute
   '/dashboard/payments': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
+  '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
@@ -255,11 +257,11 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
-  '/staff': typeof StaffIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills': typeof DashboardBillsIndexRoute
   '/dashboard/payments': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
+  '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
@@ -273,11 +275,11 @@ export interface FileRoutesById {
   '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile/': typeof ProfileIndexRoute
-  '/staff/': typeof StaffIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
   '/dashboard/bills/': typeof DashboardBillsIndexRoute
   '/dashboard/payments/': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops/': typeof DashboardShopsIndexRoute
+  '/dashboard/staff/': typeof DashboardStaffIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
   '/dashboard/tenants/$tenant/': typeof DashboardTenantsTenantIndexRoute
@@ -292,11 +294,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard/'
     | '/profile'
-    | '/staff'
     | '/dashboard/bills/print'
     | '/dashboard/bills'
     | '/dashboard/payments'
     | '/dashboard/shops'
+    | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
     | '/dashboard/tenants/$tenant'
@@ -307,11 +309,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/profile'
-    | '/staff'
     | '/dashboard/bills/print'
     | '/dashboard/bills'
     | '/dashboard/payments'
     | '/dashboard/shops'
+    | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
     | '/dashboard/tenants/$tenant'
@@ -323,11 +325,11 @@ export interface FileRouteTypes {
     | '/auth/'
     | '/dashboard/'
     | '/profile/'
-    | '/staff/'
     | '/dashboard/bills/print'
     | '/dashboard/bills/'
     | '/dashboard/payments/'
     | '/dashboard/shops/'
+    | '/dashboard/staff/'
     | '/dashboard/tenants/'
     | '/dashboard/shops/$shop/'
     | '/dashboard/tenants/$tenant/'
@@ -340,7 +342,6 @@ export interface RootRouteChildren {
   AuthSignupRoute: typeof AuthSignupRoute
   AuthIndexRoute: typeof AuthIndexRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
-  StaffIndexRoute: typeof StaffIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -349,7 +350,6 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignupRoute: AuthSignupRoute,
   AuthIndexRoute: AuthIndexRoute,
   ProfileIndexRoute: ProfileIndexRoute,
-  StaffIndexRoute: StaffIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -368,8 +368,7 @@ export const routeTree = rootRoute
         "/dashboard",
         "/auth/signup",
         "/auth/",
-        "/profile/",
-        "/staff/"
+        "/profile/"
       ]
     },
     "/": {
@@ -383,6 +382,7 @@ export const routeTree = rootRoute
         "/dashboard/bills/",
         "/dashboard/payments/",
         "/dashboard/shops/",
+        "/dashboard/staff/",
         "/dashboard/tenants/",
         "/dashboard/shops/$shop/",
         "/dashboard/tenants/$tenant/"
@@ -401,9 +401,6 @@ export const routeTree = rootRoute
     "/profile/": {
       "filePath": "profile/index.tsx"
     },
-    "/staff/": {
-      "filePath": "staff/index.tsx"
-    },
     "/dashboard/bills/print": {
       "filePath": "dashboard/bills/print.tsx",
       "parent": "/dashboard"
@@ -418,6 +415,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/shops/": {
       "filePath": "dashboard/shops/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/staff/": {
+      "filePath": "dashboard/staff/index.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/tenants/": {

@@ -55,8 +55,8 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
       <DiaDrawer
         open={open}
         setOpen={setOpen}
-        title="Create Payment"
-        description="Create a new payment"
+        title="Update Payment"
+        description="Update payment"
         trigger={<Edit className="size-5" />}
       >
         <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
