@@ -1,4 +1,4 @@
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { SearchBox } from "@/components/search/SearchBox";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
 import { useSearch } from "@tanstack/react-router";

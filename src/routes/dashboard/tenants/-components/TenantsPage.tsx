@@ -1,7 +1,7 @@
 import { SearchBox } from "@/components/search/SearchBox";
 import { useTenantsSearchQuery } from "./list/use-search";
 import { Suspense } from "react";
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { TenantsList } from "./list/TenantsList";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
 import { Plus } from "lucide-react";

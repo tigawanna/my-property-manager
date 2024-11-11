@@ -4,7 +4,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 interface DashboardSidebarHeaderProps {}
 
 export function DashboardSidebarHeader({}: DashboardSidebarHeaderProps) {
-  const { state,setOpenMobile } = useSidebar();
+  const { state,setOpenMobile,isMobile } = useSidebar();
     const { pathname } = useLocation();
     return (
       <div className="flex flex-col gap-3" onClick={() => {setOpenMobile(false)}}>
@@ -24,7 +24,7 @@ export function DashboardSidebarHeader({}: DashboardSidebarHeaderProps) {
 
         >
           <LayoutDashboard />
-          {state === "expanded" && (
+          {(state === "expanded" || isMobile) && (
             <h1 className="text-xl font-bold">Dashboard</h1>
           )}
         </Link>

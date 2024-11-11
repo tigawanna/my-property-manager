@@ -1,4 +1,4 @@
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { Suspense } from "react";
 import { ShopsBillsList } from "./OneShopBillsList";
 import { PaginateOneShopBills } from "./PaginateOneShopBills";

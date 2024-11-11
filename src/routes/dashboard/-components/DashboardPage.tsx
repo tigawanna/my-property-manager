@@ -1,4 +1,4 @@
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { dashboard_routes } from "@/components/navigation/routes";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { Link } from "@tanstack/react-router";

@@ -1,7 +1,7 @@
 import { useSearch } from "@tanstack/react-router";
 import { usePaymentsSearchQuery } from "./list/use-payments-hook";
 import { SearchBox } from "@/components/search/SearchBox";
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
 import { CreatePaymentForm } from "./form/CreatePaymentForm";

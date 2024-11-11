@@ -8,7 +8,7 @@ import { GenericTable } from "@/components/wrappers/GenericTable";
 import { pb } from "@/lib/pb/client";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 import { PaginateOneShopBills } from "./PaginateOneShopBills";
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { Suspense } from "react";
 
 interface SOneShopPaymentsListrops {}

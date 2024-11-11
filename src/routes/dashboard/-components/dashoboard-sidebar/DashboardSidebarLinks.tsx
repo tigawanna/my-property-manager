@@ -18,7 +18,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 interface DashboardSidebarLinksProps {}
 
 export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
-  const { state, setOpen, setOpenMobile } = useSidebar();
+  const { state, setOpen, setOpenMobile,isMobile } = useSidebar();
   const { pathname } = useLocation();
   return (
     <SidebarGroup className="h-full bg-base-100">
@@ -34,24 +34,28 @@ export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
                       asChild
                       className={
                         pathname === item.href
-                          ? `glass flex w-full gap-3 rounded-lg border bg-primary/60 p-1`
+                          ? `glass flex w-full gap-3 rounded-lg border bg-primary/40 p-1`
                           : `flex w-full gap-3 rounded-sm p-1 hover:bg-base-300`
                       }
                     >
                       <Link
+                      className="flex items-center gap-[10%]"
                         to={item.href}
                         onClick={() => {
-                          setOpen(false);
-                          setOpenMobile(false);
+                          if(isMobile){
+                            setOpen(false);
+                            setOpenMobile(false);
+
+                          }
                         }}
                       >
                         <button className="size-6">{item.icon}</button>
-                        {state === "expanded" && (
-                          <span className="text-lg"> {item.name}</span>
+                        {(state === "expanded" || isMobile)  && (
+                          <span className="text-lg text-center"> {item.name}</span>
                         )}
                       </Link>
                     </TooltipTrigger>
-                    <TooltipContent>{item.name}</TooltipContent>
+                    <TooltipContent side="right">{item.name}</TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               </SidebarMenuButton>

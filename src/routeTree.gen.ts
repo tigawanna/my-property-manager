@@ -17,7 +17,6 @@ import { Route as StaffIndexImport } from './routes/staff/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
-import { Route as DashboardNiceImport } from './routes/dashboard/nice'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
 import { Route as DashboardShopsIndexImport } from './routes/dashboard/shops/index'
@@ -57,11 +56,6 @@ const DashboardIndexRoute = DashboardIndexImport.update({
 const AuthIndexRoute = AuthIndexImport.update({
   path: '/auth/',
   getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardNiceRoute = DashboardNiceImport.update({
-  path: '/nice',
-  getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
 const AuthSignupRoute = AuthSignupImport.update({
@@ -129,13 +123,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/signup'
       preLoaderRoute: typeof AuthSignupImport
       parentRoute: typeof rootRoute
-    }
-    '/dashboard/nice': {
-      id: '/dashboard/nice'
-      path: '/nice'
-      fullPath: '/dashboard/nice'
-      preLoaderRoute: typeof DashboardNiceImport
-      parentRoute: typeof DashboardLayoutImport
     }
     '/auth/': {
       id: '/auth/'
@@ -220,7 +207,6 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface DashboardLayoutRouteChildren {
-  DashboardNiceRoute: typeof DashboardNiceRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardBillsPrintRoute: typeof DashboardBillsPrintRoute
   DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
@@ -232,7 +218,6 @@ interface DashboardLayoutRouteChildren {
 }
 
 const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
-  DashboardNiceRoute: DashboardNiceRoute,
   DashboardIndexRoute: DashboardIndexRoute,
   DashboardBillsPrintRoute: DashboardBillsPrintRoute,
   DashboardBillsIndexRoute: DashboardBillsIndexRoute,
@@ -251,7 +236,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
-  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
@@ -268,7 +252,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/signup': typeof AuthSignupRoute
-  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth': typeof AuthIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/profile': typeof ProfileIndexRoute
@@ -287,7 +270,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
-  '/dashboard/nice': typeof DashboardNiceRoute
   '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile/': typeof ProfileIndexRoute
@@ -307,7 +289,6 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/auth/signup'
-    | '/dashboard/nice'
     | '/auth'
     | '/dashboard/'
     | '/profile'
@@ -323,7 +304,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth/signup'
-    | '/dashboard/nice'
     | '/auth'
     | '/dashboard'
     | '/profile'
@@ -340,7 +320,6 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/auth/signup'
-    | '/dashboard/nice'
     | '/auth/'
     | '/dashboard/'
     | '/profile/'
@@ -399,7 +378,6 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard/layout.tsx",
       "children": [
-        "/dashboard/nice",
         "/dashboard/",
         "/dashboard/bills/print",
         "/dashboard/bills/",
@@ -412,10 +390,6 @@ export const routeTree = rootRoute
     },
     "/auth/signup": {
       "filePath": "auth/signup.tsx"
-    },
-    "/dashboard/nice": {
-      "filePath": "dashboard/nice.tsx",
-      "parent": "/dashboard"
     },
     "/auth/": {
       "filePath": "auth/index.tsx"

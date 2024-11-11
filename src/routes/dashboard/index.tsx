@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DashboardPage } from "./-components/DashboardPage";
 import { authGuard } from "@/lib/tanstack/query/use-viewer";
 import { RouterErrorComponent } from "@/lib/tanstack/router/routerErrorComponent";
-import { CardsListSuspenseFallback } from "@/components/loaders/GenericDataCardsListSuspenseFallback";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 
 export const Route = createFileRoute("/dashboard/")({
   errorComponent: ({ error }) => <RouterErrorComponent error={error} />,
