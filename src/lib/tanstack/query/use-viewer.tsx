@@ -14,24 +14,10 @@ import {
   RootRoute,
 } from "@tanstack/react-router";
 import { RecordAuthResponse } from "pocketbase";
+import { viewerqueryOptions } from "./query-options/viewer-query-options";
 
-export const viewerqueryOptions = queryOptions({
-  queryKey: ["viewer"],
-  queryFn: () =>
-    pb
-      .from("property_user")
-      .authRefresh()
-      .then((res) => {
-        // console.log("use viewer res", res);
-        return res;
-      })
-      .catch((err) => {
-        // console.log("use viewer error ", err);
-        pb.authStore.clear();
-        return { record: null, token: null };
-      }),
-  staleTime: 1000 * 60 * 60,
-});
+
+
 export function useViewer() {
   const qc = useQueryClient();
   const logoutMutation = useMutation({

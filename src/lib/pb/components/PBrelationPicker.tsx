@@ -40,8 +40,6 @@ export function PBrelationPicker<T extends Record<string, any>>({
 }: PBrelationPickerProps<T>) {
   const { isDebouncing, debouncedValue, setKeyword, keyword } =
     useGlobalPocketbaseSearchQuery({ default_value: "" });
-  // useGlobalPocketbaseSearchQuery({ default_value: "" });
-  // console.log({ selectedRows });
   return (
     <div className="flex h-full w-full flex-col gap-2 overflow-auto p-2">
       <div className="flex w-full flex-col justify-between gap-3 px-3 pr-5 md:flex-row">

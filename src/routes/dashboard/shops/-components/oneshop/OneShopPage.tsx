@@ -20,7 +20,7 @@ export function OneShopPage({}: OneShopPageProps) {
           <TabsTrigger value="utilities">Utilities</TabsTrigger>
         </TabsList>
         <TabsContent value="payments">
-          <OneShopPaymentsCharts />
+          {/* <OneShopPaymentsCharts /> */}
           <OneShopsPaymentsContainer shop={shop} />
         </TabsContent>
         <TabsContent value="utilities">

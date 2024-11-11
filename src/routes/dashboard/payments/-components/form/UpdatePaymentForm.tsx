@@ -9,6 +9,7 @@ import { Edit, X } from "lucide-react";
 import { BasePaymentsForm } from "./BasePaymentsForm";
 import { useState } from "react";
 import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
+import { makeHotToast } from "@/components/toasters";
 
 interface UpdatePaymentFormProps {
   row: PropertyShopPaymentsUpdate;
@@ -29,11 +30,23 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
         value,
       );
     },
+      onSuccess: () => {
+      makeHotToast({
+        title: "Payment update",
+        description: "Payment has been update successfully",
+        variant:"success"
+      })
+      setOpen(false);
+    },
+    onError(error, variables, context) {
+      makeHotToast({
+        title: "Something went wrong",
+        description:error.message,
+        variant:"error"
+      })
+    },
     meta: {
       invalidates: ["property_shops_payments"],
-    },
-    onSuccess:() => {
-      setOpen(false);
     }
   });
 

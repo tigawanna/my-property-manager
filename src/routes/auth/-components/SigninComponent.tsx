@@ -8,7 +8,6 @@ import { pb } from "@/lib/pb/client";
 import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
-import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
 
 interface SigninComponentProps {}

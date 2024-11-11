@@ -6,6 +6,7 @@ import { useState } from "react";
 import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
 import { Plus } from "lucide-react";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
+import { makeHotToast } from "@/components/toasters";
 
 interface CreatePaymentFormProps {}
 
@@ -17,6 +18,21 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
     mutationFn: (value: PropertyShopPaymentsCreate) => {
       return pb.from("property_shop_payments").create(value);
     },
+    onSuccess: () => {
+      makeHotToast({
+        title: "Payment created",
+        description: "Payment has been created successfully",
+        variant:"success"
+      })
+      setOpen(false);
+    },
+    onError(error, variables, context) {
+      makeHotToast({
+        title: "Something went wrong",
+        description:error.message,
+        variant:"error"
+      })
+    },
     meta: {
       invalidates: ["property_shops_payments"],
     },
@@ -25,7 +41,6 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
     amount: 5000,
-    staff: viewer?.id,
     reciept_number: "R-" + Math.floor(Math.random() * 100000),
     type: "rent",
   } as const;

@@ -7,7 +7,7 @@ import { pb } from "@/lib/pb/client";
 import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
-import { viewerqueryOptions } from "@/lib/tanstack/query/use-viewer";
+import { viewerqueryOptions } from "@/lib/tanstack/query/query-options/viewer-query-options";
 import { makeHotToast } from "@/components/toasters";
 import { useNavigate } from "@tanstack/react-router";
 

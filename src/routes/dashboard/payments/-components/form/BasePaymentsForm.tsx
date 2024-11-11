@@ -11,10 +11,11 @@ import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useForm } from "@tanstack/react-form";
-import { UseMutationResult } from "@tanstack/react-query";
+import { UseMutationResult, useSuspenseQuery } from "@tanstack/react-query";
 import { Edit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ClientResponseError } from "pocketbase";
+import { oneStaffQueryOptions } from "@/lib/tanstack/query/query-options/staff-query-options";
 type PaymentExpansion = {
   shop: PropertyShopsResponse[];
   staff: PropertyStaffListResponse[];
@@ -38,13 +39,19 @@ export function BasePaymentsForm({
 }: BasePaymentsFormProps) {
   const { userQuery } = useViewer();
   const viewer = userQuery?.data?.record!;
+  const staffQuery = useSuspenseQuery(
+    oneStaffQueryOptions(viewer?.id)
+  )
+  const staff = staffQuery?.data
   const [expansions, setExpansions] = useState<PaymentExpansion>({
     shop: [],
-    // @ts-expect-error
-    staff: [viewer],
+    staff: [staff],
   });
   const form = useForm<Partial<PropertyShopPaymentsUpdate>>({
-    defaultValues: row,
+    defaultValues: {
+      ...row,
+      staff: staff?.id,
+    },
     onSubmit: async ({ value }) => {
       mutation.mutate(value);
       afterSave?.();
@@ -190,6 +197,7 @@ export function BasePaymentsForm({
         <div className="form-control w-fit min-w-[30%] md:w-[40%]">
           <form.Field name="staff">
             {(field) => {
+              console.log("==== field  ==== ", field.state.value);
               return (
                 <>
                   <label htmlFor={field.name}>Staff</label>
