@@ -24,6 +24,7 @@ import { Route as DashboardPaymentsIndexImport } from './routes/dashboard/paymen
 import { Route as DashboardBillsIndexImport } from './routes/dashboard/bills/index'
 import { Route as DashboardBillsPrintImport } from './routes/dashboard/bills/print'
 import { Route as DashboardTenantsTenantIndexImport } from './routes/dashboard/tenants/$tenant/index'
+import { Route as DashboardStaffStaffIndexImport } from './routes/dashboard/staff/$staff/index'
 import { Route as DashboardShopsShopIndexImport } from './routes/dashboard/shops/$shop/index'
 
 // Create/Update Routes
@@ -93,6 +94,11 @@ const DashboardTenantsTenantIndexRoute =
     path: '/tenants/$tenant/',
     getParentRoute: () => DashboardLayoutRoute,
   } as any)
+
+const DashboardStaffStaffIndexRoute = DashboardStaffStaffIndexImport.update({
+  path: '/staff/$staff/',
+  getParentRoute: () => DashboardLayoutRoute,
+} as any)
 
 const DashboardShopsShopIndexRoute = DashboardShopsShopIndexImport.update({
   path: '/shops/$shop/',
@@ -194,6 +200,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardShopsShopIndexImport
       parentRoute: typeof DashboardLayoutImport
     }
+    '/dashboard/staff/$staff/': {
+      id: '/dashboard/staff/$staff/'
+      path: '/staff/$staff'
+      fullPath: '/dashboard/staff/$staff'
+      preLoaderRoute: typeof DashboardStaffStaffIndexImport
+      parentRoute: typeof DashboardLayoutImport
+    }
     '/dashboard/tenants/$tenant/': {
       id: '/dashboard/tenants/$tenant/'
       path: '/tenants/$tenant'
@@ -215,6 +228,7 @@ interface DashboardLayoutRouteChildren {
   DashboardStaffIndexRoute: typeof DashboardStaffIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
   DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
+  DashboardStaffStaffIndexRoute: typeof DashboardStaffStaffIndexRoute
   DashboardTenantsTenantIndexRoute: typeof DashboardTenantsTenantIndexRoute
 }
 
@@ -227,6 +241,7 @@ const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
   DashboardStaffIndexRoute: DashboardStaffIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
   DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
+  DashboardStaffStaffIndexRoute: DashboardStaffStaffIndexRoute,
   DashboardTenantsTenantIndexRoute: DashboardTenantsTenantIndexRoute,
 }
 
@@ -248,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
+  '/dashboard/staff/$staff': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
 }
 
@@ -264,6 +280,7 @@ export interface FileRoutesByTo {
   '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
+  '/dashboard/staff/$staff': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
 }
 
@@ -282,6 +299,7 @@ export interface FileRoutesById {
   '/dashboard/staff/': typeof DashboardStaffIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
   '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
+  '/dashboard/staff/$staff/': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant/': typeof DashboardTenantsTenantIndexRoute
 }
 
@@ -301,6 +319,7 @@ export interface FileRouteTypes {
     | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
+    | '/dashboard/staff/$staff'
     | '/dashboard/tenants/$tenant'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -316,6 +335,7 @@ export interface FileRouteTypes {
     | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/shops/$shop'
+    | '/dashboard/staff/$staff'
     | '/dashboard/tenants/$tenant'
   id:
     | '__root__'
@@ -332,6 +352,7 @@ export interface FileRouteTypes {
     | '/dashboard/staff/'
     | '/dashboard/tenants/'
     | '/dashboard/shops/$shop/'
+    | '/dashboard/staff/$staff/'
     | '/dashboard/tenants/$tenant/'
   fileRoutesById: FileRoutesById
 }
@@ -385,6 +406,7 @@ export const routeTree = rootRoute
         "/dashboard/staff/",
         "/dashboard/tenants/",
         "/dashboard/shops/$shop/",
+        "/dashboard/staff/$staff/",
         "/dashboard/tenants/$tenant/"
       ]
     },
@@ -427,6 +449,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/shops/$shop/": {
       "filePath": "dashboard/shops/$shop/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/staff/$staff/": {
+      "filePath": "dashboard/staff/$staff/index.tsx",
       "parent": "/dashboard"
     },
     "/dashboard/tenants/$tenant/": {

@@ -14,6 +14,7 @@ export const dashboard_routes = [
   },
   { name: "tenants", href: "/dashboard/tenants", icon: <Users /> },
   { name: "payments", href: "/dashboard/payments", icon: <Wallet /> },
+  { name: "staff", href: "/dashboard/staff", icon: <Wallet /> },
 ] as const;
 
 

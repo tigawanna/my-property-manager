@@ -18,7 +18,7 @@ export function DashboardSidebarHeader({}: DashboardSidebarHeaderProps) {
           to="/dashboard"
           className={
             pathname === "/dashboard"
-              ? `glass flex w-full cursor-pointer items-center gap-2 rounded-lg border bg-primary/60 p-1 underline-offset-2 hover:underline`
+              ? ` flex w-full cursor-pointer items-center gap-2 rounded-lg  text-primary p-1 underline-offset-2 `
               : `flex w-full cursor-pointer items-center gap-2 rounded-sm p-1 underline-offset-2 hover:bg-base-300 hover:underline`
           }
 

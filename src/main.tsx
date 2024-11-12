@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouteMask, createRouter } from "@tanstack/react-router";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 import {
   MutationCache,
   QueryClient,
@@ -29,7 +29,7 @@ export const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 10,
+      staleTime: 1000 * 60 * 60,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
     },
@@ -41,6 +41,7 @@ export const queryClient = new QueryClient({
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
+  defaultViewTransition:true,
   defaultPendingComponent: () => <RouterPendingComponent />,
   defaultNotFoundComponent: () => <RouterNotFoundComponent />,
   defaultErrorComponent: ({ error }) => <RouterErrorComponent error={error} />,

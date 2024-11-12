@@ -34,7 +34,7 @@ export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
                       asChild
                       className={
                         pathname === item.href
-                          ? `glass flex w-full gap-3 rounded-lg border bg-primary/40 p-1`
+                          ? `flex w-full gap-3 rounded-lg bg-base-200  text-primary p-1`
                           : `flex w-full gap-3 rounded-sm p-1 hover:bg-base-300`
                       }
                     >
