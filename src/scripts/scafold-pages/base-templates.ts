@@ -7,7 +7,7 @@ const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
 return `
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { ${capitalpagename}Page } from "./-components/${capitalpagename}Page";
+import { ${capitalpagename}Page } from "@/routes/${pagename}/-components/${capitalpagename}Page";
 
 const searchparams = z.object({
   sq: z.string().optional(),
@@ -77,8 +77,8 @@ import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { Update${capitalpagename}form } from "../form/update";
-import { ${pagename}ListQueryOptions } from "../../-query-options/${pagename}-query-option";
+import { Update${capitalpagename}form } from "@/routes/${pagename}/-components/form/update";
+import { ${pagename}ListQueryOptions } from "@/routes/${pagename}/-query-options/${pagename}-query-option";
 
 interface ${capitalpagename}ListProps {
   keyword?: string;

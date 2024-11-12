@@ -63,8 +63,6 @@ export function Create${capitalpagename}Form() {
   );
 }
 
-
- 
  
  `;
 }

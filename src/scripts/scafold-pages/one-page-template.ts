@@ -5,8 +5,8 @@ export function rootOnePageTemplate(
 ) {
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return `
-  import { createFileRoute } from '@tanstack/react-router'
-import { One${capitalpagename}Page } from '../-components/one${pagename}/One${capitalpagename}Page'
+import { createFileRoute } from '@tanstack/react-router'
+import { One${capitalpagename}Page } from '@/routes/${pagename}/-components/one${pagename}/One${capitalpagename}Page'
 
 export const Route = createFileRoute('/${path}/$${pagename}/')({
   component: One${capitalpagename}Page
@@ -21,7 +21,7 @@ export function rootOnePageComponentsTemplate(
 ) {
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return `
-  import { Suspense } from "react";
+import { Suspense } from "react";
 import { One${capitalpagename}Details } from "./One${capitalpagename}Details";
 
 interface One${capitalpagename}PageProps {
@@ -45,16 +45,16 @@ export function One${capitalpagename}Page({}: One${capitalpagename}PageProps) {
 
   `;
 }
-// /-components/form/base
+// /-components/one${capitalpagename}/one${capitalpagename}Details
 export function rootOnePageDetailsComponentsTemplate(
   pagename: string,
   path: string,
 ) {
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return `
-  import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { one${capitalpagename}QueryOptions } from "../../-query-options/${pagename}-query-option";
+import { one${capitalpagename}QueryOptions } from "@/routes/${pagename}/-query-options/${pagename}-query-option";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 
 interface One${capitalpagename}DetailsProps {
@@ -62,7 +62,7 @@ interface One${capitalpagename}DetailsProps {
 
 export function One${capitalpagename}Details({}: One${capitalpagename}DetailsProps) {
   const { ${pagename} } = useParams({ from: "/${path}/$${pagename}/" });
-  const query = useSuspenseQuery(one${capitalpagename}QueryOptions({ staff }));
+  const query = useSuspenseQuery(one${capitalpagename}QueryOptions({ ${pagename} }));
   const data = query.data;
   const error = query.error;
 
