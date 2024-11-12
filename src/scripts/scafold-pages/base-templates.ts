@@ -4,7 +4,7 @@ export function rootPageTemplate(pagename:string,path:string) {
 // const pagename = name.split("/").pop();
 // const capitalized = page.charAt(0).toUpperCase() + page.slice(1);
 const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
-  return `
+return `
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ${capitalpagename}Page } from "./-components/${capitalpagename}Page";
