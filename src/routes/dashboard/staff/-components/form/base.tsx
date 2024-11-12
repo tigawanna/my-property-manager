@@ -1,7 +1,7 @@
 import { UseMutationResult } from "@tanstack/react-query";
 
 interface BaseStaffFormProps<T extends Record<string, any>> {
-   mutation: UseMutationResult<
+  mutation: UseMutationResult<
     any,
     Error,
     T,
@@ -10,12 +10,12 @@ interface BaseStaffFormProps<T extends Record<string, any>> {
   row: T;
   afterSave?: () => void;
 }
-export function BaseStaffForm<T extends Record<string, any>>({}: BaseStaffFormProps<T>) {
+export function BaseStaffForm<T extends Record<string, any>>(
+  {}: BaseStaffFormProps<T>,
+) {
   return (
     <form>
       <h1>BaseStaffForm</h1>
     </form>
   );
 }
-
-

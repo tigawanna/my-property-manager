@@ -21,7 +21,7 @@ export function OneStaffDetails({}: OneStaffDetailsProps) {
   }
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
-        {JSON.stringify(data, null, 2)}
+      {JSON.stringify(data, null, 2)}
     </div>
   );
 }

@@ -21,6 +21,7 @@ export const Route = createFileRoute("/${path}/")({
 `;
 }
 
+// /-components/${capitalpagename}Page
 export function rootPageComponentTemplate(pagename: string, path: string) {
 const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
 return `
@@ -68,9 +69,69 @@ export function ${capitalpagename}Page({}: ${capitalpagename}PageProps) {
 }
 
 
+// /-components/${capitalpagename}List
 export function rootPageListComponentsTemplate(pagename: string, path: string) {
 const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
 return `
+import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
+import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
+import { Update${capitalpagename}form } from "../form/update";
+import { ${pagename}ListQueryOptions } from "../../-query-options/${pagename}-query-option";
+
+interface ${capitalpagename}ListProps {
+  keyword?: string;
+}
+
+export function ${capitalpagename}List({ keyword = "" }: ${capitalpagename}ListProps) {
+  const query = useSuspenseQuery(${pagename}ListQueryOptions({ keyword }));
+  const data = query.data;
+  const error = query.error;
+
+  if (error) {
+    return (
+      <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
+        <PBReturnedUseQueryError error={error} />
+      </div>
+    );
+  }
+  if (!data || data.items.length === 0) {
+    return (
+      <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
+        <ItemNotFound label="shops" />
+      </div>
+    );
+  }
+  return (
+    <div className="w-full h-full flex flex-col items-center justify-center">
+      <ul className="w-[90%] flex flex-wrap justify-center gap-2">
+        {data.items.map((item) => {
+          return (
+            <li
+              key={item.id}
+              className="h-56 w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl bg-base-300 p-4 flex justify-center items-center gap-2 "
+            >
+              <div className="flex flex-col gap-2 w-full justify-center">
+                {item.id}
+                <Link
+                  to={\`/${path}/\${item.id}/\`}
+                  className="text-primary"
+                >
+                  see details
+                </Link>
+              </div>
+              <Update${capitalpagename}form item={item} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 
 `
 }
+
+
