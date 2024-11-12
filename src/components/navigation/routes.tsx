@@ -1,4 +1,4 @@
-import { Droplet, Home, Store, User, Users, Wallet, Zap } from "lucide-react";
+import { Droplet, Home, ShieldCheck, Store, User, Users, Wallet, Zap } from "lucide-react";
 
 export const dashboard_routes = [
   { name: "shops", href: "/dashboard/shops", icon: <Store /> },
@@ -14,7 +14,11 @@ export const dashboard_routes = [
   },
   { name: "tenants", href: "/dashboard/tenants", icon: <Users /> },
   { name: "payments", href: "/dashboard/payments", icon: <Wallet /> },
-  { name: "staff", href: "/dashboard/staff", icon: <Wallet /> },
+  { name: "staff", href: "/dashboard/staff", icon: <div className="flex">
+    <Users />
+    <ShieldCheck />
+
+  </div> },
 ] as const;
 
 
