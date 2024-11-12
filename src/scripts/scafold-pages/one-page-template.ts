@@ -6,7 +6,7 @@ export function rootOnePageTemplate(
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return `
 import { createFileRoute } from '@tanstack/react-router'
-import { One${capitalpagename}Page } from '@/routes/${pagename}/-components/one${pagename}/One${capitalpagename}Page'
+import { One${capitalpagename}Page } from '@/routes/${path}/-components/one${pagename}/One${capitalpagename}Page'
 
 export const Route = createFileRoute('/${path}/$${pagename}/')({
   component: One${capitalpagename}Page
@@ -54,7 +54,7 @@ export function rootOnePageDetailsComponentsTemplate(
   return `
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { one${capitalpagename}QueryOptions } from "@/routes/${pagename}/-query-options/${pagename}-query-option";
+import { one${capitalpagename}QueryOptions } from "@/routes/${path}/-query-options/${pagename}-query-option";
 import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryError";
 
 interface One${capitalpagename}DetailsProps {
