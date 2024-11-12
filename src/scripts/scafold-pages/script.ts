@@ -13,12 +13,10 @@ async function scaffoldPage(pagename: string, path: string) {
   await mkdir(roootDirpath, { recursive: true }).catch((err) => {
     if (err instanceof Error) {
       if (err.message.includes("EEXIST")) {
-        console.log("=========== Folder already exists ============")
       }else{
         throw err
       }
     }
-    console.log("something went wrong", err.message)
 
   })
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
@@ -28,6 +26,9 @@ async function scaffoldPage(pagename: string, path: string) {
   }
   if (rootPath.endsWith("/")) {
     rootPath = rootPath.slice(0, rootPath.length - 1)
+  }
+  if (rootPath.startsWith("./")) {
+    rootPath = rootPath.slice(2)
   }
   if (rootPath.startsWith("/")) {
     rootPath = rootPath.slice(1)
@@ -116,7 +117,6 @@ const component_path = resolve("./src/routes",path)
           }
         })
       }
-      console.log("something went wro", err.message)
     }
   }
 }
@@ -139,7 +139,7 @@ function main() {
 
 main()
 .catch((err) => {
-  console.log(" ===bad things happend ===", err.message)
+  // console.log(" ===bad things happend ===", err.message)
 })
 
 // async function uwu(){
