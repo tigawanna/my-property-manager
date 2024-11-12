@@ -1,6 +1,6 @@
 import { ValidRoutes } from "@/lib/tanstack/router/router-types";
 import { useDebouncedValue } from "@/utils/hooks/use-debouncer";
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useTransition, useState, useEffect } from "react";
 
 export function usePageSearchQuery(path: ValidRoutes) {
