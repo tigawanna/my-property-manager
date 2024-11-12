@@ -74,8 +74,13 @@ export function SigninComponent({}: SigninComponentProps) {
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-3 bg-base-300 p-[2%] md:w-[60%] lg:w-[50%]"
+        className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-6 bg-base-300 p-[2%] md:w-[60%] lg:w-[50%]"
       >
+        <div  
+        className="rounded-lh flex h-full w-full flex-col items-center justify-center gap-3 bg-base-300 "
+        
+        >
+
         <h1 className="text-4xl">Sign in</h1>
         <form.Field
           name="emailOrUsername"
@@ -135,7 +140,8 @@ export function SigninComponent({}: SigninComponentProps) {
           </div>
         </div>
 
-        <MutationButton className="btn-primary" mutation={mutation} />
+        </div>
+        <MutationButton label="Sign in" className="btn-" mutation={mutation} />
       </form>
     </div>
   );

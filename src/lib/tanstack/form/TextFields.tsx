@@ -23,7 +23,7 @@ export function TextFormField<T>({
 
   return (
     <div className="w-full">
-      <label htmlFor={fieldKey} className="capitalize">
+      <label htmlFor={fieldKey} className=" text-sm">
         {fieldlabel || fieldKey}
       </label>
       <Input
@@ -59,7 +59,7 @@ export function TextAreaFormField<T>({
   );
   return (
     <div className="w-full">
-      <label htmlFor={fieldKey} className="capitalize">
+      <label htmlFor={fieldKey} className=" text-sm">
         {fieldlabel || fieldKey}
       </label>
       <Textarea
@@ -97,7 +97,7 @@ export function ImageURLInputField<T>({
   const value = field.state.value as string;
   return (
     <div className="w-full">
-      <label htmlFor={fieldKey} className="capitalize">
+      <label htmlFor={fieldKey} className=" text-sm">
         {fieldlabel || fieldKey}
       </label>
       <img src={value ?? ""} key={value} />

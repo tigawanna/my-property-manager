@@ -20,7 +20,7 @@ export function MutationButton({
   return (
     <button
       className={twMerge(
-        "btn btn-sm btn-wide flex items-center justify-center gap-2",
+        "btn  btn-wide flex items-center justify-center gap-2",
         className,
       )}
       disabled={mutation.isPending}
