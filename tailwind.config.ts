@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-import shadcnTailwindPlugin from "./src/components/lib/shadcn-tailwind-config";
+import shadcnTailwindPlugin from "./src/components/shadcn/lib/shadcn-tailwind-config.ts";
 export default {
     darkMode: ["class"],
     content: ["./src/**/*.{js,ts,jsx,tsx}"],
