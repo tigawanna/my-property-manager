@@ -17,6 +17,7 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AuthSignupImport } from './routes/auth/signup'
+import { Route as DashboardTodosLayoutImport } from './routes/dashboard/todos/layout'
 import { Route as DashboardTodosIndexImport } from './routes/dashboard/todos/index'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
 import { Route as DashboardStaffIndexImport } from './routes/dashboard/staff/index'
@@ -62,9 +63,14 @@ const AuthSignupRoute = AuthSignupImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DashboardTodosIndexRoute = DashboardTodosIndexImport.update({
-  path: '/todos/',
+const DashboardTodosLayoutRoute = DashboardTodosLayoutImport.update({
+  path: '/todos',
   getParentRoute: () => DashboardLayoutRoute,
+} as any)
+
+const DashboardTodosIndexRoute = DashboardTodosIndexImport.update({
+  path: '/',
+  getParentRoute: () => DashboardTodosLayoutRoute,
 } as any)
 
 const DashboardTenantsIndexRoute = DashboardTenantsIndexImport.update({
@@ -99,13 +105,13 @@ const DashboardBillsPrintRoute = DashboardBillsPrintImport.update({
 
 const DashboardTodosTrackingIndexRoute =
   DashboardTodosTrackingIndexImport.update({
-    path: '/todos/tracking/',
-    getParentRoute: () => DashboardLayoutRoute,
+    path: '/tracking/',
+    getParentRoute: () => DashboardTodosLayoutRoute,
   } as any)
 
 const DashboardTodosTodosIndexRoute = DashboardTodosTodosIndexImport.update({
-  path: '/todos/$todos/',
-  getParentRoute: () => DashboardLayoutRoute,
+  path: '/$todos/',
+  getParentRoute: () => DashboardTodosLayoutRoute,
 } as any)
 
 const DashboardTenantsTenantIndexRoute =
@@ -141,6 +147,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardLayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/dashboard/todos': {
+      id: '/dashboard/todos'
+      path: '/todos'
+      fullPath: '/dashboard/todos'
+      preLoaderRoute: typeof DashboardTodosLayoutImport
+      parentRoute: typeof DashboardLayoutImport
     }
     '/auth/signup': {
       id: '/auth/signup'
@@ -214,10 +227,10 @@ declare module '@tanstack/react-router' {
     }
     '/dashboard/todos/': {
       id: '/dashboard/todos/'
-      path: '/todos'
-      fullPath: '/dashboard/todos'
+      path: '/'
+      fullPath: '/dashboard/todos/'
       preLoaderRoute: typeof DashboardTodosIndexImport
-      parentRoute: typeof DashboardLayoutImport
+      parentRoute: typeof DashboardTodosLayoutImport
     }
     '/dashboard/shops/$shop/': {
       id: '/dashboard/shops/$shop/'
@@ -242,24 +255,40 @@ declare module '@tanstack/react-router' {
     }
     '/dashboard/todos/$todos/': {
       id: '/dashboard/todos/$todos/'
-      path: '/todos/$todos'
+      path: '/$todos'
       fullPath: '/dashboard/todos/$todos'
       preLoaderRoute: typeof DashboardTodosTodosIndexImport
-      parentRoute: typeof DashboardLayoutImport
+      parentRoute: typeof DashboardTodosLayoutImport
     }
     '/dashboard/todos/tracking/': {
       id: '/dashboard/todos/tracking/'
-      path: '/todos/tracking'
+      path: '/tracking'
       fullPath: '/dashboard/todos/tracking'
       preLoaderRoute: typeof DashboardTodosTrackingIndexImport
-      parentRoute: typeof DashboardLayoutImport
+      parentRoute: typeof DashboardTodosLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface DashboardTodosLayoutRouteChildren {
+  DashboardTodosIndexRoute: typeof DashboardTodosIndexRoute
+  DashboardTodosTodosIndexRoute: typeof DashboardTodosTodosIndexRoute
+  DashboardTodosTrackingIndexRoute: typeof DashboardTodosTrackingIndexRoute
+}
+
+const DashboardTodosLayoutRouteChildren: DashboardTodosLayoutRouteChildren = {
+  DashboardTodosIndexRoute: DashboardTodosIndexRoute,
+  DashboardTodosTodosIndexRoute: DashboardTodosTodosIndexRoute,
+  DashboardTodosTrackingIndexRoute: DashboardTodosTrackingIndexRoute,
+}
+
+const DashboardTodosLayoutRouteWithChildren =
+  DashboardTodosLayoutRoute._addFileChildren(DashboardTodosLayoutRouteChildren)
+
 interface DashboardLayoutRouteChildren {
+  DashboardTodosLayoutRoute: typeof DashboardTodosLayoutRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
   DashboardBillsPrintRoute: typeof DashboardBillsPrintRoute
   DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
@@ -267,15 +296,13 @@ interface DashboardLayoutRouteChildren {
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
   DashboardStaffIndexRoute: typeof DashboardStaffIndexRoute
   DashboardTenantsIndexRoute: typeof DashboardTenantsIndexRoute
-  DashboardTodosIndexRoute: typeof DashboardTodosIndexRoute
   DashboardShopsShopIndexRoute: typeof DashboardShopsShopIndexRoute
   DashboardStaffStaffIndexRoute: typeof DashboardStaffStaffIndexRoute
   DashboardTenantsTenantIndexRoute: typeof DashboardTenantsTenantIndexRoute
-  DashboardTodosTodosIndexRoute: typeof DashboardTodosTodosIndexRoute
-  DashboardTodosTrackingIndexRoute: typeof DashboardTodosTrackingIndexRoute
 }
 
 const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
+  DashboardTodosLayoutRoute: DashboardTodosLayoutRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
   DashboardBillsPrintRoute: DashboardBillsPrintRoute,
   DashboardBillsIndexRoute: DashboardBillsIndexRoute,
@@ -283,12 +310,9 @@ const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
   DashboardStaffIndexRoute: DashboardStaffIndexRoute,
   DashboardTenantsIndexRoute: DashboardTenantsIndexRoute,
-  DashboardTodosIndexRoute: DashboardTodosIndexRoute,
   DashboardShopsShopIndexRoute: DashboardShopsShopIndexRoute,
   DashboardStaffStaffIndexRoute: DashboardStaffStaffIndexRoute,
   DashboardTenantsTenantIndexRoute: DashboardTenantsTenantIndexRoute,
-  DashboardTodosTodosIndexRoute: DashboardTodosTodosIndexRoute,
-  DashboardTodosTrackingIndexRoute: DashboardTodosTrackingIndexRoute,
 }
 
 const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(
@@ -298,6 +322,7 @@ const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardLayoutRouteWithChildren
+  '/dashboard/todos': typeof DashboardTodosLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
   '/auth': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -308,7 +333,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
-  '/dashboard/todos': typeof DashboardTodosIndexRoute
+  '/dashboard/todos/': typeof DashboardTodosIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
   '/dashboard/staff/$staff': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
@@ -340,6 +365,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardLayoutRouteWithChildren
+  '/dashboard/todos': typeof DashboardTodosLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
   '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -363,6 +389,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/dashboard/todos'
     | '/auth/signup'
     | '/auth'
     | '/dashboard/'
@@ -373,7 +400,7 @@ export interface FileRouteTypes {
     | '/dashboard/shops'
     | '/dashboard/staff'
     | '/dashboard/tenants'
-    | '/dashboard/todos'
+    | '/dashboard/todos/'
     | '/dashboard/shops/$shop'
     | '/dashboard/staff/$staff'
     | '/dashboard/tenants/$tenant'
@@ -402,6 +429,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/dashboard/todos'
     | '/auth/signup'
     | '/auth/'
     | '/dashboard/'
@@ -462,6 +490,7 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard/layout.tsx",
       "children": [
+        "/dashboard/todos",
         "/dashboard/",
         "/dashboard/bills/print",
         "/dashboard/bills/",
@@ -469,10 +498,16 @@ export const routeTree = rootRoute
         "/dashboard/shops/",
         "/dashboard/staff/",
         "/dashboard/tenants/",
-        "/dashboard/todos/",
         "/dashboard/shops/$shop/",
         "/dashboard/staff/$staff/",
-        "/dashboard/tenants/$tenant/",
+        "/dashboard/tenants/$tenant/"
+      ]
+    },
+    "/dashboard/todos": {
+      "filePath": "dashboard/todos/layout.tsx",
+      "parent": "/dashboard",
+      "children": [
+        "/dashboard/todos/",
         "/dashboard/todos/$todos/",
         "/dashboard/todos/tracking/"
       ]
@@ -516,7 +551,7 @@ export const routeTree = rootRoute
     },
     "/dashboard/todos/": {
       "filePath": "dashboard/todos/index.tsx",
-      "parent": "/dashboard"
+      "parent": "/dashboard/todos"
     },
     "/dashboard/shops/$shop/": {
       "filePath": "dashboard/shops/$shop/index.tsx",
@@ -532,11 +567,11 @@ export const routeTree = rootRoute
     },
     "/dashboard/todos/$todos/": {
       "filePath": "dashboard/todos/$todos/index.tsx",
-      "parent": "/dashboard"
+      "parent": "/dashboard/todos"
     },
     "/dashboard/todos/tracking/": {
       "filePath": "dashboard/todos/tracking/index.tsx",
-      "parent": "/dashboard"
+      "parent": "/dashboard/todos"
     }
   }
 }
