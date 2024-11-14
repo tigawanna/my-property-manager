@@ -74,7 +74,7 @@ function App() {
         context={{
           pb,
           queryClient,
-          viewer: userQuery.data,
+          viewer: userQuery?.data,
         }}
       />
     </>
