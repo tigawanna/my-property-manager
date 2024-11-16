@@ -30,6 +30,7 @@ import { Route as DashboardTodosTodosIndexImport } from './routes/dashboard/todo
 import { Route as DashboardTenantsTenantIndexImport } from './routes/dashboard/tenants/$tenant/index'
 import { Route as DashboardStaffStaffIndexImport } from './routes/dashboard/staff/$staff/index'
 import { Route as DashboardShopsShopIndexImport } from './routes/dashboard/shops/$shop/index'
+import { Route as DashboardTodosTrackingLoadIndexImport } from './routes/dashboard/todos/tracking/load/index'
 import { Route as DashboardTodosTrackingTrackingIndexImport } from './routes/dashboard/todos/tracking/$tracking/index'
 
 // Create/Update Routes
@@ -130,6 +131,12 @@ const DashboardShopsShopIndexRoute = DashboardShopsShopIndexImport.update({
   path: '/shops/$shop/',
   getParentRoute: () => DashboardLayoutRoute,
 } as any)
+
+const DashboardTodosTrackingLoadIndexRoute =
+  DashboardTodosTrackingLoadIndexImport.update({
+    path: '/tracking/load/',
+    getParentRoute: () => DashboardTodosLayoutRoute,
+  } as any)
 
 const DashboardTodosTrackingTrackingIndexRoute =
   DashboardTodosTrackingTrackingIndexImport.update({
@@ -281,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTodosTrackingTrackingIndexImport
       parentRoute: typeof DashboardTodosLayoutImport
     }
+    '/dashboard/todos/tracking/load/': {
+      id: '/dashboard/todos/tracking/load/'
+      path: '/tracking/load'
+      fullPath: '/dashboard/todos/tracking/load'
+      preLoaderRoute: typeof DashboardTodosTrackingLoadIndexImport
+      parentRoute: typeof DashboardTodosLayoutImport
+    }
   }
 }
 
@@ -291,6 +305,7 @@ interface DashboardTodosLayoutRouteChildren {
   DashboardTodosTodosIndexRoute: typeof DashboardTodosTodosIndexRoute
   DashboardTodosTrackingIndexRoute: typeof DashboardTodosTrackingIndexRoute
   DashboardTodosTrackingTrackingIndexRoute: typeof DashboardTodosTrackingTrackingIndexRoute
+  DashboardTodosTrackingLoadIndexRoute: typeof DashboardTodosTrackingLoadIndexRoute
 }
 
 const DashboardTodosLayoutRouteChildren: DashboardTodosLayoutRouteChildren = {
@@ -299,6 +314,7 @@ const DashboardTodosLayoutRouteChildren: DashboardTodosLayoutRouteChildren = {
   DashboardTodosTrackingIndexRoute: DashboardTodosTrackingIndexRoute,
   DashboardTodosTrackingTrackingIndexRoute:
     DashboardTodosTrackingTrackingIndexRoute,
+  DashboardTodosTrackingLoadIndexRoute: DashboardTodosTrackingLoadIndexRoute,
 }
 
 const DashboardTodosLayoutRouteWithChildren =
@@ -357,6 +373,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/todos/$todos': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking': typeof DashboardTodosTrackingIndexRoute
   '/dashboard/todos/tracking/$tracking': typeof DashboardTodosTrackingTrackingIndexRoute
+  '/dashboard/todos/tracking/load': typeof DashboardTodosTrackingLoadIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -378,6 +395,7 @@ export interface FileRoutesByTo {
   '/dashboard/todos/$todos': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking': typeof DashboardTodosTrackingIndexRoute
   '/dashboard/todos/tracking/$tracking': typeof DashboardTodosTrackingTrackingIndexRoute
+  '/dashboard/todos/tracking/load': typeof DashboardTodosTrackingLoadIndexRoute
 }
 
 export interface FileRoutesById {
@@ -402,6 +420,7 @@ export interface FileRoutesById {
   '/dashboard/todos/$todos/': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking/': typeof DashboardTodosTrackingIndexRoute
   '/dashboard/todos/tracking/$tracking/': typeof DashboardTodosTrackingTrackingIndexRoute
+  '/dashboard/todos/tracking/load/': typeof DashboardTodosTrackingLoadIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -427,6 +446,7 @@ export interface FileRouteTypes {
     | '/dashboard/todos/$todos'
     | '/dashboard/todos/tracking'
     | '/dashboard/todos/tracking/$tracking'
+    | '/dashboard/todos/tracking/load'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -447,6 +467,7 @@ export interface FileRouteTypes {
     | '/dashboard/todos/$todos'
     | '/dashboard/todos/tracking'
     | '/dashboard/todos/tracking/$tracking'
+    | '/dashboard/todos/tracking/load'
   id:
     | '__root__'
     | '/'
@@ -469,6 +490,7 @@ export interface FileRouteTypes {
     | '/dashboard/todos/$todos/'
     | '/dashboard/todos/tracking/'
     | '/dashboard/todos/tracking/$tracking/'
+    | '/dashboard/todos/tracking/load/'
   fileRoutesById: FileRoutesById
 }
 
@@ -533,7 +555,8 @@ export const routeTree = rootRoute
         "/dashboard/todos/",
         "/dashboard/todos/$todos/",
         "/dashboard/todos/tracking/",
-        "/dashboard/todos/tracking/$tracking/"
+        "/dashboard/todos/tracking/$tracking/",
+        "/dashboard/todos/tracking/load/"
       ]
     },
     "/auth/signup": {
@@ -599,6 +622,10 @@ export const routeTree = rootRoute
     },
     "/dashboard/todos/tracking/$tracking/": {
       "filePath": "dashboard/todos/tracking/$tracking/index.tsx",
+      "parent": "/dashboard/todos"
+    },
+    "/dashboard/todos/tracking/load/": {
+      "filePath": "dashboard/todos/tracking/load/index.tsx",
       "parent": "/dashboard/todos"
     }
   }

@@ -5,7 +5,7 @@ declare module "html-table-to-json" {
     constructor(html: string);
 
     static parse(html: string): {
-        _results: Record<string, string>[];
+        _results: Array<Record<string, string>[]>;
         _headers: string[];
         _count: null;
         _firstRowUsedAsHeaders: boolean;

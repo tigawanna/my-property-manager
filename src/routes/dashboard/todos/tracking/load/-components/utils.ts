@@ -1,6 +1,16 @@
 import { convertToHtml } from "mammoth";
 import HtmlTableToJson from "html-table-to-json";
 
+
+export type TrackingSheetRow = {
+  date: any;
+  description: any;
+  materials: any;
+  labour: any;
+  completion_date: any;
+  status: any;
+};
+
 export function parseRows(rows:Array<Record<string,any>>) {
   return rows.map((row) => {
       if (row["2"] === "") {
@@ -15,7 +25,7 @@ export function parseRows(rows:Array<Record<string,any>>) {
             status: row["6"],
         }
     return new_row;
-  });
+  }).filter((row) => row !== undefined);
 }
 
 

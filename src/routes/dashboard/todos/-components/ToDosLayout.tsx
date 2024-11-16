@@ -13,6 +13,9 @@ export function ToDosLayout({}: ToDosLayoutProps) {
         <Link to="/dashboard/todos/tracking">
           <h1 className="btn btn-sm btn-link">Trackong</h1>
         </Link>
+        <Link to="/dashboard/todos/tracking/load">
+          <h1 className="btn btn-sm btn-link">Load Trackong</h1>
+        </Link>
       </nav>
       <div className="h-full w-full">
         <Outlet />
