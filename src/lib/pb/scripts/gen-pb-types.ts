@@ -69,6 +69,7 @@ export async function getCustomTypes() {
 export async function getPBType() {
   const PB_ADMIN_EMAIL = process.env.PB_ADMIN_EMAIL;
   const PB_ADMIN_PASSWORD = process.env.PB_ADMIN_PASSWORD;
+  const PB_URL = process.env.VITE_PB_URL;
 
   const commands = [
     "npx",
@@ -77,7 +78,11 @@ export async function getPBType() {
     PB_ADMIN_EMAIL,
     "--password",
     PB_ADMIN_PASSWORD,
+
   ];
+  if(PB_URL){
+    commands.push("--url", PB_URL);
+  }
   console.log(" ================ running command =============== ", commands);
   const output = await runCommand(commands.join(" "));
   return output;

@@ -40,7 +40,7 @@ export function Create${capitalpagename}Form() {
       });
     },
     meta: {
-      invalidates: ["property_shops_payments"],
+      invalidates: ["${pagename}"],
     },
   });
   return (
@@ -48,7 +48,7 @@ export function Create${capitalpagename}Form() {
       open={open}
       setOpen={setOpen}
       title="Add ${capitalpagename}"
-      description="Add new staff"
+      description="Add new ${capitalpagename}"
       trigger={
         <button className="btn btn-outline btn-sm flex items-center justify-center gap-2">
           <Plus className="" />

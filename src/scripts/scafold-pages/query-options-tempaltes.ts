@@ -1,4 +1,5 @@
 // /-components/query-options/#{pagename}-query-option
+
 export function rootPageQeuryOptionsTemplate(
   pagename: string,
   path: string,
@@ -6,6 +7,7 @@ export function rootPageQeuryOptionsTemplate(
   const capitalpagename = pagename.charAt(0).toUpperCase() + pagename.slice(1);
   return ` 
 import { queryOptions } from "@tanstack/react-query";
+
 
 interface ${pagename}QueryOptionPropss {
   keyword: string;

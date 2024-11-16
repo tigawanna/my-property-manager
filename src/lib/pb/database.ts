@@ -341,16 +341,19 @@ export interface PropertyStaffListResponse extends BaseCollectionResponse {
 	collectionName: 'property_staff_list';
 	name: string;
 	account: string;
+	staff_role: '' | 'manager' | 'cashier' | 'caretaker';
 }
 
 export interface PropertyStaffListCreate extends BaseCollectionCreate {
 	name?: string;
 	account: string;
+	staff_role?: '' | 'manager' | 'cashier' | 'caretaker';
 }
 
 export interface PropertyStaffListUpdate extends BaseCollectionUpdate {
 	name?: string;
 	account?: string;
+	staff_role?: '' | 'manager' | 'cashier' | 'caretaker';
 }
 
 export interface PropertyStaffListCollection {
@@ -465,32 +468,29 @@ export interface PropertyShopHistoryResponse extends BaseCollectionResponse {
 	collectionName: 'property_shop_history';
 	shop: string;
 	tenant: string;
-	rent: number;
+	monthly_rent: number;
 	deposit: number;
-	from: string;
-	to: string;
+	utils: '' | 'elec' | 'water' | 'both' | 'none';
 }
 
 export interface PropertyShopHistoryCreate extends BaseCollectionCreate {
-	shop?: string;
-	tenant?: string;
-	rent?: number;
-	deposit?: number;
-	from?: string | Date;
-	to?: string | Date;
+	shop: string;
+	tenant: string;
+	monthly_rent: number;
+	deposit: number;
+	utils?: '' | 'elec' | 'water' | 'both' | 'none';
 }
 
 export interface PropertyShopHistoryUpdate extends BaseCollectionUpdate {
 	shop?: string;
 	tenant?: string;
-	rent?: number;
-	'rent+'?: number;
-	'rent-'?: number;
+	monthly_rent?: number;
+	'monthly_rent+'?: number;
+	'monthly_rent-'?: number;
 	deposit?: number;
 	'deposit+'?: number;
 	'deposit-'?: number;
-	from?: string | Date;
-	to?: string | Date;
+	utils?: '' | 'elec' | 'water' | 'both' | 'none';
 }
 
 export interface PropertyShopHistoryCollection {
@@ -508,6 +508,91 @@ export interface PropertyShopHistoryCollection {
 
 // ==== end of property_shop_history block =====
 
+// ==== start of property_staff_tasks block =====
+
+
+export interface PropertyStaffTasksResponse extends BaseCollectionResponse {
+	collectionName: 'property_staff_tasks';
+	title: string;
+	description: string;
+	scheduled_for: string;
+	repeats_in_days: number;
+	status: '' | 'dismissed' | 'pending' | 'done';
+}
+
+export interface PropertyStaffTasksCreate extends BaseCollectionCreate {
+	title?: string;
+	description?: string;
+	scheduled_for?: string | Date;
+	repeats_in_days?: number;
+	status?: '' | 'dismissed' | 'pending' | 'done';
+}
+
+export interface PropertyStaffTasksUpdate extends BaseCollectionUpdate {
+	title?: string;
+	description?: string;
+	scheduled_for?: string | Date;
+	repeats_in_days?: number;
+	'repeats_in_days+'?: number;
+	'repeats_in_days-'?: number;
+	status?: '' | 'dismissed' | 'pending' | 'done';
+}
+
+export interface PropertyStaffTasksCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_staff_tasks';
+	response: PropertyStaffTasksResponse;
+	create: PropertyStaffTasksCreate;
+	update: PropertyStaffTasksUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of property_staff_tasks block =====
+
+// ==== start of property_staff_tracking_sheet block =====
+
+
+export interface PropertyStaffTrackingSheetResponse extends BaseCollectionResponse {
+	collectionName: 'property_staff_tracking_sheet';
+	date: string;
+	description: string;
+	material: string;
+	labour: string;
+	completed: string;
+	status: string;
+}
+
+export interface PropertyStaffTrackingSheetCreate extends BaseCollectionCreate {
+	date?: string;
+	description?: string;
+	material?: string;
+	labour?: string;
+	completed?: string;
+	status?: string;
+}
+
+export interface PropertyStaffTrackingSheetUpdate extends BaseCollectionUpdate {
+	date?: string;
+	description?: string;
+	material?: string;
+	labour?: string;
+	completed?: string;
+	status?: string;
+}
+
+export interface PropertyStaffTrackingSheetCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_staff_tracking_sheet';
+	response: PropertyStaffTrackingSheetResponse;
+	create: PropertyStaffTrackingSheetCreate;
+	update: PropertyStaffTrackingSheetUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of property_staff_tracking_sheet block =====
+
 export type Schema = {
 	property_shops: PropertyShopsCollection;
 	property_bills: PropertyBillsCollection;
@@ -517,4 +602,6 @@ export type Schema = {
 	property_users_list: PropertyUsersListCollection;
 	property_shop_payments: PropertyShopPaymentsCollection;
 	property_shop_history: PropertyShopHistoryCollection;
+	property_staff_tasks: PropertyStaffTasksCollection;
+	property_staff_tracking_sheet: PropertyStaffTrackingSheetCollection;
 };
