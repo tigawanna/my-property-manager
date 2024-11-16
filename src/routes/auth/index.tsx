@@ -21,14 +21,14 @@ interface SigninPageProps {}
 
 export function SigninPage({}: SigninPageProps) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary/20 via-accent/10 to-primary/50">
-      <Link
+    <div className="flex min-h-screen flex-col items-center justify-center ">
+      {/* <Link
         to="/"
         className="absolute left-[2%] top-[2%] flex items-center gap-2 text-2xl font-bold hover:text-accent"
       >
         My property manager
         <MapPinHouse />
-      </Link>
+      </Link> */}
       <SigninComponent />
     </div>
   );

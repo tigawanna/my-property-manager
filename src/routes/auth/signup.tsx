@@ -22,11 +22,7 @@ interface SignupProps {}
 
 export function SignupPage({}: SignupProps) {
   return (
-    <div className="to-primary/50items-center flex h-full min-h-screen w-full flex-col justify-center bg-gradient-to-br from-primary/20 via-accent/10">
-      <Link to="/" className="absolute hover:text-accent left-[2%] top-[2%] flex items-center gap-2 text-2xl font-bold">
-        My property manager
-        <MapPinHouse />
-      </Link>
+    <div className="to-primary/50items-center flex h-full min-h-screen w-full flex-col justify-center ">
       <SignupComponent />
     </div>
   );

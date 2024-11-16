@@ -1,7 +1,8 @@
 import { pb } from "@/lib/pb/client";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { CheckIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { CheckIcon, MapPinHouse } from "lucide-react";
 
 interface ProfilePageProps {}
 

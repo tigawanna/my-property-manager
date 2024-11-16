@@ -35,7 +35,7 @@ export default {
 
   daisyui: {
     light: {
-      "color-scheme": "dark",
+      "color-scheme": "light",
       primary: "#7480ff",
       "primary-content": "#050617",
       secondary: "#ff52d9",
