@@ -1,8 +1,10 @@
 import { pb } from "@/lib/pb/client";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { CheckIcon, MapPinHouse } from "lucide-react";
+import { Navigate } from "@tanstack/react-router";
+import { StaffUserProfile } from "./StaffUserProfile";
+import { RegularUserProfile } from "./RegularUserProfile";
+import { BaseProfile } from "./BaseProfile";
 
 interface ProfilePageProps {}
 
@@ -25,27 +27,16 @@ export function ProfilePage({}: ProfilePageProps) {
       }),
   });
 
-  const profileRole = profileQuery.data?.expand?.[viewer?.role || "user"];
+const profile = profileQuery?.data
+
+  if(!viewer || !profile){
+    return <Navigate to="/"/>
+  }
+    
+
   return (
     <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center p-1">
-      <div className="flex gap-2 rounded-md bg-base-200 p-3">
-        <div className="flex w-full flex-col gap-2 rounded-md bg-base-200 p-3">
-          <h1 className="text-5xl">{viewer?.username}</h1>
-          <p className="">{viewer?.email}</p>
-          <div className="flex items-center gap-2 rounded-lg">
-            <div className="">{viewer?.role}</div>
-            {profileRole && profileRole.id && (
-              <CheckIcon className="fill-success-content text-success-content" />
-            )}
-          </div>
-        </div>
-        <div className="flex w-full flex-col gap-2 rounded-md bg-base-200 p-3">
-          <h1 className="text-5xl">Profile</h1>
-          <p className="">{viewer?.role}</p>
-          <p className="">{viewer?.email}</p>
-          <p className="">{viewer?.email}</p>
-        </div>
-      </div>
+      <BaseProfile user={profile} />
     </div>
   );
 }
