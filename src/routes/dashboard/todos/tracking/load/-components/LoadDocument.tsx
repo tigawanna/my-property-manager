@@ -11,6 +11,7 @@ import {
 } from "@/components/shadcn/ui/dialog";
 
 import { useTrackingSheetStore } from "@/store/tacking-sheet-store";
+import { FolderPlus } from "lucide-react";
 
 interface LoadFromDocxModalProps {
 
@@ -60,7 +61,10 @@ export function LoadFromDocxModal({
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="btn btn-secondary btn-wide btn-sm">Load Document</span>
+        <span className="btn btn-outline btn-secondary btn-sm btn-wide">
+          Load Document
+          <FolderPlus />
+        </span>
       </DialogTrigger>
       <DialogContent className="flex w-full flex-col gap-5">
         <DialogHeader>
@@ -76,28 +80,25 @@ export function LoadFromDocxModal({
             accept=".docx"
             className="file-input file-input-bordered file-input-sm w-full max-w-xs"
           />
-
         </div>
-      <DialogFooter className="flex justify-center items-center w-full ">
-        {file && (
-          <button
-            className="btn-wide btn btn-sm "
-            onClick={() => {
-              handleConvert(file).then((res) => {
-                if (res) {
-                  setTrackingSheet((prev) =>{
-                    return parseRows(res.tableJson[0] as TrackingSheetRow[])
-
+        <DialogFooter className="flex w-full items-center justify-center">
+          {file && (
+            <button
+              className="btn btn-sm btn-wide"
+              onClick={() => {
+                handleConvert(file).then((res) => {
+                  if (res) {
+                    setTrackingSheet((prev) => {
+                      return parseRows(res.tableJson[0] as TrackingSheetRow[]);
+                    });
                   }
-                  );
-                }
-              });
-            }}
-          >
-            Convert
-          </button>
-        )}
-      </DialogFooter>
+                });
+              }}
+            >
+              Convert
+            </button>
+          )}
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

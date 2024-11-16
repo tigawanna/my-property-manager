@@ -10,6 +10,8 @@ import {
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
 import { Edit } from "lucide-react";
+import { Textarea } from "@/components/shadcn/ui/textarea";
+import { Input } from "@/components/shadcn/ui/input";
 
 interface LoadedTrackingSheetFormProps {
   oneRow: TrackingSheetRow;
@@ -18,14 +20,6 @@ interface LoadedTrackingSheetFormProps {
   ) => void;
 }
 
-// export type TrackingSheetRow = {
-//   date: any;
-//   description: any;
-//   materials: any;
-//   labour: any;
-//   completion_date: any;
-//   status: any;
-// };
 export function LoadedTrackingSheetForm({
   oneRow,
   setTrackingSheet,
@@ -38,7 +32,9 @@ export function LoadedTrackingSheetForm({
     completion_date: oneRow.completion_date ?? "",
     status: oneRow.status ?? "",
   });
-  function hnadleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  function hnadleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     setInut({ ...input, [e.target.name]: e.target.value });
   }
   function handleSubmit() {
@@ -76,7 +72,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="date" className="text-right">
                 Date
               </label>
-              <input
+             <Input
                 type="date"
                 id="date"
                 name="date"
@@ -89,8 +85,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="description" className="text-right">
                 Description
               </label>
-              <input
-                type="text"
+              <Textarea
                 id="description"
                 name="description"
                 value={input.description}
@@ -102,7 +97,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="materials" className="text-right">
                 Materials
               </label>
-              <input
+             <Input
                 type="text"
                 id="materials"
                 name="materials"
@@ -115,7 +110,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="labour" className="text-right">
                 Labour
               </label>
-              <input
+             <Input
                 type="text"
                 id="labour"
                 name="labour"
@@ -128,7 +123,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="completion_date" className="text-right">
                 Completion Date
               </label>
-              <input
+              <Input
                 type="date"
                 id="completion_date"
                 name="completion_date"
@@ -141,7 +136,7 @@ export function LoadedTrackingSheetForm({
               <label htmlFor="status" className="text-right">
                 Status
               </label>
-              <input
+             <Input
                 type="text"
                 id="status"
                 name="status"
