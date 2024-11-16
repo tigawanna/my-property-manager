@@ -1,6 +1,7 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { SigninComponent } from "./-components/SigninComponent";
+import { MapPinHouse } from "lucide-react";
 const searchparams = z.object({
   returnTo: z.string(),
 });
@@ -20,7 +21,14 @@ interface SigninPageProps {}
 
 export function SigninPage({}: SigninPageProps) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-primary/20 via-accent/10 to-primary/50">
+      <Link
+        to="/"
+        className="absolute left-[2%] top-[2%] flex items-center gap-2 text-2xl font-bold hover:text-accent"
+      >
+        My property manager
+        <MapPinHouse />
+      </Link>
       <SigninComponent />
     </div>
   );

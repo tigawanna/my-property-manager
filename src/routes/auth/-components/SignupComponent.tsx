@@ -9,7 +9,7 @@ import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useState } from "react";
 import { viewerqueryOptions } from "@/lib/tanstack/query/query-options/viewer-query-options";
 import { makeHotToast } from "@/components/toasters";
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 
 interface SignupComponentProps {}
 
@@ -28,6 +28,9 @@ const formOpts = formOptions<PropertyUserCreate>({
 });
 
 export function SignupComponent({}: SignupComponentProps) {
+    const { returnTo } = useSearch({
+      from: "/auth/signup",
+    });
   const [showPassword, setShowPassword] = useState(false);
   const qc = useQueryClient();
   const navigate = useNavigate({ from: "/auth/signup" });
@@ -67,113 +70,126 @@ export function SignupComponent({}: SignupComponentProps) {
   });
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="flex h-full w-full items-center justify-evenly gap-2 p-5">
+      <img
+        src="/site.svg"
+        alt="logo"
+        className="hidden w-[30%] object-cover md:flex"
+      />
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="bg-bg-muted flex h-full w-[90%] flex-col items-center justify-center gap-3 rounded-md p-[2%] md:w-[60%] lg:w-[50%]"
+        className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-6 bg-base-300/20 p-[2%] md:w-[70%] lg:w-[40%]"
       >
-        <h1 className="text-4xl">Sign up</h1>
-        <form.Field
-          name="username"
-          validatorAdapter={zodValidator()}
-          validators={{
-            onChange: z.string(),
-          }}
-          children={(field) => {
-            return (
-              <TextFormField<PropertyUserCreate>
-                field={field}
-                fieldKey="username"
-                inputOptions={{
-                  onBlur: field.handleBlur,
-                  onChange: (e) => field.handleChange(e.target.value),
-                }}
+        <div className="flex flex-col items-center justify-center gap- w-full h-full">
+          <h1 className="text-4xl font-bold">Sign up</h1>
+          <form.Field
+            name="username"
+            validatorAdapter={zodValidator()}
+            validators={{
+              onChange: z.string(),
+            }}
+            children={(field) => {
+              return (
+                <TextFormField<PropertyUserCreate>
+                  field={field}
+                  fieldKey="username"
+                  inputOptions={{
+                    onBlur: field.handleBlur,
+                    onChange: (e) => field.handleChange(e.target.value),
+                  }}
+                />
+              );
+            }}
+          />
+          <form.Field
+            name="email"
+            validatorAdapter={zodValidator()}
+            validators={{
+              onChange: z.string().email(),
+            }}
+            children={(field) => {
+              return (
+                <TextFormField<PropertyUserCreate>
+                  field={field}
+                  fieldKey="email"
+                  inputOptions={{
+                    autoComplete: "email",
+                    onBlur: field.handleBlur,
+                    onChange: (e) => field.handleChange(e.target.value),
+                  }}
+                />
+              );
+            }}
+          />
+          <form.Field
+            name="password"
+            validatorAdapter={zodValidator()}
+            validators={{
+              onChange: z.string().min(8),
+            }}
+            children={(field) => {
+              return (
+                <TextFormField<PropertyUserCreate>
+                  field={field}
+                  fieldKey="password"
+                  inputOptions={{
+                    type: showPassword ? "text" : "password",
+                    onBlur: field.handleBlur,
+                    onChange: (e) => field.handleChange(e.target.value),
+                  }}
+                />
+              );
+            }}
+          />
+          <form.Field
+            name="passwordConfirm"
+            validatorAdapter={zodValidator()}
+            validators={{
+              onChange: z.string().min(8),
+            }}
+            children={(field) => {
+              return (
+                <TextFormField<PropertyUserCreate>
+                  field={field}
+                  fieldKey="passwordConfirm"
+                  fieldlabel="Confirm password"
+                  inputOptions={{
+                    type: showPassword ? "text" : "password",
+                    onBlur: field.handleBlur,
+                    onChange: (e) => field.handleChange(e.target.value),
+                  }}
+                />
+              );
+            }}
+          />
+          <div className="w-full p-5">
+            <div className="flex w-full items-center justify-center gap-3">
+              <label htmlFor="showPassword" className="text-sm">
+                Show password
+              </label>
+              <input
+                type="checkbox"
+                id="showPassword"
+                name="showPassword"
+                className="checkbox-primary checkbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
               />
-            );
-          }}
-        />
-        <form.Field
-          name="email"
-          validatorAdapter={zodValidator()}
-          validators={{
-            onChange: z.string().email(),
-          }}
-          children={(field) => {
-            return (
-              <TextFormField<PropertyUserCreate>
-                field={field}
-                fieldKey="email"
-                inputOptions={{
-                  autoComplete: "email",
-                  onBlur: field.handleBlur,
-                  onChange: (e) => field.handleChange(e.target.value),
-                }}
-              />
-            );
-          }}
-        />
-        <form.Field
-          name="password"
-          validatorAdapter={zodValidator()}
-          validators={{
-            onChange: z.string().min(8),
-          }}
-          children={(field) => {
-            return (
-              <TextFormField<PropertyUserCreate>
-                field={field}
-                fieldKey="password"
-                inputOptions={{
-                  type: showPassword ? "text" : "password",
-                  onBlur: field.handleBlur,
-                  onChange: (e) => field.handleChange(e.target.value),
-                }}
-              />
-            );
-          }}
-        />
-        <form.Field
-          name="passwordConfirm"
-          validatorAdapter={zodValidator()}
-          validators={{
-            onChange: z.string().min(8),
-          }}
-          children={(field) => {
-            return (
-              <TextFormField<PropertyUserCreate>
-                field={field}
-                fieldKey="passwordConfirm"
-                fieldlabel="Confirm password"
-                inputOptions={{
-                  type: showPassword ? "text" : "password",
-                  onBlur: field.handleBlur,
-                  onChange: (e) => field.handleChange(e.target.value),
-                }}
-              />
-            );
-          }}
-        />
-        <div className="w-full">
-          <div className="flex w-full items-center justify-center gap-3">
-            <label htmlFor="showPassword" className="text-sm">
-              Show password
-            </label>
-            <input
-              type="checkbox"
-              id="showPassword"
-              name="showPassword"
-              className="checkbox-primary checkbox"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
-            />
+            </div>
           </div>
         </div>
-
         <MutationButton className="btn-primary" mutation={mutation} />
+        <div className="flex gap-2">
+          Already have an account?
+          <Link to="/auth" search={{ returnTo }} className="text-primary">
+            Sign in
+          </Link>
+          instead
+        </div>
       </form>
     </div>
   );
