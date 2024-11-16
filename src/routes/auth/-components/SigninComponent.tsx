@@ -44,7 +44,7 @@ export function SigninComponent({}: SigninComponentProps) {
 
       // qc.invalidateQueries(viewerqueryOptions);
       qc.setQueryData(["viewer"], () => data);
-      // @ts-expect-error
+
       navigate({ to: returnTo || "/" });
       if (typeof window !== "undefined") {
         location.reload();
@@ -67,7 +67,7 @@ export function SigninComponent({}: SigninComponentProps) {
     },
   });
   return (
-    <div className="flex h-full w-full items-center justify-evenly gap-2 p-5 ">
+    <div className="flex h-full w-full items-center justify-evenly gap-2 p-5">
       <img
         src="/site.svg"
         alt="logo"
@@ -81,7 +81,7 @@ export function SigninComponent({}: SigninComponentProps) {
         }}
         className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-6 p-[2%] md:w-[70%] lg:w-[40%]"
       >
-        <div className="rounded-lh flex h-full w-full gap-2 flex-col items-center justify-center">
+        <div className="rounded-lh flex h-full w-full flex-col items-center justify-center gap-2">
           <h1 className="text-4xl font-bold">Sign in</h1>
           <form.Field
             name="emailOrUsername"
