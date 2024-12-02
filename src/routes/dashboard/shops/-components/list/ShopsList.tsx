@@ -6,6 +6,7 @@ import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryE
 import { CreateShopModal } from "../form/CreateShops";
 import { Plus } from "lucide-react";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
+import { Item } from "@radix-ui/react-dropdown-menu";
 
 interface ShopsListProps {
   keyword?: string;

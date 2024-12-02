@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { BillsForm } from "./BillsForm";
 import { BillsPeriod, MonthlyBills } from "../api/bills";
 import { useNavigate, useSearch } from "@tanstack/react-router";
@@ -12,12 +12,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/shadcn/ui/dialog";
+import { useTransform } from "@tanstack/react-form";
 
 interface BillsCarousselProps {
   period: BillsPeriod;
 }
 
 export function BillsCaroussel({ period }: BillsCarousselProps) {
+  const [_, startTransition] = useTransition();
   const query = useBillsQuery(period);
   const bills = query.data.result;
   const searchParams = useSearch({
@@ -35,15 +37,16 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       setCurrentBill((prev) => {
         return prev + 1;
       });
-
-      navigate({
-        search: {
-          bill: currentBill + 1,
-          cm: period.curr_month,
-          cy: period.curr_year,
-          pm: period.prev_month,
-          py: period.prev_year,
-        },
+      startTransition(() => {
+        navigate({
+          search: {
+            bill: currentBill + 1,
+            cm: period.curr_month,
+            cy: period.curr_year,
+            pm: period.prev_month,
+            py: period.prev_year,
+          },
+        });
       });
     }
   }
@@ -52,15 +55,16 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       setCurrentBill((prev) => {
         return prev - 1;
       });
-
-      navigate({
-        search: {
-          bill: currentBill - 1,
-          cm: period.curr_month,
-          cy: period.curr_year,
-          pm: period.prev_month,
-          py: period.prev_year,
-        },
+      startTransition(() => {
+        navigate({
+          search: {
+            bill: currentBill - 1,
+            cm: period.curr_month,
+            cy: period.curr_year,
+            pm: period.prev_month,
+            py: period.prev_year,
+          },
+        });
       });
     }
   }
@@ -88,13 +92,19 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       >
         {bill && (
           <div className="h-full w-full">
+            <DialogHeader className="sr-only">
+              Utility Carousel form
+            </DialogHeader>
+            <DialogDescription className="sr-only">
+              Use the left and right arrows to navigate between bills
+            </DialogDescription>
             <DialogTitle>
               {" "}
               <div className="flex flex-col gap-2">
-                <div className="font-bold "> {bill.shop_number}</div>
+                <div className="font-bold"> {bill.shop_number}</div>
                 {bill.shop_name}
                 <div className="flex gap-0.5">
-                  <div className="flex ">{currentBill}</div>/
+                  <div className="flex">{currentBill}</div>/
                   <div className="flex">{bills.length}</div>
                 </div>
               </div>
@@ -117,7 +127,10 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
               </div>
               <button
                 className="btn btn-sm flex gap-2 text-lg hover:text-accent"
-                onClick={() => nextBill()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextBill();
+                }}
               >
                 <ChevronRight />
               </button>

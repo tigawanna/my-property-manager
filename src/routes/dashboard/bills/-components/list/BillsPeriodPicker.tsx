@@ -75,7 +75,6 @@ export function BillsPeriodPicker({
 
 interface PlusMinusMonthProps {
   value: number;
-
   setValue: (value: number) => void;
 }
 
@@ -83,7 +82,7 @@ export function PlusMinusMonth({ value, setValue }: PlusMinusMonthProps) {
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full items-center justify-center gap-1">
-        <button disabled={value === 12} className="btn btn-ghost">
+        <button type="button" disabled={value === 12} className="btn btn-ghost">
           <Plus
             onClick={() => {
               if (value > 0) {
@@ -96,7 +95,7 @@ export function PlusMinusMonth({ value, setValue }: PlusMinusMonthProps) {
           />
         </button>
         {value}
-        <button disabled={value === 1} className="btn btn-ghost">
+        <button type="button" disabled={value === 1} className="btn btn-ghost">
           <Minus
             onClick={() => {
               if (value > 1) {
@@ -127,7 +126,7 @@ export function PlusMinusYear({
   return (
     <div className="flex w-full flex-col items-center justify-center gap-1">
       <div className="flex w-full items-center justify-center gap-1">
-        <button disabled={value === maxYear} className="btn btn-ghost">
+        <button type="button" disabled={value === maxYear} className="btn btn-ghost">
           <Plus
             onClick={() => {
               if (value > 0) {
@@ -140,7 +139,7 @@ export function PlusMinusYear({
           />
         </button>
         {value}
-        <button disabled={value === minYear} className="btn btn-ghost">
+        <button type="button" disabled={value === minYear} className="btn btn-ghost">
           <Minus
             onClick={() => {
               if (value > 1) {
