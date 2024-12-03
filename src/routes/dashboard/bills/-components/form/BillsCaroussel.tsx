@@ -1,18 +1,18 @@
 import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import { useState, useTransition } from "react";
 import { BillsForm } from "./BillsForm";
-import { BillsPeriod, MonthlyBills } from "../api/bills";
+import { BillsPeriod } from "../api/bills";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useBillsQuery } from "../api/use-bills";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/shadcn/ui/dialog";
-import { useTransform } from "@tanstack/react-form";
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  AlertDialogCancel,
+} from "@/components/shadcn/ui/alert-dialog";
 
 interface BillsCarousselProps {
   period: BillsPeriod;
@@ -34,53 +34,53 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
 
   function nextBill() {
     if (currentBill < bills.length - 1) {
-      setCurrentBill((prev) => {
-        return prev + 1;
-      });
       startTransition(() => {
-        navigate({
-          search: {
-            bill: currentBill + 1,
-            cm: period.curr_month,
-            cy: period.curr_year,
-            pm: period.prev_month,
-            py: period.prev_year,
-          },
+        setCurrentBill((prev) => {
+          return prev + 1;
         });
+      });
+      navigate({
+        search: {
+          bill: currentBill + 1,
+          cm: period.curr_month,
+          cy: period.curr_year,
+          pm: period.prev_month,
+          py: period.prev_year,
+        },
       });
     }
   }
   function prevBill() {
     if (currentBill > 0) {
-      setCurrentBill((prev) => {
-        return prev - 1;
-      });
       startTransition(() => {
-        navigate({
-          search: {
-            bill: currentBill - 1,
-            cm: period.curr_month,
-            cy: period.curr_year,
-            pm: period.prev_month,
-            py: period.prev_year,
-          },
+        setCurrentBill((prev) => {
+          return prev - 1;
         });
+      });
+      navigate({
+        search: {
+          bill: currentBill - 1,
+          cm: period.curr_month,
+          cy: period.curr_year,
+          pm: period.prev_month,
+          py: period.prev_year,
+        },
       });
     }
   }
 
   const bill = bills[currentBill];
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
         <button className="btn btn-outline btn-sm flex gap-2 px-2">
           <Plus />
           carrousel form
         </button>
-      </DialogTrigger>
+      </AlertDialogTrigger>
 
-      <DialogContent
-        className="min-h-[70vh] min-w-[60%] bg-base-300 p-5"
+      <AlertDialogContent
+        className="h-fit max-h-[90%] min-h-[50vh] min-w-[60%] bg-base-300 p-5"
         onKeyDown={(e) => {
           if (e.ctrlKey && e.key === "ArrowRight") {
             nextBill();
@@ -91,33 +91,36 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
         }}
       >
         {bill && (
-          <div className="h-full w-full">
-            <DialogHeader className="sr-only">
-              Utility Carousel form
-            </DialogHeader>
-            <DialogDescription className="sr-only">
-              Use the left and right arrows to navigate between bills
-            </DialogDescription>
-            <DialogTitle>
-              {" "}
-              <div className="flex flex-col gap-2">
-                <div className="font-bold"> {bill.shop_number}</div>
-                {bill.shop_name}
-                <div className="flex gap-0.5">
-                  <div className="flex">{currentBill}</div>/
-                  <div className="flex">{bills.length}</div>
-                </div>
-              </div>
-            </DialogTitle>
+          <div className="h-full w-full flex flex-col gap-2 justify-evenly ">
+            <AlertDialogHeader className="">
+              <AlertDialogTitle>
+                <div className="flex flex-col">
+                  <div className="text-5xl font-bold"> {bill.shop_number}</div>
 
-            <div className="flex h-full items-center justify-center">
+                  <div className="flex items-center gap-2">
+                    <div className="text-2xl font-bold"> {bill.shop_name}</div>
+                    <div className="flex gap-0.5 text-xl font-normal">
+                      <div className="flex">{currentBill}</div>/
+                      <div className="flex">{bills.length}</div>
+                    </div>
+                  </div>
+                </div>
+              </AlertDialogTitle>
+              <AlertDialogDescription className="">
+                Use the ctrl + left and right arrows to navigate between bills
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogCancel  className="absolute right-2 top-2">
+              <X className="size-6 text-accent"/> 
+            </AlertDialogCancel>
+            <div className="flex min-h-fit items-center justify-center">
               <button
                 className="btn btn-sm flex gap-2 text-lg hover:text-accent"
                 onClick={() => prevBill()}
               >
                 <ChevronLeft />
               </button>
-              <div className="">
+              <div className="min-h-fit p-2 ">
                 <BillsForm
                   bill={bill}
                   setOpen={() => {}}
@@ -126,6 +129,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
                 />
               </div>
               <button
+                type="button"
                 className="btn btn-sm flex gap-2 text-lg hover:text-accent"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -137,7 +141,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
             </div>
           </div>
         )}
-      </DialogContent>
-    </Dialog>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
