@@ -23,7 +23,7 @@
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.10",
-    "daisyui-devtools": "link:/home/dennis/Desktop/code/npm/daisyui-devtools",
+    "daisyui-devtools": "^0.0.4",
     "dotenv": "^16.4.5",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
