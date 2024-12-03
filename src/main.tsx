@@ -1,18 +1,16 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import {  createRouter } from "@tanstack/react-router";
 import {
   MutationCache,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { routeTree } from "./routeTree.gen";
-import { useViewer } from "./lib/tanstack/query/use-viewer";
-import { pb } from "./lib/pb/client";
 import React, { useEffect } from "react";
 import { RouterPendingComponent } from "./lib/tanstack/router/RouterPendingComponent";
 import { RouterErrorComponent } from "./lib/tanstack/router/routerErrorComponent";
 import { RouterNotFoundComponent } from "./lib/tanstack/router/RouterNotFoundComponent";
-import { themeChange } from "theme-change";
+import { App } from "./App";
 
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({
@@ -38,7 +36,7 @@ export const queryClient = new QueryClient({
 
 
 // Set up a Router instance
-const router = createRouter({
+export const router = createRouter({
   routeTree,
   defaultPreload: "intent",
   defaultViewTransition:true,
@@ -59,27 +57,7 @@ declare module "@tanstack/react-router" {
   }
 }
 
-function App() {
-  useEffect(() => {
-    document.documentElement.dataset.style = "vertical";
-    themeChange(false);
-  }, []);
-  const { userQuery } = useViewer();
 
-  return (
-    <>
-      <RouterProvider
-        router={router}
-        defaultPreload="intent"
-        context={{
-          pb,
-          queryClient,
-          viewer: userQuery?.data,
-        }}
-      />
-    </>
-  );
-}
 
 const rootElement = document.getElementById("app")!;
 

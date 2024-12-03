@@ -80,7 +80,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       </AlertDialogTrigger>
 
       <AlertDialogContent
-        className="h-fit max-h-[90%] min-h-[50vh] min-w-[60%] bg-base-300 p-5"
+        className="h-fit max-h-[90%] min-h-[50vh] min-w-[60%] bg-base-300 p-5 overflow-scroll"
         onKeyDown={(e) => {
           if (e.ctrlKey && e.key === "ArrowRight") {
             nextBill();
@@ -113,14 +113,14 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
             <AlertDialogCancel  className="absolute right-2 top-2">
               <X className="size-6 text-accent"/> 
             </AlertDialogCancel>
-            <div className="flex min-h-fit items-center justify-center">
+            <div className="flex min-h-fit items-center  justify-center">
               <button
                 className="btn btn-sm flex gap-2 text-lg hover:text-accent"
                 onClick={() => prevBill()}
               >
                 <ChevronLeft />
               </button>
-              <div className="min-h-fit p-2 ">
+              <div className="max-h-full  p-2 ">
                 <BillsForm
                   bill={bill}
                   setOpen={() => {}}

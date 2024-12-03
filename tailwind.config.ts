@@ -1,31 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 import shadcnTailwindPlugin from "./src/components/shadcn/lib/shadcn-tailwind-config.ts";
 export default {
-    darkMode: ["class"],
-    content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: ["class"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-  	extend: {
-  		screens: {
-  			print: {
-  				raw: 'print'
-  			},
-  			screen: {
-  				raw: 'screen'
-  			}
-  		},
-  		colors: {
-  			sidebar: {
-  				DEFAULT: 'oklch(var(--sidebar-background))',
-  				foreground: 'oklch(var(--sidebar-foreground))',
-  				primary: 'oklch(var(--sidebar-primary))',
-  				'primary-foreground': 'oklch(var(--sidebar-primary-foreground))',
-  				accent: 'oklch(var(--sidebar-accent))',
-  				'accent-foreground': 'oklch(var(--sidebar-accent-foreground))',
-  				border: 'oklch(var(--sidebar-border))',
-  				ring: 'oklch(var(--sidebar-ring))'
-  			}
-  		}
-  	}
+    extend: {
+      screens: {
+        print: {
+          raw: "print",
+        },
+        screen: {
+          raw: "screen",
+        },
+      },
+      colors: {
+        sidebar: {
+          DEFAULT: "oklch(var(--sidebar-background))",
+          foreground: "oklch(var(--sidebar-foreground))",
+          primary: "oklch(var(--sidebar-primary))",
+          "primary-foreground": "oklch(var(--sidebar-primary-foreground))",
+          accent: "oklch(var(--sidebar-accent))",
+          "accent-foreground": "oklch(var(--sidebar-accent-foreground))",
+          border: "oklch(var(--sidebar-border))",
+          ring: "oklch(var(--sidebar-ring))",
+        },
+      },
+    },
   },
   plugins: [
     require("daisyui"),
@@ -34,61 +34,65 @@ export default {
   ],
 
   daisyui: {
-    light: {
-      "color-scheme": "light",
-      primary: "#7480ff",
-      "primary-content": "#050617",
-      secondary: "#ff52d9",
-      "secondary-content": "#190211",
-      accent: "#00cdb8",
-      "accent-content": "#000f0c",
-      neutral: "#2a323c",
-      "neutral-content": "#a6adbb",
-      "base-100": "#1d232a",
-      "base-200": "#191e24",
-      "base-300": "#15191e",
-      "base-content": "#a6adbb",
-      success: "#00a96e",
-      error: "#ff5861",
-      info: "#00b5ff",
-      warning: "#ffbe00",
-      "--animation-btn": ".25s",
-      "--animation-input": ".2s",
-      "--border-btn": "1px",
-      "--btn-focus-scale": ".95",
-      "--rounded-badge": "1.9rem",
-      "--rounded-box": "1rem",
-      "--rounded-btn": ".5rem",
-      "--tab-border": "1px",
-      "--tab-radius": ".5rem",
-    },
-    dark: {
-      "color-scheme": "dark",
-      primary: "#7480ff",
-      "primary-content": "#050617",
-      secondary: "#ff52d9",
-      "secondary-content": "#190211",
-      accent: "#00cdb8",
-      "accent-content": "#000f0c",
-      neutral: "#2a323c",
-      "neutral-content": "#a6adbb",
-      "base-100": "#1d232a",
-      "base-200": "#191e24",
-      "base-300": "#15191e",
-      "base-content": "#a6adbb",
-      success: "#00a96e",
-      error: "#ff5861",
-      info: "#00b5ff",
-      warning: "#ffbe00",
-      "--animation-btn": ".25s",
-      "--animation-input": ".2s",
-      "--border-btn": "1px",
-      "--btn-focus-scale": ".95",
-      "--rounded-badge": "1.9rem",
-      "--rounded-box": "1rem",
-      "--rounded-btn": ".5rem",
-      "--tab-border": "1px",
-      "--tab-radius": ".5rem",
-    },
+    themes: [
+      {
+        light: {
+          "color-scheme": "light",
+          primary: "#997300",
+          "primary-content": "#ffd965",
+          secondary: "#5b9519",
+          "secondary-content": "#fff8fd",
+          accent: "#602286",
+          "accent-content": "#00110e",
+          neutral: "#2b3440",
+          "neutral-content": "#d7dde4",
+          "base-100": "#ffffff",
+          "base-200": "#f2f2f2",
+          "base-300": "#e5e6e6",
+          "base-content": "#1f2937",
+          success: "#00a96e",
+          error: "#ff5861",
+          info: "#00b5ff",
+          warning: "#ffbe00",
+          // "--animation-btn": ".25s",
+          // "--animation-input": ".2s",
+          // "--border-btn": "1px",
+          // "--btn-focus-scale": ".95",
+          // "--rounded-badge": "1.9rem",
+          // "--rounded-box": "1rem",
+          // "--rounded-btn": ".5rem",
+          // "--tab-border": "1px",
+          // "--tab-radius": ".5rem",
+        },
+        dark: {
+          "color-scheme": "dark",
+          primary: "#ffe497",
+          "primary-content": "#1d1707",
+          secondary: "#6db618",
+          "secondary-content": "#062e05",
+          accent: "#602286",
+          "accent-content": "#00110e",
+          neutral: "#eeeeee",
+          "neutral-content": "#1f1f1f",
+          "base-100": "#2b1f09",
+          "base-200": "#342d15",
+          "base-300": "#574921",
+          "base-content": "#fcf9f2",
+          success: "#00a96e",
+          error: "#ff5861",
+          info: "#00b5ff",
+          warning: "#ffbe00",
+          // "--animation-btn": ".25s",
+          // "--animation-input": ".2s",
+          // "--border-btn": "1px",
+          // "--btn-focus-scale": ".95",
+          // "--rounded-badge": "1.9rem",
+          // "--rounded-box": "1rem",
+          // "--rounded-btn": ".5rem",
+          // "--tab-border": "1px",
+          // "--tab-radius": ".5rem",
+        },
+      },
+    ],
   },
 };
