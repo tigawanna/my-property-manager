@@ -2,7 +2,7 @@ import { ListPagination } from "@/components/pagination/ReactresponsivePaginatio
 import { pb, type CollectionName } from "@/lib/pb/client";
 import { Checkbox } from "@/components/shadcn/ui/checkbox";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { and, like } from "typed-pocketbase";
+import { and, like } from "@tigawanna/typed-pocketbase";
 
 export type PBListCollectioncolumn<T extends Record<string, any>> = {
   [key in keyof T]: {

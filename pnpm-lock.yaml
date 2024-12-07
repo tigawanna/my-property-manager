@@ -110,6 +110,9 @@ importers:
       '@tanstack/zod-form-adapter':
         specifier: ^0.33.0
         version: 0.33.0(zod@3.23.8)
+      '@tigawanna/typed-pocketbase':
+        specifier: ^0.0.4
+        version: 0.0.4(pocketbase@0.22.1)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -135,8 +138,8 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       pocketbase:
-        specifier: ^0.21.5
-        version: 0.21.5
+        specifier: ^0.22.0
+        version: 0.22.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -173,9 +176,6 @@ importers:
       theme-change:
         specifier: ^2.5.0
         version: 2.5.0
-      typed-pocketbase:
-        specifier: ^0.1.1
-        version: 0.1.1(pocketbase@0.21.5)
       vaul:
         specifier: ^0.9.4
         version: 0.9.4(@types/react-dom@18.3.0)(@types/react@18.3.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1687,6 +1687,12 @@ packages:
     peerDependencies:
       zod: ^3.x
 
+  '@tigawanna/typed-pocketbase@0.0.4':
+    resolution: {integrity: sha512-YzQj+dPTXZVChicIc5w+erJiAtBj4HWoRAXXik4Kqg1WA85sJnMq/od8Gd2AbLFzWSu2IGg7I/Sl3Te820w7iw==}
+    hasBin: true
+    peerDependencies:
+      pocketbase: ^0.22.0
+
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -2475,8 +2481,8 @@ packages:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
     engines: {node: '>= 6'}
 
-  pocketbase@0.21.5:
-    resolution: {integrity: sha512-bnI/uinnQps+ElSlzxkc4yvwuSFfKcoszDtXH/4QT2FhGq2mJVUvDlxn+rjRXVntUjPfmMG5LEPZ1eGqV6ssog==}
+  pocketbase@0.22.1:
+    resolution: {integrity: sha512-hnzpDcIx5kbkUJXz6IkiTox6R4nb706u4rPSMy2FYCaI2OqBnFxbY0qwWBSqx1ERz/Xi61Uguf17Gb9bWZ8+kw==}
 
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
@@ -2910,12 +2916,6 @@ packages:
 
   turbo-stream@2.4.0:
     resolution: {integrity: sha512-FHncC10WpBd2eOmGwpmQsWLDoK4cqsA/UT/GqNoaKOQnT8uzhtCbg3EoUDMvqpOSAI0S26mr0rkjzbOO6S3v1g==}
-
-  typed-pocketbase@0.1.1:
-    resolution: {integrity: sha512-E6NuYIDhjoJmr4LgGuljy1zc/R293XABrWIUDFy4DpXrLaK+HmoLizvg8p3LzpE1ch6kScD6ayQi/ZSwowbm/Q==}
-    hasBin: true
-    peerDependencies:
-      pocketbase: ^0.21.0
 
   typescript@5.6.2:
     resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
@@ -4467,6 +4467,11 @@ snapshots:
       '@tanstack/form-core': 0.33.0
       zod: 3.23.8
 
+  '@tigawanna/typed-pocketbase@0.0.4(pocketbase@0.22.1)':
+    dependencies:
+      pocketbase: 0.22.1
+      sade: 1.8.1
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.25.6
@@ -5278,7 +5283,7 @@ snapshots:
 
   pirates@4.0.6: {}
 
-  pocketbase@0.21.5: {}
+  pocketbase@0.22.1: {}
 
   possible-typed-array-names@1.0.0: {}
 
@@ -5684,11 +5689,6 @@ snapshots:
       fsevents: 2.3.3
 
   turbo-stream@2.4.0: {}
-
-  typed-pocketbase@0.1.1(pocketbase@0.21.5):
-    dependencies:
-      pocketbase: 0.21.5
-      sade: 1.8.1
 
   typescript@5.6.2: {}
 

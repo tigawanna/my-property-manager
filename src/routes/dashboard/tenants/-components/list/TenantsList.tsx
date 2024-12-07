@@ -1,7 +1,7 @@
 import { pb } from "@/lib/pb/client";
 import { wordToNumber } from "@/utils/string";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { like } from "typed-pocketbase";
+import { like } from "@tigawanna/typed-pocketbase";
 import {
   Avatar,
   AvatarImage,

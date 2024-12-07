@@ -1,4 +1,4 @@
-import { TypedPocketBase } from "typed-pocketbase";
+import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
 import { Schema } from "@/lib/pb/database";
 import { config as dotenvConfig } from "dotenv";
 dotenvConfig();

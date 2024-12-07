@@ -1,6 +1,6 @@
 
 /**
- * This file was @generated using typed-pocketbase
+ * This file was @generated using @tigawanna/typed-pocketbase
  */
 
 // https://pocketbase.io/docs/collections/#base-collection

@@ -11,7 +11,7 @@ import {
 import { floors, PropertyFloorPrefixes } from "./floors";
 import { useEffect, useTransition } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { like } from "typed-pocketbase";
+import { like } from "@tigawanna/typed-pocketbase";
 import { pb } from "@/lib/pb/client";
 
 interface ShopNumberInputProps {

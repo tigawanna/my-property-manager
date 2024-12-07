@@ -73,7 +73,7 @@ export async function getPBType() {
 
   const commands = [
     "npx",
-    "typed-pocketbase",
+    "@tigawanna/typed-pocketbase",
     "--email",
     PB_ADMIN_EMAIL,
     "--password",

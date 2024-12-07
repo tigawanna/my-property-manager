@@ -1,6 +1,6 @@
 import { pb } from "@/lib/pb/client";
 import { queryOptions } from "@tanstack/react-query";
-import { and, eq, like } from "typed-pocketbase";
+import { and, eq, like } from "@tigawanna/typed-pocketbase";
 
 interface IListPropertyQueryOptions {
   keyword: string;
