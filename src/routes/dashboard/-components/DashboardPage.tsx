@@ -1,8 +1,7 @@
-import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { dashboard_routes } from "@/components/navigation/routes";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { Link } from "@tanstack/react-router";
-import { CreatePaymentForm } from "../payments/-components/form/CreatePaymentForm";
+
 
 
 interface DashboardPageProps {}
@@ -17,7 +16,7 @@ export function DashboardPage({}: DashboardPageProps) {
       <ul className="grid h-full w-full grid-cols-1 justify-center gap-2 p-[5%] md:grid-cols-2 lg:grid-cols-2">
         {dashboard_routes.map((link) => {
           if (
-            !(viewer?.staff && viewer?.staff.length > 0) &&
+            !(viewer?.role === "staff") &&
             (link.name === "utilities" || link.name === "payments")
           ) {
             return;

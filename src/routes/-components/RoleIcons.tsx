@@ -1,5 +1,5 @@
 interface RoleIconsProps {
-    role: "staff" | "tenant" | "user";
+    role: "staff" | "tenant" | "user" |"";
 }
 
 export function RoleIcons({role}:RoleIconsProps){

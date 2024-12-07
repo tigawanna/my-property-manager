@@ -21,8 +21,7 @@ const formOpts = formOptions<PropertyUserCreate>({
     password: "",
     passwordConfirm: "",
     role: "user",
-    verification_status: "initial",
-    pnone: "",
+    phone: "",
     avatarUrl: "",
   },
 });

@@ -25,7 +25,7 @@ interface BasePaymentsFormProps {
   mutation: UseMutationResult<
     any,
     Error,
-    PropertyShopPaymentsCreate | PropertyShopPaymentsUpdate,
+    PropertyShopPaymentsCreate | (PropertyShopPaymentsUpdate & { id: string }),
     unknown
   >;
   row: PropertyShopPaymentsUpdate;
@@ -53,6 +53,7 @@ export function BasePaymentsForm({
       staff: staff?.id,
     },
     onSubmit: async ({ value }) => {
+      // @ts-expect-error
       mutation.mutate(value);
       afterSave?.();
     },
@@ -93,7 +94,7 @@ export function BasePaymentsForm({
           <form.Field name="amount">
             {(field) => {
               return (
-                <TextFormField<PropertyShopPaymentsUpdate>
+                <TextFormField<PropertyShopPaymentsUpdate & { id: string }>
                   field={field}
                   fieldKey="amount"
                   fieldlabel="Amount"

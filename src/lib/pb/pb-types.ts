@@ -187,7 +187,6 @@ export interface OtpsResponse extends BaseCollectionResponse {
 	id: string;
 	collectionRef: string;
 	recordRef: string;
-	sentTo: string;
 	created: string;
 	updated: string;
 }
@@ -196,8 +195,6 @@ export interface OtpsCreate extends BaseCollectionCreate {
 	id?: string;
 	collectionRef: string;
 	recordRef: string;
-	password: string;
-	sentTo?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -206,7 +203,6 @@ export interface OtpsUpdate extends BaseCollectionUpdate {
 	id: string;
 	collectionRef: string;
 	recordRef: string;
-	sentTo?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -312,7 +308,6 @@ export interface AuthOriginsCollection {
 export interface SuperusersResponse extends AuthCollectionResponse {
 	collectionName: '_superusers';
 	id: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility: boolean;
 	verified: boolean;
@@ -322,8 +317,6 @@ export interface SuperusersResponse extends AuthCollectionResponse {
 
 export interface SuperusersCreate extends AuthCollectionCreate {
 	id?: string;
-	password: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -333,7 +326,6 @@ export interface SuperusersCreate extends AuthCollectionCreate {
 
 export interface SuperusersUpdate extends AuthCollectionUpdate {
 	id: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -357,33 +349,32 @@ export interface SuperusersCollection {
 export interface PropertyUserResponse extends AuthCollectionResponse {
 	collectionName: 'property_user';
 	id: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility: boolean;
 	verified: boolean;
 	role: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl: string;
+	phone: string;
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
 	id?: string;
-	password: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
 	role?: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl?: string | URL;
+	phone?: string;
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
 	id: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
 	role?: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl?: string | URL;
+	phone?: string;
 }
 
 export interface PropertyUserCollection {

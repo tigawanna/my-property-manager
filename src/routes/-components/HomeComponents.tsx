@@ -9,8 +9,8 @@ import { RoleIcons } from "./RoleIcons";
 
 interface ProfileLinkCardProps {
   viewer: {
-    role: "staff" | "tenant" | "user";
-    pnone: string;
+    role: "staff" | "tenant" | "user" |"";
+    pnone?: string;
     avatarUrl: string;
     username: string;
     email: string;

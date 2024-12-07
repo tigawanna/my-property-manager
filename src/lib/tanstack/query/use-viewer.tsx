@@ -66,7 +66,7 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user?.record);
   if (
     ctx.location.pathname === "/dashboard/bills" &&
-    (!user?.record?.staff || user?.record?.staff == "")
+    (user?.record?.role !=="staff")
   ) {
     throw redirect({
       to: "..",
