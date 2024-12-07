@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState, useTransition } from "react";
 import { Loader } from "lucide-react";
 import { BillMutationFields, MonthlyBills } from "../api/bills";
-import { PropertyBillsCreate, PropertyBillsUpdate } from "@/lib/pb/database";
+import { PropertyBillsCreate, PropertyBillsUpdate } from "@/lib/pb/pb-types";
 import { ErrorWrapper } from "@/components/wrappers/ErrorWrapper";
 import { useForm } from "@tanstack/react-form";
 import {

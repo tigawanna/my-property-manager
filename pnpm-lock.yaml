@@ -111,8 +111,8 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0(zod@3.23.8)
       '@tigawanna/typed-pocketbase':
-        specifier: ^0.0.4
-        version: 0.0.4(pocketbase@0.22.1)
+        specifier: link:/home/dennis/Desktop/code/npm/typed-pocketbase
+        version: link:../../code/npm/typed-pocketbase
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1687,12 +1687,6 @@ packages:
     peerDependencies:
       zod: ^3.x
 
-  '@tigawanna/typed-pocketbase@0.0.4':
-    resolution: {integrity: sha512-YzQj+dPTXZVChicIc5w+erJiAtBj4HWoRAXXik4Kqg1WA85sJnMq/od8Gd2AbLFzWSu2IGg7I/Sl3Te820w7iw==}
-    hasBin: true
-    peerDependencies:
-      pocketbase: ^0.22.0
-
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -2386,10 +2380,6 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mri@1.2.0:
-    resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
-    engines: {node: '>=4'}
-
   mrmime@1.0.1:
     resolution: {integrity: sha512-hzzEagAgDyoU1Q6yg5uI+AorQgdvMCur3FcKf7NhMKWsaYg+RnbTyHRa/9IlLF9rf455MOCtcqqrQQ83pPP7Uw==}
     engines: {node: '>=10'}
@@ -2754,10 +2744,6 @@ packages:
 
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
-
-  sade@1.8.1:
-    resolution: {integrity: sha512-xal3CZX1Xlo/k4ApwCFrHVACi9fBqJ7V+mwhBsuf/1IOKbBy098Fex+Wa/5QMubw09pSZ/u8EY8PWgevJsXp1A==}
-    engines: {node: '>=6'}
 
   safe-buffer@5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -4467,11 +4453,6 @@ snapshots:
       '@tanstack/form-core': 0.33.0
       zod: 3.23.8
 
-  '@tigawanna/typed-pocketbase@0.0.4(pocketbase@0.22.1)':
-    dependencies:
-      pocketbase: 0.22.1
-      sade: 1.8.1
-
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.25.6
@@ -5212,8 +5193,6 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mri@1.2.0: {}
-
   mrmime@1.0.1: {}
 
   ms@2.1.3: {}
@@ -5522,10 +5501,6 @@ snapshots:
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
-
-  sade@1.8.1:
-    dependencies:
-      mri: 1.2.0
 
   safe-buffer@5.1.2: {}
 

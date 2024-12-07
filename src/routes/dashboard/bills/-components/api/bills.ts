@@ -1,5 +1,5 @@
 import { PocketBaseClient } from "@/lib/pb/client";
-import { PropertyShopsResponse } from "@/lib/pb/database";
+import { PropertyShopsResponse } from "@/lib/pb/pb-types";
 import { ClientResponseError } from "pocketbase";
 
 export interface BillsPeriod {

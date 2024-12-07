@@ -3,7 +3,7 @@ import {
   PropertyShopPaymentsUpdate,
   PropertyShopsResponse,
   PropertyStaffListResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import { useMutation } from "@tanstack/react-query";
 import { Edit, X } from "lucide-react";
 import { BasePaymentsForm } from "./BasePaymentsForm";

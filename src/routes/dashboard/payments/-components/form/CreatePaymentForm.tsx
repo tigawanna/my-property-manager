@@ -1,5 +1,5 @@
 import { pb } from "@/lib/pb/client";
-import { PropertyShopPaymentsCreate } from "@/lib/pb/database";
+import { PropertyShopPaymentsCreate } from "@/lib/pb/pb-types";
 import { useMutation } from "@tanstack/react-query";
 import { BasePaymentsForm } from "./BasePaymentsForm";
 import { useState } from "react";

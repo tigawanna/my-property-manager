@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/shadcn/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/shadcn/ui/avatar";
 import { Badge } from "@/components/shadcn/ui/badge";
-import { PropertyUserResponse } from "@/lib/pb/database";
+import { PropertyUserResponse } from "@/lib/pb/pb-types";
 
 interface BaseProfileProps {
 user:PropertyUserResponse

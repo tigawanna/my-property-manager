@@ -1,7 +1,7 @@
 import {
   PropertyUsersListResponse,
 
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import {
   Card,
   CardContent,

@@ -1,4 +1,4 @@
-import { PropertyStaffListResponse, PropertyUserResponse } from "@/lib/pb/database";
+import { PropertyStaffListResponse, PropertyUserResponse } from "@/lib/pb/pb-types";
 import { BaseProfile } from "./BaseProfile";
 import {
   Card,

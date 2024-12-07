@@ -1,7 +1,7 @@
 import {
   PropertyShopsResponse,
   PropertyTenantsListResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import {
   Avatar,
   AvatarImage,

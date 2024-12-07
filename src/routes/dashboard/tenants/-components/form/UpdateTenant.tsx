@@ -14,7 +14,7 @@ import {
   PropertyTenantsListCreate,
   PropertyTenantsListUpdate,
   PropertyUserResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import { PBPickRelationField } from "@/lib/pb/components/PBrelationPicker";
 import { useFormHook } from "@/components/form/useForm";
 import { PbTheTextInput } from "@/lib/pb/components/PBTheTextInput";

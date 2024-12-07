@@ -1,4 +1,4 @@
-import { PropertyShopsCreate } from "@/lib/pb/database";
+import { PropertyShopsCreate } from "@/lib/pb/pb-types";
 import {
   Select,
   SelectContent,

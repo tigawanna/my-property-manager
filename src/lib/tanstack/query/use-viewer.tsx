@@ -1,5 +1,5 @@
 import { pb, PocketBaseClient } from "@/lib/pb/client";
-import { PropertyUserResponse } from "@/lib/pb/database";
+import { PropertyUserResponse } from "@/lib/pb/pb-types";
 import {
   QueryClient,
   queryOptions,

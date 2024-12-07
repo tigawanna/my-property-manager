@@ -1,5 +1,5 @@
 import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
-import { Schema } from "./database";
+import { Schema } from "./pb-types";
 
 export type PocketBaseClient = TypedPocketBase<Schema>;
 const PB_URL = import.meta.env.VITE_PB_URL;

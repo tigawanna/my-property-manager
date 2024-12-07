@@ -3,7 +3,7 @@ import {
   PropertyShopsResponse,
   PropertyShopPaymentsResponse,
   PropertyTenantsListResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import { getNestedProperty } from "@/utils/object";
 import { PossibleNestedUnions } from "@/utils/types/nested_objects_union";
 import { ListResult } from "pocketbase";

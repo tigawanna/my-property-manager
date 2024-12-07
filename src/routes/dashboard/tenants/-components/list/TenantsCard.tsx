@@ -11,7 +11,7 @@ import { Link } from "@tanstack/react-router";
 import {
   PropertyShopsResponse,
   PropertyTenantsListResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 
 type ShopExpand = {
   expand?:

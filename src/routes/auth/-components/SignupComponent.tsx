@@ -1,4 +1,4 @@
-import { PropertyUserCreate } from "@/lib/pb/database";
+import { PropertyUserCreate } from "@/lib/pb/pb-types";
 import { formOptions, useForm } from "@tanstack/react-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 import { z } from "zod";

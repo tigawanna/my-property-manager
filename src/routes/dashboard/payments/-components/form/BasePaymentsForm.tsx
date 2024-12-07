@@ -4,7 +4,7 @@ import {
   PropertyShopPaymentsUpdate,
   PropertyShopsResponse,
   PropertyStaffListResponse,
-} from "@/lib/pb/database";
+} from "@/lib/pb/pb-types";
 import { FieldInfo } from "@/lib/tanstack/form/components";
 import { SelectFields } from "@/lib/tanstack/form/SelectFileds";
 import { TextFormField } from "@/lib/tanstack/form/TextFields";

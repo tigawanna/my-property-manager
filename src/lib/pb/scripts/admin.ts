@@ -1,5 +1,5 @@
 import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
-import { Schema } from "@/lib/pb/database";
+import { Schema } from "@/lib/pb/pb-types";
 import { config as dotenvConfig } from "dotenv";
 dotenvConfig();
 
@@ -16,7 +16,7 @@ async function cliAdminPB() {
   const PB_URL = process.env.VITE_PB_URL;
   const pb = new TypedPocketBase<Schema>(PB_URL);
 
-  await pb.admins.authWithPassword(
+  await pb.from("_superusers").authWithPassword(
     process.env.PB_ADMIN_EMAIL,
     process.env.PB_ADMIN_PASSWORD,
   );
@@ -30,11 +30,9 @@ async function addRentoToallShops() {
   // c random number between 30000 and 100000
   for (const shop of shops) {
     const randomRent = (Math.floor(Math.random() * 70) + 30) * 1000;
-    await pb.from("property_shops").update(shop.id, {
-      monthly_rent: randomRent,
-      deposit: randomRent * 3,
-      goodwill: randomRent > 80_000 ? randomRent * 2 : 0,
-    });
+    // await pb.from("property_shops").update(shop.id, {
+
+    // });
   }
 }
 
@@ -49,7 +47,7 @@ async function addrandomPayments() {
         if(month === 0){
         await pb.from("property_shop_payments").create({
           shop: shop.id,
-          amount: shop.deposit,
+          amount: shop.monthly_rent,
           type: "deposit",
           year: new Date().getFullYear(),
           month: month+1,
@@ -83,9 +81,9 @@ async function updateAllShops() {
     });
     for (const shop of shops) {
         for (let month = 0; month < 10; month++) {
-      await pb.from("property_shops").update(shop.id,{
-          "goodwill": shop.goodwill,
-        });
+      // await pb.from("property_shops").update(shop.id,{
+     
+      //   });
     }
         // await pb.from("property_shop_payments").create({
         // shop: shop.id,

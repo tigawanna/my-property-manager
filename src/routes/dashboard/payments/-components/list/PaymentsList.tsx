@@ -9,7 +9,7 @@ import { CreatePaymentForm } from "../form/CreatePaymentForm";
 import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
 import { PaymentsTable } from "./PaymentsTable";
 import { PBPickRelationField, PBPickRelationsDaisyUIDrawer } from "@/lib/pb/components/PBrelationPicker";
-import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/database";
+import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/pb-types";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";

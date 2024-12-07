@@ -1,11 +1,11 @@
 import { runCommand } from "@/utils/fs";
 import { config as dotenvConfig } from "dotenv";
+dotenvConfig(); 
 import { writeFile, readFile } from "node:fs/promises";
 const CUSTOM_DB_TYPES_PATH = "./src/lib/pb/custom-db-types.ts";
 
-dotenvConfig();
 
-const CHUNKED_TYPES_OUTPUT_DIR = "./src/lib/pb/database.ts";
+const CHUNKED_TYPES_OUTPUT_DIR = "./src/lib/pb/pb-types.ts";
 
 export async function getCustomTypes() {
   const custom_db_types_string = await readFile(CUSTOM_DB_TYPES_PATH, "utf-8");
