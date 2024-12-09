@@ -25,11 +25,6 @@ return (
         <dt className="font-semibold">Email:</dt>
         <dd>{user.email}</dd>
         <dt className="font-semibold">Phone:</dt>
-        <dd>{user.pnone || "N/A"}</dd>
-        <dt className="font-semibold">Verification Status:</dt>
-        <dd className="capitalize">
-          {user.verification_status || "Not verified"}
-        </dd>
       </dl>
     </CardContent>
   </Card>

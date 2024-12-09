@@ -14,17 +14,9 @@ export function ProfilePage({}: ProfilePageProps) {
   const viewerId = viewer?.id!;
 
   const profileQuery = useSuspenseQuery({
-    queryKey: ["viiewer", "profile", viewerId],
+    queryKey: ["viewer", "profile", viewerId],
     queryFn: async () =>
-      pb.from("property_user").getOne(viewerId, {
-        select: {
-          expand: {
-            staff: true,
-            tenant: true,
-            user: true,
-          },
-        },
-      }),
+      pb.from("property_user").getOne(viewerId),
   });
 
 const profile = profileQuery?.data

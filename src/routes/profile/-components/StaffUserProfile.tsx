@@ -23,9 +23,6 @@ export function StaffUserProfile({ user, staffDetails }: StaffUserProfileProps) 
         <CardContent>
           <dl className="grid grid-cols-2 gap-2 text-sm">
             <dt className="font-semibold">Staff Role:</dt>
-            <dd className="capitalize">
-              {staffDetails.staff_role || "Not assigned"}
-            </dd>
             <dt className="font-semibold">Account ID:</dt>
             <dd>{staffDetails.account}</dd>
           </dl>

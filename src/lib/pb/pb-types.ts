@@ -735,6 +735,38 @@ export interface PropertyBillsCollection {
 	};
 }
 
+// ===== property_staff_tracking_sheet block =====
+// ===== property_staff_tracking_sheet =====
+
+export interface PropertyStaffTrackingSheetResponse extends BaseCollectionResponse {
+	collectionName: 'property_staff_tracking_sheet';
+	id: string;
+	created: string;
+	updated: string;
+}
+
+export interface PropertyStaffTrackingSheetCreate extends BaseCollectionCreate {
+	id?: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface PropertyStaffTrackingSheetUpdate extends BaseCollectionUpdate {
+	id: string;
+	created?: string | Date;
+	updated?: string | Date;
+}
+
+export interface PropertyStaffTrackingSheetCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_staff_tracking_sheet';
+	response: PropertyStaffTrackingSheetResponse;
+	create: PropertyStaffTrackingSheetCreate;
+	update: PropertyStaffTrackingSheetUpdate;
+	relations: Record<string, never>;
+}
+
 // ===== Schema =====
 
 export type Schema = {
@@ -751,4 +783,5 @@ export type Schema = {
 	property_shop_payments: PropertyShopPaymentsCollection;
 	property_shop_history: PropertyShopHistoryCollection;
 	property_bills: PropertyBillsCollection;
+	property_staff_tracking_sheet: PropertyStaffTrackingSheetCollection;
 }
