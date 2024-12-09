@@ -1,7 +1,6 @@
 import { useLocation, useNavigate, useSearch } from "@tanstack/react-router";
 import { Minus, Plus } from "lucide-react";
 import ResponsivePagination from "react-responsive-pagination";
-import { usePaymentsSearchQuery } from "./use-payments-hook";
 import { usePaymentsPeriod } from "../../-hooks/use-shop-params";
 
 interface PaymentsPaginationProps {
