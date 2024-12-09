@@ -66,7 +66,7 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user?.record);
   if (
     ctx.location.pathname === "/dashboard/bills" &&
-    (user?.record?.role !=="staff")
+    user?.record?.tenant&&user?.record?.tenant?.length > 0
   ) {
     throw redirect({
       to: "..",
@@ -92,11 +92,11 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
     });
   }
   // redirect if not the right role
-  if (role && user?.record?.role !== role) {
-    // console.log(" ++++++++ user exists but wrong role redirecting back ++++++ ");
-    throw redirect({
-      to: returnTo ?? "/",
-    });
-  }
+  // if (role && user?.record?.role !== role) {
+  //   // console.log(" ++++++++ user exists but wrong role redirecting back ++++++ ");
+  //   throw redirect({
+  //     to: returnTo ?? "/",
+  //   });
+  // }
   // console.log(" ++++++++ fall through case user exists ++++++ ");
 }

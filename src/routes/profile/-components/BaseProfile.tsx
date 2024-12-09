@@ -17,7 +17,7 @@ return (
       </Avatar>
       <div className="flex items-center gap-2">
         <CardTitle>{user.username}</CardTitle>
-        {user.role==="staff" && <Badge>{user.role.charAt(0).toUpperCase() + user.role.slice(1)}</Badge>}
+        {user?.staff && <Badge>{user.username?.charAt(0).toUpperCase() + user.username?.slice(1)}</Badge>}
       </div>
     </CardHeader>
     <CardContent className="rounded-lg">

@@ -16,7 +16,7 @@ export function DashboardPage({}: DashboardPageProps) {
       <ul className="grid h-full w-full grid-cols-1 justify-center gap-2 p-[5%] md:grid-cols-2 lg:grid-cols-2">
         {dashboard_routes.map((link) => {
           if (
-            !(viewer?.role === "staff") &&
+            !(viewer?.staff && viewer?.staff?.length>0) &&
             (link.name === "utilities" || link.name === "payments")
           ) {
             return;

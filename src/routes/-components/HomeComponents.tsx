@@ -9,7 +9,8 @@ import { RoleIcons } from "./RoleIcons";
 
 interface ProfileLinkCardProps {
   viewer: {
-    role: "staff" | "tenant" | "user" |"";
+    staff?: string;
+    tenant?: string;
     pnone?: string;
     avatarUrl: string;
     username: string;
@@ -26,7 +27,7 @@ return (
     </Avatar>
     <div className="flex  gap-10 justify-center items-center">
     <span className=" text-2xl">{viewer.username}</span>
-    <RoleIcons role={viewer.role}/>
+    <RoleIcons role={viewer.tenant?"staff":"tenant"}/>
     </div>
 
     <ArrowRightIcon className="size-10 group-hover:animate-ping group-hover:text-secondary" />

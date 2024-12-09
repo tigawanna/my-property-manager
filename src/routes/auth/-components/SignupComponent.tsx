@@ -20,7 +20,6 @@ const formOpts = formOptions<PropertyUserCreate>({
     emailVisibility: true,
     password: "",
     passwordConfirm: "",
-    role: "user",
     phone: "",
     avatarUrl: "",
   },
