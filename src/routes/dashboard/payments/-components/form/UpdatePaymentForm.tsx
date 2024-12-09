@@ -25,7 +25,6 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
   const mutation = useMutation({
     mutationFn: async (value: PropertyShopPaymentsUpdate) => {
      return pb.from("property_shop_payments").update(
-        // @ts-expect-error
         row?.id,
         value,
       );

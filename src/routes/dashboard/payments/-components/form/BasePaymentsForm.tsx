@@ -2,6 +2,7 @@ import { PBPickRelationField } from "@/lib/pb/components/PBrelationPicker";
 import {
   PropertyShopPaymentsCreate,
   PropertyShopPaymentsUpdate,
+  PropertyShopPaymentsResponse,
   PropertyShopsResponse,
   PropertyStaffListResponse,
 } from "@/lib/pb/pb-types";
@@ -20,12 +21,12 @@ type PaymentExpansion = {
   shop: PropertyShopsResponse[];
   staff: PropertyStaffListResponse[];
 };
-
+type PropertyShopPaymentsUpdatePartial = Partial<PropertyShopPaymentsUpdate> ;
 interface BasePaymentsFormProps {
   mutation: UseMutationResult<
     any,
     Error,
-    PropertyShopPaymentsCreate | (PropertyShopPaymentsUpdate & { id: string }),
+    any,
     unknown
   >;
   row: PropertyShopPaymentsUpdate;
@@ -53,7 +54,6 @@ export function BasePaymentsForm({
       staff: staff?.id,
     },
     onSubmit: async ({ value }) => {
-      // @ts-expect-error
       mutation.mutate(value);
       afterSave?.();
     },
@@ -94,7 +94,7 @@ export function BasePaymentsForm({
           <form.Field name="amount">
             {(field) => {
               return (
-                <TextFormField<PropertyShopPaymentsUpdate & { id: string }>
+                <TextFormField<PropertyShopPaymentsUpdatePartial>
                   field={field}
                   fieldKey="amount"
                   fieldlabel="Amount"
@@ -115,7 +115,7 @@ export function BasePaymentsForm({
           <form.Field name="reciept_number">
             {(field) => {
               return (
-                <TextFormField<PropertyShopPaymentsUpdate>
+                <TextFormField<PropertyShopPaymentsUpdatePartial>
                   field={field}
                   fieldKey="reciept_number"
                   fieldlabel="Reciept number"
@@ -136,7 +136,7 @@ export function BasePaymentsForm({
           <form.Field name="type">
             {(field) => {
               return (
-                <SelectFields<PropertyShopPaymentsUpdate, "type">
+                <SelectFields<PropertyShopPaymentsUpdatePartial, "type">
                   field={field}
                   fieldKey="type"
                   items={[
@@ -198,7 +198,6 @@ export function BasePaymentsForm({
         <div className="form-control w-fit min-w-[30%] md:w-[40%]">
           <form.Field name="staff">
             {(field) => {
-              console.log("==== field  ==== ", field.state.value);
               return (
                 <>
                   <label htmlFor={field.name}>Staff</label>
