@@ -15,7 +15,7 @@ export function StaffPage({}: StaffPageProps) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <ListPageHeader
-        title="Tenants"
+        title="Staff"
         formTrigger={<CreateStaffForm />}
         searchBox={
           <SearchBox
