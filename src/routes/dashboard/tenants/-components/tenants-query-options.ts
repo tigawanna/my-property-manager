@@ -21,7 +21,8 @@ export function listTenantsQueryOptions({ keyword }: IListTenantsQueryOptions) {
         filter: or(like("name", keyword)),
         select: {
           expand: {
-            "property_shops(tenant)": true,
+            "property_shops_via_tenant": true,
+            // "property_shops(tenant)": true,
           },
         },
       });
@@ -48,10 +49,23 @@ export function oneTenantQueryOptions({ tenant }: IOneTenantQueryOptions) {
         select: {
           expand: {
             "account": true,
-            "property_shops(tenant)": true,
           },
         },
       });
+    },
+    staleTime: 1000 * 60 * 60,
+  });
+}
+
+
+export function oneTenantShopsQueryOptions({ tenant }: IOneTenantQueryOptions){
+  return queryOptions({
+    queryKey: ["property_shops", "one_tenant", tenant],
+    queryFn: () => {
+      return pb.from("property_shops").
+      getFullList({
+        filter:like("tenant",tenant)
+      })
     },
     staleTime: 1000 * 60 * 60,
   });

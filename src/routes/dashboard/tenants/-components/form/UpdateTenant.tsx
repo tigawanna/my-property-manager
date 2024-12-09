@@ -75,7 +75,7 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
   const currentTenant = item.expand?.account;
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("input", input);
+    // @ts-expect-error
     mutation.mutate(input);
   }
   return (

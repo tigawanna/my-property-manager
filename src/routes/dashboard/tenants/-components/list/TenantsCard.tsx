@@ -6,24 +6,18 @@ import {
   AvatarFallback,
 } from "@/components/shadcn/ui/avatar";
 import { cva } from "class-variance-authority";
-import { Zap, Droplet } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import {
-  PropertyShopsResponse,
   PropertyTenantsListResponse,
 } from "@/lib/pb/pb-types";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { oneTenantShopsQueryOptions } from "../tenants-query-options";
+import { Suspense } from "react";
 
-type ShopExpand = {
-  expand?:
-    | {
-        "property_shops(tenant)"?: PropertyShopsResponse[] | undefined;
-      }
-    | undefined;
-};
 interface TenantsCardProps {
   variant?: "default" | "wide";
   cardClassname?: string;
-  item: PropertyTenantsListResponse & ShopExpand;
+  item: PropertyTenantsListResponse
   oneTenantMode?: boolean;
 }
 
@@ -48,7 +42,7 @@ export function TenantsCard({
       },
     },
   );
-  const shops = item.expand?.["property_shops(tenant)"];
+
   return (
     <Link
       to={`/dashboard/tenants/$tenant`}
@@ -75,26 +69,49 @@ export function TenantsCard({
 
         <div className="flex h-full w-full flex-col justify-end p-2">
           {!oneTenantMode && (
-            <div className="flex w-full items-center gap-2">
-              {shops && shops.length > 0 && (
-                <div className="flex items-center justify-start gap-2">
-                  {shops?.map((shop) => (
-                    <div
-                      className="flex items-center justify-start gap-2"
-                      key={shop.id}
-                    >
-                      {/* <User className="w-3 h-3" /> */}
-                      <h4 className="badge badge-primary badge-outline px-1 text-xs">
-                        {shop.shop_number}
-                      </h4>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            <Suspense fallback={
+              <ul className="w-full flex flex-wrap gap-2">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <li
+                    key={i}
+                    className="h-8 w-8 skeleton rounded-full bg-base-300"
+                  />
+                ))}
+              </ul>
+            }>
+              <OneTenantShopBadges tenant={item.name}/>
+            </Suspense>
           )}
         </div>
       </div>
     </Link>
+  );
+}
+
+
+
+function OneTenantShopBadges({ tenant }: { tenant: string }) {
+  const query = useSuspenseQuery(oneTenantShopsQueryOptions({ tenant }));
+  const shops = query.data;
+  return (
+    <div className="flex h-full w-full flex-col justify-end p-2">
+      <div className="flex w-full items-center gap-2">
+        {shops && shops.length > 0 && (
+          <div className="flex items-center justify-start gap-2">
+            {shops?.map((shop) => (
+              <div
+                className="flex items-center justify-start gap-2"
+                key={shop.id}
+              >
+                {/* <User className="w-3 h-3" /> */}
+                <h4 className="badge badge-primary badge-outline px-1 text-xs">
+                  {shop.shop_number}
+                </h4>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

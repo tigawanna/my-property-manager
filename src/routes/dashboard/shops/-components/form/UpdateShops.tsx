@@ -20,7 +20,6 @@ import {
 import { Edit } from "lucide-react";
 import { startTransition, useState } from "react";
 import { PropertyFloorPrefixes } from "./floors";
-import { ShopNumberInput } from "./ShopNumberInput";
 import {
   PropertyShopsCreate,
   PropertyShopsUpdate,
@@ -90,6 +89,7 @@ export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // @ts-expect-error
     mutation.mutate(input);
   }
 

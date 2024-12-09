@@ -48,6 +48,7 @@ export function OneShopPaymentsList({}: SOneShopPaymentsListrops) {
         <GenericTable
           rows={data.items}
           updateItem={(item) =>
+            // @ts-expect-error
             pb.from("property_shop_payments").update(item.id, item)
           }
           columns={[
