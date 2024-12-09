@@ -352,9 +352,10 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 	email: string;
 	emailVisibility: boolean;
 	verified: boolean;
-	role: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl: string;
 	phone: string;
+	tenant: string;
+	staff: string;
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
@@ -362,9 +363,10 @@ export interface PropertyUserCreate extends AuthCollectionCreate {
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
-	role?: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl?: string | URL;
 	phone?: string;
+	tenant?: string;
+	staff?: string;
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
@@ -372,9 +374,10 @@ export interface PropertyUserUpdate extends AuthCollectionUpdate {
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
-	role?: '' | 'staff' | 'tenant' | 'user';
 	avatarUrl?: string | URL;
 	phone?: string;
+	tenant?: string;
+	staff?: string;
 }
 
 export interface PropertyUserCollection {
@@ -385,6 +388,8 @@ export interface PropertyUserCollection {
 	create: PropertyUserCreate;
 	update: PropertyUserUpdate;
 	relations: {
+		tenant: PropertyTenantsListCollection;
+		staff: PropertyStaffListCollection;
 		property_users_list_via_account: PropertyUsersListCollection[];
 		property_staff_list_via_account: PropertyStaffListCollection[];
 		property_tenants_list_via_account: PropertyTenantsListCollection[];
@@ -458,6 +463,7 @@ export interface PropertyStaffListCollection {
 	create: PropertyStaffListCreate;
 	update: PropertyStaffListUpdate;
 	relations: {
+		property_user_via_staff: PropertyUserCollection[];
 		account: PropertyUserCollection;
 		property_shop_payments_via_staff: PropertyShopPaymentsCollection[];
 	};
@@ -499,6 +505,7 @@ export interface PropertyTenantsListCollection {
 	create: PropertyTenantsListCreate;
 	update: PropertyTenantsListUpdate;
 	relations: {
+		property_user_via_tenant: PropertyUserCollection[];
 		account: PropertyUserCollection;
 		property_shops_via_tenant: PropertyShopsCollection[];
 		property_shop_history_via_tenant: PropertyShopHistoryCollection[];

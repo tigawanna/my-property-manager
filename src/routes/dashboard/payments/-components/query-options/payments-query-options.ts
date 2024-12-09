@@ -21,7 +21,7 @@ export function listPropertyQueryOptions({
       return pb.from("property_shop_payments").getList(page, 24, {
         filter: and(
           like("shop.tenant.name", keyword),
-          like("month", month),
+          // like("month", month),
           like("year", year),
         ),
         select: {

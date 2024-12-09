@@ -47,21 +47,21 @@ async function addrandomPayments() {
         if(month === 0){
         await pb.from("property_shop_payments").create({
           shop: shop.id,
-          amount: shop.monthly_rent,
+          amount: shop.monthly_rent > 0 ? shop.monthly_rent : 40_000,
           type: "deposit",
           year: new Date().getFullYear(),
-          month: month+1,
-          staff:"admin id gpes here",
+          month: month + 1,
+          staff: "1vmosq4gghb2m63",
           reciept_number: "rc-" + randomRecieptNumber,
         });
     }
         await pb.from("property_shop_payments").create({
           shop: shop.id,
-          amount: shop.monthly_rent,
+          amount: shop.monthly_rent > 0 ? shop.monthly_rent : 40_000,
           type: "rent",
           year: new Date().getFullYear(),
-          month: month+1,
-          staff:"admin id gpes here",
+          month: month + 1,
+          staff: "1vmosq4gghb2m63",
           reciept_number: "rc-" + randomRecieptNumber,
         });
     }
@@ -95,7 +95,7 @@ async function updateAllShops() {
     }
 }
 
-updateAllShops()
+addrandomPayments()
   .then(() => {
     console.log("All shops have been updated with random rent and deposit");
   })
