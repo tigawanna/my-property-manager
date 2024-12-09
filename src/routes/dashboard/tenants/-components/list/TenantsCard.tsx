@@ -68,7 +68,7 @@ export function TenantsCard({
         <div className="break-words text-4xl">{item?.name}</div>
 
         <div className="flex h-full w-full flex-col justify-end p-2">
-          {!oneTenantMode && (
+          { (
             <Suspense fallback={
               <ul className="w-full flex flex-wrap gap-2">
                 {Array.from({ length: 3 }).map((_, i) => (
@@ -93,6 +93,7 @@ export function TenantsCard({
 function OneTenantShopBadges({ tenant }: { tenant: string }) {
   const query = useSuspenseQuery(oneTenantShopsQueryOptions({ tenant }));
   const shops = query.data;
+  console.log(shops)
   return (
     <div className="flex h-full w-full flex-col justify-end p-2">
       <div className="flex w-full items-center gap-2">

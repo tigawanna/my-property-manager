@@ -62,6 +62,7 @@ export function oneTenantShopsQueryOptions({ tenant }: IOneTenantQueryOptions){
   return queryOptions({
     queryKey: ["property_shops", "one_tenant", tenant],
     queryFn: () => {
+      // pb.autoCancellation(false)
       return pb.from("property_shops").
       getFullList({
         filter:like("tenant",tenant)
