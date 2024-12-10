@@ -5,7 +5,6 @@ import {
   Bell,
   ChevronsUpDown,
 } from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/shadcn/ui/avatar";
 import {
   DropdownMenu,
@@ -24,24 +23,28 @@ import {
 } from "@/components/shadcn/ui/sidebar";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
-export function DashboardSidebaruser() {
+import { getFileURL } from "@/lib/pb/client";
+import { Link } from "@tanstack/react-router";
+export function DashboardSidebarUser() {
   const { isMobile } = useSidebar();
   const { userQuery, logoutMutation } = useViewer();
   const user = userQuery?.data?.record;
   if(!user){
     return null
   }
+  const avatarUrl = getFileURL({
+    collection_id_or_name: "property_user",
+    fallback: "/avatar.png",
+    record_id: user.id,
+  });
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatarUrl} alt={user.username} />
+            <SidebarMenuButton size="lg" className="">
+              <Avatar className="h-8 w-8 rounded-lg bg-base-content hover:bg-base-300">
+                <AvatarImage src={avatarUrl} alt={user.username} />
                 <AvatarFallback className="rounded-lg">
                   {user.username?.slice(0, 2)}
                 </AvatarFallback>
@@ -54,7 +57,7 @@ export function DashboardSidebaruser() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] p-2 text-base-content min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
@@ -62,7 +65,7 @@ export function DashboardSidebaruser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatarUrl} alt={user.username} />
+                  <AvatarImage src={avatarUrl} alt={user.username} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -77,10 +80,12 @@ export function DashboardSidebaruser() {
 
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
+              <Link to="/profile" className="w-full">
+                <DropdownMenuItem>
+                  <BadgeCheck />
+                  Account
+                </DropdownMenuItem>
+              </Link>
 
               <DropdownMenuItem>
                 <Bell />
@@ -88,14 +93,13 @@ export function DashboardSidebaruser() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <MutationButton
-                className="btn-error max-w-[98%]"
-                onClick={() => logoutMutation.mutate()}
-                label="Logout"
-                mutation={logoutMutation}
-              />
-            </DropdownMenuItem>
+
+            <MutationButton
+              className="btn-error max-w-[98%]"
+              onClick={() => logoutMutation.mutate()}
+              label="Logout"
+              mutation={logoutMutation}
+            />
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

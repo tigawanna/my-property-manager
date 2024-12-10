@@ -24,6 +24,7 @@ import {
 } from "@/components/shadcn/ui/avatar";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { Link, useLocation } from "@tanstack/react-router";
+import { getFileURL } from "@/lib/pb/client";
 
 interface CurrentUserProps {}
 
@@ -58,12 +59,16 @@ export function CurrentUser({}: CurrentUserProps) {
       </DropdownMenu>
     );
   }
-
+const avatarUrl = getFileURL({
+  collection_id_or_name: "property_user",
+  fallback: "/avatar.png",
+  record_id: viewer.id,
+})
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar>
-          <AvatarImage src={viewer.avatarUrl} alt={viewer.username} />
+          <AvatarImage src={avatarUrl} alt={viewer.username} />
           <AvatarFallback>{viewer.username.slice(0, 2)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
@@ -72,7 +77,7 @@ export function CurrentUser({}: CurrentUserProps) {
         <DropdownMenuSeparator />
         <div className="flex h-full w-full gap-3">
           <Avatar>
-            <AvatarImage src={viewer.avatarUrl} alt={viewer.username} />
+            <AvatarImage src={avatarUrl} alt={viewer.username} />
             <AvatarFallback>{viewer.username.slice(0, 2)}</AvatarFallback>
           </Avatar>
           <div className="flex h-full w-full flex-col p-1">

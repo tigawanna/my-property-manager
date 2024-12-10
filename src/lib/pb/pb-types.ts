@@ -352,10 +352,11 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 	email: string;
 	emailVisibility: boolean;
 	verified: boolean;
-	avatarUrl: string;
+	username: string;
 	phone: string;
 	tenant: string;
 	staff: string;
+	avatar: string;
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
@@ -363,10 +364,11 @@ export interface PropertyUserCreate extends AuthCollectionCreate {
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
-	avatarUrl?: string | URL;
+	username?: string;
 	phone?: string;
 	tenant?: string;
 	staff?: string;
+	avatar?: File | null;
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
@@ -374,10 +376,11 @@ export interface PropertyUserUpdate extends AuthCollectionUpdate {
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
-	avatarUrl?: string | URL;
+	username?: string;
 	phone?: string;
 	tenant?: string;
 	staff?: string;
+	avatar?: File | null;
 }
 
 export interface PropertyUserCollection {

@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 export function RootComponent() {
   return (
     <div className="content min-h-screen w-full">
+      <TailwindIndicator />
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       {/* <TanStackRouterDevtools position="bottom-left" /> */}
@@ -15,7 +16,6 @@ export function RootComponent() {
         drawerZIndex="z-50"
       />
       <Toaster reverseOrder />
-      <TailwindIndicator />
     </div>
   );
 }

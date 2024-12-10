@@ -21,14 +21,14 @@ const formOpts = formOptions<PropertyUserCreate>({
     password: "",
     passwordConfirm: "",
     phone: "",
-    avatarUrl: "",
+    avatar: null,
   },
 });
 
 export function SignupComponent({}: SignupComponentProps) {
-    const { returnTo } = useSearch({
-      from: "/auth/signup",
-    });
+  const { returnTo } = useSearch({
+    from: "/auth/signup",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const qc = useQueryClient();
   const navigate = useNavigate({ from: "/auth/signup" });
@@ -62,7 +62,7 @@ export function SignupComponent({}: SignupComponentProps) {
   });
   const form = useForm({
     ...formOpts,
-    onSubmit: async ({ value }) => {
+      onSubmit: async ({ value }) => {
       await mutation.mutate(value);
     },
   });
@@ -82,7 +82,7 @@ export function SignupComponent({}: SignupComponentProps) {
         }}
         className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-6 bg-base-300/20 p-[2%] md:w-[70%] lg:w-[40%]"
       >
-        <div className="flex flex-col items-center justify-center gap- w-full h-full">
+        <div className="gap- flex h-full w-full flex-col items-center justify-center">
           <h1 className="text-4xl font-bold">Sign up</h1>
           <form.Field
             name="username"
@@ -97,7 +97,9 @@ export function SignupComponent({}: SignupComponentProps) {
                   fieldKey="username"
                   inputOptions={{
                     onBlur: field.handleBlur,
-                    onChange: (e) => field.handleChange(e.target.value),
+                    onChange: (e) => {
+                      field.handleChange(e.target.value)
+                    },
                   }}
                 />
               );

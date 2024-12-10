@@ -4,7 +4,7 @@ export function TailwindIndicator() {
   if (!import.meta.env.DEV) return null;
 
   return (
-    <div className="fixed bottom-[1.5%] left-[1.5%] z-50 flex size-8 items-center justify-center bg-base-100 font-bold ">
+    <div className="fixed top-[1.5%] left-[50%] z-50 flex size-8 items-center justify-center bg-base-100 font-bold ">
       <div className="block sm:hidden">xs</div>
       <div className="hidden sm:block md:hidden lg:hidden xl:hidden 2xl:hidden">
         sm

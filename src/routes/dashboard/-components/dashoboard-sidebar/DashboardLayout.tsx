@@ -14,7 +14,7 @@ import { Separator } from "@/components/shadcn/ui/separator";
 import { Outlet } from "@tanstack/react-router";
 import { DashboardSidebarHeader } from "./DashboardSidebarHeader";
 import { DashboardSidebarLinks } from "./DashboardSidebarLinks";
-import { DashboardSidebaruser } from "./DashboardSidebaruser";
+import { DashboardSidebarUser } from "./DashboardSidebarUser";
 import { TSRBreadCrumbs } from "@/lib/tanstack/router/TSRBreadCrumbs";
 import { DashboardTheme } from "./DashboardTheme";
 
@@ -33,10 +33,11 @@ export function DashboardLayout({ sidebar_props }: DashboardLayoutProps) {
 
           <DashboardSidebarLinks />
         </SidebarContent>
-        <SidebarFooter>
+        <SidebarFooter className="gap-3">
           {/* <ThemeToggle /> */}
           <DashboardTheme/>
-          <DashboardSidebaruser />
+          <DashboardSidebarUser />
+          <div className="h-10"/>
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>

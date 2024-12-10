@@ -2,7 +2,6 @@ import { pb, PocketBaseClient } from "@/lib/pb/client";
 import { PropertyUserResponse } from "@/lib/pb/pb-types";
 import {
   QueryClient,
-  queryOptions,
   useMutation,
   useQueryClient,
   useSuspenseQuery,
@@ -10,6 +9,7 @@ import {
 import {
   AnyContext,
   BeforeLoadContextOptions,
+  Navigate,
   redirect,
   RootRoute,
 } from "@tanstack/react-router";
@@ -24,6 +24,7 @@ export function useViewer() {
     mutationFn: async () => {
       pb.authStore.clear();
       qc.invalidateQueries(viewerqueryOptions);
+      Navigate({ to: "/auth" , search: { returnTo: "/" } });
     },
   });
   return { userQuery: useSuspenseQuery(viewerqueryOptions), logoutMutation };
