@@ -67,7 +67,7 @@ export function TenantsCard({
         </div>
         <div className="break-words text-4xl">{item?.name}</div>
 
-        <div className="flex h-full w-full flex-col justify-end p-2">
+        {/* <div className="flex h-full w-full flex-col justify-end p-2">
           { (
             <Suspense fallback={
               <ul className="w-full flex flex-wrap gap-2">
@@ -82,7 +82,7 @@ export function TenantsCard({
               <OneTenantShopBadges tenant={item.name}/>
             </Suspense>
           )}
-        </div>
+        </div> */}
       </div>
     </Link>
   );
