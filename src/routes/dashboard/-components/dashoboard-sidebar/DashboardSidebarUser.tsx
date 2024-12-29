@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-} from "lucide-react";
+import { BadgeCheck, Bell, ChevronsUpDown, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/shadcn/ui/avatar";
 import {
   DropdownMenu,
@@ -57,7 +53,7 @@ export function DashboardSidebarUser() {
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] p-2 text-base-content min-w-56 rounded-lg"
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg p-2 text-base-content"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={4}
@@ -69,8 +65,8 @@ export function DashboardSidebarUser() {
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">
-                    {user.username}
+                  <span className="truncate font-semibold flex gap-1 items-center">
+                    {user.username} {user?.staff.length > 0 && <ShieldCheck className="size-3 text-accent"/>}
                   </span>
                   <span className="truncate text-xs">{user.email}</span>
                 </div>
