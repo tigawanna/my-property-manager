@@ -19,8 +19,9 @@ import {
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { getFileURL } from "@/lib/pb/client";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 export function DashboardSidebarUser() {
+  const tsrNavigate  = useNavigate();
   const { isMobile } = useSidebar();
   const { userQuery, logoutMutation } = useViewer();
   const user = userQuery?.data?.record;
@@ -91,7 +92,10 @@ export function DashboardSidebarUser() {
 
             <MutationButton
               className="btn-error max-w-[98%]"
-              onClick={() => logoutMutation.mutate()}
+              onClick={() => logoutMutation.mutateAsync()
+                .then(() => {
+                tsrNavigate({ to: "/auth", search: { returnTo: "/" } });
+              })}
               label="Logout"
               mutation={logoutMutation}
             />
