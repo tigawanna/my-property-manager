@@ -35,9 +35,7 @@ export function OneShopPaymentsList({}: SOneShopPaymentsListrops) {
   if (!data || data.items.length === 0) {
     return (
       <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center">
-        <div className="flex h-full items-center justify-center rounded-lg border bg-info-content p-[2%] text-sm">
           <ItemNotFound label="shop payments" />
-        </div>
       </div>
     );
   }

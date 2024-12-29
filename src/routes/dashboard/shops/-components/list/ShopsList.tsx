@@ -37,7 +37,6 @@ export function ShopsList({ keyword = "", floor }: ShopsListProps) {
     <ul className="flex h-full w-full flex-col items-center justify-center">
       <div className="flex w-[90%] flex-wrap justify-center gap-2">
         {data.items.map((item) => {
-          const tenant = item.expand?.tenant;
           return <ShopCard key={item.id} item={item} />;
         })}
         <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">

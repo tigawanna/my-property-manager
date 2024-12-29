@@ -4,6 +4,7 @@ import { oneShopBillsQueryOptions } from "../../query-options/shops-query-option
 import { useParams, useSearch } from "@tanstack/react-router";
 import { GenericTable } from "@/components/wrappers/GenericTable";
 import { pb } from "@/lib/pb/client";
+import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 
 interface ShopsListProps {}
 
@@ -18,7 +19,7 @@ export function ShopsBillsList({}: ShopsListProps) {
   );
   const data = query.data;
   const error = query.error;
-  console.log("==== data === ", data);
+
   if (error) {
     return (
       <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center">
@@ -29,11 +30,7 @@ export function ShopsBillsList({}: ShopsListProps) {
   if (!data || data.items.length === 0) {
     return (
       <div className="flex h-full min-h-[80vh] w-full flex-col items-center justify-center">
-        <div className="flex h-full items-center justify-center rounded-lg border bg-info-content p-[2%] text-sm">
-          {error && (
-            <div className="warning rounded-lg p-2">No bills found</div>
-          )}
-        </div>
+          <ItemNotFound label="shop bills" />
       </div>
     );
   }

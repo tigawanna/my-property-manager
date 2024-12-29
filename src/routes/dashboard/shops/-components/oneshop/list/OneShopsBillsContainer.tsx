@@ -16,7 +16,7 @@ export function OneShopsBillsContainer({ shop }: OneShopsBillsContainerProps) {
         </div>
       </div>
       <div className="m-3 flex h-full w-full flex-col items-center justify-center p-5">
-        <PaginateOneShopBills shop={shop} />
+        {/* <PaginateOneShopBills shop={shop} /> */}
         <Suspense fallback={<CardsListSuspenseFallback />}>
           <ShopsBillsList />
         </Suspense>

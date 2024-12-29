@@ -33,7 +33,6 @@ export function PaymentsList({
   );
   const data = query.data;
   const error = query.error;
-  console.log("==== data === ", data);
   if (error) {
     return (
       <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
@@ -44,7 +43,7 @@ export function PaymentsList({
   if (!data || data.items.length === 0) {
     return (
       <div className="flex h-full min-h-[90vh] w-full flex-col items-center justify-center">
-        <ItemNotFound label="payments"/>
+        <ItemNotFound label="payments" />
       </div>
     );
   }

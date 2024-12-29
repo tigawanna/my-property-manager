@@ -34,8 +34,9 @@ import { PBCheckbox } from "./PBCheckbox";
 
 type PropertyTenantsExpand = Pick<PropertyTenantsListResponse, "id" | "name">;
 interface UpdateShopProps {
-  shop: PropertyShopsUpdate & {
+  shop: Omit<PropertyShopsUpdate, "gallery"> & {
     id: string;
+    gallery?: string[];
     expand?: { tenant?: PropertyTenantsListResponse | undefined };
   };
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -170,9 +171,10 @@ export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
 }
 
 interface UpdateShopModalProps {
-  shop: PropertyShopsUpdate & {
+  shop: Omit<PropertyShopsUpdate, "gallery"> & {
     id: string;
-    expand?:{tenant?: PropertyTenantsListResponse | undefined;}
+    gallery?: string[];
+    expand?: { tenant?: PropertyTenantsListResponse | undefined };
   };
   trigger?: React.ReactNode;
 }

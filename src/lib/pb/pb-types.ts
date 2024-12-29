@@ -353,10 +353,10 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 	emailVisibility: boolean;
 	verified: boolean;
 	username: string;
+	avatar: string;
 	phone: string;
 	tenant: string;
 	staff: string;
-	avatar: string;
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
@@ -365,10 +365,10 @@ export interface PropertyUserCreate extends AuthCollectionCreate {
 	emailVisibility?: boolean;
 	verified?: boolean;
 	username?: string;
+	avatar?: File | null;
 	phone?: string;
 	tenant?: string;
 	staff?: string;
-	avatar?: File | null;
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
@@ -377,10 +377,10 @@ export interface PropertyUserUpdate extends AuthCollectionUpdate {
 	emailVisibility?: boolean;
 	verified?: boolean;
 	username?: string;
+	avatar?: File | null;
 	phone?: string;
 	tenant?: string;
 	staff?: string;
-	avatar?: File | null;
 }
 
 export interface PropertyUserCollection {
@@ -527,6 +527,8 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 	order: number;
 	is_vacant: boolean;
 	monthly_rent: number;
+	on_display: boolean;
+	gallery: Array<string>;
 	created: string;
 	updated: string;
 }
@@ -539,6 +541,8 @@ export interface PropertyShopsCreate extends BaseCollectionCreate {
 	order?: number;
 	is_vacant?: boolean;
 	monthly_rent?: number;
+	on_display?: boolean;
+	gallery?: MaybeArray<File>;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -555,6 +559,9 @@ export interface PropertyShopsUpdate extends BaseCollectionUpdate {
 	monthly_rent?: number;
 	'monthly_rent+'?: number;
 	'monthly_rent-'?: number;
+	on_display?: boolean;
+	gallery?: MaybeArray<File>;
+	'gallery-'?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
