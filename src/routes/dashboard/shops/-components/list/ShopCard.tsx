@@ -64,8 +64,8 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
             {item.is_vacant && (
               <div className="badge badge-primary badge-outline">Vacant</div>
             )}
-            {item.on_display && (
-              <div className="badge badge-primary badge-outline">On Display</div>
+            {item.dummy_record && (
+              <div className="badge badge-primary badge-outline">Dummy shop</div>
             )}
             {item.utils === "elec" && (
               <Zap className="fill-warning stroke-warning" />

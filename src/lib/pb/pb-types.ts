@@ -527,7 +527,7 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 	order: number;
 	is_vacant: boolean;
 	monthly_rent: number;
-	on_display: boolean;
+	dummy_record: boolean;
 	gallery: Array<string>;
 	created: string;
 	updated: string;
@@ -541,7 +541,7 @@ export interface PropertyShopsCreate extends BaseCollectionCreate {
 	order?: number;
 	is_vacant?: boolean;
 	monthly_rent?: number;
-	on_display?: boolean;
+	dummy_record?: boolean;
 	gallery?: MaybeArray<File>;
 	created?: string | Date;
 	updated?: string | Date;
@@ -559,7 +559,7 @@ export interface PropertyShopsUpdate extends BaseCollectionUpdate {
 	monthly_rent?: number;
 	'monthly_rent+'?: number;
 	'monthly_rent-'?: number;
-	on_display?: boolean;
+	dummy_record?: boolean;
 	gallery?: MaybeArray<File>;
 	'gallery-'?: string;
 	created?: string | Date;
