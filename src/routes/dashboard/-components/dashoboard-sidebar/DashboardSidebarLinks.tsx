@@ -19,48 +19,55 @@ import { Link, useLocation } from "@tanstack/react-router";
 interface DashboardSidebarLinksProps {}
 
 export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
-  const { state, setOpen, setOpenMobile,isMobile } = useSidebar();
+  const { state, setOpen, setOpenMobile, isMobile } = useSidebar();
   const { pathname } = useLocation();
-  const {userQuery} = useViewer();
-  const user = userQuery.data?.record;
+  const { role } = useViewer();
   return (
     <SidebarGroup className="h-full bg-base-100">
       <SidebarGroupLabel>House keeping</SidebarGroupLabel>
       <SidebarMenu className="gap-5">
         {dashboard_routes.map((item) => {
-          if(
-            !(user?.staff && user?.staff?.length>0) &&
-            (item.name === "utilities" || item.name === "payments" || item.name === "staff")
+          if (
+            !(role === "tenant") &&
+            (item.name === "utilities" ||
+              item.name === "payments" ||
+              item.name === "staff")
           ) {
             return;
           }
           return (
             <SidebarMenuItem key={item.name}>
               <SidebarMenuButton asChild>
-                <TooltipProvider >
-                  <Tooltip defaultOpen={false} delayDuration={10} disableHoverableContent>
+                <TooltipProvider>
+                  <Tooltip
+                    defaultOpen={false}
+                    delayDuration={10}
+                    disableHoverableContent
+                  >
                     <TooltipTrigger
                       asChild
                       className={
                         pathname === item.href
-                          ? `flex w-full gap-3 rounded-lg bg-base-200  text-primary p-1`
+                          ? `flex w-full gap-3 rounded-lg bg-base-200 p-1 text-primary`
                           : `flex w-full gap-3 rounded-sm p-1 hover:bg-base-300`
                       }
                     >
                       <Link
-                      className="flex items-center gap-[10%]"
+                        className="flex items-center gap-[10%]"
                         to={item.href}
                         onClick={() => {
-                          if(isMobile){
+                          if (isMobile) {
                             setOpen(false);
                             setOpenMobile(false);
-
                           }
                         }}
                       >
                         <button className="size-6">{item.icon}</button>
-                        {(state === "expanded" || isMobile)  && (
-                          <span className="text-lg text-center"> {item.name}</span>
+                        {(state === "expanded" || isMobile) && (
+                          <span className="text-center text-lg">
+                            {" "}
+                            {item.name}
+                          </span>
                         )}
                       </Link>
                     </TooltipTrigger>

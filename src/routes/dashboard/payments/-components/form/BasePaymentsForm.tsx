@@ -38,10 +38,10 @@ export function BasePaymentsForm({
   row,
   afterSave,
 }: BasePaymentsFormProps) {
-  const { userQuery } = useViewer();
-  const viewer = userQuery?.data?.record!;
+  const { viewer } = useViewer();
+
   const staffQuery = useSuspenseQuery(
-    oneStaffQueryOptions(viewer?.id)
+    oneStaffQueryOptions(viewer?.id!)
   )
   const staff = staffQuery?.data
   const [expansions, setExpansions] = useState<PaymentExpansion>({

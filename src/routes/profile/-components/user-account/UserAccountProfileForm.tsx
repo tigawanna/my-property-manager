@@ -60,14 +60,14 @@ export function UserAccountProfileForm({
       return res;
     },
     meta: {
-      invalidates:["viewer"]
+      invalidates: ["viewer"],
     },
     onSuccess(data) {
       makeHotToast({
         title: "Profile updated",
         description: `Your profile has been updated`,
         variant: "success",
-      })
+      });
       setOpen(false);
     },
     onError(error: ClientResponseError, variables, context) {
@@ -93,6 +93,12 @@ export function UserAccountProfileForm({
         });
     },
   });
+  const savedImage = getFileURL({
+    collection_id_or_name: "property_user",
+    fallback: "/avatar.png",
+    record_id: input?.id,
+    file_name: input?.avatar as any,
+  });
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -111,7 +117,8 @@ export function UserAccountProfileForm({
             editing
             userAvatar={{
               alt: input?.username || "",
-              avatarUrl: input?.avatarUrl || "",
+              avatarUrl:
+                savedImage.length > 0 ? savedImage || input?.avatarUrl : "",
               avatarFile: input?.avatar as any as File,
             }}
             setUserAvarat={(data) => {
@@ -149,13 +156,13 @@ export function UserAccountProfileForm({
                       inputOptions={{
                         onBlur: field.handleBlur,
                         onChange: (e) => {
-                          field.handleChange(e.target.value)
+                          field.handleChange(e.target.value);
                           setInput((prev) => {
                             return {
                               ...prev,
-                              username: e.target.value
-                            }
-                          })
+                              username: e.target.value,
+                            };
+                          });
                         },
                       }}
                     />
@@ -177,13 +184,13 @@ export function UserAccountProfileForm({
                         autoComplete: "email",
                         onBlur: field.handleBlur,
                         onChange: (e) => {
-                          field.handleChange(e.target.value)
+                          field.handleChange(e.target.value);
                           setInput((prev) => {
                             return {
                               ...prev,
-                              email: e.target.value
-                            }
-                          })
+                              email: e.target.value,
+                            };
+                          });
                         },
                       }}
                     />
@@ -205,13 +212,13 @@ export function UserAccountProfileForm({
                         type: "tel",
                         onBlur: field.handleBlur,
                         onChange: (e) => {
-                          field.handleChange(e.target.value)
+                          field.handleChange(e.target.value);
                           setInput((prev) => {
                             return {
                               ...prev,
-                              phone: e.target.value
-                            }
-                          })
+                              phone: e.target.value,
+                            };
+                          });
                         },
                       }}
                     />

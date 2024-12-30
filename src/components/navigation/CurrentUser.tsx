@@ -30,8 +30,7 @@ interface CurrentUserProps {}
 
 export function CurrentUser({}: CurrentUserProps) {
   const location = useLocation();
-  const { userQuery, logoutMutation } = useViewer();
-  const viewer = userQuery?.data?.record;
+  const { viewer, logoutMutation } = useViewer();
 
   if (!viewer) {
     return (

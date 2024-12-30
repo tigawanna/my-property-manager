@@ -10,7 +10,7 @@ export function App() {
       document.documentElement.dataset.style = "vertical";
       themeChange(false);
     }, []);
-    const { userQuery } = useViewer();
+    const { viewerQuery } = useViewer();
   
     return (
       <>
@@ -20,7 +20,7 @@ export function App() {
           context={{
             pb,
             queryClient,
-            viewer: userQuery?.data,
+            viewer: viewerQuery?.data,
           }}
         />
       </>

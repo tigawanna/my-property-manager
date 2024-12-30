@@ -6,8 +6,7 @@ import { ProfileLinkCard } from "./HomeComponents";
 import { GenericToolbar } from "./GenericToolbar";
 
 export function HomePage() {
-  const { userQuery } = useViewer();
-  const viewer = userQuery?.data?.record;
+  const { viewer } = useViewer();
   return (
     <div className="jusify-center flex h-full min-h-screen w-full flex-col items-center bg-gradient-to-br from-primary/60 via-accent/60 to-primary/30 ">
       {/* <picture className="fixed inset-0 z-0 size-full">

@@ -1,9 +1,10 @@
+import { getFileURL } from "@/lib/pb/client";
 import { useRef } from "react";
 
 
 interface AvatarInputProps {
   editing: boolean;
-  userAvatar: { avatarFile: File | null; avatarUrl: string; alt: string };
+  userAvatar: { avatarFile: File | null; avatarUrl: string; alt: string }; 
   setUserAvarat: (data: { avatarFile: File | null; avatarUrl: string }) => void;
 }
 
@@ -13,6 +14,7 @@ export function AvatarInput({
   setUserAvarat,
 }: AvatarInputProps) {
   const imagInpt = useRef<HTMLInputElement>(null);
+
   function handleInageChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files[0]) {
       setUserAvarat({

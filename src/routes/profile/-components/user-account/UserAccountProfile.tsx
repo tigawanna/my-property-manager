@@ -11,12 +11,13 @@ import { PropertyUserResponse } from "@/lib/pb/pb-types";
 import { Navigate } from "@tanstack/react-router";
 import { getFileURL } from "@/lib/pb/client";
 import { UserAccountProfileForm } from "./UserAccountProfileForm";
+import { Mail,Phone } from "lucide-react";
 
 interface UserAccountProfileProps {}
 
 export function UserAccountProfile({}: UserAccountProfileProps) {
-  const { userQuery, logoutMutation } = useViewer();
-  const user = userQuery?.data?.record!;
+  const { viewer } = useViewer();
+  const user = viewer!;
   const [input, setInput] = useState<
     PropertyUserResponse & { avatarUrl: string }
   >({
@@ -25,6 +26,7 @@ export function UserAccountProfile({}: UserAccountProfileProps) {
       collection_id_or_name: "property_user",
       fallback: "/avatar.png",
       record_id: user?.id,
+      file_name: user?.avatar
     }),
   });
 
@@ -32,35 +34,42 @@ export function UserAccountProfile({}: UserAccountProfileProps) {
     return <Navigate to="/auth" search={{ returnTo: "/profile" }} />;
   }
   return (
-    <Card className="flex w-full flex-col md:flex-row  border-base-200 bg-base-300">
-      <CardHeader className="flex flex-row items-center p-0">
-        <img
-          src={input.avatarUrl}
-          className="h-[250px] w-full lg:size-[200px] object-cover"
-        />
-      </CardHeader>
-      <CardContent className="rounded-lg">
-        <div className="flex flex-col gap-1 p-3">
-          {input.username && (
-            <div className="i flex h-full gap-2">
-              <CardTitle>{input.username}</CardTitle>
-              {input.staff && (
-                <Badge>
-                  {input.username?.charAt(0).toUpperCase() +
-                    input.username?.slice(1)}
-                </Badge>
+    <Card className="flex h-full w-[90%] flex-col items-center border-base-200 bg-base-300 shadow shadow-base-300 border md:w-fit md:flex-row">
+      <CardHeader className="flex flex-row items-center p-0"></CardHeader>
+      <CardContent className="rounded-lg p-0">
+        <div className="flex h-full w-full flex-col gap-3 md:flex-row">
+          <img
+            src={input.avatarUrl}
+            className="aspect-square size-full object-cover md:h-[350px]"
+          />
+          <div className="flex flex-col justify-between gap-1 p-5">
+            <div className="p2- flex flex-col gap-1">
+              {input.username && (
+                <div className="i flex h-full gap-2">
+                  <CardTitle className="text-5xl">{input.username}</CardTitle>
+                  {input.staff && (
+                    <Badge>
+                      {input.username?.charAt(0).toUpperCase() +
+                        input.username?.slice(1)}
+                    </Badge>
+                  )}
+                </div>
+              )}
+              {input.email && (
+                <span className="flex items-center gap-1">
+                  <Mail className="size-4" />
+                  {input.email}
+                </span>
+              )}
+              {input.phone && (
+                <span className="flex items-center gap-1">
+                  <Phone className="size-4" />:{input.phone}
+                </span>
               )}
             </div>
-          )}
-          {input.email && (
-            <span className="font-semibold">Email:{input.email}</span>
-          )}
-          {input.phone && (
-            <span className="font-semibold">Phone:{input.phone}</span>
-          )}
+            <UserAccountProfileForm input={input} setInput={setInput} />
+          </div>
         </div>
-
-        <UserAccountProfileForm input={input} setInput={setInput} />
       </CardContent>
     </Card>
   );

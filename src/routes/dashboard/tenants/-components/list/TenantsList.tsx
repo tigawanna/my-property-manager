@@ -12,9 +12,7 @@ interface TenantsListProps {
 }
 
 export function TenantsList({ keyword = "" }: TenantsListProps) {
-  const {
-    userQuery: { data: viewer },
-  } = useViewer();
+  const { role } = useViewer();
   const query = useSuspenseQuery(listTenantsQueryOptions({ keyword }));
   const data = query.data;
   const error = query.error;
@@ -39,7 +37,7 @@ export function TenantsList({ keyword = "" }: TenantsListProps) {
         {data.items.map((item) => {
           return <TenantsCard key={item.id} item={item} />;
         })}
-        {viewer?.record && viewer?.record?.staff?.length > 3 && (
+        {role === "staff" && (
           <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">
             <CreateTenantModal
               trigger={

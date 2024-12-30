@@ -25,9 +25,6 @@ export function PaymentsList({
   year,
   page,
 }: PaymentsListProps) {
-  const { userQuery } = useViewer();
-  const viewer = userQuery.data.record;
-
   const query = useSuspenseQuery(
     listPropertyQueryOptions({ keyword, month, year, page }),
   );

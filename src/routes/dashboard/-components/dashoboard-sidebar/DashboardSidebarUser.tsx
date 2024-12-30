@@ -23,15 +23,15 @@ import { Link, useNavigate } from "@tanstack/react-router";
 export function DashboardSidebarUser() {
   const tsrNavigate  = useNavigate();
   const { isMobile } = useSidebar();
-  const { userQuery, logoutMutation } = useViewer();
-  const user = userQuery?.data?.record;
-  if(!user){
-    return null
+  const { viewer, logoutMutation,role } = useViewer();
+
+  if (!viewer) {
+    return null;
   }
   const avatarUrl = getFileURL({
     collection_id_or_name: "property_user",
     fallback: "/avatar.png",
-    record_id: user.id,
+    record_id: viewer.id,
   });
   return (
     <SidebarMenu>
@@ -40,14 +40,16 @@ export function DashboardSidebarUser() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton size="lg" className="">
               <Avatar className="h-8 w-8 rounded-lg bg-base-content hover:bg-base-300">
-                <AvatarImage src={avatarUrl} alt={user.username} />
+                <AvatarImage src={avatarUrl} alt={viewer.username} />
                 <AvatarFallback className="rounded-lg">
-                  {user.username?.slice(0, 2)}
+                  {viewer.username?.slice(0, 2)}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.username}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-semibold">
+                  {viewer.username}
+                </span>
+                <span className="truncate text-xs">{viewer.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -61,14 +63,17 @@ export function DashboardSidebarUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={avatarUrl} alt={user.username} />
+                  <AvatarImage src={avatarUrl} alt={viewer.username} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold flex gap-1 items-center">
-                    {user.username} {user?.staff.length > 0 && <ShieldCheck className="size-3 text-accent"/>}
+                  <span className="flex items-center gap-1 truncate font-semibold">
+                    {viewer.username}{" "}
+                    {role==="tenant" && (
+                      <ShieldCheck className="size-3 text-accent" />
+                    )}
                   </span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate text-xs">{viewer.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
@@ -92,10 +97,11 @@ export function DashboardSidebarUser() {
 
             <MutationButton
               className="btn-error max-w-[98%]"
-              onClick={() => logoutMutation.mutateAsync()
-                .then(() => {
-                tsrNavigate({ to: "/auth", search: { returnTo: "/" } });
-              })}
+              onClick={() =>
+                logoutMutation.mutateAsync().then(() => {
+                  tsrNavigate({ to: "/auth", search: { returnTo: "/" } });
+                })
+              }
               label="Logout"
               mutation={logoutMutation}
             />

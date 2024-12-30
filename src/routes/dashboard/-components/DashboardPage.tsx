@@ -8,8 +8,7 @@ interface DashboardPageProps {}
 dashboard_routes
 
 export function DashboardPage({}: DashboardPageProps) {
-  const { userQuery } = useViewer();
-  const viewer = userQuery?.data?.record;
+  const { viewer } = useViewer();
   return (
     <div className="flex h-full min-h-screen w-full flex-col items-center justify-center">
       <h1 className="text-3xl font-bold">Dashboard</h1>
