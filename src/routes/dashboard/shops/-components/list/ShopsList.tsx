@@ -6,14 +6,17 @@ import { PBReturnedUseQueryError } from "@/lib/pb/components/PBReturnedUseQueryE
 import { CreateShopModal } from "../form/CreateShops";
 import { Plus } from "lucide-react";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
-
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 
 interface ShopsListProps {
   keyword?: string;
-  floor: HouseFloorsKeys|"";
+  floor: HouseFloorsKeys | "";
 }
 
 export function ShopsList({ keyword = "", floor }: ShopsListProps) {
+  const {
+    userQuery: { data: viewer },
+  } = useViewer();
   const query = useSuspenseQuery(listShopsQueryOptions({ floor, keyword }));
   const data = query.data;
   const error = query.error;
@@ -38,16 +41,19 @@ export function ShopsList({ keyword = "", floor }: ShopsListProps) {
       <div className="flex w-[90%] flex-wrap justify-center gap-2">
         {data.items.map((item) => {
           return <ShopCard key={item.id} item={item} />;
+          
         })}
-        <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">
-          <CreateShopModal
-            trigger={
-              <div className="">
-                <Plus className="size-9" />
-              </div>
-            }
-          />
-        </div>
+        {viewer?.record&&viewer?.record?.staff?.length > 3 && (
+          <div className="flex h-52 w-[95%] items-center justify-center rounded-xl bg-gradient-to-r from-base-300 to-base-200 sm:w-[45%] lg:w-[30%]">
+            <CreateShopModal
+              trigger={
+                <div className="">
+                  <Plus className="size-9" />
+                </div>
+              }
+            />
+          </div>
+        )}
       </div>
     </ul>
   );

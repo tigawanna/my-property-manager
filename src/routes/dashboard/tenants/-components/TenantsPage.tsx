@@ -6,10 +6,12 @@ import { TenantsList } from "./list/TenantsList";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
 import { Plus } from "lucide-react";
 import { CreateTenantModal } from "./form/CreateTenant";
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 
 interface TenantsPageProps {}
 
 export function TenantsPage({}: TenantsPageProps) {
+  const { role } = useViewer();
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
     useTenantsSearchQuery();
   return (
@@ -17,14 +19,16 @@ export function TenantsPage({}: TenantsPageProps) {
       <ListPageHeader
         title="Tenants"
         formTrigger={
-          <CreateTenantModal
-            trigger={
-              <div className="btn btn-sm btn-outline">
-                <Plus className="" />
-                add
-              </div>
-            }
-          />
+          role === "staff" && (
+            <CreateTenantModal
+              trigger={
+                <div className="btn btn-outline btn-sm">
+                  <Plus className="" />
+                  add
+                </div>
+              }
+            />
+          )
         }
         searchBox={
           <SearchBox

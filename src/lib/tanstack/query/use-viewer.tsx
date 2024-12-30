@@ -16,18 +16,32 @@ import {
 import { RecordAuthResponse } from "pocketbase";
 import { viewerqueryOptions } from "./query-options/viewer-query-options";
 
-
-
 export function useViewer() {
   const qc = useQueryClient();
   const logoutMutation = useMutation({
     mutationFn: async () => {
       pb.authStore.clear();
       qc.invalidateQueries(viewerqueryOptions);
-      Navigate({ to: "/auth" , search: { returnTo: "/" } });
+      Navigate({ to: "/auth", search: { returnTo: "/" } });
     },
   });
-  return { userQuery: useSuspenseQuery(viewerqueryOptions), logoutMutation };
+  const viewerQuery = useSuspenseQuery(viewerqueryOptions);
+  const viewer = viewerQuery.data?.record;
+  const getViewerRole = () => {
+    if (viewer?.staff && viewer?.staff?.length > 0) {
+      return "staff";
+    }
+    if (viewer?.tenant && viewer?.tenant?.length > 0) {
+      return "tenant";
+    }
+    return "user";
+  };
+  return {
+    viewerQuery,
+    viewer,
+    role: getViewerRole(),
+    logoutMutation,
+  } as const;
 }
 
 export type PocketbaseViewerType =
@@ -66,7 +80,8 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user);
   // console.log(" ============ user in ",ctx.location.pathname," guard =========== ", user?.record);
   if (
-    ctx.location.pathname === "/dashboard/bills" && !(user?.record?.staff&&user?.record?.staff?.length > 0)
+    ctx.location.pathname === "/dashboard/bills" &&
+    !(user?.record?.staff && user?.record?.staff?.length > 0)
   ) {
     throw redirect({
       to: "..",
