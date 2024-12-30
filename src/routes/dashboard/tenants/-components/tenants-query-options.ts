@@ -21,6 +21,7 @@ export function listTenantsQueryOptions({ keyword }: IListTenantsQueryOptions) {
         filter: or(like("name", keyword)),
         select: {
           expand: {
+            "account": true,
             "property_shops_via_tenant": true,
             // "property_shops(tenant)": true,
           },

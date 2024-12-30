@@ -8,7 +8,9 @@ import {
 import { cva } from "class-variance-authority";
 import { Link } from "@tanstack/react-router";
 import {
+  PropertyShopsResponse,
   PropertyTenantsListResponse,
+  PropertyUserResponse,
 } from "@/lib/pb/pb-types";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { oneTenantShopsQueryOptions } from "../tenants-query-options";
@@ -17,7 +19,14 @@ import { Suspense } from "react";
 interface TenantsCardProps {
   variant?: "default" | "wide";
   cardClassname?: string;
-  item: PropertyTenantsListResponse
+  item: PropertyTenantsListResponse & {
+    expand?:
+      | {
+          account?: PropertyUserResponse | undefined;
+          property_shops_via_tenant?: PropertyShopsResponse[] | undefined;
+        }
+      | undefined;
+  };
   oneTenantMode?: boolean;
 }
 
@@ -42,6 +51,8 @@ export function TenantsCard({
       },
     },
   );
+  const shops = item.expand?.property_shops_via_tenant;
+  const max_shops_to_show = 4
 
   return (
     <Link
@@ -52,48 +63,59 @@ export function TenantsCard({
       key={item.id}
       className={cn(tenantCardVariants({ variant }), cardClassname)}
     >
-      <div className="flex h-full w-full flex-col justify-between gap-2">
+      <div className="flex h-full w-full flex-col justify-between gap-2 p-2">
         <div className="flex w-full items-start justify-between gap-2">
-          <div className="">
-            <Avatar>
+          <div className="flex w-full justify-end">
+            {/* <img
+              alt={item.name}
+              className="size-[100px] rounded-lg"
+              src={`https://picsum.photos/id/${wordToNumber(item.name)}/100/100`}
+            /> */}
+            <div className="flex w-full items-center gap-2">
+              {shops && shops.length > 0 && (
+                <div className="flex items-center justify-start gap-2">
+                  {shops?.slice(0, max_shops_to_show).map((shop) => (
+                    <div
+                      className="flex items-center justify-start gap-2"
+                      key={shop.id}
+                    >
+                      {/* <User className="w-3 h-3" /> */}
+                      <h4 className="badge badge-primary badge-outline px-1">
+                        {shop.shop_number}
+                      </h4>
+                    </div>
+                  ))}
+                  {shops?.length > max_shops_to_show && (
+                    <span className="badge badge-primary badge-outline px-1">
+                      +{shops?.length - max_shops_to_show} more
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+            <Avatar className="size-20">
               <AvatarImage
                 alt={item.name}
                 className="size-full"
-                src={`https://picsum.photos/id/${wordToNumber(item.name)}/30/30`}
+                src={`https://picsum.photos/id/${wordToNumber(item.name)}/100/100`}
               />
               <AvatarFallback>{item.name.slice(0, 2)}</AvatarFallback>
             </Avatar>
           </div>
         </div>
-        <div className="break-words text-4xl">{item?.name}</div>
-
-        {/* <div className="flex h-full w-full flex-col justify-end p-2">
-          { (
-            <Suspense fallback={
-              <ul className="w-full flex flex-wrap gap-2">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <li
-                    key={i}
-                    className="h-8 w-8 skeleton rounded-full bg-base-300"
-                  />
-                ))}
-              </ul>
-            }>
-              <OneTenantShopBadges tenant={item.name}/>
-            </Suspense>
-          )}
-        </div> */}
+        <div>
+          <div className="">{item?.expand?.account?.email}</div>
+          <div className="break-words text-4xl">{item?.name}</div>
+        </div>
       </div>
     </Link>
   );
 }
 
-
-
 function OneTenantShopBadges({ tenant }: { tenant: string }) {
   const query = useSuspenseQuery(oneTenantShopsQueryOptions({ tenant }));
   const shops = query.data;
-  console.log(shops)
+  console.log(shops);
   return (
     <div className="flex h-full w-full flex-col justify-end p-2">
       <div className="flex w-full items-center gap-2">
