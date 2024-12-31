@@ -1,5 +1,4 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useParams } from "@tanstack/react-router";
 import { oneTenantShopsQueryOptions } from "../tenants-query-options";
 import { ShopCard } from "@/routes/dashboard/shops/-components/list/ShopCard";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";

@@ -8,6 +8,7 @@ import { useShopssSearchQuery } from "./list/use-shook-hooks";
 import { Plus } from "lucide-react";
 import { ShopsList } from "./list/ShopsList";
 import { CreateShopModal } from "./form/CreateShops";
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 
 interface ShopsPageProps {}
 
@@ -15,13 +16,14 @@ export function ShopsPage({}: ShopsPageProps) {
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
     useShopssSearchQuery();
   const { floor } = useSearch({ from: "/dashboard/shops/" });
+    const { role } = useViewer();
   // console.log({houseFloor})
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <ListPageHeader
         title="Shops"
         formTrigger={
-          <CreateShopModal
+         role==="staff"&& <CreateShopModal
             trigger={
               <div className="btn btn-outline btn-sm">
                 <Plus className="" />
