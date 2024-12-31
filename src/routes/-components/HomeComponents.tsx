@@ -24,7 +24,8 @@ export function ProfileLinkCard({viewer}:ProfileLinkCardProps){
   const avatarUrl= getFileURL({
     collection_id_or_name: "property_user",
     fallback: "/avatar.png",
-    record_id: viewer?.id
+    record_id: viewer?.id,
+    file_name: viewer?.avatar
   })
 return (
   <Link to="/profile" className="group flex hover:brightness-125 items-center justify-center gap-2">

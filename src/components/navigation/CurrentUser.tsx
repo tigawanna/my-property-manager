@@ -62,6 +62,7 @@ const avatarUrl = getFileURL({
   collection_id_or_name: "property_user",
   fallback: "/avatar.png",
   record_id: viewer.id,
+  file_name: viewer.avatar
 })
   return (
     <DropdownMenu>
