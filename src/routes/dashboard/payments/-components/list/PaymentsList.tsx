@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { listPropertyQueryOptions } from "../query-options/payments-query-options";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { PaymentsTable } from "./PaymentsTable";
-import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/pb-types";
+import { PropertyShopsResponse, PropertyStaffListResponse,PropertyShopPaymentsResponse } from "@/lib/pb/pb-types";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 import { PaymentsCard } from "./PaymentsCard";
 
@@ -18,6 +18,8 @@ interface PaymentsListProps {
   month: number;
   year: number;
   page: number;
+  type: PropertyShopPaymentsResponse["type"]|""
+  range:"yearly"|"monthly"
 }
 
 export function PaymentsList({
@@ -25,9 +27,11 @@ export function PaymentsList({
   month,
   year,
   page,
+  type,
+  range,
 }: PaymentsListProps) {
   const query = useSuspenseQuery(
-    listPropertyQueryOptions({ keyword, month, year, page }),
+    listPropertyQueryOptions({ keyword, month, year, page,type,range }),
   );
   const data = query.data;
   const error = query.error;

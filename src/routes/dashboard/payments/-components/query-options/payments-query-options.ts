@@ -1,4 +1,5 @@
 import { pb } from "@/lib/pb/client";
+import { PropertyShopPaymentsResponse } from "@/lib/pb/pb-types";
 import { queryOptions } from "@tanstack/react-query";
 import { and, eq, like } from "@tigawanna/typed-pocketbase";
 
@@ -7,6 +8,8 @@ interface IListPropertyQueryOptions {
   month: number;
   year: number;
   page: number;
+  type: PropertyShopPaymentsResponse["type"] | "";
+  range: "yearly" | "monthly";
 }
 
 export function listPropertyQueryOptions({
@@ -14,16 +17,20 @@ export function listPropertyQueryOptions({
   month,
   year,
   page = 1,
+  type,
+  range,
 }: IListPropertyQueryOptions) {
   return queryOptions({
-    queryKey: ["property_shops_payments", keyword, month, year, page],
+    queryKey: ["property_shops_payments", keyword, month, year, page,type,range],
     queryFn: () => {
-      return pb.from("property_shop_payments").getList(page, 24, {
+      return pb.from("property_shop_payments").getList(page, 100, {
         filter: and(
+          type==="" ? null : eq("type", type),
           like("shop.tenant.name", keyword),
-          like("month", month),
+          range==="yearly" ? null : eq("month", month),
           like("year", year),
         ),
+        sort: ["-year", "-month"],
         select: {
           expand: {
             shop: {

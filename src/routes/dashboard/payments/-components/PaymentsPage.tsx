@@ -10,6 +10,8 @@ import {
   PaymentsYearPagination,
 } from "./list/PaymentsPagination";
 import { GeneriicTableSkeleton } from "@/components/wrappers/GeneriicTableSkeleton";
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
+import { PaymentRangeSelect, PaymentTypeSelect } from "./list/PaymentTypeSelect";
 
 interface PaymentsPageProps {}
 
@@ -20,38 +22,49 @@ export function PaymentsPage({}: PaymentsPageProps) {
     month = new Date().getMonth() + 1,
     year = new Date().getFullYear(),
     page = 1,
+    type="",
+    range="monthly",
   } = useSearch({ from: "/dashboard/payments/" });
+  const { role } = useViewer();
 
   return (
-    <div className="flex h-full w-full flex-col items-center ">
-      <div className="flex h-full min-h-screen w-full flex-col items-center justify-between gap-5 mb-4">
+    <div className="flex h-full w-full flex-col items-center">
+      <div className="mb-4 flex h-full min-h-screen w-full flex-col items-center justify-between gap-5">
         <ListPageHeader
           title="Payments"
-          formTrigger={<CreatePaymentForm />}
+          formTrigger={role === "staff" && <CreatePaymentForm />}
           searchBox={
-            <SearchBox
-              inputProps={{
-                placeholder: "Search by name",
-              }}
-              debouncedValue={debouncedValue}
-              isDebouncing={isDebouncing}
-              setKeyword={setKeyword}
-              keyword={keyword}
-            />
+            <div className="flex w-full gap-2">
+              <PaymentTypeSelect />
+              <PaymentRangeSelect/>
+              {role === "staff" && (
+                <SearchBox
+                  inputProps={{
+                    placeholder: "Search by tenant name",
+                  }}
+                  debouncedValue={debouncedValue}
+                  isDebouncing={isDebouncing}
+                  setKeyword={setKeyword}
+                  keyword={keyword}
+                />
+              )}
+            </div>
           }
         />
         <div className="flex h-full w-full flex-col items-center justify-center gap-3 pb-3">
           <PaymentsYearPagination year={year} month={month} />
           <Suspense fallback={<GeneriicTableSkeleton />}>
             <PaymentsList
+              type={type}
               month={month}
               year={year}
               keyword={debouncedValue}
               page={page}
+              range={range}
             />
           </Suspense>
         </div>
-          <PaymentsPagination month={month} year={year} />
+        {range==="monthly" && <PaymentsPagination month={month} year={year} />}
       </div>
     </div>
   );
