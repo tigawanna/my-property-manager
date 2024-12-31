@@ -42,7 +42,7 @@ export function TenantsCard({
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] lg:w-[45%]  rounded-xl to-base-200",
           wide: "w-full ",
         },
       },
@@ -112,29 +112,3 @@ export function TenantsCard({
   );
 }
 
-function OneTenantShopBadges({ tenant }: { tenant: string }) {
-  const query = useSuspenseQuery(oneTenantShopsQueryOptions({ tenant }));
-  const shops = query.data;
-  console.log(shops);
-  return (
-    <div className="flex h-full w-full flex-col justify-end p-2">
-      <div className="flex w-full items-center gap-2">
-        {shops && shops.length > 0 && (
-          <div className="flex items-center justify-start gap-2">
-            {shops?.map((shop) => (
-              <div
-                className="flex items-center justify-start gap-2"
-                key={shop.id}
-              >
-                {/* <User className="w-3 h-3" /> */}
-                <h4 className="badge badge-primary badge-outline px-1 text-xs">
-                  {shop.shop_number}
-                </h4>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
