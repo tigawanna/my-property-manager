@@ -27,7 +27,7 @@ export function DashboardSidebarLinks({}: DashboardSidebarLinksProps) {
       <SidebarGroupLabel>House keeping</SidebarGroupLabel>
       <SidebarMenu className="gap-5">
         {dashboard_routes.map((item) => {
-          if (!(role === "staff") && item.name === "staff") {
+          if (!(role === "staff") && (item.name === "staff" || item.name === "utilities")) {
             return;
           }
           return (

@@ -99,7 +99,7 @@ export function TenantsCard({
         </div>
         <div>
           <div className="">{item?.expand?.account?.email}</div>
-          <div className="break-words text-2xl lg:text-4xl">{item?.name}</div>
+          <div className="break-words text-3xl @xl:text-2xl">{item?.name}</div>
         </div>
       </div>
     </Link>
