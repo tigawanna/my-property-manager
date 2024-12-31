@@ -12,6 +12,7 @@ import { Link } from "@tanstack/react-router";
 import { cva } from "class-variance-authority";
 import { cn } from "@/components/shadcn/lib/utils";
 import { Droplet, Zap } from "lucide-react";
+import { TailwindContainerIndicator } from "@/components/navigation/tailwind-indicator";
 
 type ShopsExpand = {
   expand?:
@@ -35,7 +36,7 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] @xl:w-[48%] @3xl:w-[35%] rounded-xl to-base-200",
           wide: "w-full ",
           disabled:
             " hover:via-secondary/30 hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-primary",
@@ -59,6 +60,7 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
       className={cn(shopCardVariants({ variant }), cardClassname)}
     >
       <div className="flex h-full w-full flex-col justify-between gap-2">
+      <TailwindContainerIndicator/>
         <div className="flex w-full items-start justify-between gap-2">
           <div className="flex items-center gap-2">
             {item.is_vacant && (

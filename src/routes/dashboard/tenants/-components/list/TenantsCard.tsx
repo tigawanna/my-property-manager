@@ -12,9 +12,7 @@ import {
   PropertyTenantsListResponse,
   PropertyUserResponse,
 } from "@/lib/pb/pb-types";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { oneTenantShopsQueryOptions } from "../tenants-query-options";
-import { Suspense } from "react";
+
 
 interface TenantsCardProps {
   variant?: "default" | "wide";
@@ -42,7 +40,7 @@ export function TenantsCard({
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] lg:w-[45%]  rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] @xl:w-[48%] @3xl:w-[35%]  rounded-xl to-base-200",
           wide: "w-full ",
         },
       },
@@ -52,7 +50,7 @@ export function TenantsCard({
     },
   );
   const shops = item.expand?.property_shops_via_tenant;
-  const max_shops_to_show = 4
+  const max_shops_to_show = 4;
 
   return (
     <Link
@@ -64,13 +62,9 @@ export function TenantsCard({
       className={cn(tenantCardVariants({ variant }), cardClassname)}
     >
       <div className="flex h-full w-full flex-col justify-between gap-2 p-2">
+
         <div className="flex w-full items-start justify-between gap-2">
           <div className="flex w-full justify-end">
-            {/* <img
-              alt={item.name}
-              className="size-[100px] rounded-lg"
-              src={`https://picsum.photos/id/${wordToNumber(item.name)}/100/100`}
-            /> */}
             <div className="flex w-full items-center gap-2">
               {shops && shops.length > 0 && (
                 <div className="flex items-center justify-start gap-2">
@@ -93,11 +87,11 @@ export function TenantsCard({
                 </div>
               )}
             </div>
-            <Avatar className="size-20">
+            <Avatar className="size-16">
               <AvatarImage
                 alt={item.name}
                 className="size-full"
-                src={`https://picsum.photos/id/${wordToNumber(item.name)}/100/100`}
+                src={`https://picsum.photos/id/${wordToNumber(item.name)}/50/50`}
               />
               <AvatarFallback>{item.name.slice(0, 2)}</AvatarFallback>
             </Avatar>
@@ -105,10 +99,9 @@ export function TenantsCard({
         </div>
         <div>
           <div className="">{item?.expand?.account?.email}</div>
-          <div className="break-words text-4xl">{item?.name}</div>
+          <div className="break-words text-2xl lg:text-4xl">{item?.name}</div>
         </div>
       </div>
     </Link>
   );
 }
-

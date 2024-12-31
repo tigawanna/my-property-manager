@@ -35,8 +35,8 @@ export function ShopsList({ keyword = "", floor }: ShopsListProps) {
   }
 
   return (
-    <ul className="flex h-full w-full flex-col items-center justify-center">
-      <div className="flex w-[90%] flex-wrap justify-center gap-2">
+    <ul className="flex h-full w-full @container/shops flex-col items-center justify-center">
+      <div className="flex w-[99%] flex-wrap justify-center gap-2">
         {data.items.map((item) => {
           return <ShopCard key={item.id} item={item} />;
         })}

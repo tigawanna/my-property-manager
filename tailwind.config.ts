@@ -30,6 +30,7 @@ export default {
   plugins: [
     require("daisyui"),
     require("tailwindcss-animate"),
+    require("@tailwindcss/container-queries"),
     shadcnTailwindPlugin,
   ],
 
