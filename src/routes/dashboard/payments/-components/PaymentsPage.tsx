@@ -5,7 +5,10 @@ import { Suspense } from "react";
 import { PaymentsList } from "./list/PaymentsList";
 import { CreatePaymentForm } from "./form/CreatePaymentForm";
 import { ListPageHeader } from "@/components/wrappers/ListPageHeader";
-import { PaymentsPagination, PaymentsYearPagination } from "./list/PaymentsPagination";
+import {
+  PaymentsPagination,
+  PaymentsYearPagination,
+} from "./list/PaymentsPagination";
 import { GeneriicTableSkeleton } from "@/components/wrappers/GeneriicTableSkeleton";
 
 interface PaymentsPageProps {}
@@ -13,12 +16,15 @@ interface PaymentsPageProps {}
 export function PaymentsPage({}: PaymentsPageProps) {
   const { debouncedValue, isDebouncing, keyword, setKeyword } =
     usePaymentsSearchQuery();
-  const { month = new Date().getMonth() + 1, year = new Date().getFullYear(),page=1 } =
-    useSearch({ from: "/dashboard/payments/" });
+  const {
+    month = new Date().getMonth() + 1,
+    year = new Date().getFullYear(),
+    page = 1,
+  } = useSearch({ from: "/dashboard/payments/" });
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="flex h-full w-full flex-col items-center justify-center gap-5">
+    <div className="flex h-full w-full flex-col items-center ">
+      <div className="flex h-full min-h-screen w-full flex-col items-center justify-between gap-5 mb-4">
         <ListPageHeader
           title="Payments"
           formTrigger={<CreatePaymentForm />}
@@ -35,8 +41,8 @@ export function PaymentsPage({}: PaymentsPageProps) {
           }
         />
         <div className="flex h-full w-full flex-col items-center justify-center gap-3 pb-3">
-          <PaymentsYearPagination year={year} month={month}/>
-        <Suspense fallback={<GeneriicTableSkeleton />}>
+          <PaymentsYearPagination year={year} month={month} />
+          <Suspense fallback={<GeneriicTableSkeleton />}>
             <PaymentsList
               month={month}
               year={year}
@@ -44,8 +50,8 @@ export function PaymentsPage({}: PaymentsPageProps) {
               page={page}
             />
           </Suspense>
-          <PaymentsPagination month={month} year={year}/>
         </div>
+          <PaymentsPagination month={month} year={year} />
       </div>
     </div>
   );

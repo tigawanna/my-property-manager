@@ -8,6 +8,7 @@ import { getNestedProperty } from "@/utils/object";
 import { PossibleNestedUnions } from "@/utils/types/nested_objects_union";
 import { ListResult } from "pocketbase";
 import { UpdatePaymentForm } from "../form/UpdatePaymentForm";
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 
 interface PaymentsTableProps {
   data: ListResult<
@@ -15,12 +16,15 @@ interface PaymentsTableProps {
       expand?:
         | {
             staff?: PropertyStaffListResponse | undefined;
-            shop?: PropertyShopsResponse&{
-                expand?: {
-                tenant?: PropertyTenantsListResponse | undefined;
-            } | undefined;
-            } | undefined;
-
+            shop?:
+              | (PropertyShopsResponse & {
+                  expand?:
+                    | {
+                        tenant?: PropertyTenantsListResponse | undefined;
+                      }
+                    | undefined;
+                })
+              | undefined;
           }
         | undefined;
     }
@@ -46,18 +50,18 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     { label: "Year", accessor: "year" },
     { accessor: "type", label: "Type" },
     { accessor: "shop.shop_number", label: "Shop" },
-    { accessor: "staff.name", label: "Staff" },
-  ];
+  ] as const;
+  const { role } = useViewer();
   return (
-    <div className="overflow-x-auto">
+    <div className="w-full overflow-x-auto">
       <table className="table table-zebra table-lg w-full">
         <thead>
           <tr>
             <th>name</th>
-            {columns.map((column) => (
-              <th key={column.accessor}>{column.label}</th>
-            ))}
-            <th>Edit</th>
+            {columns.map((column) => {
+              return <th key={column.accessor}>{column.label}</th>;
+            })}
+            {role === "staff" && <th>Edit</th>}
           </tr>
         </thead>
         <tbody>
@@ -75,10 +79,12 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
                 //   @ts-expect-error
                 return <td key={column.accessor}>{row?.[column?.accessor]}</td>;
               })}
-              <td>
-                {/* @ts-expect-error */}
-                <UpdatePaymentForm row={row} />
-              </td>
+              {role === "staff" && (
+                <td>
+                  {/* @ts-expect-error */}
+                  <UpdatePaymentForm row={row} />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -86,3 +92,4 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
     </div>
   );
 }
+

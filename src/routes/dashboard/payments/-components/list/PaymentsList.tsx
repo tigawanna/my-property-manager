@@ -5,6 +5,7 @@ import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { PaymentsTable } from "./PaymentsTable";
 import { PropertyShopsResponse, PropertyStaffListResponse } from "@/lib/pb/pb-types";
 import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
+import { PaymentsCard } from "./PaymentsCard";
 
 type PaymentExpansion = {
   shop: PropertyShopsResponse[];
@@ -46,10 +47,17 @@ export function PaymentsList({
   }
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="max-w-[99vw] overflow-auto">
+    <div className="flex h-full  w-full flex-col items-center ">
+      <div className="max-w-[99vw] w-full hidden lg:flex overflow-auto">
         <PaymentsTable data={data} />
       </div>
+      <ul className="flex w-full lg:hidden p-2 flex-wrap justify-center gap-2">
+        {data.items.map((item) => {
+          return (
+            <PaymentsCard key={item.id} payment={item}/>
+          )
+        })}
+      </ul>
     </div>
   );
 }
