@@ -36,7 +36,7 @@ export function ShopCard({ item, cardClassname, variant }: ShopCardProps) {
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] @xl:w-[48%] @3xl:w-[35%] rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] @xl:w-[48%] xl:w-[35%] rounded-xl to-base-200",
           wide: "w-full ",
           disabled:
             " hover:via-secondary/30 hover:text-primary w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl to-primary",
