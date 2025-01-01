@@ -40,7 +40,7 @@ export function TenantsCard({
       variants: {
         variant: {
           default:
-            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] @xl:w-[48%] @3xl:w-[35%]  rounded-xl to-base-200",
+            "h-56 hover:via-secondary/30 hover:scale-95 hover:duration-300 hover:ease-in-out hover:text-primary w-[95%] flex-grow md:w-[45%] xl:w-[30%]  rounded-xl to-base-200",
           wide: "w-full ",
         },
       },
@@ -99,7 +99,7 @@ export function TenantsCard({
         </div>
         <div>
           <div className="">{item?.expand?.account?.email}</div>
-          <div className="break-words text-3xl @xl:text-2xl">{item?.name}</div>
+          <div className="text-4xl line-clamp-1">{item?.name}</div>
         </div>
       </div>
     </Link>

@@ -18,10 +18,10 @@ export function OneTenantShops({tenant}: OneTenantShopsProps) {
     );
   }
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-1 @container">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-1 p-2 ">
       <div className="text-3xl font-vold w-full p-1">Tenant shops</div>
       {data && data.length > 0 && (
-      <ul className="flex w-full items-center gap-2 @container">
+      <ul className="flex w-full items-center gap-2 p-2 @container">
           <li className="flex w-[90%] flex-wrap justify-center gap-2">
             {data?.map((shop) => <ShopCard key={shop.id} item={shop} />)}
           </li>

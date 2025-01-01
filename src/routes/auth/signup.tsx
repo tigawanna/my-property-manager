@@ -9,13 +9,13 @@ const searchparams = z.object({
 export const Route = createFileRoute("/auth/signup")({
   component: SignupPage,
   validateSearch: (search) => searchparams.parse(search),
-  async beforeLoad(ctx) {
-    const viewer = ctx.context?.viewer;
-    const returnTo = ctx.search?.returnTo ?? "/";
-    if (viewer?.record) {
-      throw redirect({ to: returnTo });
-    }
-  },
+  // async beforeLoad(ctx) {
+  //   const viewer = ctx.context?.viewer;
+  //   const returnTo = ctx.search?.returnTo ?? "/";
+  //   if (viewer?.record) {
+  //     throw redirect({ to: returnTo });
+  //   }
+  // },
 });
 
 interface SignupProps {}
