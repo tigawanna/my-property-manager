@@ -16,7 +16,6 @@ export function RootComponent() {
         drawerZIndex="z-50"
       />
       <Toaster reverseOrder />
-      
     </div>
   );
 }
