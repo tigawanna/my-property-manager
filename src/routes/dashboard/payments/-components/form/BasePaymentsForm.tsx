@@ -1,8 +1,6 @@
 import { PBPickRelationField } from "@/lib/pb/components/PBrelationPicker";
 import {
-  PropertyShopPaymentsCreate,
   PropertyShopPaymentsUpdate,
-  PropertyShopPaymentsResponse,
   PropertyShopsResponse,
   PropertyStaffListResponse,
 } from "@/lib/pb/pb-types";

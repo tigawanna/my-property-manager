@@ -131,7 +131,7 @@ export interface AuthCollectionUpdate {
 
 // https://pocketbase.io/docs/collections/#view-collection
 export interface ViewCollectionRecord {
-	id: string;
+	id?: string;
 }
 
 // utilities
@@ -151,7 +151,7 @@ export interface MfasResponse extends BaseCollectionResponse {
 }
 
 export interface MfasCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	method: string;
@@ -194,7 +194,7 @@ export interface OtpsResponse extends BaseCollectionResponse {
 }
 
 export interface OtpsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	password: string;
@@ -239,7 +239,7 @@ export interface ExternalAuthsResponse extends BaseCollectionResponse {
 }
 
 export interface ExternalAuthsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	provider: string;
@@ -284,7 +284,7 @@ export interface AuthOriginsResponse extends BaseCollectionResponse {
 }
 
 export interface AuthOriginsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	collectionRef: string;
 	recordRef: string;
 	fingerprint: string;
@@ -328,7 +328,7 @@ export interface SuperusersResponse extends AuthCollectionResponse {
 }
 
 export interface SuperusersCreate extends AuthCollectionCreate {
-	id: string;
+	id?: string;
 	password: string;
 	tokenKey: string;
 	email: string;
@@ -378,9 +378,9 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
-	id: string;
+	id?: string;
 	password: string;
-	tokenKey: string;
+	tokenKey?: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -434,7 +434,7 @@ export interface PropertyUsersListResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyUsersListCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	account: string;
 }
 
@@ -470,7 +470,7 @@ export interface PropertyStaffListResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyStaffListCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	name?: string;
 	account: string;
 	created?: string | Date;
@@ -514,7 +514,7 @@ export interface PropertyTenantsListResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyTenantsListCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	name?: string;
 	account?: string;
 	created?: string | Date;
@@ -565,7 +565,7 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyShopsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	shop_number?: string;
 	tenant: string;
 	utils?: '' | 'elec' | 'water' | 'both' | 'none';
@@ -632,7 +632,7 @@ export interface PropertyShopPaymentsResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyShopPaymentsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	year: number;
 	month: number;
 	amount: number;
@@ -694,7 +694,7 @@ export interface PropertyShopHistoryResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyShopHistoryCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	shop: string;
 	tenant: string;
 	monthly_rent: number;
@@ -748,7 +748,7 @@ export interface PropertyBillsResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyBillsCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	shop: string;
 	elec_readings?: number;
 	water_readings?: number;
@@ -802,7 +802,7 @@ export interface PropertyStaffTrackingSheetResponse extends BaseCollectionRespon
 }
 
 export interface PropertyStaffTrackingSheetCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -840,7 +840,7 @@ export interface PropertyTodosResponse extends BaseCollectionResponse {
 }
 
 export interface PropertyTodosCreate extends BaseCollectionCreate {
-	id: string;
+	id?: string;
 	title?: string;
 	description?: string;
 	author?: string;

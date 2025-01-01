@@ -81,7 +81,6 @@ export function PaymentsTable({ data }: PaymentsTableProps) {
               })}
               {role === "staff" && (
                 <td>
-                  {/* @ts-expect-error */}
                   <UpdatePaymentForm row={row} />
                 </td>
               )}

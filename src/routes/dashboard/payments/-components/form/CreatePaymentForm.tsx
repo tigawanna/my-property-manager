@@ -5,7 +5,6 @@ import { BasePaymentsForm } from "./BasePaymentsForm";
 import { useState } from "react";
 import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
 import { Plus } from "lucide-react";
-import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { makeHotToast } from "@/components/toasters";
 
 interface CreatePaymentFormProps {}
@@ -58,7 +57,6 @@ export function CreatePaymentForm({}: CreatePaymentFormProps) {
       }
     >
       <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
-        {/* @ts-expect-error */}
         <BasePaymentsForm mutation={mutation} row={defaultRow} />
       </div>
     </DiaDrawer>

@@ -56,7 +56,7 @@ export function UserAccountProfileForm({
   const mutation = useMutation({
     mutationFn: async (data: PropertyUserUpdate) => {
       console.log("data", data);
-      const res = await pb.collection("property_user").update(data.id, data);
+      const res = await pb.collection("property_user").update(data?.id??"", data);
       return res;
     },
     meta: {

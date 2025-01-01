@@ -25,7 +25,7 @@ export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
   const mutation = useMutation({
     mutationFn: async (value: PropertyShopPaymentsUpdate) => {
      return pb.from("property_shop_payments").update(
-        row?.id,
+        row?.id??"",
         value,
       );
     },

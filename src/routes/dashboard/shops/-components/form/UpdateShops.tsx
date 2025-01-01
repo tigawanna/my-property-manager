@@ -90,7 +90,6 @@ export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // @ts-expect-error
     mutation.mutate(input);
   }
 
