@@ -146,15 +146,37 @@ export function SigninComponent({}: SigninComponentProps) {
           className="btn btn-primary"
           mutation={mutation}
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col items-center justify-center gap-2">
           Don&apos;t have an account?
-          <Link
+          {/* <Link
             to="/auth/signup"
             search={{ returnTo }}
             className="text-primary"
           >
             Sign up
-          </Link>
+          </Link> */}
+          <div className="flex gap-2">
+            <button
+              disabled={mutation.isPending}
+              className="btn btn-primary btn-sm"
+              onClick={() => {
+                form.setFieldValue("emailOrUsername", "stranger1@email.com");
+                form.setFieldValue("password", "stranger1@email.com");
+              }}
+            >
+              Login as stranger 1
+            </button>
+            <button
+              disabled={mutation.isPending}
+              className="btn btn-secondary btn-sm"
+              onClick={() => {
+                form.setFieldValue("emailOrUsername", "stranger2@email.com");
+                form.setFieldValue("password", "stranger2@email.com");
+              }}
+            >
+              Login as stranger 2
+            </button>
+          </div>
         </div>
       </form>
     </div>

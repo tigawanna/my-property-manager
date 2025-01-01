@@ -1,6 +1,10 @@
 "use client";
 import { BadgeCheck, Bell, ChevronsUpDown, ShieldCheck } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/shadcn/ui/avatar";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/shadcn/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,9 +25,9 @@ import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { getFileURL } from "@/lib/pb/client";
 import { Link, useNavigate } from "@tanstack/react-router";
 export function DashboardSidebarUser() {
-  const tsrNavigate  = useNavigate();
+  const tsrNavigate = useNavigate();
   const { isMobile } = useSidebar();
-  const { viewer, logoutMutation,role } = useViewer();
+  const { viewer, logoutMutation, role } = useViewer();
 
   if (!viewer) {
     return null;
@@ -70,7 +74,7 @@ export function DashboardSidebarUser() {
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="flex items-center gap-1 truncate font-semibold">
                     {viewer.username}{" "}
-                    {role==="tenant" && (
+                    {role === "tenant" && (
                       <ShieldCheck className="size-3 text-accent" />
                     )}
                   </span>
@@ -98,11 +102,10 @@ export function DashboardSidebarUser() {
 
             <MutationButton
               className="btn-error max-w-[98%]"
-              onClick={() =>
-                logoutMutation.mutateAsync().then(() => {
-                  tsrNavigate({ to: "/auth", search: { returnTo: "/" } });
-                })
-              }
+              onClick={() => {
+                logoutMutation.mutate();
+                tsrNavigate({ to: "/auth", search: { returnTo: "/" } });
+              }}
               label="Logout"
               mutation={logoutMutation}
             />
