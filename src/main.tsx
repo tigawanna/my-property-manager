@@ -12,6 +12,7 @@ import { RouterErrorComponent } from "./lib/tanstack/router/routerErrorComponent
 import { RouterNotFoundComponent } from "./lib/tanstack/router/RouterNotFoundComponent";
 import { App } from "./App";
 
+
 export const queryClient = new QueryClient({
   mutationCache: new MutationCache({
     onSuccess: async (_, __, ___, mutation) => {
