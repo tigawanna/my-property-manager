@@ -6,6 +6,14 @@ export function useBillsQuery(period: BillsPeriod) {
   const query = useSuspenseQuery({
     queryKey: ["monthly-bills", period],
     queryFn: () => getMonthlyBills(pb, period),
+    select: (data) => {
+      return {
+        ...data,
+        result: data.result.filter((item) =>
+          !item.shop_name.startsWith("dummy_"),
+        ),
+      };
+    },
   });
   // console.log("bills query", query);
   return query;

@@ -18,8 +18,8 @@ export const Route = createFileRoute("/dashboard/bills/")({
   component: BillsPage,
   errorComponent: ({ error }) => <RouterErrorComponent error={error} />,
   validateSearch: (search) => searchparams.parse(search),
-  async beforeLoad(ctx) {
-    // @ts-expect-error
+  async beforeLoad(context) {
+    const ctx = context as any
     await authGuard({ ctx });
   },
 });

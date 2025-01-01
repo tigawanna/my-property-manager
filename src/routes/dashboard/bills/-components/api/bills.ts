@@ -123,7 +123,7 @@ export async function getMonthlyBills(
 export async function addBill(pb: PocketBaseClient, bill: BillMutationFields) {
   // console.log("creating bill ", bill)
   try {
-    const record = await pb.from("property_bills").create(bill, {
+    const record = await pb.from("property_bills").create(bill as any, {
       select: {
         expand: {
           shop: true,
