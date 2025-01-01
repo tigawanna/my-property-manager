@@ -43,11 +43,11 @@ export function UpdateTodosform({ item }: UpdateTodosformInterface) {
     <DiaDrawer
       open={open}
       setOpen={setOpen}
-      title="Add Todos"
-      description="Add a new staff"
+      title="Update Todos"
+      description="Update Todos"
       trigger={<Edit className="size-5" />}
     >
-      <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
+      <div className="flex h-full max-h-[80vh] w-full flex-col gap-2 overflow-auto">
         <BaseTodosForm mutation={mutation} row={{}} />
       </div>
     </DiaDrawer>

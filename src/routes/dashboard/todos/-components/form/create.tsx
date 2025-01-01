@@ -42,7 +42,7 @@ export function CreateTodosForm() {
       open={open}
       setOpen={setOpen}
       title="Add Todos"
-      description="Add new staff"
+      description="Add new Todos"
       trigger={
         <button className="btn btn-outline btn-sm flex items-center justify-center gap-2">
           <Plus className="" />
@@ -50,7 +50,7 @@ export function CreateTodosForm() {
         </button>
       }
     >
-      <div className="flex h-full max-h-[80vh] w-fit flex-col gap-2 overflow-auto">
+      <div className="flex h-full max-h-[80vh] w-full flex-col gap-2 overflow-auto">
         <BaseTodosForm mutation={mutation} row={{}} />
       </div>
     </DiaDrawer>
