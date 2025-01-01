@@ -107,10 +107,10 @@ export async function authGuard({ ctx, role, reverse }: AuthGuardProps) {
     });
   }
   // redirect if not the right role
-  // if (role && user?.record?.role !== role) {
+  // if (!(role && role==="staff" && user?.record?.staff?.length > 0)) {
   //   // console.log(" ++++++++ user exists but wrong role redirecting back ++++++ ");
   //   throw redirect({
-  //     to: returnTo ?? "/",
+  //     to:".."
   //   });
   // }
   // console.log(" ++++++++ fall through case user exists ++++++ ");

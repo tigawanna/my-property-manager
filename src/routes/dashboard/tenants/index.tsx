@@ -9,7 +9,7 @@ export const Route = createFileRoute("/dashboard/tenants/")({
   component: TenantsPage,
   validateSearch: (search) => searchparams.parse(search),
   async beforeLoad(ctx) {
-    // @ts-expect-error
-    await authGuard({ ctx });
+    const context = ctx as any;
+    await authGuard({ ctx: context,role:"staff" });
   },
 });
