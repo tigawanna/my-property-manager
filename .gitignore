@@ -17,3 +17,7 @@ dist/
 !.vscode/extensions.json
 .idea
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
