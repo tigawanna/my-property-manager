@@ -6,6 +6,8 @@ import { Edit } from "lucide-react";
 import { makeHotToast } from "@/components/toasters";
 import { BaseTodosForm } from "./base";
 import { useMutation } from "@tanstack/react-query";
+import { pb } from "@/lib/pb/client";
+import { PropertyTodosUpdate } from "@/lib/pb/pb-types";
 
 interface UpdateTodosformInterface {
   item: Record<string, any> & { id: string };
@@ -13,12 +15,8 @@ interface UpdateTodosformInterface {
 export function UpdateTodosform({ item }: UpdateTodosformInterface) {
   const [open, setOpen] = useState(false);
   const mutation = useMutation({
-    mutationFn: (value: {}) => {
-      return new Promise<{}>((resolve) => {
-        setTimeout(() => {
-          resolve(value);
-        }, 2000);
-      });
+    mutationFn: (value: PropertyTodosUpdate) => {
+      return pb.from("property_todos").update(item.id, value);
     },
     onSuccess: () => {
       makeHotToast({
@@ -36,7 +34,7 @@ export function UpdateTodosform({ item }: UpdateTodosformInterface) {
       });
     },
     meta: {
-      invalidates: ["todos"],
+      invalidates: ["property_todos"],
     },
   });
   return (

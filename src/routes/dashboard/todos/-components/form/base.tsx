@@ -5,6 +5,7 @@ import {
   TextAreaFormField,
   TextFormField,
 } from "@/lib/tanstack/form/TextFields";
+import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useForm } from "@tanstack/react-form";
 import { UseMutationResult } from "@tanstack/react-query";
@@ -19,7 +20,7 @@ interface BaseTodosFormProps<T extends Record<string, any>> {
 }
 type TodosExpansion = {
   participants: PropertyUserResponse[];
-  owner: PropertyUserResponse[];
+  author: PropertyUserResponse[];
 };
 
 export function BaseTodosForm<T extends Record<string, any>>({
@@ -30,7 +31,7 @@ export function BaseTodosForm<T extends Record<string, any>>({
   const { viewer } = useViewer();
   const [expansions, setExpansions] = useState<TodosExpansion>({
     participants: [],
-    owner: [viewer as PropertyUserResponse],
+    author: [viewer as PropertyUserResponse],
   });
   const form = useForm<PropertyTodosUpdatePartial>({
     defaultValues: {
@@ -38,6 +39,11 @@ export function BaseTodosForm<T extends Record<string, any>>({
       description: row?.description ?? "",
       participants: row?.participants ?? [],
       author: row?.author ?? viewer?.id ?? "",
+    },
+    onSubmit: async ({ value }) => {
+      // @ts-expect-error
+      mutation.mutate(value);
+      afterSave?.();
     },
   });
   return (
@@ -86,8 +92,8 @@ export function BaseTodosForm<T extends Record<string, any>>({
             }}
           </form.Field>
         </div>
-        <div className="form-control w-full">
-          <form.Field name="participants">
+        {/* <div className="form-control w-full">
+          <form.Field name="author">
             {(field) => {
               return (
                 <div className="flex gap-1">
@@ -95,17 +101,17 @@ export function BaseTodosForm<T extends Record<string, any>>({
                   <PBPickRelationField<PropertyUserResponse>
                     dialogTrigger={
                       <span className="btn btn-outline btn-sm">
-                        {expansions["owner"]?.at(0)?.username}
+                        {expansions["author"]?.at(0)?.username}
                         <Edit className="size-4" />
                       </span>
                     }
-                    selectedRows={expansions["owner"]}
+                    selectedRows={expansions["author"]}
                     maxSelected={1}
                     setSelectedRows={(itm: any) => {
                       if (Array.isArray(itm)) {
                         setExpansions((prev) => ({
                           ...prev,
-                          owner: itm,
+                          author: itm,
                         }));
                         field.handleChange((itm.at(0)?.id as any) ?? "");
                       }
@@ -125,7 +131,7 @@ export function BaseTodosForm<T extends Record<string, any>>({
               );
             }}
           </form.Field>
-        </div>
+        </div> */}
         <div className="form-control w-full">
           <form.Field name="participants">
             {(field) => {
@@ -168,6 +174,7 @@ export function BaseTodosForm<T extends Record<string, any>>({
           </form.Field>
         </div>
       </div>
+      <MutationButton mutation={mutation} />
     </form>
   );
 }

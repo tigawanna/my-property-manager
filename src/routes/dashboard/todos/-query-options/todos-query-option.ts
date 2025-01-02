@@ -7,7 +7,7 @@ interface todosQueryOptionPropss {
 }
 export function todosListQueryOptions({ keyword }: todosQueryOptionPropss) {
   return queryOptions({
-    queryKey: ["todos_list", keyword],
+    queryKey: ["property_todos", keyword],
     queryFn: () => {
       return pb.from("property_todos").getList(1, 24, {});
     },
@@ -18,14 +18,14 @@ interface oneTodosQueryOptionPropss {
 }
 export function oneTodosQueryOptions({ todos }: oneTodosQueryOptionPropss) {
   return queryOptions({
-    queryKey: ["one_todos", todos],
+    queryKey: ["property_todos", todos],
     queryFn: () => {
-      return new Promise<{ id: string }>((res, rej) => {
-        setTimeout(() => {
-          res({
-            id: todos,
-          });
-        }, 1000);
+      return pb.from("property_todos").getOne(todos,{
+        select: {
+          "expand":{
+            "participants":true
+          }
+        }
       });
     },
   });

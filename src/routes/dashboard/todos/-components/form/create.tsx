@@ -6,17 +6,15 @@ import { Plus } from "lucide-react";
 import { makeHotToast } from "@/components/toasters";
 import { BaseTodosForm } from "./base";
 import { useMutation } from "@tanstack/react-query";
+import { pb } from "@/lib/pb/client";
+import { PropertyTodosCreate } from "@/lib/pb/pb-types";
 
 export function CreateTodosForm() {
   const [open, setOpen] = useState(false);
 
   const mutation = useMutation({
-    mutationFn: (value: {}) => {
-      return new Promise<{}>((resolve, reject) => {
-        setTimeout(() => {
-          resolve(value);
-        }, 2000);
-      });
+    mutationFn: (value: PropertyTodosCreate) => {
+      return pb.from("property_todos").create(value);
     },
     onSuccess: () => {
       makeHotToast({
@@ -34,7 +32,7 @@ export function CreateTodosForm() {
       });
     },
     meta: {
-      invalidates: ["property_shops_payments"],
+      invalidates: ["property_todos"],
     },
   });
   return (
