@@ -52,6 +52,7 @@ const query = useSuspenseQuery({
   });
 
   const data = query?.data?.items ?? [];
+
   function selectItem(one_item: T) {
     if (maxSelected > 1) {
       const is_in_array = selectedRows.find((item) => item.id === one_item.id);

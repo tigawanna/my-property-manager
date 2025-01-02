@@ -5,6 +5,8 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { UpdateTodosform } from "@/routes/dashboard/todos/-components/form/update";
 import { todosListQueryOptions } from "@/routes/dashboard/todos/-query-options/todos-query-option";
+import { ArrowRight } from "lucide-react";
+import { getRelativeTimeString } from "@/utils/date-helpers";
 
 interface TodosListProps {
   keyword?: string;
@@ -36,16 +38,31 @@ export function TodosList({ keyword = "" }: TodosListProps) {
           return (
             <li
               key={item.id}
-              className="h-56 w-[95%] sm:w-[45%] lg:w-[30%] rounded-xl bg-base-300 p-4 flex justify-center items-center gap-2 "
+              className="flex h-48 w-[95%] gap-2 rounded-xl bg-base-300 p-4 sm:w-[45%] lg:w-[30%]"
             >
-              <div className="flex flex-col gap-2 w-full justify-center">
-                {item.id}
-                <Link
-                  to={`/dashboard/todos/${item.id}/`}
-                  className="text-primary"
-                >
-                  see details
-                </Link>
+              <div className="-center flex w-full flex-col justify-between gap-2">
+                <div className="flex flex-col gap-1">
+                  <h1 className="text-3xl font-bold">{item.title}</h1>
+                  <p className="">{item.description}</p>
+                </div>
+                <div className="flex w-full justify-between gap-2">
+                  <div className="flex w-full flex-col justify-center gap-1">
+                    {item.updated < item.created && (
+                      <div className="text-sm">
+                        {getRelativeTimeString(new Date(item.updated))}
+                      </div>
+                    )}
+                    <div className="text-sm">
+                      {getRelativeTimeString(new Date(item.created))}
+                    </div>
+                  </div>
+                  <Link
+                    to={`/dashboard/todos/${item.id}/`}
+                    className="flex items-center min-w-fit  gap-2 text-primary"
+                  >
+                    see details <ArrowRight className="size-4" />
+                  </Link>
+                </div>
               </div>
               <UpdateTodosform item={item} />
             </li>

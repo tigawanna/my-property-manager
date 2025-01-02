@@ -59,7 +59,7 @@ export function PBrelationPicker<T extends Record<string, any>>({
           {selectedRows?.slice?.(0, 5)?.map((item) => (
             <li
               key={item.id}
-              className="rounded-lg bg-secondary px-2 text-center"
+              className="badge badge-primary badge-outline text-center"
             >
               {item[filterBy as any]}
             </li>
@@ -111,7 +111,7 @@ export function PBPickRelationField<T extends Record<string, any>>({
   dialogTrigger,
 }: PBrelationPickerProps<T>) {
   return (
-    <div className="flex  w-full flex-wrap gap-2 ">
+    <div className="flex w-full flex-wrap gap-2">
       <PBPickRelationsModal
         collectionName={collectionName}
         columns={columns}
@@ -124,19 +124,19 @@ export function PBPickRelationField<T extends Record<string, any>>({
         dialogTrigger={dialogTrigger}
       />
       {maxSelected > 1 && (
-        <div className="mb-4 flex flex-wrap items-center gap-2 bg-base-300">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
           {selectedRows?.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-center bg-base-100 rounded-lg b px-2"
+              className="badge badge-primary badge-outline flex items-center justify-center"
             >
-              <div className="flex h-full w-full items-center justify-center">
+              <div className="flex items-center justify-center">
                 {" "}
                 {item[filterBy as any]}
               </div>
 
               <X
-                className="size-5 hover:text-error"
+                className="size-4 hover:text-error"
                 onClick={() => {
                   setSelectedRows(
                     selectedRows?.filter((i) => i.id !== item.id),
