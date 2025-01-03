@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
 import { Edit } from "lucide-react";
@@ -10,7 +8,7 @@ import { pb } from "@/lib/pb/client";
 import { PropertyTodosUpdate } from "@/lib/pb/pb-types";
 
 interface UpdateTodosformInterface {
-  item: Record<string, any> & { id: string };
+  item: PropertyTodosUpdate
 }
 export function UpdateTodosform({ item }: UpdateTodosformInterface) {
   const [open, setOpen] = useState(false);

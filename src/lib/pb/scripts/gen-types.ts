@@ -2,7 +2,8 @@ import { runCommand } from "@/utils/fs";
 import { config as dotenvConfig } from "dotenv";
 dotenvConfig();
 
-const PB_TYPES_DIR = "./src/lib/pb/"
+// const PB_TYPES_DIR = "./src/lib/pb/"
+const PB_TYPES_DIR = "./src/lib/pb"
 const filter_collection=""
 export async function callCliDirectly() {
   const url = process.env.VITE_PB_URL;

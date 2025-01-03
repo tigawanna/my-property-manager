@@ -49,7 +49,7 @@ export function CreateTodosForm() {
       }
     >
       <div className="flex h-full max-h-[80vh] w-full flex-col gap-2 overflow-auto">
-        <BaseTodosForm mutation={mutation} row={{}} />
+        <BaseTodosForm mutation={mutation}  />
       </div>
     </DiaDrawer>
   );

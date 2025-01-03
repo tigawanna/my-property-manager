@@ -21,13 +21,8 @@ type PaymentExpansion = {
 };
 type PropertyShopPaymentsUpdatePartial = Partial<PropertyShopPaymentsUpdate> ;
 interface BasePaymentsFormProps {
-  mutation: UseMutationResult<
-    any,
-    Error,
-    any,
-    unknown
-  >;
-  row: PropertyShopPaymentsUpdate;
+  mutation: UseMutationResult<any, Error, any, unknown>;
+  row: PropertyShopPaymentsUpdatePartial;
   afterSave?: () => void;
 }
 

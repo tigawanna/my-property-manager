@@ -34,11 +34,11 @@ import { PBCheckbox } from "./PBCheckbox";
 
 type PropertyTenantsExpand = Pick<PropertyTenantsListResponse, "id" | "name">;
 interface UpdateShopProps {
-  shop: Omit<PropertyShopsUpdate, "gallery"> & {
+  shop: Partial<Omit<PropertyShopsUpdate, "gallery"> & {
     id: string;
     gallery?: string[];
     expand?: { tenant?: PropertyTenantsListResponse | undefined };
-  };
+  }>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -50,21 +50,20 @@ export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
   );
   const shopFloor =
     (shop?.shop_number?.split("-")[0] as PropertyFloorPrefixes) ?? "G";
-  const { input, handleChange, setInput } = useFormHook<
-    PropertyShopsCreate & { floor: PropertyFloorPrefixes }
-  >({
+  const { input, handleChange, setInput } = useFormHook<PropertyShopsUpdate>({
     initialValues: {
+      id: shop.id!,
       shop_number: shop?.shop_number ?? "",
       is_vacant: shop.is_vacant,
-      floor: shopFloor,
+      monthly_rent: shop.monthly_rent,
       order: shop.order,
       tenant: shop?.tenant ?? "",
-      utils: shop.utils,
+      utils: shop.utils??"none",
     },
   });
   const mutation = useMutation({
     mutationFn: (data: PropertyShopsUpdate) => {
-      return pb.from(collectionName).update(shop.id, data);
+      return pb.from(collectionName).update(shop?.id??"", data);
     },
     meta: { invalidates: [collectionName] },
     onSuccess: (data) => {
@@ -170,11 +169,11 @@ export function UpdateShop({ shop, setOpen }: UpdateShopProps) {
 }
 
 interface UpdateShopModalProps {
-  shop: Omit<PropertyShopsUpdate, "gallery"> & {
+  shop: Partial<Omit<PropertyShopsUpdate, "gallery"> & {
     id: string;
     gallery?: string[];
     expand?: { tenant?: PropertyTenantsListResponse | undefined };
-  };
+  }>;
   trigger?: React.ReactNode;
 }
 export function UpdateShopModal({ shop, trigger }: UpdateShopModalProps) {

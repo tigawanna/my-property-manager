@@ -111,8 +111,8 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0(zod@3.23.8)
       '@tigawanna/typed-pocketbase':
-        specifier: 0.0.4
-        version: 0.0.4(pocketbase@0.22.1)
+        specifier: ^0.0.5
+        version: 0.0.5(pocketbase@0.22.1)
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1701,8 +1701,8 @@ packages:
     peerDependencies:
       zod: ^3.x
 
-  '@tigawanna/typed-pocketbase@0.0.4':
-    resolution: {integrity: sha512-YzQj+dPTXZVChicIc5w+erJiAtBj4HWoRAXXik4Kqg1WA85sJnMq/od8Gd2AbLFzWSu2IGg7I/Sl3Te820w7iw==}
+  '@tigawanna/typed-pocketbase@0.0.5':
+    resolution: {integrity: sha512-SMJ1VsXpwQjaTsXaVX2l6Z66GIVG+ZwwYDAQXfoalE4/hqxuQA7HNxKAvaNx03HoE9/OQ0tjTEGK4HDtkvQaEA==}
     hasBin: true
     peerDependencies:
       pocketbase: ^0.22.0
@@ -4634,7 +4634,7 @@ snapshots:
       '@tanstack/form-core': 0.33.0
       zod: 3.23.8
 
-  '@tigawanna/typed-pocketbase@0.0.4(pocketbase@0.22.1)':
+  '@tigawanna/typed-pocketbase@0.0.5(pocketbase@0.22.1)':
     dependencies:
       pocketbase: 0.22.1
       sade: 1.8.1

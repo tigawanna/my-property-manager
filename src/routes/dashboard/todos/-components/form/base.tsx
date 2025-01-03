@@ -15,7 +15,7 @@ import { useState } from "react";
 type PropertyTodosUpdatePartial = Partial<PropertyTodosUpdate>;
 interface BaseTodosFormProps<T extends Record<string, any>> {
   mutation: UseMutationResult<any, Error, T, unknown>;
-  row: T;
+  row?: T;
   afterSave?: () => void;
 }
 type TodosExpansion = {

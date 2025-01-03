@@ -12,13 +12,10 @@ import { DiaDrawer } from "@/components/wrappers/DiaDrawer";
 import { makeHotToast } from "@/components/toasters";
 
 interface UpdatePaymentFormProps {
-  row: PropertyShopPaymentsUpdate;
+  row: Partial<PropertyShopPaymentsUpdate>;
 }
 
-type PaymentExpansion = {
-  shop: PropertyShopsResponse[];
-  staff: PropertyStaffListResponse[];
-};
+
 export function UpdatePaymentForm({ row }: UpdatePaymentFormProps) {
   const [open, setOpen] = useState(false);
 

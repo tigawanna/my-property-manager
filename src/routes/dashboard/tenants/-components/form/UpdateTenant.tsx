@@ -41,8 +41,9 @@ export function UpdateTenant({ item, setOpen }: UpdateTenantProps) {
   );
 
   const { input, handleChange, setInput } =
-    useFormHook<PropertyTenantsListCreate>({
+    useFormHook<PropertyTenantsListUpdate>({
       initialValues: {
+        id: item.id,
         name: item.name ?? "",
         account: item.account ?? "",
       },

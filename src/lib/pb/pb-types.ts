@@ -131,14 +131,15 @@ export interface AuthCollectionUpdate {
 
 // https://pocketbase.io/docs/collections/#view-collection
 export interface ViewCollectionRecord {
-	id?: string;
+	id: string;
 }
 
 // utilities
 
 type MaybeArray<T> = T | T[];
-// ==== start of _mfas block =====
 
+// ===== _mfas block =====
+// ===== _mfas =====
 
 export interface MfasResponse extends BaseCollectionResponse {
 	collectionName: '_mfas';
@@ -160,10 +161,10 @@ export interface MfasCreate extends BaseCollectionCreate {
 }
 
 export interface MfasUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	method?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	method: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -178,17 +179,14 @@ export interface MfasCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _mfas block =====
-
-// ==== start of _otps block =====
-
+// ===== _otps block =====
+// ===== _otps =====
 
 export interface OtpsResponse extends BaseCollectionResponse {
 	collectionName: '_otps';
 	id: string;
 	collectionRef: string;
 	recordRef: string;
-	sentTo: string;
 	created: string;
 	updated: string;
 }
@@ -197,17 +195,14 @@ export interface OtpsCreate extends BaseCollectionCreate {
 	id?: string;
 	collectionRef: string;
 	recordRef: string;
-	password: string;
-	sentTo?: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
 
 export interface OtpsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	sentTo?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -222,10 +217,8 @@ export interface OtpsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _otps block =====
-
-// ==== start of _externalAuths block =====
-
+// ===== _externalAuths block =====
+// ===== _externalAuths =====
 
 export interface ExternalAuthsResponse extends BaseCollectionResponse {
 	collectionName: '_externalAuths';
@@ -249,11 +242,11 @@ export interface ExternalAuthsCreate extends BaseCollectionCreate {
 }
 
 export interface ExternalAuthsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	provider?: string;
-	providerId?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	provider: string;
+	providerId: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -268,10 +261,8 @@ export interface ExternalAuthsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _externalAuths block =====
-
-// ==== start of _authOrigins block =====
-
+// ===== _authOrigins block =====
+// ===== _authOrigins =====
 
 export interface AuthOriginsResponse extends BaseCollectionResponse {
 	collectionName: '_authOrigins';
@@ -293,10 +284,10 @@ export interface AuthOriginsCreate extends BaseCollectionCreate {
 }
 
 export interface AuthOriginsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	collectionRef?: string;
-	recordRef?: string;
-	fingerprint?: string;
+	id: string;
+	collectionRef: string;
+	recordRef: string;
+	fingerprint: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -311,10 +302,8 @@ export interface AuthOriginsCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _authOrigins block =====
-
-// ==== start of _superusers block =====
-
+// ===== _superusers block =====
+// ===== _superusers =====
 
 export interface SuperusersResponse extends AuthCollectionResponse {
 	collectionName: '_superusers';
@@ -329,8 +318,6 @@ export interface SuperusersResponse extends AuthCollectionResponse {
 
 export interface SuperusersCreate extends AuthCollectionCreate {
 	id?: string;
-	password: string;
-	tokenKey: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -339,9 +326,8 @@ export interface SuperusersCreate extends AuthCollectionCreate {
 }
 
 export interface SuperusersUpdate extends AuthCollectionUpdate {
-	id?: string;
-	tokenKey?: string;
-	email?: string;
+	id: string;
+	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
 	created?: string | Date;
@@ -358,10 +344,8 @@ export interface SuperusersCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of _superusers block =====
-
-// ==== start of property_user block =====
-
+// ===== property_user block =====
+// ===== property_user =====
 
 export interface PropertyUserResponse extends AuthCollectionResponse {
 	collectionName: 'property_user';
@@ -379,8 +363,6 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
 	id?: string;
-	password: string;
-	tokenKey?: string;
 	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
@@ -392,9 +374,8 @@ export interface PropertyUserCreate extends AuthCollectionCreate {
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
-	id?: string;
-	tokenKey?: string;
-	email?: string;
+	id: string;
+	email: string;
 	emailVisibility?: boolean;
 	verified?: boolean;
 	username?: string;
@@ -422,10 +403,8 @@ export interface PropertyUserCollection {
 	};
 }
 
-// ==== end of property_user block =====
-
-// ==== start of property_users_list block =====
-
+// ===== property_users_list block =====
+// ===== property_users_list =====
 
 export interface PropertyUsersListResponse extends BaseCollectionResponse {
 	collectionName: 'property_users_list';
@@ -439,8 +418,8 @@ export interface PropertyUsersListCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyUsersListUpdate extends BaseCollectionUpdate {
-	id?: string;
-	account?: string;
+	id: string;
+	account: string;
 }
 
 export interface PropertyUsersListCollection {
@@ -455,10 +434,8 @@ export interface PropertyUsersListCollection {
 	};
 }
 
-// ==== end of property_users_list block =====
-
-// ==== start of property_staff_list block =====
-
+// ===== property_staff_list block =====
+// ===== property_staff_list =====
 
 export interface PropertyStaffListResponse extends BaseCollectionResponse {
 	collectionName: 'property_staff_list';
@@ -478,9 +455,9 @@ export interface PropertyStaffListCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyStaffListUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	name?: string;
-	account?: string;
+	account: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -499,10 +476,8 @@ export interface PropertyStaffListCollection {
 	};
 }
 
-// ==== end of property_staff_list block =====
-
-// ==== start of property_tenants_list block =====
-
+// ===== property_tenants_list block =====
+// ===== property_tenants_list =====
 
 export interface PropertyTenantsListResponse extends BaseCollectionResponse {
 	collectionName: 'property_tenants_list';
@@ -522,7 +497,7 @@ export interface PropertyTenantsListCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyTenantsListUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	name?: string;
 	account?: string;
 	created?: string | Date;
@@ -544,10 +519,8 @@ export interface PropertyTenantsListCollection {
 	};
 }
 
-// ==== end of property_tenants_list block =====
-
-// ==== start of property_shops block =====
-
+// ===== property_shops block =====
+// ===== property_shops =====
 
 export interface PropertyShopsResponse extends BaseCollectionResponse {
 	collectionName: 'property_shops';
@@ -559,7 +532,7 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 	is_vacant: boolean;
 	monthly_rent: number;
 	dummy_record: boolean;
-	gallery: Array<string>;
+	gallery: MaybeArray<string>;
 	created: string;
 	updated: string;
 }
@@ -579,9 +552,9 @@ export interface PropertyShopsCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyShopsUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	shop_number?: string;
-	tenant?: string;
+	tenant: string;
 	utils?: '' | 'elec' | 'water' | 'both' | 'none';
 	order?: number;
 	'order+'?: number;
@@ -612,10 +585,8 @@ export interface PropertyShopsCollection {
 	};
 }
 
-// ==== end of property_shops block =====
-
-// ==== start of property_shop_payments block =====
-
+// ===== property_shop_payments block =====
+// ===== property_shop_payments =====
 
 export interface PropertyShopPaymentsResponse extends BaseCollectionResponse {
 	collectionName: 'property_shop_payments';
@@ -645,20 +616,20 @@ export interface PropertyShopPaymentsCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyShopPaymentsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	year?: number;
+	id: string;
+	year: number;
 	'year+'?: number;
 	'year-'?: number;
-	month?: number;
+	month: number;
 	'month+'?: number;
 	'month-'?: number;
-	amount?: number;
+	amount: number;
 	'amount+'?: number;
 	'amount-'?: number;
-	type?: 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
+	type: 'deposit' | 'rent' | 'water' | 'elec' | 'fines';
 	reciept_number?: string;
-	shop?: string;
-	staff?: string;
+	shop: string;
+	staff: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -676,10 +647,8 @@ export interface PropertyShopPaymentsCollection {
 	};
 }
 
-// ==== end of property_shop_payments block =====
-
-// ==== start of property_shop_history block =====
-
+// ===== property_shop_history block =====
+// ===== property_shop_history =====
 
 export interface PropertyShopHistoryResponse extends BaseCollectionResponse {
 	collectionName: 'property_shop_history';
@@ -705,14 +674,14 @@ export interface PropertyShopHistoryCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyShopHistoryUpdate extends BaseCollectionUpdate {
-	id?: string;
-	shop?: string;
-	tenant?: string;
-	monthly_rent?: number;
+	id: string;
+	shop: string;
+	tenant: string;
+	monthly_rent: number;
 	'monthly_rent+'?: number;
 	'monthly_rent-'?: number;
-	utils?: 'elec' | 'water' | 'both' | 'none';
-	shop_number?: string;
+	utils: 'elec' | 'water' | 'both' | 'none';
+	shop_number: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -730,10 +699,8 @@ export interface PropertyShopHistoryCollection {
 	};
 }
 
-// ==== end of property_shop_history block =====
-
-// ==== start of property_bills block =====
-
+// ===== property_bills block =====
+// ===== property_bills =====
 
 export interface PropertyBillsResponse extends BaseCollectionResponse {
 	collectionName: 'property_bills';
@@ -759,8 +726,8 @@ export interface PropertyBillsCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyBillsUpdate extends BaseCollectionUpdate {
-	id?: string;
-	shop?: string;
+	id: string;
+	shop: string;
 	elec_readings?: number;
 	'elec_readings+'?: number;
 	'elec_readings-'?: number;
@@ -789,10 +756,8 @@ export interface PropertyBillsCollection {
 	};
 }
 
-// ==== end of property_bills block =====
-
-// ==== start of property_staff_tracking_sheet block =====
-
+// ===== property_staff_tracking_sheet block =====
+// ===== property_staff_tracking_sheet =====
 
 export interface PropertyStaffTrackingSheetResponse extends BaseCollectionResponse {
 	collectionName: 'property_staff_tracking_sheet';
@@ -808,7 +773,7 @@ export interface PropertyStaffTrackingSheetCreate extends BaseCollectionCreate {
 }
 
 export interface PropertyStaffTrackingSheetUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	created?: string | Date;
 	updated?: string | Date;
 }
@@ -823,10 +788,8 @@ export interface PropertyStaffTrackingSheetCollection {
 	relations: Record<string, never>;
 }
 
-// ==== end of property_staff_tracking_sheet block =====
-
-// ==== start of property_todos block =====
-
+// ===== property_todos block =====
+// ===== property_todos =====
 
 export interface PropertyTodosResponse extends BaseCollectionResponse {
 	collectionName: 'property_todos';
@@ -843,17 +806,17 @@ export interface PropertyTodosCreate extends BaseCollectionCreate {
 	id?: string;
 	title?: string;
 	description?: string;
-	author?: string;
+	author: string;
 	participants?: MaybeArray<string>;
 	created?: string | Date;
 	updated?: string | Date;
 }
 
 export interface PropertyTodosUpdate extends BaseCollectionUpdate {
-	id?: string;
+	id: string;
 	title?: string;
 	description?: string;
-	author?: string;
+	author: string;
 	participants?: MaybeArray<string>;
 	'participants+'?: MaybeArray<string>;
 	'participants-'?: MaybeArray<string>;
@@ -873,9 +836,6 @@ export interface PropertyTodosCollection {
 		participants: PropertyUserCollection[];
 	};
 }
-
-// ==== end of property_todos block =====
-
 
 // ===== Schema =====
 
