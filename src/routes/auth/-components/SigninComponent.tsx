@@ -79,9 +79,9 @@ export function SigninComponent({}: SigninComponentProps) {
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="rounded-lh flex h-full w-[90%] flex-col items-center justify-center gap-6 p-[2%] md:w-[70%] lg:w-[40%]"
+        className="rounded-lg flex h-full w-[90%] flex-col items-center justify-center gap-6 p-[2%] md:w-[70%] lg:w-[40%]"
       >
-        <div className="rounded-lh flex h-full w-full flex-col items-center justify-center gap-2">
+        <div className=" flex  w-full  flex-col items-center justify-center gap-2">
           <h1 className="text-4xl font-bold">Sign in</h1>
           <form.Field
             name="emailOrUsername"
@@ -148,14 +148,7 @@ export function SigninComponent({}: SigninComponentProps) {
         />
         <div className="flex flex-col items-center justify-center gap-2">
           Don&apos;t have an account?
-          {/* <Link
-            to="/auth/signup"
-            search={{ returnTo }}
-            className="text-primary"
-          >
-            Sign up
-          </Link> */}
-          <div className="flex gap-2">
+        <div className="flex gap-2">
             <button
               disabled={mutation.isPending}
               className="btn btn-primary btn-sm"
