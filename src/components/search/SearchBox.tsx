@@ -27,9 +27,9 @@ export function SearchBox({
           className="w-full bg-base-200/30"
           value={keyword}
           onChange={(e) => {
-            startTransition(() => {
-              setKeyword(e.target.value);
-            });
+            setKeyword(e.target.value);
+            // startTransition(() => {
+            // });
           }}
           {...inputProps}
         />
