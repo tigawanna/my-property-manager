@@ -44,7 +44,7 @@ export function PaymentsCard({payment}: PaymentsCardProps) {
       fines: "text-red-500",
     };
   return (
-    <Card className="p-0 rounded-lg w-full sm:w-[45%]">
+    <Card className="p-0 rounded-lg w-full sm:w-[45%] border-none ">
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex items-center ">
           <Badge

@@ -12,6 +12,7 @@ import {
 import { GeneriicTableSkeleton } from "@/components/wrappers/GeneriicTableSkeleton";
 import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { PaymentRangeSelect, PaymentTypeSelect } from "./list/PaymentTypeSelect";
+import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 
 interface PaymentsPageProps {}
 
@@ -36,7 +37,7 @@ export function PaymentsPage({}: PaymentsPageProps) {
           searchBox={
             <div className="flex w-full gap-2">
               <PaymentTypeSelect />
-              <PaymentRangeSelect/>
+              <PaymentRangeSelect />
               {role === "staff" && (
                 <SearchBox
                   inputProps={{
@@ -53,7 +54,18 @@ export function PaymentsPage({}: PaymentsPageProps) {
         />
         <div className="flex h-full w-full flex-col items-center justify-center gap-3 pb-3">
           <PaymentsYearPagination year={year} month={month} />
-          <Suspense fallback={<GeneriicTableSkeleton />}>
+          <Suspense
+            fallback={
+              <div className="h-full w-full">
+                <div className="hidden lg:block">
+                  <GeneriicTableSkeleton />
+                </div>
+                <div className="h-full w-full lg:hidden">
+                  <CardsListSuspenseFallback />
+                </div>
+              </div>
+            }
+          >
             <PaymentsList
               type={type}
               month={month}
@@ -64,7 +76,9 @@ export function PaymentsPage({}: PaymentsPageProps) {
             />
           </Suspense>
         </div>
-        {range==="monthly" && <PaymentsPagination month={month} year={year} />}
+        {range === "monthly" && (
+          <PaymentsPagination month={month} year={year} />
+        )}
       </div>
     </div>
   );

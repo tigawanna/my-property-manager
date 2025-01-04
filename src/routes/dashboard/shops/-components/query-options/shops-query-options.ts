@@ -79,6 +79,7 @@ export function oneShopBillsQueryOptions({
         select: {
           expand: {
             shop: true,
+            
           },
         },
       });
@@ -91,7 +92,7 @@ export function oneShopBillsQueryOptions({
           const prev_water = data?.items?.[idx + 1]?.water_readings ?? 0;
           const elec_diff = (item.elec_readings - prev_elec).toFixed(2);
           const water_diff = (item.water_readings - prev_water).toFixed(2);
-          return { ...item, elec_diff, water_diff };
+          return { ...item, elec_diff, water_diff,prev_water,prev_elec };
         }),
       };
     },

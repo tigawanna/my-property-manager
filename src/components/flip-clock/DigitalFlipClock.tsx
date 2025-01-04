@@ -131,7 +131,7 @@ export function FlipClock(){
   }, []);
 //   console.log({hours, minutes, seconds});
   return (
-    <div className={"flipClock"}>
+    <div className="flipClock">
       <FlipUnitContainer
         key={`hour-${hours}`}
         unit={"hours"}

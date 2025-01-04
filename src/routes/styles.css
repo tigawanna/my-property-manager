@@ -282,7 +282,7 @@ h6 {
 .flipUnitContainer {
   display: block;
   position: relative;
-  width: 100%;
+  width: 50%;
   height: 120px;
   perspective-origin: 50% 50%;
   perspective: 300px;

@@ -1,3 +1,4 @@
+import { useViewer } from "@/lib/tanstack/query/use-viewer";
 import { useMutation } from "@tanstack/react-query";
 import { Edit, Loader } from "lucide-react";
 import { useRef, useState } from "react";
@@ -11,7 +12,6 @@ interface GenericTableProps<T extends Record<string, any>> {
   columns: GenericTableColumn<T>[];
   rows: T[];
   updateItem?: (item: T) => Promise<any>;
-  
 }
 
 export function GenericTable<T extends Record<string, any>>({
@@ -20,6 +20,7 @@ export function GenericTable<T extends Record<string, any>>({
   updateItem,
 }: GenericTableProps<T>) {
   const modalRef = useRef<HTMLDialogElement | null>(null);
+  const { role } = useViewer();
   // @ts-expect-error
   const [input, setInput] = useState<T>({});
   const mutation = useMutation({
@@ -46,7 +47,7 @@ export function GenericTable<T extends Record<string, any>>({
             {columns.map((column) => (
               <th key={column.accessor}>{column.label}</th>
             ))}
-            <th>Edit</th>
+            {role === "staff" && <th>Edit</th>}
           </tr>
         </thead>
         <tbody>
@@ -55,15 +56,17 @@ export function GenericTable<T extends Record<string, any>>({
               {columns.map((column) => (
                 <td key={row.id + column.accessor}>{row[column.accessor]}</td>
               ))}
-              <td>
-                <Edit
-                  className="size-4"
-                  onClick={() => {
-                    setInput(row);
-                    modalRef.current?.showModal();
-                  }}
-                />
-              </td>
+              {role === "staff" && (
+                <td>
+                  <Edit
+                    className="size-4"
+                    onClick={() => {
+                      setInput(row);
+                      modalRef.current?.showModal();
+                    }}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>

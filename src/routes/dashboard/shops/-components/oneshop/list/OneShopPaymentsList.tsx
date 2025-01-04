@@ -10,6 +10,7 @@ import { ItemNotFound } from "@/components/wrappers/ItemNotFound";
 import { PaginateOneShopBills } from "./PaginateOneShopBills";
 import { CardsListSuspenseFallback } from "@/components/wrappers/GenericDataCardsListSuspenseFallback";
 import { Suspense } from "react";
+import { PaymentsCard } from "@/routes/dashboard/payments/-components/list/PaymentsCard";
 
 interface SOneShopPaymentsListrops {}
 
@@ -42,7 +43,7 @@ export function OneShopPaymentsList({}: SOneShopPaymentsListrops) {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="w-full p-2">
+      <div className="hidden w-full p-2 lg:flex">
         <GenericTable
           rows={data.items}
           updateItem={(item) =>
@@ -57,6 +58,11 @@ export function OneShopPaymentsList({}: SOneShopPaymentsListrops) {
           ]}
         />
       </div>
+      <ul className="flex w-full flex-wrap justify-center gap-2 p-2 lg:hidden">
+        {data.items.map((item) => {
+          return <PaymentsCard key={item.id} payment={item} />;
+        })}
+      </ul>
     </div>
   );
 }

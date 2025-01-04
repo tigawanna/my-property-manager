@@ -16,7 +16,7 @@ export function DashboardPage({}: DashboardPageProps) {
         {dashboard_routes.map((link) => {
           if (
             !(viewer?.staff && viewer?.staff?.length>0) &&
-            (link.name === "utilities" || link.name === "payments")
+            (link.name === "utilities" || link.name === "staff")
           ) {
             return;
           }

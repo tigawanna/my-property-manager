@@ -1,5 +1,4 @@
 import { TailwindIndicator } from "@/components/navigation/tailwind-indicator";
-import { DaisyUIDevtools } from "@/components/wrappers/DaisyUIDevtools";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Outlet } from "@tanstack/react-router";
 import { Toaster } from "react-hot-toast";
@@ -11,10 +10,10 @@ export function RootComponent() {
       <Outlet />
       <ReactQueryDevtools buttonPosition="bottom-right" />
       {/* <TanStackRouterDevtools position="bottom-left" /> */}
-      <DaisyUIDevtools
+      {/* <DaisyUIDevtools
         drawaerTriggerClassName="fixed bottom-[5%] right-[45%] z-20"
         drawerZIndex="z-50"
-      />
+      /> */}
       <Toaster reverseOrder />
     </div>
   );
