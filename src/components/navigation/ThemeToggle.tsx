@@ -39,7 +39,7 @@ export function ThemeToggle({}: ThemeToggleProps) {
           </select>
         )}
       </div>
-      <button onClick={() => transitionColors()} className="btn">
+      <button onClick={() => transitionColors()} data-test="theme-toggle-button" className="btn">
         {theme === "light" ? <Moon /> : <Sun />}
       </button>
     </div>

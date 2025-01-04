@@ -22,6 +22,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AvatarInput } from "./AvatarInput";
 import { ClientResponseError } from "pocketbase";
 import { makeHotToast } from "@/components/toasters";
+import { Edit } from "lucide-react";
 interface UserAccountProfileFormProps {
   input: PropertyUserResponse & {
     avatarUrl: string;
@@ -102,8 +103,11 @@ export function UserAccountProfileForm({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
+      <DialogTrigger asChild className="text-xl">
+        <Button className="btn-wide">
+       Edit <Edit className="size-10" />
+
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-auto sm:max-w-[90%] lg:max-w-[60%]">
         <DialogHeader>
@@ -226,7 +230,7 @@ export function UserAccountProfileForm({
                 }}
               />
             </div>
-            <MutationButton className="btn-primary" mutation={mutation} />
+            <MutationButton className="btn btn-primary " mutation={mutation} />
           </form>
         </div>
         <DialogFooter></DialogFooter>

@@ -8,15 +8,16 @@ import {
 } from "@/components/shadcn/ui/card";
 import { Badge } from "@/components/shadcn/ui/badge";
 import { PropertyUserResponse } from "@/lib/pb/pb-types";
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useNavigate } from "@tanstack/react-router";
 import { getFileURL } from "@/lib/pb/client";
 import { UserAccountProfileForm } from "./UserAccountProfileForm";
-import { Mail,Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { MutationButton } from "@/lib/tanstack/query/MutationButton";
 
 interface UserAccountProfileProps {}
 
 export function UserAccountProfile({}: UserAccountProfileProps) {
-  const { viewer } = useViewer();
+  const { viewer, logoutMutation } = useViewer();
   const user = viewer!;
   const [input, setInput] = useState<
     PropertyUserResponse & { avatarUrl: string }
@@ -26,15 +27,15 @@ export function UserAccountProfile({}: UserAccountProfileProps) {
       collection_id_or_name: "property_user",
       fallback: "/avatar.png",
       record_id: user?.id,
-      file_name: user?.avatar
+      file_name: user?.avatar,
     }),
   });
-
+  const tsrNavigate = useNavigate();
   if (!input) {
     return <Navigate to="/auth" search={{ returnTo: "/profile" }} />;
   }
   return (
-    <Card className="flex h-full w-[90%] flex-col items-center border-base-200 bg-base-300 shadow shadow-base-300 border md:w-fit md:flex-row">
+    <Card className="flex h-full w-[90%] flex-col items-center border border-base-200 bg-base-300 shadow shadow-base-300 md:w-fit md:flex-row">
       <CardHeader className="flex flex-row items-center p-0"></CardHeader>
       <CardContent className="rounded-lg p-0">
         <div className="flex h-full w-full flex-col gap-3 md:flex-row">
@@ -67,7 +68,21 @@ export function UserAccountProfile({}: UserAccountProfileProps) {
                 </span>
               )}
             </div>
-            <UserAccountProfileForm input={input} setInput={setInput} />
+            <div className="] flex w-full flex-col items-center justify-center gap-1">
+              <UserAccountProfileForm input={input} setInput={setInput} />
+              <MutationButton
+                className="btn-error max-w-[98%]"
+                onClick={() => {
+                  logoutMutation.mutate();
+                  tsrNavigate({
+                    to: "/auth",
+                    search: { returnTo: "/" },
+                  });
+                }}
+                label="Logout"
+                mutation={logoutMutation}
+              />
+            </div>
           </div>
         </div>
       </CardContent>

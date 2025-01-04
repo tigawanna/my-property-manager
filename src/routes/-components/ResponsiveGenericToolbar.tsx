@@ -8,7 +8,7 @@ children: React.ReactNode
 
 export function ResponsiveGenericToolbar({children}:ResponsiveGenericToolbarProps){
 return (
-  <div className="drawer">
+  <div className="drawer" data-test="sidebar-drawer">
     <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
     <div className="drawer-content flex h-full min-h-screen flex-col bg-base-300/70">
       {/* Navbar */}
@@ -17,6 +17,7 @@ return (
           htmlFor="my-drawer-3"
           aria-label="open sidebar"
           className="btn btn-square btn-ghost"
+          data-test="homepage-side-drawer-toggle"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -34,10 +35,14 @@ return (
         </label>
       </div>
 
-      <div className="hidden w-full items-center justify-between px-2 md:flex">
+      <div
+        data-test="homepage-toolbar"
+        className="hidden w-full max-w-full items-center justify-between px-2 md:flex"
+      >
         <div className="flex">
           <Link
             to="/"
+            data-test="homepage-home-link"
             className="flex items-center gap-2 text-2xl font-bold hover:text-accent"
           >
             My property manager
@@ -55,11 +60,15 @@ return (
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <ul className="menu min-h-full w-80 justify-between bg-base-300/70 p-4">
+      <ul
+        data-test="homepage-sidebar"
+        className="menu min-h-full w-80 justify-between bg-base-300/70 p-4"
+      >
         {/* Sidebar content here */}
 
         <Link
           to="/"
+          data-test="sidebar-homepage-home-link"
           className="flex flex-col-reverse items-center gap-2 p-3 text-2xl font-bold hover:text-accent md:flex-row"
         >
           My property manager

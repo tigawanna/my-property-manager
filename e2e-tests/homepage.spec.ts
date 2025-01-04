@@ -1,14 +1,42 @@
 import { pb } from "@/lib/pb/client";
 import { test, expect, Page } from "@playwright/test";
 async function testToolbar(page: Page) {
-  await expect(page).toHaveTitle("My property manager");
-  await expect(
-    page.getByRole("link", { name: "My property manager" }),
-  ).toBeVisible();
-  await expect(
-    page.locator('[data-test="theme-toggle"]').getByRole("button"),
-  ).toBeVisible();
+  const toolbarhomeLink = await page.locator(
+    '[data-test="homepage-toolbar"] [data-test="homepage-home-link"]',
+  );
+  await expect(toolbarhomeLink).toBeVisible();
+  const toolbarThemeToggle = await page.locator(
+    '[data-test="homepage-toolbar"] [data-test="theme-toggle-button"]',
+  );
+  await expect(toolbarThemeToggle).toBeVisible();
 }
+async function testSidebar(page: Page) {
+  const sidebarContainer = await page.locator('[data-test="sidebar-drawer"]');
+  await expect(sidebarContainer).not.toBeVisible();
+  await page.setViewportSize({ width: 700, height: 800 });
+  const sideBarTrigger = await page.locator(
+    `[data-test="homepage-side-drawer-toggle"]`,
+  );
+  await expect(sideBarTrigger).toBeVisible();
+  await sideBarTrigger.click();
+
+  const sidebarhomeLink = await page.locator(
+    '[data-test="homepage-sidebar"] [data-test="sidebar-homepage-home-link"]',
+  );
+  await expect(sidebarhomeLink).toBeVisible();
+  const sidebarThemeToggle = await page.locator(
+    '[data-test="homepage-sidebar"] [data-test="theme-toggle-button"]',
+  );
+  await expect(sidebarThemeToggle).toBeVisible();
+}
+test("test-toolbar", async ({ page }) => {
+  await page.goto("/");
+  await testToolbar(page);
+});
+test("test-sidebar", async ({ page }) => {
+  await page.goto("/");
+  await testSidebar(page);
+});
 // Test group for navigation and auth flows
 test.describe("Unauthenticated Homepage", () => {
   test.beforeEach(async ({ page }) => {
