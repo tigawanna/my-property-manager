@@ -2,7 +2,7 @@ import { TypedPocketBase } from "@tigawanna/typed-pocketbase";
 import { Schema } from "./pb-types";
 
 export type PocketBaseClient = TypedPocketBase<Schema>;
-const PB_URL = import.meta.env.VITE_PB_URL;
+const PB_URL = import.meta.env?.VITE_PB_URL;
 export const pb = new TypedPocketBase<Schema>(PB_URL);
 
 export type CollectionName = keyof Schema;

@@ -28,14 +28,23 @@ export function ProfileLinkCard({viewer}:ProfileLinkCardProps){
     file_name: viewer?.avatar
   })
 return (
-  <Link to="/profile" className="group flex hover:brightness-125 items-center justify-center gap-2">
+  <Link
+    to="/profile"
+    data-test="homepage-section--profile-link"
+    className="group flex items-center justify-center gap-2 hover:brightness-125"
+  >
     <Avatar>
-      <AvatarImage height={50} className="size-10" src={avatarUrl} alt={viewer?.username} />
+      <AvatarImage
+        height={50}
+        className="size-10"
+        src={avatarUrl}
+        alt={viewer?.username}
+      />
       <AvatarFallback>{viewer?.username?.slice(0, 2)}</AvatarFallback>
     </Avatar>
-    <div className="flex  gap-10 justify-center items-center">
-    <span className=" text-2xl">{viewer?.username}</span>
-    <RoleIcons role={viewer?.tenant?"staff":"tenant"}/>
+    <div className="flex items-center justify-center gap-10">
+      <span className="text-2xl">{viewer?.username}</span>
+      <RoleIcons role={viewer?.tenant ? "staff" : "tenant"} />
     </div>
 
     <ArrowRightIcon className="size-10 group-hover:animate-ping group-hover:text-secondary" />

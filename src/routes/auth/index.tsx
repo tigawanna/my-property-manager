@@ -1,7 +1,8 @@
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { SigninComponent } from "./-components/SigninComponent";
-import { MapPinHouse } from "lucide-react";
+import { Helmet } from "@/components/wrappers/custom-helmet";
+
 const searchparams = z.object({
   returnTo: z.string(),
 });
@@ -20,15 +21,10 @@ export const Route = createFileRoute("/auth/")({
 interface SigninPageProps {}
 
 export function SigninPage({}: SigninPageProps) {
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center ">
-      {/* <Link
-        to="/"
-        className="absolute left-[2%] top-[2%] flex items-center gap-2 text-2xl font-bold hover:text-accent"
-      >
-        My property manager
-        <MapPinHouse />
-      </Link> */}
+      <Helmet title="Property | Signin" description="Login to your account" />
       <SigninComponent />
     </div>
   );

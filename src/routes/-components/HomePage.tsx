@@ -4,11 +4,19 @@ import { ArrowRightIcon } from "lucide-react";
 import { FlipClock } from "@/components/flip-clock/DigitalFlipClock";
 import { ProfileLinkCard } from "./HomeComponents";
 import { GenericToolbar } from "./GenericToolbar";
+import { Helmet } from "@/components/wrappers/custom-helmet";
 
 export function HomePage() {
   const { viewer } = useViewer();
   return (
-    <div className="jusify-center flex h-full min-h-screen w-full flex-col items-center bg-gradient-to-br from-primary/60 via-accent/60 to-primary/30 ">
+    <div
+      data-test="homepage"
+      className="jusify-center flex h-full min-h-screen w-full flex-col items-center bg-gradient-to-br from-primary/60 via-accent/60 to-primary/30"
+    >
+      <Helmet
+        title="My property manager"
+        description="Welcome to your property manager"
+      />
       {/* <picture className="fixed inset-0 z-0 size-full">
         <source
           media="(min-width:350px)"
@@ -33,11 +41,17 @@ export function HomePage() {
       </picture> */}
 
       <div className="z-10 flex h-full min-h-screen w-full flex-col items-center justify-evenly gap-5 bg-base-300/70">
-        <div className="fixed left-0 right-6 top-5 w-full">
+        <div data-test="homepage-toolbar" className="fixed left-0 right-6 top-5 w-full">
           <GenericToolbar />
         </div>
-        <div className="*:justfy-center grid grid-cols-1 justify-center gap-2 p-[5%] *:flex *:items-center *:rounded-xl *:bg-base-300/40 *:p-5 md:grid-cols-2 lg:grid-cols-2">
-          <h1 className="text-7xl font-bold text-primary">
+        <div
+          data-test="homepage-section"
+          className="*:justfy-center grid grid-cols-1 justify-center gap-2 p-[5%] *:flex *:items-center *:rounded-xl *:bg-base-300/40 *:p-5 md:grid-cols-2 lg:grid-cols-2"
+        >
+          <h1
+            data-test="homepage-section-welcome"
+            className="text-7xl font-bold text-primary"
+          >
             welcome {viewer?.username}
           </h1>
 
@@ -46,10 +60,14 @@ export function HomePage() {
           {viewer && <ProfileLinkCard viewer={viewer} />}
           {/* <div className="text-4xl hover:bg-primary-content/30">
           </div> */}
-          <div className="text-4xl hover:bg-primary-content/30">
+          <div
+            data-test="homepage-section-links"
+            className="text-4xl hover:bg-primary-content/30"
+          >
             {viewer ? (
               <Link
                 to="/dashboard"
+                data-test="homepage-section--dashboard-link"
                 className="group flex items-center justify-center gap-2"
               >
                 Proceed to Dashboard
