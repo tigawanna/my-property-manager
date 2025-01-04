@@ -20,7 +20,6 @@ import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as AuthIndexImport } from './routes/auth/index'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as DashboardTodosLayoutImport } from './routes/dashboard/todos/layout'
-import { Route as DashboardBillsLayoutImport } from './routes/dashboard/bills/layout'
 import { Route as DashboardTodosIndexImport } from './routes/dashboard/todos/index'
 import { Route as DashboardTenantsIndexImport } from './routes/dashboard/tenants/index'
 import { Route as DashboardStaffIndexImport } from './routes/dashboard/staff/index'
@@ -33,10 +32,8 @@ import { Route as DashboardTodosTodosIndexImport } from './routes/dashboard/todo
 import { Route as DashboardTenantsTenantIndexImport } from './routes/dashboard/tenants/$tenant/index'
 import { Route as DashboardStaffStaffIndexImport } from './routes/dashboard/staff/$staff/index'
 import { Route as DashboardShopsShopIndexImport } from './routes/dashboard/shops/$shop/index'
-import { Route as DashboardBillsShopsbillsIndexImport } from './routes/dashboard/bills/shopsbills/index'
 import { Route as DashboardTodosTrackingLoadIndexImport } from './routes/dashboard/todos/tracking/load/index'
 import { Route as DashboardTodosTrackingTrackingIndexImport } from './routes/dashboard/todos/tracking/$tracking/index'
-import { Route as DashboardBillsShopsbillsShopsbillsIndexImport } from './routes/dashboard/bills/shopsbills/$shopsbills/index'
 
 // Create/Update Routes
 
@@ -85,11 +82,6 @@ const DashboardTodosLayoutRoute = DashboardTodosLayoutImport.update({
   getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
-const DashboardBillsLayoutRoute = DashboardBillsLayoutImport.update({
-  path: '/bills',
-  getParentRoute: () => DashboardLayoutRoute,
-} as any)
-
 const DashboardTodosIndexRoute = DashboardTodosIndexImport.update({
   path: '/',
   getParentRoute: () => DashboardTodosLayoutRoute,
@@ -116,13 +108,13 @@ const DashboardPaymentsIndexRoute = DashboardPaymentsIndexImport.update({
 } as any)
 
 const DashboardBillsIndexRoute = DashboardBillsIndexImport.update({
-  path: '/',
-  getParentRoute: () => DashboardBillsLayoutRoute,
+  path: '/bills/',
+  getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
 const DashboardBillsPrintRoute = DashboardBillsPrintImport.update({
-  path: '/print',
-  getParentRoute: () => DashboardBillsLayoutRoute,
+  path: '/bills/print',
+  getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
 const DashboardTodosTrackingIndexRoute =
@@ -152,12 +144,6 @@ const DashboardShopsShopIndexRoute = DashboardShopsShopIndexImport.update({
   getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
-const DashboardBillsShopsbillsIndexRoute =
-  DashboardBillsShopsbillsIndexImport.update({
-    path: '/shopsbills/',
-    getParentRoute: () => DashboardBillsLayoutRoute,
-  } as any)
-
 const DashboardTodosTrackingLoadIndexRoute =
   DashboardTodosTrackingLoadIndexImport.update({
     path: '/tracking/load/',
@@ -168,12 +154,6 @@ const DashboardTodosTrackingTrackingIndexRoute =
   DashboardTodosTrackingTrackingIndexImport.update({
     path: '/tracking/$tracking/',
     getParentRoute: () => DashboardTodosLayoutRoute,
-  } as any)
-
-const DashboardBillsShopsbillsShopsbillsIndexRoute =
-  DashboardBillsShopsbillsShopsbillsIndexImport.update({
-    path: '/shopsbills/$shopsbills/',
-    getParentRoute: () => DashboardBillsLayoutRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -207,13 +187,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileLayoutImport
       parentRoute: typeof rootRoute
-    }
-    '/dashboard/bills': {
-      id: '/dashboard/bills'
-      path: '/bills'
-      fullPath: '/dashboard/bills'
-      preLoaderRoute: typeof DashboardBillsLayoutImport
-      parentRoute: typeof DashboardLayoutImport
     }
     '/dashboard/todos': {
       id: '/dashboard/todos'
@@ -252,17 +225,17 @@ declare module '@tanstack/react-router' {
     }
     '/dashboard/bills/print': {
       id: '/dashboard/bills/print'
-      path: '/print'
+      path: '/bills/print'
       fullPath: '/dashboard/bills/print'
       preLoaderRoute: typeof DashboardBillsPrintImport
-      parentRoute: typeof DashboardBillsLayoutImport
+      parentRoute: typeof DashboardLayoutImport
     }
     '/dashboard/bills/': {
       id: '/dashboard/bills/'
-      path: '/'
-      fullPath: '/dashboard/bills/'
+      path: '/bills'
+      fullPath: '/dashboard/bills'
       preLoaderRoute: typeof DashboardBillsIndexImport
-      parentRoute: typeof DashboardBillsLayoutImport
+      parentRoute: typeof DashboardLayoutImport
     }
     '/dashboard/payments/': {
       id: '/dashboard/payments/'
@@ -299,13 +272,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTodosIndexImport
       parentRoute: typeof DashboardTodosLayoutImport
     }
-    '/dashboard/bills/shopsbills/': {
-      id: '/dashboard/bills/shopsbills/'
-      path: '/shopsbills'
-      fullPath: '/dashboard/bills/shopsbills'
-      preLoaderRoute: typeof DashboardBillsShopsbillsIndexImport
-      parentRoute: typeof DashboardBillsLayoutImport
-    }
     '/dashboard/shops/$shop/': {
       id: '/dashboard/shops/$shop/'
       path: '/shops/$shop'
@@ -341,13 +307,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardTodosTrackingIndexImport
       parentRoute: typeof DashboardTodosLayoutImport
     }
-    '/dashboard/bills/shopsbills/$shopsbills/': {
-      id: '/dashboard/bills/shopsbills/$shopsbills/'
-      path: '/shopsbills/$shopsbills'
-      fullPath: '/dashboard/bills/shopsbills/$shopsbills'
-      preLoaderRoute: typeof DashboardBillsShopsbillsShopsbillsIndexImport
-      parentRoute: typeof DashboardBillsLayoutImport
-    }
     '/dashboard/todos/tracking/$tracking/': {
       id: '/dashboard/todos/tracking/$tracking/'
       path: '/tracking/$tracking'
@@ -381,24 +340,6 @@ const AuthLayoutRouteWithChildren = AuthLayoutRoute._addFileChildren(
   AuthLayoutRouteChildren,
 )
 
-interface DashboardBillsLayoutRouteChildren {
-  DashboardBillsPrintRoute: typeof DashboardBillsPrintRoute
-  DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
-  DashboardBillsShopsbillsIndexRoute: typeof DashboardBillsShopsbillsIndexRoute
-  DashboardBillsShopsbillsShopsbillsIndexRoute: typeof DashboardBillsShopsbillsShopsbillsIndexRoute
-}
-
-const DashboardBillsLayoutRouteChildren: DashboardBillsLayoutRouteChildren = {
-  DashboardBillsPrintRoute: DashboardBillsPrintRoute,
-  DashboardBillsIndexRoute: DashboardBillsIndexRoute,
-  DashboardBillsShopsbillsIndexRoute: DashboardBillsShopsbillsIndexRoute,
-  DashboardBillsShopsbillsShopsbillsIndexRoute:
-    DashboardBillsShopsbillsShopsbillsIndexRoute,
-}
-
-const DashboardBillsLayoutRouteWithChildren =
-  DashboardBillsLayoutRoute._addFileChildren(DashboardBillsLayoutRouteChildren)
-
 interface DashboardTodosLayoutRouteChildren {
   DashboardTodosIndexRoute: typeof DashboardTodosIndexRoute
   DashboardTodosTodosIndexRoute: typeof DashboardTodosTodosIndexRoute
@@ -420,9 +361,10 @@ const DashboardTodosLayoutRouteWithChildren =
   DashboardTodosLayoutRoute._addFileChildren(DashboardTodosLayoutRouteChildren)
 
 interface DashboardLayoutRouteChildren {
-  DashboardBillsLayoutRoute: typeof DashboardBillsLayoutRouteWithChildren
   DashboardTodosLayoutRoute: typeof DashboardTodosLayoutRouteWithChildren
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardBillsPrintRoute: typeof DashboardBillsPrintRoute
+  DashboardBillsIndexRoute: typeof DashboardBillsIndexRoute
   DashboardPaymentsIndexRoute: typeof DashboardPaymentsIndexRoute
   DashboardShopsIndexRoute: typeof DashboardShopsIndexRoute
   DashboardStaffIndexRoute: typeof DashboardStaffIndexRoute
@@ -433,9 +375,10 @@ interface DashboardLayoutRouteChildren {
 }
 
 const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
-  DashboardBillsLayoutRoute: DashboardBillsLayoutRouteWithChildren,
   DashboardTodosLayoutRoute: DashboardTodosLayoutRouteWithChildren,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardBillsPrintRoute: DashboardBillsPrintRoute,
+  DashboardBillsIndexRoute: DashboardBillsIndexRoute,
   DashboardPaymentsIndexRoute: DashboardPaymentsIndexRoute,
   DashboardShopsIndexRoute: DashboardShopsIndexRoute,
   DashboardStaffIndexRoute: DashboardStaffIndexRoute,
@@ -466,26 +409,23 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthLayoutRouteWithChildren
   '/dashboard': typeof DashboardLayoutRouteWithChildren
   '/profile': typeof ProfileLayoutRouteWithChildren
-  '/dashboard/bills': typeof DashboardBillsLayoutRouteWithChildren
   '/dashboard/todos': typeof DashboardTodosLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
   '/auth/': typeof AuthIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/profile/': typeof ProfileIndexRoute
   '/dashboard/bills/print': typeof DashboardBillsPrintRoute
-  '/dashboard/bills/': typeof DashboardBillsIndexRoute
+  '/dashboard/bills': typeof DashboardBillsIndexRoute
   '/dashboard/payments': typeof DashboardPaymentsIndexRoute
   '/dashboard/shops': typeof DashboardShopsIndexRoute
   '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/todos/': typeof DashboardTodosIndexRoute
-  '/dashboard/bills/shopsbills': typeof DashboardBillsShopsbillsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
   '/dashboard/staff/$staff': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
   '/dashboard/todos/$todos': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking': typeof DashboardTodosTrackingIndexRoute
-  '/dashboard/bills/shopsbills/$shopsbills': typeof DashboardBillsShopsbillsShopsbillsIndexRoute
   '/dashboard/todos/tracking/$tracking': typeof DashboardTodosTrackingTrackingIndexRoute
   '/dashboard/todos/tracking/load': typeof DashboardTodosTrackingLoadIndexRoute
 }
@@ -503,13 +443,11 @@ export interface FileRoutesByTo {
   '/dashboard/staff': typeof DashboardStaffIndexRoute
   '/dashboard/tenants': typeof DashboardTenantsIndexRoute
   '/dashboard/todos': typeof DashboardTodosIndexRoute
-  '/dashboard/bills/shopsbills': typeof DashboardBillsShopsbillsIndexRoute
   '/dashboard/shops/$shop': typeof DashboardShopsShopIndexRoute
   '/dashboard/staff/$staff': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant': typeof DashboardTenantsTenantIndexRoute
   '/dashboard/todos/$todos': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking': typeof DashboardTodosTrackingIndexRoute
-  '/dashboard/bills/shopsbills/$shopsbills': typeof DashboardBillsShopsbillsShopsbillsIndexRoute
   '/dashboard/todos/tracking/$tracking': typeof DashboardTodosTrackingTrackingIndexRoute
   '/dashboard/todos/tracking/load': typeof DashboardTodosTrackingLoadIndexRoute
 }
@@ -520,7 +458,6 @@ export interface FileRoutesById {
   '/auth': typeof AuthLayoutRouteWithChildren
   '/dashboard': typeof DashboardLayoutRouteWithChildren
   '/profile': typeof ProfileLayoutRouteWithChildren
-  '/dashboard/bills': typeof DashboardBillsLayoutRouteWithChildren
   '/dashboard/todos': typeof DashboardTodosLayoutRouteWithChildren
   '/auth/signup': typeof AuthSignupRoute
   '/auth/': typeof AuthIndexRoute
@@ -533,13 +470,11 @@ export interface FileRoutesById {
   '/dashboard/staff/': typeof DashboardStaffIndexRoute
   '/dashboard/tenants/': typeof DashboardTenantsIndexRoute
   '/dashboard/todos/': typeof DashboardTodosIndexRoute
-  '/dashboard/bills/shopsbills/': typeof DashboardBillsShopsbillsIndexRoute
   '/dashboard/shops/$shop/': typeof DashboardShopsShopIndexRoute
   '/dashboard/staff/$staff/': typeof DashboardStaffStaffIndexRoute
   '/dashboard/tenants/$tenant/': typeof DashboardTenantsTenantIndexRoute
   '/dashboard/todos/$todos/': typeof DashboardTodosTodosIndexRoute
   '/dashboard/todos/tracking/': typeof DashboardTodosTrackingIndexRoute
-  '/dashboard/bills/shopsbills/$shopsbills/': typeof DashboardBillsShopsbillsShopsbillsIndexRoute
   '/dashboard/todos/tracking/$tracking/': typeof DashboardTodosTrackingTrackingIndexRoute
   '/dashboard/todos/tracking/load/': typeof DashboardTodosTrackingLoadIndexRoute
 }
@@ -551,26 +486,23 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/profile'
-    | '/dashboard/bills'
     | '/dashboard/todos'
     | '/auth/signup'
     | '/auth/'
     | '/dashboard/'
     | '/profile/'
     | '/dashboard/bills/print'
-    | '/dashboard/bills/'
+    | '/dashboard/bills'
     | '/dashboard/payments'
     | '/dashboard/shops'
     | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/todos/'
-    | '/dashboard/bills/shopsbills'
     | '/dashboard/shops/$shop'
     | '/dashboard/staff/$staff'
     | '/dashboard/tenants/$tenant'
     | '/dashboard/todos/$todos'
     | '/dashboard/todos/tracking'
-    | '/dashboard/bills/shopsbills/$shopsbills'
     | '/dashboard/todos/tracking/$tracking'
     | '/dashboard/todos/tracking/load'
   fileRoutesByTo: FileRoutesByTo
@@ -587,13 +519,11 @@ export interface FileRouteTypes {
     | '/dashboard/staff'
     | '/dashboard/tenants'
     | '/dashboard/todos'
-    | '/dashboard/bills/shopsbills'
     | '/dashboard/shops/$shop'
     | '/dashboard/staff/$staff'
     | '/dashboard/tenants/$tenant'
     | '/dashboard/todos/$todos'
     | '/dashboard/todos/tracking'
-    | '/dashboard/bills/shopsbills/$shopsbills'
     | '/dashboard/todos/tracking/$tracking'
     | '/dashboard/todos/tracking/load'
   id:
@@ -602,7 +532,6 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/profile'
-    | '/dashboard/bills'
     | '/dashboard/todos'
     | '/auth/signup'
     | '/auth/'
@@ -615,13 +544,11 @@ export interface FileRouteTypes {
     | '/dashboard/staff/'
     | '/dashboard/tenants/'
     | '/dashboard/todos/'
-    | '/dashboard/bills/shopsbills/'
     | '/dashboard/shops/$shop/'
     | '/dashboard/staff/$staff/'
     | '/dashboard/tenants/$tenant/'
     | '/dashboard/todos/$todos/'
     | '/dashboard/todos/tracking/'
-    | '/dashboard/bills/shopsbills/$shopsbills/'
     | '/dashboard/todos/tracking/$tracking/'
     | '/dashboard/todos/tracking/load/'
   fileRoutesById: FileRoutesById
@@ -672,9 +599,10 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard/layout.tsx",
       "children": [
-        "/dashboard/bills",
         "/dashboard/todos",
         "/dashboard/",
+        "/dashboard/bills/print",
+        "/dashboard/bills/",
         "/dashboard/payments/",
         "/dashboard/shops/",
         "/dashboard/staff/",
@@ -688,16 +616,6 @@ export const routeTree = rootRoute
       "filePath": "profile/layout.tsx",
       "children": [
         "/profile/"
-      ]
-    },
-    "/dashboard/bills": {
-      "filePath": "dashboard/bills/layout.tsx",
-      "parent": "/dashboard",
-      "children": [
-        "/dashboard/bills/print",
-        "/dashboard/bills/",
-        "/dashboard/bills/shopsbills/",
-        "/dashboard/bills/shopsbills/$shopsbills/"
       ]
     },
     "/dashboard/todos": {
@@ -729,11 +647,11 @@ export const routeTree = rootRoute
     },
     "/dashboard/bills/print": {
       "filePath": "dashboard/bills/print.tsx",
-      "parent": "/dashboard/bills"
+      "parent": "/dashboard"
     },
     "/dashboard/bills/": {
       "filePath": "dashboard/bills/index.tsx",
-      "parent": "/dashboard/bills"
+      "parent": "/dashboard"
     },
     "/dashboard/payments/": {
       "filePath": "dashboard/payments/index.tsx",
@@ -755,10 +673,6 @@ export const routeTree = rootRoute
       "filePath": "dashboard/todos/index.tsx",
       "parent": "/dashboard/todos"
     },
-    "/dashboard/bills/shopsbills/": {
-      "filePath": "dashboard/bills/shopsbills/index.tsx",
-      "parent": "/dashboard/bills"
-    },
     "/dashboard/shops/$shop/": {
       "filePath": "dashboard/shops/$shop/index.tsx",
       "parent": "/dashboard"
@@ -778,10 +692,6 @@ export const routeTree = rootRoute
     "/dashboard/todos/tracking/": {
       "filePath": "dashboard/todos/tracking/index.tsx",
       "parent": "/dashboard/todos"
-    },
-    "/dashboard/bills/shopsbills/$shopsbills/": {
-      "filePath": "dashboard/bills/shopsbills/$shopsbills/index.tsx",
-      "parent": "/dashboard/bills"
     },
     "/dashboard/todos/tracking/$tracking/": {
       "filePath": "dashboard/todos/tracking/$tracking/index.tsx",
