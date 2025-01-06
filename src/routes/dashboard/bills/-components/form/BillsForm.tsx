@@ -353,8 +353,21 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         )}
         <div className="flex flex-wrap items-center justify-center gap-5">
           <div className="flex items-center space-x-2">
-            <Switch id="airplane-mode" />
-            <Label htmlFor="airplane-mode">create/update</Label>
+            <Switch
+              id="save-mode"
+              checked={mode === "update"}
+              onCheckedChange={(value) => {
+                setMode(value ? "update" : "create");
+                navigate({
+                  search: {
+                    ...searchParams,
+                    mode: value ? "update" : "create",
+                  },
+                  replace: true,
+                });
+              }}
+            />
+            <Label htmlFor="save-mode">Ppdate mode</Label>
           </div>
           {mode === "create" ? (
             <button
