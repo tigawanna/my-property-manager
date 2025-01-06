@@ -25,7 +25,7 @@ export default function PrintBillsContainerBills({}: PrintBillsContainerProps) {
     prev_month: pm ?? prev_month,
   };
   useEffect(() => {
-    document.title = `readings for ${getMonthName(period.curr_month)} ${period.curr_year}`;
+    document.title = `Readings_for_${getMonthName(period.curr_month)}_${period.curr_year}`;
   }, []);
 
   return (

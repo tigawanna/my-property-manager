@@ -37,11 +37,29 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
   const [_, startTransition] = useTransition();
   const is_new_bill = isBillingNewMonth(bill);
   const { period } = useBillsPeriod();
+  const [initBill] = useState<BillsInput>(genInitValues(bill, is_new_bill));
+  const form = useForm({
+    defaultValues: initBill,
+    onSubmit: async ({ value }) => {
+      await handleSubmit(value);
+    },
+  });
+  const currElecinput = form.getFieldValue("curr_elec");
+  const prevElecinput = form.getFieldValue("prev_elec");
+  const currWaterinput = form.getFieldValue("curr_water");
+  const prevWaterinput = form.getFieldValue("prev_water");
+  const updating_curr =
+    initBill.curr_elec !== currElecinput ||
+    initBill.curr_water !== currWaterinput;
+  const updating_prev =
+    initBill.prev_elec !== prevElecinput ||
+    initBill.prev_water !== prevWaterinput;
+  const [updatePrev, setUpdatePrev] = useState(updating_curr);
+  const [updateCurr, setUpdateCurr] = useState(updating_prev);
   const [formPeriod, setFormPeriod] = useState({
     month: period.curr_month,
     year: period.curr_year,
   });
-  const [initBill] = useState<BillsInput>(genInitValues(bill, is_new_bill));
 
   const new_bill_mutation = useMutation({
     mutationFn: (input: PropertyBillsCreate) => {
@@ -107,9 +125,10 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
     is_new_bill === "prev_no_curr" || is_new_bill === "no_prev_no_curr"
       ? "create"
       : "update";
+
   const [mode, setMode] = useState(searchParams.mode ?? default_mode);
   function handleSubmit(input: BillsInput) {
-    if (is_new_bill === "prev_no_curr" || is_new_bill === "no_prev_no_curr") {
+    if (mode === "create") {
       const new_bill: BillMutationFields = {
         elec_readings: parseFloat(parseFloat(input.curr_elec).toFixed(2)),
         water_readings: parseFloat(parseFloat(input.curr_water).toFixed(2)),
@@ -121,45 +140,35 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
       return;
     }
 
-    if (
-      initBill.curr_elec !== input.curr_elec ||
-      initBill.curr_water !== input.curr_water
-    ) {
-      const new_bill: PropertyBillsUpdate & { id: string } = {
-        elec_readings: parseFloat(parseFloat(input.curr_elec).toFixed(2)),
-        water_readings: parseFloat(parseFloat(input.curr_water).toFixed(2)),
-        shop: bill.shop_id,
-        month: parseInt(bill.curr_month),
-        year: parseInt(bill.curr_year),
-        id: bill.curr_bill_id,
-      };
+    if (mode === "update") {
+      if (updateCurr) {
+        const new_bill: PropertyBillsUpdate & { id: string } = {
+          elec_readings: parseFloat(parseFloat(input.curr_elec).toFixed(2)),
+          water_readings: parseFloat(parseFloat(input.curr_water).toFixed(2)),
+          shop: bill.shop_id,
+          month: parseInt(bill.curr_month),
+          year: parseInt(bill.curr_year),
+          id: bill.curr_bill_id,
+        };
 
-      update_bill_mutation.mutate(new_bill);
-    }
+        update_bill_mutation.mutate(new_bill);
+      }
 
-    if (
-      initBill.prev_elec !== input.prev_elec ||
-      initBill.prev_water !== input.prev_water
-    ) {
-      const new_bill: PropertyBillsUpdate & { id: string } = {
-        elec_readings: parseFloat(parseFloat(input.prev_elec).toFixed(2)),
-        water_readings: parseFloat(parseFloat(input.prev_water).toFixed(2)),
-        shop: bill.shop_id,
-        month: parseInt(bill.prev_month),
-        year: parseInt(bill.prev_year),
-        id: bill.prev_bill_id,
-      };
+      if (updatePrev) {
+        const new_bill: PropertyBillsUpdate & { id: string } = {
+          elec_readings: parseFloat(parseFloat(input.prev_elec).toFixed(2)),
+          water_readings: parseFloat(parseFloat(input.prev_water).toFixed(2)),
+          shop: bill.shop_id,
+          month: parseInt(bill.prev_month),
+          year: parseInt(bill.prev_year),
+          id: bill.prev_bill_id,
+        };
 
-      update_bill_mutation.mutate(new_bill);
+        update_bill_mutation.mutate(new_bill);
+      }
     }
     // setInput(genInitValues())
   }
-  const form = useForm({
-    defaultValues: initBill,
-    onSubmit: async ({ value }) => {
-      await handleSubmit(value);
-    },
-  });
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
@@ -215,6 +224,30 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
               }
             />
           </div>
+            {mode === "update" && (
+              <div className="flex items-center rounded-2xl bg-base-200/40 gap-5 py-2 px-3">
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    id="save-mode-curr"
+                    checked={mode === "update" && updateCurr}
+                    onCheckedChange={(value) => {
+                      setUpdateCurr(value);
+                    }}
+                  />
+                  <Label htmlFor="save-mode-curr">Update Curr</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    id="save-mode-prev"
+                    checked={mode === "update" && updatePrev}
+                    onCheckedChange={(value) => {
+                      setUpdatePrev(value);
+                    }}
+                  />
+                  <Label htmlFor="save-mode-prev">Update Prev</Label>
+                </div>
+              </div>
+            )}
           <div className="flex w-full flex-wrap items-center justify-center gap-5">
             {/* water */}
             <div className="flex min-w-[40%] flex-col items-center justify-center gap-3">
@@ -376,7 +409,16 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
             >
               Create{" "}
               {new_bill_mutation.isPending && (
-                <Loader className="h-4 w-4 animate-spin" />
+                <div className="flex items-center gap-2">
+                  creating
+                  <Loader className="h-4 w-4 animate-spin" />
+                </div>
+              )}
+              {update_bill_mutation.isPending && (
+                <div className="flex items-center gap-2">
+                  updating
+                  <Loader className="h-4 w-4 animate-spin" />
+                </div>
               )}
             </button>
           ) : (
@@ -385,8 +427,17 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
               className="btn btn-outline btn-wide"
             >
               Update{" "}
+              {new_bill_mutation.isPending && (
+                <div className="flex items-center gap-2">
+                  creating
+                  <Loader className="h-4 w-4 animate-spin" />
+                </div>
+              )}
               {update_bill_mutation.isPending && (
-                <Loader className="h-4 w-4 animate-spin" />
+                <div className="flex items-center gap-2">
+                  updating
+                  <Loader className="h-4 w-4 animate-spin" />
+                </div>
               )}
             </button>
           )}
