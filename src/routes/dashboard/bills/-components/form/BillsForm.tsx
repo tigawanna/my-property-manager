@@ -345,8 +345,27 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         {update_bill_mutation.isError && (
           <ErrorWrapper err={update_bill_mutation.error} />
         )}
-
-        {is_new_bill === "prev_no_curr" || is_new_bill === "no_prev_no_curr" ? (
+        <div className="flex  flex-wrap items-center justify-center gap-5">
+          <button
+            disabled={new_bill_mutation.isPending}
+            className="btn btn-outline btn-wide"
+          >
+            Create{" "}
+            {new_bill_mutation.isPending && (
+              <Loader className="h-4 w-4 animate-spin" />
+            )}
+          </button>
+          <button
+            disabled={update_bill_mutation.isPending}
+            className="btn btn-outline btn-wide"
+          >
+            Update{" "}
+            {update_bill_mutation.isPending && (
+              <Loader className="h-4 w-4 animate-spin" />
+            )}
+          </button>
+        </div>
+        {/* {is_new_bill === "prev_no_curr" || is_new_bill === "no_prev_no_curr" ? (
           <button
             disabled={new_bill_mutation.isPending}
             className="btn btn-outline btn-wide"
@@ -366,7 +385,7 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
               <Loader className="h-4 w-4 animate-spin" />
             )}
           </button>
-        )}
+        )} */}
       </form>
     </div>
   );
