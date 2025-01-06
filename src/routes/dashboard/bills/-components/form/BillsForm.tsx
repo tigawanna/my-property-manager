@@ -17,6 +17,7 @@ import { TextFormField } from "@/lib/tanstack/form/TextFields";
 import { z } from "zod";
 import { makeHotToast } from "@/components/toasters";
 import { PlusMinusMonth, PlusMinusYear } from "../list/BillsPeriodPicker";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 
 interface BillsFormProps {
   bill: MonthlyBills;
@@ -25,12 +26,18 @@ interface BillsFormProps {
 }
 
 export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
+  const searchParams = useSearch({
+    from: "/dashboard/bills/",
+  });
+  const navigate = useNavigate({
+    from: "/dashboard/bills",
+  });
   const [_, startTransition] = useTransition();
   const is_new_bill = isBillingNewMonth(bill);
   const { period } = useBillsPeriod();
-  const [formPeriod,setFormPeriod] = useState({
+  const [formPeriod, setFormPeriod] = useState({
     month: period.curr_month,
-    year: period.curr_year
+    year: period.curr_year,
   });
   const [initBill] = useState<BillsInput>(genInitValues(bill, is_new_bill));
 
@@ -101,8 +108,8 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         elec_readings: parseFloat(parseFloat(input.curr_elec).toFixed(2)),
         water_readings: parseFloat(parseFloat(input.curr_water).toFixed(2)),
         shop: bill.shop_id,
-        month: period.curr_month,
-        year: period.curr_year,
+        month: searchParams.sm ?? period.curr_month,
+        year: searchParams.sy ?? period.curr_year,
       };
       new_bill_mutation.mutate(new_bill);
       return;
@@ -159,18 +166,24 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
         className="flex w-full flex-wrap items-center justify-center gap-8"
       >
         <div className="flex w-full flex-col items-center justify-center gap-5">
-          <div className="flex w-full bg-base-200 rounded-2xl items-center justify-center gap-5">
+          <div className="flex w-full items-center justify-center gap-5 rounded-2xl bg-base-200">
             <PlusMinusYear
               value={formPeriod.year}
               setValue={(value) =>
-                startTransition(() =>
+                startTransition(() => {
                   setFormPeriod((prev) => {
                     return {
                       ...prev,
                       year: value,
                     };
-                  }),
-                )
+                  });
+                  navigate({
+                    search: {
+                      ...searchParams,
+                      sy: value,
+                    },
+                  });
+                })
               }
               maxYear={new Date().getFullYear() + 5}
               minYear={new Date().getFullYear() - 5}
@@ -179,14 +192,20 @@ export function BillsForm({ bill, setOpen, next }: BillsFormProps) {
             <PlusMinusMonth
               value={formPeriod.month}
               setValue={(value) =>
-                startTransition(() =>
+                startTransition(() => {
                   setFormPeriod((prev) => {
                     return {
                       ...prev,
                       month: value,
                     };
-                  }),
-                )
+                  });
+                  navigate({
+                    search: {
+                      ...searchParams,
+                      sm: value,
+                    },
+                  });
+                })
               }
             />
           </div>

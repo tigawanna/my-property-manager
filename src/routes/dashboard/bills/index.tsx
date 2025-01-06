@@ -12,6 +12,9 @@ const searchparams = z.object({
   cm: z.number().default(curr_month).optional(),
   py: z.number().default(prev_year).optional(),
   pm: z.number().default(prev_month).optional(),
+  // month and year we're saving
+  sm: z.number().default(prev_month).optional(),
+  sy: z.number().default(prev_month).optional(),
   bill: z.number().default(0).optional(),
 });
 export const Route = createFileRoute("/dashboard/bills/")({
