@@ -41,6 +41,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       });
       navigate({
         search: {
+          ...searchParams,
           bill: currentBill + 1,
           cm: period.curr_month,
           cy: period.curr_year,
@@ -59,6 +60,7 @@ export function BillsCaroussel({ period }: BillsCarousselProps) {
       });
       navigate({
         search: {
+          ...searchParams,
           bill: currentBill - 1,
           cm: period.curr_month,
           cy: period.curr_year,
